@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:BattleManager-----------------------------------------------------------------------------
 // BattleManager
 //
 // The static class that manages battle progress.
@@ -38,6 +38,7 @@ BattleManager.initMembers = function() {
     this._escapeRatio = 0;
     this._escaped = false;
     this._rewards = {};
+    this._turnForced = false;
 };
 
 BattleManager.isBattleTest = function() {
@@ -113,21 +114,21 @@ BattleManager.makeEscapeRatio = function() {
 BattleManager.update = function() {
     if (!this.isBusy() && !this.updateEvent()) {
         switch (this._phase) {
-        case 'start':
-            this.startInput();
-            break;
-        case 'turn':
-            this.updateTurn();
-            break;
-        case 'action':
-            this.updateAction();
-            break;
-        case 'turnEnd':
-            this.updateTurnEnd();
-            break;
-        case 'battleEnd':
-            this.updateBattleEnd();
-            break;
+            case 'start':
+                this.startInput();
+                break;
+            case 'turn':
+                this.updateTurn();
+                break;
+            case 'action':
+                this.updateAction();
+                break;
+            case 'turnEnd':
+                this.updateTurnEnd();
+                break;
+            case 'battleEnd':
+                this.updateBattleEnd();
+                break;
         }
     }
 };
@@ -162,7 +163,7 @@ BattleManager.updateEventMain = function() {
 
 BattleManager.isBusy = function() {
     return ($gameMessage.isBusy() || this._spriteset.isBusy() ||
-            this._logWindow.isBusy());
+        this._logWindow.isBusy());
 };
 
 BattleManager.isInputting = function() {
@@ -327,6 +328,13 @@ BattleManager.endTurn = function() {
         this._logWindow.displayAutoAffectedStatus(battler);
         this._logWindow.displayRegeneration(battler);
     }, this);
+    if (this.isForcedTurn()) {
+        this._turnForced = false;
+    }
+};
+
+BattleManager.isForcedTurn = function() {
+    return this._turnForced;
 };
 
 BattleManager.updateTurnEnd = function() {
@@ -422,7 +430,7 @@ BattleManager.invokeCounterAttack = function(subject, target) {
 };
 
 BattleManager.invokeMagicReflection = function(subject, target) {
-	this._action._reflectionTarget = target;
+    this._action._reflectionTarget = target;
     this._logWindow.displayReflection(target);
     this._action.apply(subject);
     this._logWindow.displayActionResults(target, subject);
@@ -457,6 +465,7 @@ BattleManager.forceAction = function(battler) {
 
 BattleManager.processForcedAction = function() {
     if (this._actionForcedBattler) {
+        this._turnForced = true;
         this._subject = this._actionForcedBattler;
         this._actionForcedBattler = null;
         this.startAction();
@@ -653,3 +662,4 @@ BattleManager.gainDropItems = function() {
         $gameParty.gainItem(item, 1);
     });
 };
+

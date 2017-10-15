@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_BattleLog-----------------------------------------------------------------------------
 // Window_BattleLog
 //
 // The window for displaying battle progress. No frame is displayed, but it is
@@ -90,12 +90,12 @@ Window_BattleLog.prototype.updateWaitCount = function() {
 Window_BattleLog.prototype.updateWaitMode = function() {
     var waiting = false;
     switch (this._waitMode) {
-    case 'effect':
-        waiting = this._spriteset.isEffecting();
-        break;
-    case 'movement':
-        waiting = this._spriteset.isAnyoneMoving();
-        break;
+        case 'effect':
+            waiting = this._spriteset.isEffecting();
+            break;
+        case 'movement':
+            waiting = this._spriteset.isAnyoneMoving();
+            break;
     }
     if (!waiting) {
         this._waitMode = '';
@@ -120,12 +120,15 @@ Window_BattleLog.prototype.callNextMethod = function() {
 
 Window_BattleLog.prototype.isFastForward = function() {
     return (Input.isLongPressed('ok') || Input.isPressed('shift') ||
-            TouchInput.isLongPressed());
+        TouchInput.isLongPressed());
 };
 
 Window_BattleLog.prototype.push = function(methodName) {
     var methodArgs = Array.prototype.slice.call(arguments, 1);
-    this._methods.push({ name: methodName, params: methodArgs });
+    this._methods.push({
+        name: methodName,
+        params: methodArgs
+    });
 };
 
 Window_BattleLog.prototype.clear = function() {
@@ -586,3 +589,4 @@ Window_BattleLog.prototype.makeTpDamageText = function(target) {
         return '';
     }
 };
+

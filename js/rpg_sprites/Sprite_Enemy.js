@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Enemy-----------------------------------------------------------------------------
 // Sprite_Enemy
 //
 // The sprite for displaying an enemy.
@@ -109,27 +109,27 @@ Sprite_Enemy.prototype.setupEffect = function() {
 Sprite_Enemy.prototype.startEffect = function(effectType) {
     this._effectType = effectType;
     switch (this._effectType) {
-    case 'appear':
-        this.startAppear();
-        break;
-    case 'disappear':
-        this.startDisappear();
-        break;
-    case 'whiten':
-        this.startWhiten();
-        break;
-    case 'blink':
-        this.startBlink();
-        break;
-    case 'collapse':
-        this.startCollapse();
-        break;
-    case 'bossCollapse':
-        this.startBossCollapse();
-        break;
-    case 'instantCollapse':
-        this.startInstantCollapse();
-        break;
+        case 'appear':
+            this.startAppear();
+            break;
+        case 'disappear':
+            this.startDisappear();
+            break;
+        case 'whiten':
+            this.startWhiten();
+            break;
+        case 'blink':
+            this.startBlink();
+            break;
+        case 'collapse':
+            this.startCollapse();
+            break;
+        case 'bossCollapse':
+            this.startBossCollapse();
+            break;
+        case 'instantCollapse':
+            this.startInstantCollapse();
+            break;
     }
     this.revertToNormal();
 };
@@ -172,27 +172,27 @@ Sprite_Enemy.prototype.updateEffect = function() {
     if (this._effectDuration > 0) {
         this._effectDuration--;
         switch (this._effectType) {
-        case 'whiten':
-            this.updateWhiten();
-            break;
-        case 'blink':
-            this.updateBlink();
-            break;
-        case 'appear':
-            this.updateAppear();
-            break;
-        case 'disappear':
-            this.updateDisappear();
-            break;
-        case 'collapse':
-            this.updateCollapse();
-            break;
-        case 'bossCollapse':
-            this.updateBossCollapse();
-            break;
-        case 'instantCollapse':
-            this.updateInstantCollapse();
-            break;
+            case 'whiten':
+                this.updateWhiten();
+                break;
+            case 'blink':
+                this.updateBlink();
+                break;
+            case 'appear':
+                this.updateAppear();
+                break;
+            case 'disappear':
+                this.updateDisappear();
+                break;
+            case 'collapse':
+                this.updateCollapse();
+                break;
+            case 'bossCollapse':
+                this.updateBossCollapse();
+                break;
+            case 'instantCollapse':
+                this.updateInstantCollapse();
+                break;
         }
         if (this._effectDuration === 0) {
             this._effectType = null;
@@ -255,3 +255,4 @@ Sprite_Enemy.prototype.damageOffsetX = function() {
 Sprite_Enemy.prototype.damageOffsetY = function() {
     return -8;
 };
+

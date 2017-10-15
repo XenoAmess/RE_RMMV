@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Picture-----------------------------------------------------------------------------
 // Game_Picture
 //
 // The game object class for a picture.
@@ -86,7 +86,7 @@ Game_Picture.prototype.initRotation = function() {
 };
 
 Game_Picture.prototype.show = function(name, origin, x, y, scaleX,
-                                       scaleY, opacity, blendMode) {
+    scaleY, opacity, blendMode) {
     this._name = name;
     this._origin = origin;
     this._x = x;
@@ -101,7 +101,7 @@ Game_Picture.prototype.show = function(name, origin, x, y, scaleX,
 };
 
 Game_Picture.prototype.move = function(origin, x, y, scaleX, scaleY,
-                                       opacity, blendMode, duration) {
+    opacity, blendMode, duration) {
     this._origin = origin;
     this._targetX = x;
     this._targetY = y;
@@ -146,8 +146,8 @@ Game_Picture.prototype.updateMove = function() {
         var d = this._duration;
         this._x = (this._x * (d - 1) + this._targetX) / d;
         this._y = (this._y * (d - 1) + this._targetY) / d;
-        this._scaleX  = (this._scaleX  * (d - 1) + this._targetScaleX)  / d;
-        this._scaleY  = (this._scaleY  * (d - 1) + this._targetScaleY)  / d;
+        this._scaleX = (this._scaleX * (d - 1) + this._targetScaleX) / d;
+        this._scaleY = (this._scaleY * (d - 1) + this._targetScaleY) / d;
         this._opacity = (this._opacity * (d - 1) + this._targetOpacity) / d;
         this._duration--;
     }
@@ -168,3 +168,4 @@ Game_Picture.prototype.updateRotation = function() {
         this._angle += this._rotationSpeed / 2;
     }
 };
+

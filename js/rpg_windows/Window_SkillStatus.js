@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_SkillStatus-----------------------------------------------------------------------------
 // Window_SkillStatus
 //
 // The window for displaying the skill user's status on the skill screen.
@@ -33,3 +33,4 @@ Window_SkillStatus.prototype.refresh = function() {
         this.drawActorSimpleStatus(this._actor, 162, y, width);
     }
 };
+

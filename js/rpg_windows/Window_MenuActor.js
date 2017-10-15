@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_MenuActor-----------------------------------------------------------------------------
 // Window_MenuActor
 //
 // The window for selecting a target actor on the item and skill screens.
@@ -46,3 +46,4 @@ Window_MenuActor.prototype.selectForItem = function(item) {
         this.selectLast();
     }
 };
+

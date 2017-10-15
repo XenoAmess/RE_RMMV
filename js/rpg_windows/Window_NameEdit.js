@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_NameEdit-----------------------------------------------------------------------------
 // Window_NameEdit
 //
 // The window for editing an actor's name on the name input screen.
@@ -130,3 +130,4 @@ Window_NameEdit.prototype.refresh = function() {
     var rect = this.itemRect(this._index);
     this.setCursorRect(rect.x, rect.y, rect.width, rect.height);
 };
+

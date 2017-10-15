@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_PartyCommand-----------------------------------------------------------------------------
 // Window_PartyCommand
 //
 // The window for selecting whether to fight or escape on the battle screen.
@@ -26,7 +26,7 @@ Window_PartyCommand.prototype.numVisibleRows = function() {
 };
 
 Window_PartyCommand.prototype.makeCommandList = function() {
-    this.addCommand(TextManager.fight,  'fight');
+    this.addCommand(TextManager.fight, 'fight');
     this.addCommand(TextManager.escape, 'escape', BattleManager.canEscape());
 };
 
@@ -38,3 +38,4 @@ Window_PartyCommand.prototype.setup = function() {
     this.activate();
     this.open();
 };
+

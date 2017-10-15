@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_EquipCommand-----------------------------------------------------------------------------
 // Window_EquipCommand
 //
 // The window for selecting a command on the equipment screen.
@@ -24,7 +24,8 @@ Window_EquipCommand.prototype.maxCols = function() {
 };
 
 Window_EquipCommand.prototype.makeCommandList = function() {
-    this.addCommand(TextManager.equip2,   'equip');
+    this.addCommand(TextManager.equip2, 'equip');
     this.addCommand(TextManager.optimize, 'optimize');
-    this.addCommand(TextManager.clear,    'clear');
+    this.addCommand(TextManager.clear, 'clear');
 };
+

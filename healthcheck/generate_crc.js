@@ -19,11 +19,10 @@ const fs = require('fs');
 const path = require('path');
 
 let crc = {};
-files.forEach(file=>{
+files.forEach(file => {
     const content = fs.readFileSync(path.join('corescript', file)).toString();
     crc[file] = CRC32.bstr(content);
 });
 
 const plugin = fs.readFileSync('healthcheck/Debug_HealthCheck.js').toString().replace('__CRC__', JSON.stringify(crc));
 fs.writeFileSync('corescript/js/plugins/Debug_HealthCheck.js', plugin);
-

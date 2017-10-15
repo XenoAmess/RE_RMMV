@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Name-----------------------------------------------------------------------------
 // Scene_Name
 //
 // The scene class of the name input screen.
@@ -46,3 +46,4 @@ Scene_Name.prototype.onInputOk = function() {
     this._actor.setName(this._editWindow.name());
     this.popScene();
 };
+

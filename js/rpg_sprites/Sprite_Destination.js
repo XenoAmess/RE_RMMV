@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Destination-----------------------------------------------------------------------------
 // Sprite_Destination
 //
 // The sprite for displaying the destination place of the touch input.
@@ -18,7 +18,7 @@ Sprite_Destination.prototype.initialize = function() {
 
 Sprite_Destination.prototype.update = function() {
     Sprite.prototype.update.call(this);
-    if ($gameTemp.isDestinationValid()){
+    if ($gameTemp.isDestinationValid()) {
         this.updatePosition();
         this.updateAnimation();
         this.visible = true;
@@ -54,3 +54,4 @@ Sprite_Destination.prototype.updateAnimation = function() {
     this.scale.x = 1 + this._frameCount / 20;
     this.scale.y = this.scale.x;
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ChoiceList-----------------------------------------------------------------------------
 // Window_ChoiceList
 //
 // The window used for the event command [Show Choices].
@@ -37,15 +37,15 @@ Window_ChoiceList.prototype.updatePlacement = function() {
     this.width = this.windowWidth();
     this.height = this.windowHeight();
     switch (positionType) {
-    case 0:
-        this.x = 0;
-        break;
-    case 1:
-        this.x = (Graphics.boxWidth - this.width) / 2;
-        break;
-    case 2:
-        this.x = Graphics.boxWidth - this.width;
-        break;
+        case 0:
+            this.x = 0;
+            break;
+        case 1:
+            this.x = (Graphics.boxWidth - this.width) / 2;
+            break;
+        case 2:
+            this.x = Graphics.boxWidth - this.width;
+            break;
     }
     if (messageY >= Graphics.boxHeight / 2) {
         this.y = messageY - this.height;
@@ -131,3 +131,4 @@ Window_ChoiceList.prototype.callCancelHandler = function() {
     this._messageWindow.terminateMessage();
     this.close();
 };
+

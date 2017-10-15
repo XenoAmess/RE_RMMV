@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_MenuCommand-----------------------------------------------------------------------------
 // Window_MenuCommand
 //
 // The window for selecting a command on the menu screen.
@@ -61,8 +61,7 @@ Window_MenuCommand.prototype.addFormationCommand = function() {
     }
 };
 
-Window_MenuCommand.prototype.addOriginalCommands = function() {
-};
+Window_MenuCommand.prototype.addOriginalCommands = function() {};
 
 Window_MenuCommand.prototype.addOptionsCommand = function() {
     if (this.needsCommand('options')) {
@@ -87,18 +86,18 @@ Window_MenuCommand.prototype.needsCommand = function(name) {
     var flags = $dataSystem.menuCommands;
     if (flags) {
         switch (name) {
-        case 'item':
-            return flags[0];
-        case 'skill':
-            return flags[1];
-        case 'equip':
-            return flags[2];
-        case 'status':
-            return flags[3];
-        case 'formation':
-            return flags[4];
-        case 'save':
-            return flags[5];
+            case 'item':
+                return flags[0];
+            case 'skill':
+                return flags[1];
+            case 'equip':
+                return flags[2];
+            case 'status':
+                return flags[3];
+            case 'formation':
+                return flags[4];
+            case 'save':
+                return flags[5];
         }
     }
     return true;
@@ -132,3 +131,4 @@ Window_MenuCommand.prototype.processOk = function() {
 Window_MenuCommand.prototype.selectLast = function() {
     this.selectSymbol(Window_MenuCommand._lastCommandSymbol);
 };
+

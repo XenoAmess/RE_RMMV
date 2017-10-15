@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Party-----------------------------------------------------------------------------
 // Game_Party
 //
 // The game object class for the party. Information such as gold and items is
@@ -11,12 +11,12 @@ function Game_Party() {
 Game_Party.prototype = Object.create(Game_Unit.prototype);
 Game_Party.prototype.constructor = Game_Party;
 
-Game_Party.ABILITY_ENCOUNTER_HALF    = 0;
-Game_Party.ABILITY_ENCOUNTER_NONE    = 1;
-Game_Party.ABILITY_CANCEL_SURPRISE   = 2;
-Game_Party.ABILITY_RAISE_PREEMPTIVE  = 3;
-Game_Party.ABILITY_GOLD_DOUBLE       = 4;
-Game_Party.ABILITY_DROP_ITEM_DOUBLE  = 5;
+Game_Party.ABILITY_ENCOUNTER_HALF = 0;
+Game_Party.ABILITY_ENCOUNTER_NONE = 1;
+Game_Party.ABILITY_CANCEL_SURPRISE = 2;
+Game_Party.ABILITY_RAISE_PREEMPTIVE = 3;
+Game_Party.ABILITY_GOLD_DOUBLE = 4;
+Game_Party.ABILITY_DROP_ITEM_DOUBLE = 5;
 
 Game_Party.prototype.initialize = function() {
     Game_Unit.prototype.initialize.call(this);
@@ -450,3 +450,4 @@ Game_Party.prototype.requestMotionRefresh = function() {
         actor.requestMotionRefresh();
     });
 };
+

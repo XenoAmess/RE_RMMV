@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ShopSell-----------------------------------------------------------------------------
 // Window_ShopSell
 //
 // The window for selecting an item to sell on the shop screen.
@@ -17,3 +17,4 @@ Window_ShopSell.prototype.initialize = function(x, y, width, height) {
 Window_ShopSell.prototype.isEnabled = function(item) {
     return item && item.price > 0;
 };
+

@@ -1,16 +1,17 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:WebAudio-----------------------------------------------------------------------------
 /**
  * The audio object of Web Audio API.
  *
  * @class WebAudio
  * @constructor
- * @param {String} url The url of the audio file
+ * @param {String}
+ *            url The url of the audio file
  */
 function WebAudio() {
     this.initialize.apply(this, arguments);
 }
 
-WebAudio._standAlone = (function(top){
+WebAudio._standAlone = (function(top) {
     return !top.ResourceHandler;
 })(this);
 
@@ -20,7 +21,7 @@ WebAudio.prototype.initialize = function(url) {
     }
     this.clear();
 
-    if(!WebAudio._standAlone){
+    if (!WebAudio._standAlone) {
         this._loader = ResourceHandler.createLoader(url, this._load.bind(this, url), function() {
             this._hasError = true;
         }.bind(this));
@@ -29,18 +30,19 @@ WebAudio.prototype.initialize = function(url) {
     this._url = url;
 };
 
-WebAudio._masterVolume   = 1;
-WebAudio._context        = null;
+WebAudio._masterVolume = 1;
+WebAudio._context = null;
 WebAudio._masterGainNode = null;
-WebAudio._initialized    = false;
-WebAudio._unlocked       = false;
+WebAudio._initialized = false;
+WebAudio._unlocked = false;
 
 /**
  * Initializes the audio system.
  *
  * @static
  * @method initialize
- * @param {Boolean} noAudio Flag for the no-audio mode
+ * @param {Boolean}
+ *            noAudio Flag for the no-audio mode
  * @return {Boolean} True if the audio system is available
  */
 WebAudio.initialize = function(noAudio) {
@@ -89,7 +91,8 @@ WebAudio.canPlayM4a = function() {
  *
  * @static
  * @method setMasterVolume
- * @param {Number} value Master volume (min: 0, max: 1)
+ * @param {Number}
+ *            value Master volume (min: 0, max: 1)
  */
 WebAudio.setMasterVolume = function(value) {
     this._masterVolume = value;
@@ -149,14 +152,14 @@ WebAudio._createMasterGainNode = function() {
  */
 WebAudio._setupEventHandlers = function() {
     document.addEventListener("touchend", function() {
-            var context = WebAudio._context;
-            if (context && context.state === "suspended" && typeof context.resume === "function") {
-                context.resume().then(function() {
-                    WebAudio._onTouchStart();
-                })
-            } else {
+        var context = WebAudio._context;
+        if (context && context.state === "suspended" && typeof context.resume === "function") {
+            context.resume().then(function() {
                 WebAudio._onTouchStart();
-            }
+            })
+        } else {
+            WebAudio._onTouchStart();
+        }
     });
     document.addEventListener('touchstart', this._onTouchStart.bind(this));
     document.addEventListener('visibilitychange', this._onVisibilityChange.bind(this));
@@ -224,7 +227,8 @@ WebAudio._shouldMuteOnHide = function() {
 /**
  * @static
  * @method _fadeIn
- * @param {Number} duration
+ * @param {Number}
+ *            duration
  * @private
  */
 WebAudio._fadeIn = function(duration) {
@@ -239,7 +243,8 @@ WebAudio._fadeIn = function(duration) {
 /**
  * @static
  * @method _fadeOut
- * @param {Number} duration
+ * @param {Number}
+ *            duration
  * @private
  */
 WebAudio._fadeOut = function(duration) {
@@ -381,8 +386,10 @@ WebAudio.prototype.isPlaying = function() {
  * Plays the audio.
  *
  * @method play
- * @param {Boolean} loop Whether the audio data play in a loop
- * @param {Number} offset The start position to play in seconds
+ * @param {Boolean}
+ *            loop Whether the audio data play in a loop
+ * @param {Number}
+ *            offset The start position to play in seconds
  */
 WebAudio.prototype.play = function(loop, offset) {
     if (this.isReady()) {
@@ -419,7 +426,8 @@ WebAudio.prototype.stop = function() {
  * Performs the audio fade-in.
  *
  * @method fadeIn
- * @param {Number} duration Fade-in time in seconds
+ * @param {Number}
+ *            duration Fade-in time in seconds
  */
 WebAudio.prototype.fadeIn = function(duration) {
     if (this.isReady()) {
@@ -440,7 +448,8 @@ WebAudio.prototype.fadeIn = function(duration) {
  * Performs the audio fade-out.
  *
  * @method fadeOut
- * @param {Number} duration Fade-out time in seconds
+ * @param {Number}
+ *            duration Fade-out time in seconds
  */
 WebAudio.prototype.fadeOut = function(duration) {
     if (this._gainNode) {
@@ -475,7 +484,8 @@ WebAudio.prototype.seek = function() {
  * Add a callback function that will be called when the audio data is loaded.
  *
  * @method addLoadListener
- * @param {Function} listner The callback function
+ * @param {Function}
+ *            listner The callback function
  */
 WebAudio.prototype.addLoadListener = function(listner) {
     this._loadListeners.push(listner);
@@ -485,7 +495,8 @@ WebAudio.prototype.addLoadListener = function(listner) {
  * Add a callback function that will be called when the playback is stopped.
  *
  * @method addStopListener
- * @param {Function} listner The callback function
+ * @param {Function}
+ *            listner The callback function
  */
 WebAudio.prototype.addStopListener = function(listner) {
     this._stopListeners.push(listner);
@@ -493,13 +504,14 @@ WebAudio.prototype.addStopListener = function(listner) {
 
 /**
  * @method _load
- * @param {String} url
+ * @param {String}
+ *            url
  * @private
  */
 WebAudio.prototype._load = function(url) {
     if (WebAudio._context) {
         var xhr = new XMLHttpRequest();
-        if(Decrypter.hasEncryptedAudio) url = Decrypter.extToEncryptExt(url);
+        if (Decrypter.hasEncryptedAudio) url = Decrypter.extToEncryptExt(url);
         xhr.open('GET', url);
         xhr.responseType = 'arraybuffer';
         xhr.onload = function() {
@@ -507,19 +519,22 @@ WebAudio.prototype._load = function(url) {
                 this._onXhrLoad(xhr);
             }
         }.bind(this);
-        xhr.onerror = this._loader || function(){this._hasError = true;}.bind(this);
+        xhr.onerror = this._loader || function() {
+            this._hasError = true;
+        }.bind(this);
         xhr.send();
     }
 };
 
 /**
  * @method _onXhrLoad
- * @param {XMLHttpRequest} xhr
+ * @param {XMLHttpRequest}
+ *            xhr
  * @private
  */
 WebAudio.prototype._onXhrLoad = function(xhr) {
     var array = xhr.response;
-    if(Decrypter.hasEncryptedAudio) array = Decrypter.decryptArrayBuffer(array);
+    if (Decrypter.hasEncryptedAudio) array = Decrypter.decryptArrayBuffer(array);
     this._readLoopComments(new Uint8Array(array));
     WebAudio._context.decodeAudioData(array, function(buffer) {
         this._buffer = buffer;
@@ -537,8 +552,10 @@ WebAudio.prototype._onXhrLoad = function(xhr) {
 
 /**
  * @method _startPlaying
- * @param {Boolean} loop
- * @param {Number} offset
+ * @param {Boolean}
+ *            loop
+ * @param {Number}
+ *            offset
  * @private
  */
 WebAudio.prototype._startPlaying = function(loop, offset) {
@@ -600,7 +617,7 @@ WebAudio.prototype._removeNodes = function() {
 WebAudio.prototype._createEndTimer = function() {
     if (this._sourceNode && !this._sourceNode.loop) {
         var endTime = this._startTime + this._totalTime / this._pitch;
-        var delay =  endTime - WebAudio._context.currentTime;
+        var delay = endTime - WebAudio._context.currentTime;
         this._endTimer = setTimeout(function() {
             this.stop();
         }.bind(this), delay * 1000);
@@ -643,7 +660,8 @@ WebAudio.prototype._onLoad = function() {
 
 /**
  * @method _readLoopComments
- * @param {Uint8Array} array
+ * @param {Uint8Array}
+ *            array
  * @private
  */
 WebAudio.prototype._readLoopComments = function(array) {
@@ -653,7 +671,8 @@ WebAudio.prototype._readLoopComments = function(array) {
 
 /**
  * @method _readOgg
- * @param {Uint8Array} array
+ * @param {Uint8Array}
+ *            array
  * @private
  */
 WebAudio.prototype._readOgg = function(array) {
@@ -690,7 +709,8 @@ WebAudio.prototype._readOgg = function(array) {
 
 /**
  * @method _readMp4
- * @param {Uint8Array} array
+ * @param {Uint8Array}
+ *            array
  * @private
  */
 WebAudio.prototype._readMp4 = function(array) {
@@ -719,9 +739,12 @@ WebAudio.prototype._readMp4 = function(array) {
 
 /**
  * @method _readMetaData
- * @param {Uint8Array} array
- * @param {Number} index
- * @param {Number} size
+ * @param {Uint8Array}
+ *            array
+ * @param {Number}
+ *            index
+ * @param {Number}
+ *            size
  * @private
  */
 WebAudio.prototype._readMetaData = function(array, index, size) {
@@ -755,30 +778,36 @@ WebAudio.prototype._readMetaData = function(array, index, size) {
 
 /**
  * @method _readLittleEndian
- * @param {Uint8Array} array
- * @param {Number} index
+ * @param {Uint8Array}
+ *            array
+ * @param {Number}
+ *            index
  * @private
  */
 WebAudio.prototype._readLittleEndian = function(array, index) {
     return (array[index + 3] * 0x1000000 + array[index + 2] * 0x10000 +
-            array[index + 1] * 0x100 + array[index + 0]);
+        array[index + 1] * 0x100 + array[index + 0]);
 };
 
 /**
  * @method _readBigEndian
- * @param {Uint8Array} array
- * @param {Number} index
+ * @param {Uint8Array}
+ *            array
+ * @param {Number}
+ *            index
  * @private
  */
 WebAudio.prototype._readBigEndian = function(array, index) {
     return (array[index + 0] * 0x1000000 + array[index + 1] * 0x10000 +
-            array[index + 2] * 0x100 + array[index + 3]);
+        array[index + 2] * 0x100 + array[index + 3]);
 };
 
 /**
  * @method _readFourCharacters
- * @param {Uint8Array} array
- * @param {Number} index
+ * @param {Uint8Array}
+ *            array
+ * @param {Number}
+ *            index
  * @private
  */
 WebAudio.prototype._readFourCharacters = function(array, index) {
@@ -788,3 +817,4 @@ WebAudio.prototype._readFourCharacters = function(array, index) {
     }
     return string;
 };
+

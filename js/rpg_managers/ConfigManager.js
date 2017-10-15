@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:ConfigManager-----------------------------------------------------------------------------
 // ConfigManager
 //
 // The static class that manages the configuration data.
@@ -7,8 +7,8 @@ function ConfigManager() {
     throw new Error('This is a static class');
 }
 
-ConfigManager.alwaysDash        = false;
-ConfigManager.commandRemember   = false;
+ConfigManager.alwaysDash = false;
+ConfigManager.commandRemember = false;
 
 Object.defineProperty(ConfigManager, 'bgmVolume', {
     get: function() {
@@ -100,3 +100,4 @@ ConfigManager.readVolume = function(config, name) {
         return 100;
     }
 };
+

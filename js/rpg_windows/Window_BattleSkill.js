@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_BattleSkill-----------------------------------------------------------------------------
 // Window_BattleSkill
 //
 // The window for selecting a skill to use on the battle screen.
@@ -25,3 +25,4 @@ Window_BattleSkill.prototype.hide = function() {
     this.hideHelpWindow();
     Window_SkillList.prototype.hide.call(this);
 };
+

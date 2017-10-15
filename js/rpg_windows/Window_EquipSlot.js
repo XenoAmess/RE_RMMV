@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_EquipSlot-----------------------------------------------------------------------------
 // Window_EquipSlot
 //
 // The window for selecting an equipment slot on the equipment screen.
@@ -79,3 +79,4 @@ Window_EquipSlot.prototype.updateHelp = function() {
         this._statusWindow.setTempActor(null);
     }
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Balloon-----------------------------------------------------------------------------
 // Sprite_Balloon
 //
 // The sprite for displaying a balloon icon.
@@ -68,3 +68,4 @@ Sprite_Balloon.prototype.frameIndex = function() {
 Sprite_Balloon.prototype.isPlaying = function() {
     return this._duration > 0;
 };
+

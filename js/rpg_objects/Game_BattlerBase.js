@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_BattlerBase-----------------------------------------------------------------------------
 // Game_BattlerBase
 //
 // The superclass of Game_Battler. It mainly contains parameters calculation.
@@ -7,100 +7,255 @@ function Game_BattlerBase() {
     this.initialize.apply(this, arguments);
 }
 
-Game_BattlerBase.TRAIT_ELEMENT_RATE   = 11;
-Game_BattlerBase.TRAIT_DEBUFF_RATE    = 12;
-Game_BattlerBase.TRAIT_STATE_RATE     = 13;
-Game_BattlerBase.TRAIT_STATE_RESIST   = 14;
-Game_BattlerBase.TRAIT_PARAM          = 21;
-Game_BattlerBase.TRAIT_XPARAM         = 22;
-Game_BattlerBase.TRAIT_SPARAM         = 23;
+Game_BattlerBase.TRAIT_ELEMENT_RATE = 11;
+Game_BattlerBase.TRAIT_DEBUFF_RATE = 12;
+Game_BattlerBase.TRAIT_STATE_RATE = 13;
+Game_BattlerBase.TRAIT_STATE_RESIST = 14;
+Game_BattlerBase.TRAIT_PARAM = 21;
+Game_BattlerBase.TRAIT_XPARAM = 22;
+Game_BattlerBase.TRAIT_SPARAM = 23;
 Game_BattlerBase.TRAIT_ATTACK_ELEMENT = 31;
-Game_BattlerBase.TRAIT_ATTACK_STATE   = 32;
-Game_BattlerBase.TRAIT_ATTACK_SPEED   = 33;
-Game_BattlerBase.TRAIT_ATTACK_TIMES   = 34;
-Game_BattlerBase.TRAIT_STYPE_ADD      = 41;
-Game_BattlerBase.TRAIT_STYPE_SEAL     = 42;
-Game_BattlerBase.TRAIT_SKILL_ADD      = 43;
-Game_BattlerBase.TRAIT_SKILL_SEAL     = 44;
-Game_BattlerBase.TRAIT_EQUIP_WTYPE    = 51;
-Game_BattlerBase.TRAIT_EQUIP_ATYPE    = 52;
-Game_BattlerBase.TRAIT_EQUIP_LOCK     = 53;
-Game_BattlerBase.TRAIT_EQUIP_SEAL     = 54;
-Game_BattlerBase.TRAIT_SLOT_TYPE      = 55;
-Game_BattlerBase.TRAIT_ACTION_PLUS    = 61;
-Game_BattlerBase.TRAIT_SPECIAL_FLAG   = 62;
-Game_BattlerBase.TRAIT_COLLAPSE_TYPE  = 63;
-Game_BattlerBase.TRAIT_PARTY_ABILITY  = 64;
-Game_BattlerBase.FLAG_ID_AUTO_BATTLE  = 0;
-Game_BattlerBase.FLAG_ID_GUARD        = 1;
-Game_BattlerBase.FLAG_ID_SUBSTITUTE   = 2;
-Game_BattlerBase.FLAG_ID_PRESERVE_TP  = 3;
-Game_BattlerBase.ICON_BUFF_START      = 32;
-Game_BattlerBase.ICON_DEBUFF_START    = 48;
+Game_BattlerBase.TRAIT_ATTACK_STATE = 32;
+Game_BattlerBase.TRAIT_ATTACK_SPEED = 33;
+Game_BattlerBase.TRAIT_ATTACK_TIMES = 34;
+Game_BattlerBase.TRAIT_STYPE_ADD = 41;
+Game_BattlerBase.TRAIT_STYPE_SEAL = 42;
+Game_BattlerBase.TRAIT_SKILL_ADD = 43;
+Game_BattlerBase.TRAIT_SKILL_SEAL = 44;
+Game_BattlerBase.TRAIT_EQUIP_WTYPE = 51;
+Game_BattlerBase.TRAIT_EQUIP_ATYPE = 52;
+Game_BattlerBase.TRAIT_EQUIP_LOCK = 53;
+Game_BattlerBase.TRAIT_EQUIP_SEAL = 54;
+Game_BattlerBase.TRAIT_SLOT_TYPE = 55;
+Game_BattlerBase.TRAIT_ACTION_PLUS = 61;
+Game_BattlerBase.TRAIT_SPECIAL_FLAG = 62;
+Game_BattlerBase.TRAIT_COLLAPSE_TYPE = 63;
+Game_BattlerBase.TRAIT_PARTY_ABILITY = 64;
+Game_BattlerBase.FLAG_ID_AUTO_BATTLE = 0;
+Game_BattlerBase.FLAG_ID_GUARD = 1;
+Game_BattlerBase.FLAG_ID_SUBSTITUTE = 2;
+Game_BattlerBase.FLAG_ID_PRESERVE_TP = 3;
+Game_BattlerBase.ICON_BUFF_START = 32;
+Game_BattlerBase.ICON_DEBUFF_START = 48;
 
 Object.defineProperties(Game_BattlerBase.prototype, {
     // Hit Points
-    hp: { get: function() { return this._hp; }, configurable: true },
+    hp: {
+        get: function() {
+            return this._hp;
+        },
+        configurable: true
+    },
     // Magic Points
-    mp: { get: function() { return this._mp; }, configurable: true },
+    mp: {
+        get: function() {
+            return this._mp;
+        },
+        configurable: true
+    },
     // Tactical Points
-    tp: { get: function() { return this._tp; }, configurable: true },
+    tp: {
+        get: function() {
+            return this._tp;
+        },
+        configurable: true
+    },
     // Maximum Hit Points
-    mhp: { get: function() { return this.param(0); }, configurable: true },
+    mhp: {
+        get: function() {
+            return this.param(0);
+        },
+        configurable: true
+    },
     // Maximum Magic Points
-    mmp: { get: function() { return this.param(1); }, configurable: true },
+    mmp: {
+        get: function() {
+            return this.param(1);
+        },
+        configurable: true
+    },
     // ATtacK power
-    atk: { get: function() { return this.param(2); }, configurable: true },
+    atk: {
+        get: function() {
+            return this.param(2);
+        },
+        configurable: true
+    },
     // DEFense power
-    def: { get: function() { return this.param(3); }, configurable: true },
+    def: {
+        get: function() {
+            return this.param(3);
+        },
+        configurable: true
+    },
     // Magic ATtack power
-    mat: { get: function() { return this.param(4); }, configurable: true },
+    mat: {
+        get: function() {
+            return this.param(4);
+        },
+        configurable: true
+    },
     // Magic DeFense power
-    mdf: { get: function() { return this.param(5); }, configurable: true },
+    mdf: {
+        get: function() {
+            return this.param(5);
+        },
+        configurable: true
+    },
     // AGIlity
-    agi: { get: function() { return this.param(6); }, configurable: true },
+    agi: {
+        get: function() {
+            return this.param(6);
+        },
+        configurable: true
+    },
     // LUcK
-    luk: { get: function() { return this.param(7); }, configurable: true },
+    luk: {
+        get: function() {
+            return this.param(7);
+        },
+        configurable: true
+    },
     // HIT rate
-    hit: { get: function() { return this.xparam(0); }, configurable: true },
+    hit: {
+        get: function() {
+            return this.xparam(0);
+        },
+        configurable: true
+    },
     // EVAsion rate
-    eva: { get: function() { return this.xparam(1); }, configurable: true },
+    eva: {
+        get: function() {
+            return this.xparam(1);
+        },
+        configurable: true
+    },
     // CRItical rate
-    cri: { get: function() { return this.xparam(2); }, configurable: true },
+    cri: {
+        get: function() {
+            return this.xparam(2);
+        },
+        configurable: true
+    },
     // Critical EVasion rate
-    cev: { get: function() { return this.xparam(3); }, configurable: true },
+    cev: {
+        get: function() {
+            return this.xparam(3);
+        },
+        configurable: true
+    },
     // Magic EVasion rate
-    mev: { get: function() { return this.xparam(4); }, configurable: true },
+    mev: {
+        get: function() {
+            return this.xparam(4);
+        },
+        configurable: true
+    },
     // Magic ReFlection rate
-    mrf: { get: function() { return this.xparam(5); }, configurable: true },
+    mrf: {
+        get: function() {
+            return this.xparam(5);
+        },
+        configurable: true
+    },
     // CouNTer attack rate
-    cnt: { get: function() { return this.xparam(6); }, configurable: true },
+    cnt: {
+        get: function() {
+            return this.xparam(6);
+        },
+        configurable: true
+    },
     // Hp ReGeneration rate
-    hrg: { get: function() { return this.xparam(7); }, configurable: true },
+    hrg: {
+        get: function() {
+            return this.xparam(7);
+        },
+        configurable: true
+    },
     // Mp ReGeneration rate
-    mrg: { get: function() { return this.xparam(8); }, configurable: true },
+    mrg: {
+        get: function() {
+            return this.xparam(8);
+        },
+        configurable: true
+    },
     // Tp ReGeneration rate
-    trg: { get: function() { return this.xparam(9); }, configurable: true },
+    trg: {
+        get: function() {
+            return this.xparam(9);
+        },
+        configurable: true
+    },
     // TarGet Rate
-    tgr: { get: function() { return this.sparam(0); }, configurable: true },
+    tgr: {
+        get: function() {
+            return this.sparam(0);
+        },
+        configurable: true
+    },
     // GuaRD effect rate
-    grd: { get: function() { return this.sparam(1); }, configurable: true },
+    grd: {
+        get: function() {
+            return this.sparam(1);
+        },
+        configurable: true
+    },
     // RECovery effect rate
-    rec: { get: function() { return this.sparam(2); }, configurable: true },
+    rec: {
+        get: function() {
+            return this.sparam(2);
+        },
+        configurable: true
+    },
     // PHArmacology
-    pha: { get: function() { return this.sparam(3); }, configurable: true },
+    pha: {
+        get: function() {
+            return this.sparam(3);
+        },
+        configurable: true
+    },
     // Mp Cost Rate
-    mcr: { get: function() { return this.sparam(4); }, configurable: true },
+    mcr: {
+        get: function() {
+            return this.sparam(4);
+        },
+        configurable: true
+    },
     // Tp Charge Rate
-    tcr: { get: function() { return this.sparam(5); }, configurable: true },
+    tcr: {
+        get: function() {
+            return this.sparam(5);
+        },
+        configurable: true
+    },
     // Physical Damage Rate
-    pdr: { get: function() { return this.sparam(6); }, configurable: true },
+    pdr: {
+        get: function() {
+            return this.sparam(6);
+        },
+        configurable: true
+    },
     // Magical Damage Rate
-    mdr: { get: function() { return this.sparam(7); }, configurable: true },
+    mdr: {
+        get: function() {
+            return this.sparam(7);
+        },
+        configurable: true
+    },
     // Floor Damage Rate
-    fdr: { get: function() { return this.sparam(8); }, configurable: true },
+    fdr: {
+        get: function() {
+            return this.sparam(8);
+        },
+        configurable: true
+    },
     // EXperience Rate
-    exr: { get: function() { return this.sparam(9); }, configurable: true }
+    exr: {
+        get: function() {
+            return this.sparam(9);
+        },
+        configurable: true
+    }
 });
 
 Game_BattlerBase.prototype.initialize = function() {
@@ -118,7 +273,7 @@ Game_BattlerBase.prototype.initMembers = function() {
 };
 
 Game_BattlerBase.prototype.clearParamPlus = function() {
-    this._paramPlus = [0,0,0,0,0,0,0,0];
+    this._paramPlus = [0, 0, 0, 0, 0, 0, 0, 0];
 };
 
 Game_BattlerBase.prototype.clearStates = function() {
@@ -165,8 +320,8 @@ Game_BattlerBase.prototype.updateStateTurns = function() {
 };
 
 Game_BattlerBase.prototype.clearBuffs = function() {
-    this._buffs = [0,0,0,0,0,0,0,0];
-    this._buffTurns = [0,0,0,0,0,0,0,0];
+    this._buffs = [0, 0, 0, 0, 0, 0, 0, 0];
+    this._buffTurns = [0, 0, 0, 0, 0, 0, 0, 0];
 };
 
 Game_BattlerBase.prototype.eraseBuff = function(paramId) {
@@ -339,7 +494,7 @@ Game_BattlerBase.prototype.paramPlus = function(paramId) {
 
 Game_BattlerBase.prototype.paramMin = function(paramId) {
     if (paramId === 1) {
-        return 0;   // MMP
+        return 0; // MMP
     } else {
         return 1;
     }
@@ -347,9 +502,9 @@ Game_BattlerBase.prototype.paramMin = function(paramId) {
 
 Game_BattlerBase.prototype.paramMax = function(paramId) {
     if (paramId === 0) {
-        return 999999;  // MHP
+        return 999999; // MHP
     } else if (paramId === 1) {
-        return 9999;    // MMP
+        return 9999; // MMP
     } else {
         return 999;
     }
@@ -635,8 +790,7 @@ Game_BattlerBase.prototype.addNewState = function(stateId) {
     }
 };
 
-Game_BattlerBase.prototype.onRestrict = function() {
-};
+Game_BattlerBase.prototype.onRestrict = function() {};
 
 Game_BattlerBase.prototype.mostImportantStateText = function() {
     var states = this.states();
@@ -701,8 +855,8 @@ Game_BattlerBase.prototype.meetsUsableItemConditions = function(item) {
 
 Game_BattlerBase.prototype.meetsSkillConditions = function(skill) {
     return (this.meetsUsableItemConditions(skill) &&
-            this.isSkillWtypeOk(skill) && this.canPaySkillCost(skill) &&
-            !this.isSkillSealed(skill.id) && !this.isSkillTypeSealed(skill.stypeId));
+        this.isSkillWtypeOk(skill) && this.canPaySkillCost(skill) &&
+        !this.isSkillSealed(skill.id) && !this.isSkillTypeSealed(skill.stypeId));
 };
 
 Game_BattlerBase.prototype.meetsItemConditions = function(item) {
@@ -756,3 +910,4 @@ Game_BattlerBase.prototype.canAttack = function() {
 Game_BattlerBase.prototype.canGuard = function() {
     return this.canUse($dataSkills[this.guardSkillId()]);
 };
+

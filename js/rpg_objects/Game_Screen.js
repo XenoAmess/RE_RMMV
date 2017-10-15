@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Screen-----------------------------------------------------------------------------
 // Game_Screen
 //
 // The game object class for screen effect data, such as changes in color tone
@@ -240,7 +240,7 @@ Game_Screen.prototype.updateShake = function() {
         if (this._shake > this._shakePower * 2) {
             this._shakeDirection = -1;
         }
-        if (this._shake < - this._shakePower * 2) {
+        if (this._shake < -this._shakePower * 2) {
             this._shakeDirection = 1;
         }
         this._shakeDuration--;
@@ -281,7 +281,7 @@ Game_Screen.prototype.startFlashForDamage = function() {
 };
 
 Game_Screen.prototype.showPicture = function(pictureId, name, origin, x, y,
-                                             scaleX, scaleY, opacity, blendMode) {
+    scaleX, scaleY, opacity, blendMode) {
     var realPictureId = this.realPictureId(pictureId);
     var picture = new Game_Picture();
     picture.show(name, origin, x, y, scaleX, scaleY, opacity, blendMode);
@@ -289,7 +289,7 @@ Game_Screen.prototype.showPicture = function(pictureId, name, origin, x, y,
 };
 
 Game_Screen.prototype.movePicture = function(pictureId, origin, x, y, scaleX,
-                                             scaleY, opacity, blendMode, duration) {
+    scaleY, opacity, blendMode, duration) {
     var picture = this.picture(pictureId);
     if (picture) {
         picture.move(origin, x, y, scaleX, scaleY, opacity, blendMode, duration);
@@ -314,3 +314,4 @@ Game_Screen.prototype.erasePicture = function(pictureId) {
     var realPictureId = this.realPictureId(pictureId);
     this._pictures[realPictureId] = null;
 };
+

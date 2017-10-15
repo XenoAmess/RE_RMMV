@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_SkillType-----------------------------------------------------------------------------
 // Window_SkillType
 //
 // The window for selecting a skill type on the skill screen.
@@ -64,3 +64,4 @@ Window_SkillType.prototype.selectLast = function() {
         this.select(0);
     }
 };
+

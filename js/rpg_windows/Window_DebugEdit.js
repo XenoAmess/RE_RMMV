@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_DebugEdit-----------------------------------------------------------------------------
 // Window_DebugEdit
 //
 // The window for displaying switches and variables on the debug screen.
@@ -120,3 +120,4 @@ Window_DebugEdit.prototype.updateVariable = function() {
         }
     }
 };
+

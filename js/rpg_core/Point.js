@@ -1,11 +1,13 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Point-----------------------------------------------------------------------------
 /**
  * The point class.
  *
  * @class Point
  * @constructor
- * @param {Number} x The x coordinate
- * @param {Number} y The y coordinate
+ * @param {Number}
+ *            x The x coordinate
+ * @param {Number}
+ *            y The y coordinate
  */
 function Point() {
     this.initialize.apply(this, arguments);
@@ -31,3 +33,4 @@ Point.prototype.initialize = function(x, y) {
  * @property y
  * @type Number
  */
+

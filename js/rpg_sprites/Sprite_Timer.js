@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Timer-----------------------------------------------------------------------------
 // Sprite_Timer
 //
 // The sprite for displaying the timer.
@@ -58,3 +58,4 @@ Sprite_Timer.prototype.updatePosition = function() {
 Sprite_Timer.prototype.updateVisibility = function() {
     this.visible = $gameTimer.isWorking();
 };
+

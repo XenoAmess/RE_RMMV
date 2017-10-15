@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Spriteset_Map-----------------------------------------------------------------------------
 // Spriteset_Map
 //
 // The set of sprites on the map screen.
@@ -131,7 +131,7 @@ Spriteset_Map.prototype._canvasReAddParallax = function() {
     this._parallax = new TilingSprite();
     this._parallax.move(0, 0, Graphics.width, Graphics.height);
     this._parallax.bitmap = ImageManager.loadParallax(this._parallaxName);
-    this._baseSprite.addChildAt(this._parallax,index);
+    this._baseSprite.addChildAt(this._parallax, index);
 };
 
 Spriteset_Map.prototype.updateParallax = function() {
@@ -168,3 +168,4 @@ Spriteset_Map.prototype.updateWeather = function() {
     this._weather.origin.x = $gameMap.displayX() * $gameMap.tileWidth();
     this._weather.origin.y = $gameMap.displayY() * $gameMap.tileHeight();
 };
+

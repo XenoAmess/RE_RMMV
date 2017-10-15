@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Tilemap-----------------------------------------------------------------------------
 /**
  * The tilemap which displays 2D tile-based game map.
  *
@@ -155,9 +155,12 @@ Object.defineProperty(Tilemap.prototype, 'tileHeight', {
  * Sets the tilemap data.
  *
  * @method setData
- * @param {Number} width The width of the map in number of tiles
- * @param {Number} height The height of the map in number of tiles
- * @param {Array} data The one dimensional array for the map data
+ * @param {Number}
+ *            width The width of the map in number of tiles
+ * @param {Number}
+ *            height The height of the map in number of tiles
+ * @param {Array}
+ *            data The one dimensional array for the map data
  */
 Tilemap.prototype.setData = function(width, height, data) {
     this._mapWidth = width;
@@ -194,7 +197,7 @@ Tilemap.prototype.update = function() {
             child.update();
         }
     });
-    for (var i=0; i<this.bitmaps.length;i++) {
+    for (var i = 0; i < this.bitmaps.length; i++) {
         if (this.bitmaps[i]) {
             this.bitmaps[i].touch();
         }
@@ -261,16 +264,10 @@ Tilemap.prototype._createLayers = function() {
 
     /*
      * Z coordinate:
-     *
-     * 0 : Lower tiles
-     * 1 : Lower characters
-     * 3 : Normal characters
-     * 4 : Upper tiles
-     * 5 : Upper characters
-     * 6 : Airship shadow
-     * 7 : Balloon
-     * 8 : Animation
-     * 9 : Destination
+     * 
+     * 0 : Lower tiles 1 : Lower characters 3 : Normal characters 4 : Upper
+     * tiles 5 : Upper characters 6 : Airship shadow 7 : Balloon 8 : Animation 9 :
+     * Destination
      */
 
     this._lowerLayer = new Sprite();
@@ -292,8 +289,10 @@ Tilemap.prototype._createLayers = function() {
 
 /**
  * @method _updateLayerPositions
- * @param {Number} startX
- * @param {Number} startY
+ * @param {Number}
+ *            startX
+ * @param {Number}
+ *            startY
  * @private
  */
 Tilemap.prototype._updateLayerPositions = function(startX, startY) {
@@ -327,8 +326,10 @@ Tilemap.prototype._updateLayerPositions = function(startX, startY) {
 
 /**
  * @method _paintAllTiles
- * @param {Number} startX
- * @param {Number} startY
+ * @param {Number}
+ *            startX
+ * @param {Number}
+ *            startY
  * @private
  */
 Tilemap.prototype._paintAllTiles = function(startX, startY) {
@@ -343,10 +344,14 @@ Tilemap.prototype._paintAllTiles = function(startX, startY) {
 
 /**
  * @method _paintTiles
- * @param {Number} startX
- * @param {Number} startY
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            startX
+ * @param {Number}
+ *            startY
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 Tilemap.prototype._paintTiles = function(startX, startY, x, y) {
@@ -403,7 +408,7 @@ Tilemap.prototype._paintTiles = function(startX, startY, x, y) {
 
     var lastLowerTiles = this._readLastTiles(0, lx, ly);
     if (!lowerTiles.equals(lastLowerTiles) ||
-            (Tilemap.isTileA1(tileId0) && this._frameUpdated)) {
+        (Tilemap.isTileA1(tileId0) && this._frameUpdated)) {
         this._lowerBitmap.clearRect(dx, dy, this._tileWidth, this._tileHeight);
         for (var i = 0; i < lowerTiles.length; i++) {
             var lowerTileId = lowerTiles[i];
@@ -430,9 +435,12 @@ Tilemap.prototype._paintTiles = function(startX, startY, x, y) {
 
 /**
  * @method _readLastTiles
- * @param {Number} i
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            i
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 Tilemap.prototype._readLastTiles = function(i, x, y) {
@@ -451,10 +459,14 @@ Tilemap.prototype._readLastTiles = function(i, x, y) {
 
 /**
  * @method _writeLastTiles
- * @param {Number} i
- * @param {Number} x
- * @param {Number} y
- * @param {Array} tiles
+ * @param {Number}
+ *            i
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
+ * @param {Array}
+ *            tiles
  * @private
  */
 Tilemap.prototype._writeLastTiles = function(i, x, y, tiles) {
@@ -471,10 +483,14 @@ Tilemap.prototype._writeLastTiles = function(i, x, y, tiles) {
 
 /**
  * @method _drawTile
- * @param {Bitmap} bitmap
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Bitmap}
+ *            bitmap
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 Tilemap.prototype._drawTile = function(bitmap, tileId, dx, dy) {
@@ -489,10 +505,14 @@ Tilemap.prototype._drawTile = function(bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawNormalTile
- * @param {Bitmap} bitmap
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Bitmap}
+ *            bitmap
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 Tilemap.prototype._drawNormalTile = function(bitmap, tileId, dx, dy) {
@@ -517,10 +537,14 @@ Tilemap.prototype._drawNormalTile = function(bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawAutotile
- * @param {Bitmap} bitmap
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Bitmap}
+ *            bitmap
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 Tilemap.prototype._drawAutotile = function(bitmap, tileId, dx, dy) {
@@ -554,8 +578,7 @@ Tilemap.prototype._drawAutotile = function(bitmap, tileId, dx, dy) {
             by = ty * 6 + Math.floor(tx / 2) % 2 * 3;
             if (kind % 2 === 0) {
                 bx += waterSurfaceIndex * 2;
-            }
-            else {
+            } else {
                 bx += 6;
                 autotileTable = Tilemap.WATERFALL_AUTOTILE_TABLE;
                 by += this.animationFrame % 3;
@@ -597,13 +620,13 @@ Tilemap.prototype._drawAutotile = function(bitmap, tileId, dx, dy) {
                 var qsx2 = qsx;
                 var qsy2 = 3;
                 if (qsy === 1) {
-                    qsx2 = [0,3,2,1][qsx];
+                    qsx2 = [0, 3, 2, 1][qsx];
                 }
                 var sx2 = (bx * 2 + qsx2) * w1;
                 var sy2 = (by * 2 + qsy2) * h1;
                 bitmap.bltImage(source, sx2, sy2, w1, h1, dx1, dy1, w1, h1);
-                dy1 += h1/2;
-                bitmap.bltImage(source, sx1, sy1, w1, h1/2, dx1, dy1, w1, h1/2);
+                dy1 += h1 / 2;
+                bitmap.bltImage(source, sx1, sy1, w1, h1 / 2, dx1, dy1, w1, h1 / 2);
             } else {
                 bitmap.bltImage(source, sx1, sy1, w1, h1, dx1, dy1, w1, h1);
             }
@@ -613,10 +636,14 @@ Tilemap.prototype._drawAutotile = function(bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawTableEdge
- * @param {Bitmap} bitmap
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Bitmap}
+ *            bitmap
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 Tilemap.prototype._drawTableEdge = function(bitmap, tileId, dx, dy) {
@@ -639,10 +666,10 @@ Tilemap.prototype._drawTableEdge = function(bitmap, tileId, dx, dy) {
                 var qsx = table[2 + i][0];
                 var qsy = table[2 + i][1];
                 var sx1 = (bx * 2 + qsx) * w1;
-                var sy1 = (by * 2 + qsy) * h1 + h1/2;
+                var sy1 = (by * 2 + qsy) * h1 + h1 / 2;
                 var dx1 = dx + (i % 2) * w1;
                 var dy1 = dy + Math.floor(i / 2) * h1;
-                bitmap.bltImage(source, sx1, sy1, w1, h1/2, dx1, dy1, w1, h1/2);
+                bitmap.bltImage(source, sx1, sy1, w1, h1 / 2, dx1, dy1, w1, h1 / 2);
             }
         }
     }
@@ -650,10 +677,14 @@ Tilemap.prototype._drawTableEdge = function(bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawShadow
- * @param {Bitmap} bitmap
- * @param {Number} shadowBits
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Bitmap}
+ *            bitmap
+ * @param {Number}
+ *            shadowBits
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 Tilemap.prototype._drawShadow = function(bitmap, shadowBits, dx, dy) {
@@ -673,9 +704,12 @@ Tilemap.prototype._drawShadow = function(bitmap, shadowBits, dx, dy) {
 
 /**
  * @method _readMapData
- * @param {Number} x
- * @param {Number} y
- * @param {Number} z
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
+ * @param {Number}
+ *            z
  * @return {Number}
  * @private
  */
@@ -701,7 +735,8 @@ Tilemap.prototype._readMapData = function(x, y, z) {
 
 /**
  * @method _isHigherTile
- * @param {Number} tileId
+ * @param {Number}
+ *            tileId
  * @return {Boolean}
  * @private
  */
@@ -711,7 +746,8 @@ Tilemap.prototype._isHigherTile = function(tileId) {
 
 /**
  * @method _isTableTile
- * @param {Number} tileId
+ * @param {Number}
+ *            tileId
  * @return {Boolean}
  * @private
  */
@@ -721,8 +757,10 @@ Tilemap.prototype._isTableTile = function(tileId) {
 
 /**
  * @method _isOverpassPosition
- * @param {Number} mx
- * @param {Number} my
+ * @param {Number}
+ *            mx
+ * @param {Number}
+ *            my
  * @return {Boolean}
  * @private
  */
@@ -740,8 +778,10 @@ Tilemap.prototype._sortChildren = function() {
 
 /**
  * @method _compareChildOrder
- * @param {Object} a
- * @param {Object} b
+ * @param {Object}
+ *            a
+ * @param {Object}
+ *            b
  * @private
  */
 Tilemap.prototype._compareChildOrder = function(a, b) {
@@ -756,16 +796,16 @@ Tilemap.prototype._compareChildOrder = function(a, b) {
 
 // Tile type checkers
 
-Tilemap.TILE_ID_B      = 0;
-Tilemap.TILE_ID_C      = 256;
-Tilemap.TILE_ID_D      = 512;
-Tilemap.TILE_ID_E      = 768;
-Tilemap.TILE_ID_A5     = 1536;
-Tilemap.TILE_ID_A1     = 2048;
-Tilemap.TILE_ID_A2     = 2816;
-Tilemap.TILE_ID_A3     = 4352;
-Tilemap.TILE_ID_A4     = 5888;
-Tilemap.TILE_ID_MAX    = 8192;
+Tilemap.TILE_ID_B = 0;
+Tilemap.TILE_ID_C = 256;
+Tilemap.TILE_ID_D = 512;
+Tilemap.TILE_ID_E = 768;
+Tilemap.TILE_ID_A5 = 1536;
+Tilemap.TILE_ID_A1 = 2048;
+Tilemap.TILE_ID_A2 = 2816;
+Tilemap.TILE_ID_A3 = 4352;
+Tilemap.TILE_ID_A4 = 5888;
+Tilemap.TILE_ID_MAX = 8192;
 
 Tilemap.isVisibleTile = function(tileId) {
     return tileId > 0 && tileId < this.TILE_ID_MAX;
@@ -849,7 +889,7 @@ Tilemap.isWallTopTile = function(tileId) {
 
 Tilemap.isWallSideTile = function(tileId) {
     return (this.isTileA3(tileId) || this.isTileA4(tileId)) &&
-            this.getAutotileKind(tileId) % 16 >= 8;
+        this.getAutotileKind(tileId) % 16 >= 8;
 };
 
 Tilemap.isWallTile = function(tileId) {
@@ -858,7 +898,7 @@ Tilemap.isWallTile = function(tileId) {
 
 Tilemap.isFloorTypeAutotile = function(tileId) {
     return (this.isTileA1(tileId) && !this.isWaterfallTile(tileId)) ||
-            this.isTileA2(tileId) || this.isWallTopTile(tileId);
+        this.isTileA2(tileId) || this.isWallTopTile(tileId);
 };
 
 Tilemap.isWallTypeAutotile = function(tileId) {
@@ -872,46 +912,420 @@ Tilemap.isWaterfallTypeAutotile = function(tileId) {
 // Autotile shape number to coordinates of tileset images
 
 Tilemap.FLOOR_AUTOTILE_TABLE = [
-    [[2,4],[1,4],[2,3],[1,3]],[[2,0],[1,4],[2,3],[1,3]],
-    [[2,4],[3,0],[2,3],[1,3]],[[2,0],[3,0],[2,3],[1,3]],
-    [[2,4],[1,4],[2,3],[3,1]],[[2,0],[1,4],[2,3],[3,1]],
-    [[2,4],[3,0],[2,3],[3,1]],[[2,0],[3,0],[2,3],[3,1]],
-    [[2,4],[1,4],[2,1],[1,3]],[[2,0],[1,4],[2,1],[1,3]],
-    [[2,4],[3,0],[2,1],[1,3]],[[2,0],[3,0],[2,1],[1,3]],
-    [[2,4],[1,4],[2,1],[3,1]],[[2,0],[1,4],[2,1],[3,1]],
-    [[2,4],[3,0],[2,1],[3,1]],[[2,0],[3,0],[2,1],[3,1]],
-    [[0,4],[1,4],[0,3],[1,3]],[[0,4],[3,0],[0,3],[1,3]],
-    [[0,4],[1,4],[0,3],[3,1]],[[0,4],[3,0],[0,3],[3,1]],
-    [[2,2],[1,2],[2,3],[1,3]],[[2,2],[1,2],[2,3],[3,1]],
-    [[2,2],[1,2],[2,1],[1,3]],[[2,2],[1,2],[2,1],[3,1]],
-    [[2,4],[3,4],[2,3],[3,3]],[[2,4],[3,4],[2,1],[3,3]],
-    [[2,0],[3,4],[2,3],[3,3]],[[2,0],[3,4],[2,1],[3,3]],
-    [[2,4],[1,4],[2,5],[1,5]],[[2,0],[1,4],[2,5],[1,5]],
-    [[2,4],[3,0],[2,5],[1,5]],[[2,0],[3,0],[2,5],[1,5]],
-    [[0,4],[3,4],[0,3],[3,3]],[[2,2],[1,2],[2,5],[1,5]],
-    [[0,2],[1,2],[0,3],[1,3]],[[0,2],[1,2],[0,3],[3,1]],
-    [[2,2],[3,2],[2,3],[3,3]],[[2,2],[3,2],[2,1],[3,3]],
-    [[2,4],[3,4],[2,5],[3,5]],[[2,0],[3,4],[2,5],[3,5]],
-    [[0,4],[1,4],[0,5],[1,5]],[[0,4],[3,0],[0,5],[1,5]],
-    [[0,2],[3,2],[0,3],[3,3]],[[0,2],[1,2],[0,5],[1,5]],
-    [[0,4],[3,4],[0,5],[3,5]],[[2,2],[3,2],[2,5],[3,5]],
-    [[0,2],[3,2],[0,5],[3,5]],[[0,0],[1,0],[0,1],[1,1]]
+    [
+        [2, 4],
+        [1, 4],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [2, 0],
+        [1, 4],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [2, 4],
+        [3, 0],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [2, 4],
+        [1, 4],
+        [2, 3],
+        [3, 1]
+    ],
+    [
+        [2, 0],
+        [1, 4],
+        [2, 3],
+        [3, 1]
+    ],
+    [
+        [2, 4],
+        [3, 0],
+        [2, 3],
+        [3, 1]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 3],
+        [3, 1]
+    ],
+    [
+        [2, 4],
+        [1, 4],
+        [2, 1],
+        [1, 3]
+    ],
+    [
+        [2, 0],
+        [1, 4],
+        [2, 1],
+        [1, 3]
+    ],
+    [
+        [2, 4],
+        [3, 0],
+        [2, 1],
+        [1, 3]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 1],
+        [1, 3]
+    ],
+    [
+        [2, 4],
+        [1, 4],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [2, 0],
+        [1, 4],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [2, 4],
+        [3, 0],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [0, 4],
+        [1, 4],
+        [0, 3],
+        [1, 3]
+    ],
+    [
+        [0, 4],
+        [3, 0],
+        [0, 3],
+        [1, 3]
+    ],
+    [
+        [0, 4],
+        [1, 4],
+        [0, 3],
+        [3, 1]
+    ],
+    [
+        [0, 4],
+        [3, 0],
+        [0, 3],
+        [3, 1]
+    ],
+    [
+        [2, 2],
+        [1, 2],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [2, 2],
+        [1, 2],
+        [2, 3],
+        [3, 1]
+    ],
+    [
+        [2, 2],
+        [1, 2],
+        [2, 1],
+        [1, 3]
+    ],
+    [
+        [2, 2],
+        [1, 2],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [2, 4],
+        [3, 4],
+        [2, 3],
+        [3, 3]
+    ],
+    [
+        [2, 4],
+        [3, 4],
+        [2, 1],
+        [3, 3]
+    ],
+    [
+        [2, 0],
+        [3, 4],
+        [2, 3],
+        [3, 3]
+    ],
+    [
+        [2, 0],
+        [3, 4],
+        [2, 1],
+        [3, 3]
+    ],
+    [
+        [2, 4],
+        [1, 4],
+        [2, 5],
+        [1, 5]
+    ],
+    [
+        [2, 0],
+        [1, 4],
+        [2, 5],
+        [1, 5]
+    ],
+    [
+        [2, 4],
+        [3, 0],
+        [2, 5],
+        [1, 5]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 5],
+        [1, 5]
+    ],
+    [
+        [0, 4],
+        [3, 4],
+        [0, 3],
+        [3, 3]
+    ],
+    [
+        [2, 2],
+        [1, 2],
+        [2, 5],
+        [1, 5]
+    ],
+    [
+        [0, 2],
+        [1, 2],
+        [0, 3],
+        [1, 3]
+    ],
+    [
+        [0, 2],
+        [1, 2],
+        [0, 3],
+        [3, 1]
+    ],
+    [
+        [2, 2],
+        [3, 2],
+        [2, 3],
+        [3, 3]
+    ],
+    [
+        [2, 2],
+        [3, 2],
+        [2, 1],
+        [3, 3]
+    ],
+    [
+        [2, 4],
+        [3, 4],
+        [2, 5],
+        [3, 5]
+    ],
+    [
+        [2, 0],
+        [3, 4],
+        [2, 5],
+        [3, 5]
+    ],
+    [
+        [0, 4],
+        [1, 4],
+        [0, 5],
+        [1, 5]
+    ],
+    [
+        [0, 4],
+        [3, 0],
+        [0, 5],
+        [1, 5]
+    ],
+    [
+        [0, 2],
+        [3, 2],
+        [0, 3],
+        [3, 3]
+    ],
+    [
+        [0, 2],
+        [1, 2],
+        [0, 5],
+        [1, 5]
+    ],
+    [
+        [0, 4],
+        [3, 4],
+        [0, 5],
+        [3, 5]
+    ],
+    [
+        [2, 2],
+        [3, 2],
+        [2, 5],
+        [3, 5]
+    ],
+    [
+        [0, 2],
+        [3, 2],
+        [0, 5],
+        [3, 5]
+    ],
+    [
+        [0, 0],
+        [1, 0],
+        [0, 1],
+        [1, 1]
+    ]
 ];
 
 Tilemap.WALL_AUTOTILE_TABLE = [
-    [[2,2],[1,2],[2,1],[1,1]],[[0,2],[1,2],[0,1],[1,1]],
-    [[2,0],[1,0],[2,1],[1,1]],[[0,0],[1,0],[0,1],[1,1]],
-    [[2,2],[3,2],[2,1],[3,1]],[[0,2],[3,2],[0,1],[3,1]],
-    [[2,0],[3,0],[2,1],[3,1]],[[0,0],[3,0],[0,1],[3,1]],
-    [[2,2],[1,2],[2,3],[1,3]],[[0,2],[1,2],[0,3],[1,3]],
-    [[2,0],[1,0],[2,3],[1,3]],[[0,0],[1,0],[0,3],[1,3]],
-    [[2,2],[3,2],[2,3],[3,3]],[[0,2],[3,2],[0,3],[3,3]],
-    [[2,0],[3,0],[2,3],[3,3]],[[0,0],[3,0],[0,3],[3,3]]
+    [
+        [2, 2],
+        [1, 2],
+        [2, 1],
+        [1, 1]
+    ],
+    [
+        [0, 2],
+        [1, 2],
+        [0, 1],
+        [1, 1]
+    ],
+    [
+        [2, 0],
+        [1, 0],
+        [2, 1],
+        [1, 1]
+    ],
+    [
+        [0, 0],
+        [1, 0],
+        [0, 1],
+        [1, 1]
+    ],
+    [
+        [2, 2],
+        [3, 2],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [0, 2],
+        [3, 2],
+        [0, 1],
+        [3, 1]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [0, 0],
+        [3, 0],
+        [0, 1],
+        [3, 1]
+    ],
+    [
+        [2, 2],
+        [1, 2],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [0, 2],
+        [1, 2],
+        [0, 3],
+        [1, 3]
+    ],
+    [
+        [2, 0],
+        [1, 0],
+        [2, 3],
+        [1, 3]
+    ],
+    [
+        [0, 0],
+        [1, 0],
+        [0, 3],
+        [1, 3]
+    ],
+    [
+        [2, 2],
+        [3, 2],
+        [2, 3],
+        [3, 3]
+    ],
+    [
+        [0, 2],
+        [3, 2],
+        [0, 3],
+        [3, 3]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 3],
+        [3, 3]
+    ],
+    [
+        [0, 0],
+        [3, 0],
+        [0, 3],
+        [3, 3]
+    ]
 ];
 
 Tilemap.WATERFALL_AUTOTILE_TABLE = [
-    [[2,0],[1,0],[2,1],[1,1]],[[0,0],[1,0],[0,1],[1,1]],
-    [[2,0],[3,0],[2,1],[3,1]],[[0,0],[3,0],[0,1],[3,1]]
+    [
+        [2, 0],
+        [1, 0],
+        [2, 1],
+        [1, 1]
+    ],
+    [
+        [0, 0],
+        [1, 0],
+        [0, 1],
+        [1, 1]
+    ],
+    [
+        [2, 0],
+        [3, 0],
+        [2, 1],
+        [3, 1]
+    ],
+    [
+        [0, 0],
+        [3, 0],
+        [0, 1],
+        [3, 1]
+    ]
 ];
 
 // The important members from Pixi.js
@@ -934,7 +1348,8 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Adds a child to the container.
  *
  * @method addChild
- * @param {Object} child The child to add
+ * @param {Object}
+ *            child The child to add
  * @return {Object} The child that was added
  */
 
@@ -942,8 +1357,10 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Adds a child to the container at a specified index.
  *
  * @method addChildAt
- * @param {Object} child The child to add
- * @param {Number} index The index to place the child in
+ * @param {Object}
+ *            child The child to add
+ * @param {Number}
+ *            index The index to place the child in
  * @return {Object} The child that was added
  */
 
@@ -951,7 +1368,8 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Removes a child from the container.
  *
  * @method removeChild
- * @param {Object} child The child to remove
+ * @param {Object}
+ *            child The child to remove
  * @return {Object} The child that was removed
  */
 
@@ -959,6 +1377,8 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Removes a child from the specified index position.
  *
  * @method removeChildAt
- * @param {Number} index The index to get the child from
+ * @param {Number}
+ *            index The index to get the child from
  * @return {Object} The child that was removed
  */
+

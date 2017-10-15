@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Switches-----------------------------------------------------------------------------
 // Game_Switches
 //
 // The game object class for switches.
@@ -29,3 +29,4 @@ Game_Switches.prototype.setValue = function(switchId, value) {
 Game_Switches.prototype.onChange = function() {
     $gameMap.requestRefresh();
 };
+

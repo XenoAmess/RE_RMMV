@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_StateOverlay-----------------------------------------------------------------------------
 // Sprite_StateOverlay
 //
 // The sprite for displaying an overlay image for a state.
@@ -67,3 +67,4 @@ Sprite_StateOverlay.prototype.updateFrame = function() {
         this.setFrame(0, 0, 0, 0);
     }
 };
+

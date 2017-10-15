@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Map-----------------------------------------------------------------------------
 // Scene_Map
 //
 // The scene class of the map screen.
@@ -82,7 +82,7 @@ Scene_Map.prototype.updateMain = function() {
 
 Scene_Map.prototype.isFastForward = function() {
     return ($gameMap.isEventRunning() && !SceneManager.isSceneChanging() &&
-            (Input.isLongPressed('ok') || TouchInput.isLongPressed()));
+        (Input.isLongPressed('ok') || TouchInput.isLongPressed()));
 };
 
 Scene_Map.prototype.stop = function() {
@@ -100,8 +100,8 @@ Scene_Map.prototype.stop = function() {
 
 Scene_Map.prototype.isBusy = function() {
     return ((this._messageWindow && this._messageWindow.isClosing()) ||
-            this._waitCount > 0 || this._encounterEffectDuration > 0 ||
-            Scene_Base.prototype.isBusy.call(this));
+        this._waitCount > 0 || this._encounterEffectDuration > 0 ||
+        Scene_Base.prototype.isBusy.call(this));
 };
 
 Scene_Map.prototype.terminate = function() {
@@ -128,12 +128,12 @@ Scene_Map.prototype.terminate = function() {
 
 Scene_Map.prototype.needsFadeIn = function() {
     return (SceneManager.isPreviousScene(Scene_Battle) ||
-            SceneManager.isPreviousScene(Scene_Load));
+        SceneManager.isPreviousScene(Scene_Load));
 };
 
 Scene_Map.prototype.needsSlowFadeOut = function() {
     return (SceneManager.isNextScene(Scene_Title) ||
-            SceneManager.isNextScene(Scene_Gameover));
+        SceneManager.isNextScene(Scene_Gameover));
 };
 
 Scene_Map.prototype.updateWaitCount = function() {
@@ -234,9 +234,9 @@ Scene_Map.prototype.updateTransferPlayer = function() {
 };
 
 Scene_Map.prototype.updateEncounter = function() {
-   if ($gamePlayer.executeEncounter()) {
-       SceneManager.push(Scene_Battle);
-   }
+    if ($gamePlayer.executeEncounter()) {
+        SceneManager.push(Scene_Battle);
+    }
 };
 
 Scene_Map.prototype.updateCallMenu = function() {
@@ -282,18 +282,20 @@ Scene_Map.prototype.isDebugCalled = function() {
 Scene_Map.prototype.fadeInForTransfer = function() {
     var fadeType = $gamePlayer.fadeType();
     switch (fadeType) {
-    case 0: case 1:
-        this.startFadeIn(this.fadeSpeed(), fadeType === 1);
-        break;
+        case 0:
+        case 1:
+            this.startFadeIn(this.fadeSpeed(), fadeType === 1);
+            break;
     }
 };
 
 Scene_Map.prototype.fadeOutForTransfer = function() {
     var fadeType = $gamePlayer.fadeType();
     switch (fadeType) {
-    case 0: case 1:
-        this.startFadeOut(this.fadeSpeed(), fadeType === 1);
-        break;
+        case 0:
+        case 1:
+            this.startFadeOut(this.fadeSpeed(), fadeType === 1);
+            break;
     }
 };
 
@@ -358,3 +360,4 @@ Scene_Map.prototype.startFlashForEncounter = function(duration) {
 Scene_Map.prototype.encounterEffectSpeed = function() {
     return 60;
 };
+

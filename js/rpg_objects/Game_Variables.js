@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Variables-----------------------------------------------------------------------------
 // Game_Variables
 //
 // The game object class for variables.
@@ -32,3 +32,4 @@ Game_Variables.prototype.setValue = function(variableId, value) {
 Game_Variables.prototype.onChange = function() {
     $gameMap.requestRefresh();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Stage-----------------------------------------------------------------------------
 /**
  * The root object of the display tree.
  *
@@ -30,7 +30,8 @@ Stage.prototype.initialize = function() {
  * Adds a child to the container.
  *
  * @method addChild
- * @param {Object} child The child to add
+ * @param {Object}
+ *            child The child to add
  * @return {Object} The child that was added
  */
 
@@ -38,8 +39,10 @@ Stage.prototype.initialize = function() {
  * Adds a child to the container at a specified index.
  *
  * @method addChildAt
- * @param {Object} child The child to add
- * @param {Number} index The index to place the child in
+ * @param {Object}
+ *            child The child to add
+ * @param {Number}
+ *            index The index to place the child in
  * @return {Object} The child that was added
  */
 
@@ -47,7 +50,8 @@ Stage.prototype.initialize = function() {
  * Removes a child from the container.
  *
  * @method removeChild
- * @param {Object} child The child to remove
+ * @param {Object}
+ *            child The child to remove
  * @return {Object} The child that was removed
  */
 
@@ -55,6 +59,8 @@ Stage.prototype.initialize = function() {
  * Removes a child from the specified index position.
  *
  * @method removeChildAt
- * @param {Number} index The index to get the child from
+ * @param {Number}
+ *            index The index to get the child from
  * @return {Object} The child that was removed
  */
+

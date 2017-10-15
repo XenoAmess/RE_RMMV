@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Follower-----------------------------------------------------------------------------
 // Game_Follower
 //
 // The game object class for a follower. A follower is an allied character,
@@ -55,3 +55,4 @@ Game_Follower.prototype.chaseCharacter = function(character) {
     }
     this.setMoveSpeed($gamePlayer.realMoveSpeed());
 };
+

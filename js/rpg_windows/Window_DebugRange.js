@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_DebugRange-----------------------------------------------------------------------------
 // Window_DebugRange
 //
 // The window for selecting a block of switches/variables on the debug screen.
@@ -11,7 +11,7 @@ Window_DebugRange.prototype = Object.create(Window_Selectable.prototype);
 Window_DebugRange.prototype.constructor = Window_DebugRange;
 
 Window_DebugRange.lastTopRow = 0;
-Window_DebugRange.lastIndex  = 0;
+Window_DebugRange.lastIndex = 0;
 
 Window_DebugRange.prototype.initialize = function(x, y) {
     this._maxSwitches = Math.ceil(($dataSystem.switches.length - 1) / 10);
@@ -81,7 +81,7 @@ Window_DebugRange.prototype.drawItem = function(index) {
 
 Window_DebugRange.prototype.isCancelTriggered = function() {
     return (Window_Selectable.prototype.isCancelTriggered() ||
-            Input.isTriggered('debug'));
+        Input.isTriggered('debug'));
 };
 
 Window_DebugRange.prototype.processCancel = function() {
@@ -94,3 +94,4 @@ Window_DebugRange.prototype.setEditWindow = function(editWindow) {
     this._editWindow = editWindow;
     this.update();
 };
+

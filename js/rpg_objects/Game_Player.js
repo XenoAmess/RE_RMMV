@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Player-----------------------------------------------------------------------------
 // Game_Player
 //
 // The game object class for the player. It contains event starting
@@ -204,7 +204,7 @@ Game_Player.prototype.makeEncounterTroopId = function() {
 
 Game_Player.prototype.meetsEncounterConditions = function(encounter) {
     return (encounter.regionSet.length === 0 ||
-            encounter.regionSet.contains(this.regionId()));
+        encounter.regionSet.contains(this.regionId()));
 };
 
 Game_Player.prototype.executeEncounter = function() {
@@ -238,7 +238,7 @@ Game_Player.prototype.moveByInput = function() {
         var direction = this.getInputDirection();
         if (direction > 0) {
             $gameTemp.clearDestination();
-        } else if ($gameTemp.isDestinationValid()){
+        } else if ($gameTemp.isDestinationValid()) {
             var x = $gameTemp.destinationX();
             var y = $gameTemp.destinationY();
             direction = this.findDirectionTo(x, y);
@@ -366,7 +366,7 @@ Game_Player.prototype.updateNonmoving = function(wasMoving) {
     if (!$gameMap.isEventRunning()) {
         if (wasMoving) {
             $gameParty.onPlayerWalk();
-            this.checkEventTriggerHere([1,2]);
+            this.checkEventTriggerHere([1, 2]);
             if ($gameMap.setupStartingEvent()) {
                 return;
             }
@@ -403,7 +403,7 @@ Game_Player.prototype.triggerButtonAction = function() {
         if ($gameMap.setupStartingEvent()) {
             return true;
         }
-        this.checkEventTriggerThere([0,1,2]);
+        this.checkEventTriggerThere([0, 1, 2]);
         if ($gameMap.setupStartingEvent()) {
             return true;
         }
@@ -412,7 +412,7 @@ Game_Player.prototype.triggerButtonAction = function() {
 };
 
 Game_Player.prototype.triggerTouchAction = function() {
-    if ($gameTemp.isDestinationValid()){
+    if ($gameTemp.isDestinationValid()) {
         var direction = this.direction();
         var x1 = this.x;
         var y1 = this.y;
@@ -454,13 +454,13 @@ Game_Player.prototype.triggerTouchActionD2 = function(x2, y2) {
             return true;
         }
     }
-    this.checkEventTriggerThere([0,1,2]);
+    this.checkEventTriggerThere([0, 1, 2]);
     return $gameMap.setupStartingEvent();
 };
 
 Game_Player.prototype.triggerTouchActionD3 = function(x2, y2) {
     if ($gameMap.isCounter(x2, y2)) {
-        this.checkEventTriggerThere([0,1,2]);
+        this.checkEventTriggerThere([0, 1, 2]);
     }
     return $gameMap.setupStartingEvent();
 };
@@ -473,7 +473,7 @@ Game_Player.prototype.updateEncounterCount = function() {
 
 Game_Player.prototype.canEncounter = function() {
     return (!$gameParty.hasEncounterNone() && $gameSystem.isEncounterEnabled() &&
-            !this.isInAirship() && !this.isMoveRouteForcing() && !this.isDebugThrough());
+        !this.isInAirship() && !this.isMoveRouteForcing() && !this.isDebugThrough());
 };
 
 Game_Player.prototype.encounterProgressValue = function() {
@@ -511,7 +511,7 @@ Game_Player.prototype.checkEventTriggerThere = function(triggers) {
 
 Game_Player.prototype.checkEventTriggerTouch = function(x, y) {
     if (this.canStartLocalEvents()) {
-        this.startMapEvent(x, y, [1,2], true);
+        this.startMapEvent(x, y, [1, 2], true);
     }
 };
 
@@ -618,3 +618,4 @@ Game_Player.prototype.areFollowersGathering = function() {
 Game_Player.prototype.areFollowersGathered = function() {
     return this._followers.areGathered();
 };
+

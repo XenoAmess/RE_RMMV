@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_GameEnd-----------------------------------------------------------------------------
 // Window_GameEnd
 //
 // The window for selecting "Go to Title" on the game end screen.
@@ -28,5 +28,6 @@ Window_GameEnd.prototype.updatePlacement = function() {
 
 Window_GameEnd.prototype.makeCommandList = function() {
     this.addCommand(TextManager.toTitle, 'toTitle');
-    this.addCommand(TextManager.cancel,  'cancel');
+    this.addCommand(TextManager.cancel, 'cancel');
 };
+

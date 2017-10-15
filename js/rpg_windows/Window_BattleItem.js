@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_BattleItem-----------------------------------------------------------------------------
 // Window_BattleItem
 //
 // The window for selecting an item to use on the battle screen.
@@ -29,3 +29,4 @@ Window_BattleItem.prototype.hide = function() {
     this.hideHelpWindow();
     Window_ItemList.prototype.hide.call(this);
 };
+

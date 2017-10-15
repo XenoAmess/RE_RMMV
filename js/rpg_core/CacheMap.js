@@ -1,5 +1,7 @@
+//xenoSplitPos:CacheMap-----------------------------------------------------------------------------
 /**
  * Cache for images, audio, or any other kind of resource
+ *
  * @param manager
  * @constructor
  */
@@ -16,7 +18,7 @@ function CacheMap(manager) {
 /**
  * checks ttl of all elements and removes dead ones
  */
-CacheMap.prototype.checkTTL = function () {
+CacheMap.prototype.checkTTL = function() {
     var cache = this._inner;
     var temp = this._lastRemovedEntries;
     if (!temp) {
@@ -37,10 +39,12 @@ CacheMap.prototype.checkTTL = function () {
 
 /**
  * cache item
- * @param key url of cache element
+ *
+ * @param key
+ *            url of cache element
  * @returns {*|null}
  */
-CacheMap.prototype.getItem = function (key) {
+CacheMap.prototype.getItem = function(key) {
     var entry = this._inner[key];
     if (entry) {
         return entry.item;
@@ -48,14 +52,14 @@ CacheMap.prototype.getItem = function (key) {
     return null;
 };
 
-CacheMap.prototype.clear = function () {
+CacheMap.prototype.clear = function() {
     var keys = Object.keys(this._inner);
     for (var i = 0; i < keys.length; i++) {
         this._inner[keys[i]].free();
     }
 };
 
-CacheMap.prototype.setItem = function (key, item) {
+CacheMap.prototype.setItem = function(key, item) {
     return new CacheEntry(this, key, item).allocate();
 };
 
@@ -67,3 +71,4 @@ CacheMap.prototype.update = function(ticks, delta) {
         this.checkTTL();
     }
 };
+

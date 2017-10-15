@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Followers-----------------------------------------------------------------------------
 // Game_Followers
 //
 // The wrapper class for a follower array.
@@ -118,3 +118,4 @@ Game_Followers.prototype.isSomeoneCollided = function(x, y) {
         return follower.pos(x, y);
     }, this);
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Message-----------------------------------------------------------------------------
 // Game_Message
 //
 // The game object class for the state of the message window that displays text
@@ -173,7 +173,7 @@ Game_Message.prototype.isItemChoice = function() {
 
 Game_Message.prototype.isBusy = function() {
     return (this.hasText() || this.isChoice() ||
-            this.isNumberInput() || this.isItemChoice());
+        this.isNumberInput() || this.isItemChoice());
 };
 
 Game_Message.prototype.newPage = function() {
@@ -185,3 +185,4 @@ Game_Message.prototype.newPage = function() {
 Game_Message.prototype.allText = function() {
     return this._texts.join('\n');
 };
+

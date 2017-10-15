@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Picture-----------------------------------------------------------------------------
 // Sprite_Picture
 //
 // The sprite for displaying a picture.
@@ -92,3 +92,4 @@ Sprite_Picture.prototype.updateOther = function() {
 Sprite_Picture.prototype.loadBitmap = function() {
     this.bitmap = ImageManager.loadPicture(this._pictureName);
 };
+

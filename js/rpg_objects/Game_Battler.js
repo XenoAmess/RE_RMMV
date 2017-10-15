@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Battler-----------------------------------------------------------------------------
 // Game_Battler
 //
 // The superclass of Game_Actor and Game_Enemy. It contains methods for sprites
@@ -117,7 +117,11 @@ Game_Battler.prototype.shiftAnimation = function() {
 };
 
 Game_Battler.prototype.startAnimation = function(animationId, mirror, delay) {
-    var data = { animationId: animationId, mirror: mirror, delay: delay };
+    var data = {
+        animationId: animationId,
+        mirror: mirror,
+        delay: delay
+    };
     this._animations.push(data);
 };
 
@@ -175,9 +179,9 @@ Game_Battler.prototype.addState = function(stateId) {
 
 Game_Battler.prototype.isStateAddable = function(stateId) {
     return (this.isAlive() && $dataStates[stateId] &&
-            !this.isStateResist(stateId) &&
-            !this._result.isStateRemoved(stateId) &&
-            !this.isStateRestrict(stateId));
+        !this.isStateResist(stateId) &&
+        !this._result.isStateRemoved(stateId) &&
+        !this.isStateRestrict(stateId));
 };
 
 Game_Battler.prototype.isStateRestrict = function(stateId) {
@@ -433,8 +437,10 @@ Game_Battler.prototype.onAllActionsEnd = function() {
 Game_Battler.prototype.onTurnEnd = function() {
     this.clearResult();
     this.regenerateAll();
-    this.updateStateTurns();
-    this.updateBuffTurns();
+    if (!BattleManager.isForcedTurn()) {
+        this.updateStateTurns();
+        this.updateBuffTurns();
+    }
     this.removeStatesAuto(2);
 };
 
@@ -499,15 +505,13 @@ Game_Battler.prototype.performActionStart = function(action) {
     }
 };
 
-Game_Battler.prototype.performAction = function(action) {
-};
+Game_Battler.prototype.performAction = function(action) {};
 
 Game_Battler.prototype.performActionEnd = function() {
     this.setActionState('done');
 };
 
-Game_Battler.prototype.performDamage = function() {
-};
+Game_Battler.prototype.performDamage = function() {};
 
 Game_Battler.prototype.performMiss = function() {
     SoundManager.playMiss();
@@ -533,8 +537,7 @@ Game_Battler.prototype.performReflection = function() {
     SoundManager.playReflection();
 };
 
-Game_Battler.prototype.performSubstitute = function(target) {
-};
+Game_Battler.prototype.performSubstitute = function(target) {};
 
-Game_Battler.prototype.performCollapse = function() {
-};
+Game_Battler.prototype.performCollapse = function() {};
+

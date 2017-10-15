@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Button-----------------------------------------------------------------------------
 // Sprite_Button
 //
 // The sprite for displaying a button.
@@ -106,3 +106,4 @@ Sprite_Button.prototype.canvasToLocalY = function(y) {
     }
     return y;
 };
+

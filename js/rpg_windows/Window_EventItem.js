@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_EventItem-----------------------------------------------------------------------------
 // Window_EventItem
 //
 // The window used for the event command [Select Item].
@@ -17,7 +17,7 @@ Window_EventItem.prototype.initialize = function(messageWindow) {
     Window_ItemList.prototype.initialize.call(this, 0, 0, width, height);
     this.openness = 0;
     this.deactivate();
-    this.setHandler('ok',     this.onOk.bind(this));
+    this.setHandler('ok', this.onOk.bind(this));
     this.setHandler('cancel', this.onCancel.bind(this));
 };
 
@@ -67,3 +67,4 @@ Window_EventItem.prototype.onCancel = function() {
     this._messageWindow.terminateMessage();
     this.close();
 };
+

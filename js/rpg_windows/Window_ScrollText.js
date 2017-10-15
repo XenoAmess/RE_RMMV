@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ScrollText-----------------------------------------------------------------------------
 // Window_ScrollText
 //
 // The window for displaying scrolling text. No frame is displayed, but it
@@ -40,7 +40,9 @@ Window_ScrollText.prototype.startMessage = function() {
 };
 
 Window_ScrollText.prototype.refresh = function() {
-    var textState = { index: 0 };
+    var textState = {
+        index: 0
+    };
     textState.text = this.convertEscapeCharacters(this._text);
     this.resetFontSettings();
     this._allTextHeight = this.calcTextHeight(textState, true);
@@ -73,7 +75,7 @@ Window_ScrollText.prototype.isFastForward = function() {
         return false;
     } else {
         return (Input.isPressed('ok') || Input.isPressed('shift') ||
-                TouchInput.isPressed());
+            TouchInput.isPressed());
     }
 };
 
@@ -86,3 +88,4 @@ Window_ScrollText.prototype.terminateMessage = function() {
     $gameMessage.clear();
     this.hide();
 };
+

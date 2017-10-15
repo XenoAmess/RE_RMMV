@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_MenuBase-----------------------------------------------------------------------------
 // Scene_MenuBase
 //
 // The superclass of all the menu-type scenes.
@@ -56,5 +56,5 @@ Scene_MenuBase.prototype.previousActor = function() {
     this.onActorChange();
 };
 
-Scene_MenuBase.prototype.onActorChange = function() {
-};
+Scene_MenuBase.prototype.onActorChange = function() {};
+

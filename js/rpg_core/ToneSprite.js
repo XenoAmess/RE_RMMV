@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:ToneSprite-----------------------------------------------------------------------------
 /**
  * The sprite which changes the screen color in 2D canvas mode.
  *
@@ -33,10 +33,14 @@ ToneSprite.prototype.clear = function() {
  * Sets the tone.
  *
  * @method setTone
- * @param {Number} r The red strength in the range (-255, 255)
- * @param {Number} g The green strength in the range (-255, 255)
- * @param {Number} b The blue strength in the range (-255, 255)
- * @param {Number} gray The grayscale level in the range (0, 255)
+ * @param {Number}
+ *            r The red strength in the range (-255, 255)
+ * @param {Number}
+ *            g The green strength in the range (-255, 255)
+ * @param {Number}
+ *            b The blue strength in the range (-255, 255)
+ * @param {Number}
+ *            gray The grayscale level in the range (0, 255)
  */
 ToneSprite.prototype.setTone = function(r, g, b, gray) {
     this._red = Math.round(r || 0).clamp(-255, 255);
@@ -47,7 +51,8 @@ ToneSprite.prototype.setTone = function(r, g, b, gray) {
 
 /**
  * @method _renderCanvas
- * @param {Object} renderSession
+ * @param {Object}
+ *            renderSession
  * @private
  */
 ToneSprite.prototype._renderCanvas = function(renderer) {
@@ -96,9 +101,11 @@ ToneSprite.prototype._renderCanvas = function(renderer) {
 
 /**
  * @method _renderWebGL
- * @param {Object} renderSession
+ * @param {Object}
+ *            renderSession
  * @private
  */
 ToneSprite.prototype._renderWebGL = function(renderer) {
     // Not supported
 };
+

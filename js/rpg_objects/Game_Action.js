@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Action-----------------------------------------------------------------------------
 // Game_Action
 //
 // The game object class for a battle action.
@@ -7,23 +7,23 @@ function Game_Action() {
     this.initialize.apply(this, arguments);
 }
 
-Game_Action.EFFECT_RECOVER_HP       = 11;
-Game_Action.EFFECT_RECOVER_MP       = 12;
-Game_Action.EFFECT_GAIN_TP          = 13;
-Game_Action.EFFECT_ADD_STATE        = 21;
-Game_Action.EFFECT_REMOVE_STATE     = 22;
-Game_Action.EFFECT_ADD_BUFF         = 31;
-Game_Action.EFFECT_ADD_DEBUFF       = 32;
-Game_Action.EFFECT_REMOVE_BUFF      = 33;
-Game_Action.EFFECT_REMOVE_DEBUFF    = 34;
-Game_Action.EFFECT_SPECIAL          = 41;
-Game_Action.EFFECT_GROW             = 42;
-Game_Action.EFFECT_LEARN_SKILL      = 43;
-Game_Action.EFFECT_COMMON_EVENT     = 44;
-Game_Action.SPECIAL_EFFECT_ESCAPE   = 0;
-Game_Action.HITTYPE_CERTAIN         = 0;
-Game_Action.HITTYPE_PHYSICAL        = 1;
-Game_Action.HITTYPE_MAGICAL         = 2;
+Game_Action.EFFECT_RECOVER_HP = 11;
+Game_Action.EFFECT_RECOVER_MP = 12;
+Game_Action.EFFECT_GAIN_TP = 13;
+Game_Action.EFFECT_ADD_STATE = 21;
+Game_Action.EFFECT_REMOVE_STATE = 22;
+Game_Action.EFFECT_ADD_BUFF = 31;
+Game_Action.EFFECT_ADD_DEBUFF = 32;
+Game_Action.EFFECT_REMOVE_BUFF = 33;
+Game_Action.EFFECT_REMOVE_DEBUFF = 34;
+Game_Action.EFFECT_SPECIAL = 41;
+Game_Action.EFFECT_GROW = 42;
+Game_Action.EFFECT_LEARN_SKILL = 43;
+Game_Action.EFFECT_COMMON_EVENT = 44;
+Game_Action.SPECIAL_EFFECT_ESCAPE = 0;
+Game_Action.HITTYPE_CERTAIN = 0;
+Game_Action.HITTYPE_PHYSICAL = 1;
+Game_Action.HITTYPE_MAGICAL = 2;
 
 Game_Action.prototype.initialize = function(subject, forcing) {
     this._subjectActorId = 0;
@@ -286,15 +286,15 @@ Game_Action.prototype.repeatTargets = function(targets) {
 
 Game_Action.prototype.confusionTarget = function() {
     switch (this.subject().confusionLevel()) {
-    case 1:
-        return this.opponentsUnit().randomTarget();
-    case 2:
-        if (Math.randomInt(2) === 0) {
+        case 1:
             return this.opponentsUnit().randomTarget();
-        }
-        return this.friendsUnit().randomTarget();
-    default:
-        return this.friendsUnit().randomTarget();
+        case 2:
+            if (Math.randomInt(2) === 0) {
+                return this.opponentsUnit().randomTarget();
+            }
+            return this.friendsUnit().randomTarget();
+        default:
+            return this.friendsUnit().randomTarget();
     }
 };
 
@@ -386,7 +386,7 @@ Game_Action.prototype.evaluateWithTarget = function(target) {
 
 Game_Action.prototype.testApply = function(target) {
     return (this.isForDeadFriend() === target.isDead() &&
-            ($gameParty.inBattle() || this.isForOpponent() ||
+        ($gameParty.inBattle() || this.isForOpponent() ||
             (this.isHpRecover() && target.hp < target.mhp) ||
             (this.isMpRecover() && target.mp < target.mmp) ||
             (this.hasItemAnyValidEffects(target))));
@@ -400,26 +400,26 @@ Game_Action.prototype.hasItemAnyValidEffects = function(target) {
 
 Game_Action.prototype.testItemEffect = function(target, effect) {
     switch (effect.code) {
-    case Game_Action.EFFECT_RECOVER_HP:
-        return target.hp < target.mhp || effect.value1 < 0 || effect.value2 < 0;
-    case Game_Action.EFFECT_RECOVER_MP:
-        return target.mp < target.mmp || effect.value1 < 0 || effect.value2 < 0;
-    case Game_Action.EFFECT_ADD_STATE:
-        return !target.isStateAffected(effect.dataId);
-    case Game_Action.EFFECT_REMOVE_STATE:
-        return target.isStateAffected(effect.dataId);
-    case Game_Action.EFFECT_ADD_BUFF:
-        return !target.isMaxBuffAffected(effect.dataId);
-    case Game_Action.EFFECT_ADD_DEBUFF:
-        return !target.isMaxDebuffAffected(effect.dataId);
-    case Game_Action.EFFECT_REMOVE_BUFF:
-        return target.isBuffAffected(effect.dataId);
-    case Game_Action.EFFECT_REMOVE_DEBUFF:
-        return target.isDebuffAffected(effect.dataId);
-    case Game_Action.EFFECT_LEARN_SKILL:
-        return target.isActor() && !target.isLearnedSkill(effect.dataId);
-    default:
-        return true;
+        case Game_Action.EFFECT_RECOVER_HP:
+            return target.hp < target.mhp || effect.value1 < 0 || effect.value2 < 0;
+        case Game_Action.EFFECT_RECOVER_MP:
+            return target.mp < target.mmp || effect.value1 < 0 || effect.value2 < 0;
+        case Game_Action.EFFECT_ADD_STATE:
+            return !target.isStateAffected(effect.dataId);
+        case Game_Action.EFFECT_REMOVE_STATE:
+            return target.isStateAffected(effect.dataId);
+        case Game_Action.EFFECT_ADD_BUFF:
+            return !target.isMaxBuffAffected(effect.dataId);
+        case Game_Action.EFFECT_ADD_DEBUFF:
+            return !target.isMaxDebuffAffected(effect.dataId);
+        case Game_Action.EFFECT_REMOVE_BUFF:
+            return target.isBuffAffected(effect.dataId);
+        case Game_Action.EFFECT_REMOVE_DEBUFF:
+            return target.isDebuffAffected(effect.dataId);
+        case Game_Action.EFFECT_LEARN_SKILL:
+            return target.isActor() && !target.isLearnedSkill(effect.dataId);
+        default:
+            return true;
     }
 };
 
@@ -513,8 +513,8 @@ Game_Action.prototype.evalDamageFormula = function(target) {
         var v = $gameVariables._data;
         var sign = ([3, 4].contains(item.damage.type) ? -1 : 1);
         var value = Math.max(eval(item.damage.formula), 0) * sign;
-		if (isNaN(value)) value = 0;
-		return value;
+        if (isNaN(value)) value = 0;
+        return value;
     } catch (e) {
         return 0;
     }
@@ -590,65 +590,65 @@ Game_Action.prototype.executeMpDamage = function(target, value) {
 
 Game_Action.prototype.gainDrainedHp = function(value) {
     if (this.isDrain()) {
-       var gainTarget = this.subject();
-       if (this._reflectionTarget !== undefined) {
+        var gainTarget = this.subject();
+        if (this._reflectionTarget !== undefined) {
             gainTarget = this._reflectionTarget;
         }
-       gainTarget.gainHp(value);
+        gainTarget.gainHp(value);
     }
 };
 
 Game_Action.prototype.gainDrainedMp = function(value) {
     if (this.isDrain()) {
-       var gainTarget = this.subject();
-       if (this._reflectionTarget !== undefined) {
-           gainTarget = this._reflectionTarget;
-       }
-       gainTarget.gainMp(value);
+        var gainTarget = this.subject();
+        if (this._reflectionTarget !== undefined) {
+            gainTarget = this._reflectionTarget;
+        }
+        gainTarget.gainMp(value);
     }
 };
 
 Game_Action.prototype.applyItemEffect = function(target, effect) {
     switch (effect.code) {
-    case Game_Action.EFFECT_RECOVER_HP:
-        this.itemEffectRecoverHp(target, effect);
-        break;
-    case Game_Action.EFFECT_RECOVER_MP:
-        this.itemEffectRecoverMp(target, effect);
-        break;
-    case Game_Action.EFFECT_GAIN_TP:
-        this.itemEffectGainTp(target, effect);
-        break;
-    case Game_Action.EFFECT_ADD_STATE:
-        this.itemEffectAddState(target, effect);
-        break;
-    case Game_Action.EFFECT_REMOVE_STATE:
-        this.itemEffectRemoveState(target, effect);
-        break;
-    case Game_Action.EFFECT_ADD_BUFF:
-        this.itemEffectAddBuff(target, effect);
-        break;
-    case Game_Action.EFFECT_ADD_DEBUFF:
-        this.itemEffectAddDebuff(target, effect);
-        break;
-    case Game_Action.EFFECT_REMOVE_BUFF:
-        this.itemEffectRemoveBuff(target, effect);
-        break;
-    case Game_Action.EFFECT_REMOVE_DEBUFF:
-        this.itemEffectRemoveDebuff(target, effect);
-        break;
-    case Game_Action.EFFECT_SPECIAL:
-        this.itemEffectSpecial(target, effect);
-        break;
-    case Game_Action.EFFECT_GROW:
-        this.itemEffectGrow(target, effect);
-        break;
-    case Game_Action.EFFECT_LEARN_SKILL:
-        this.itemEffectLearnSkill(target, effect);
-        break;
-    case Game_Action.EFFECT_COMMON_EVENT:
-        this.itemEffectCommonEvent(target, effect);
-        break;
+        case Game_Action.EFFECT_RECOVER_HP:
+            this.itemEffectRecoverHp(target, effect);
+            break;
+        case Game_Action.EFFECT_RECOVER_MP:
+            this.itemEffectRecoverMp(target, effect);
+            break;
+        case Game_Action.EFFECT_GAIN_TP:
+            this.itemEffectGainTp(target, effect);
+            break;
+        case Game_Action.EFFECT_ADD_STATE:
+            this.itemEffectAddState(target, effect);
+            break;
+        case Game_Action.EFFECT_REMOVE_STATE:
+            this.itemEffectRemoveState(target, effect);
+            break;
+        case Game_Action.EFFECT_ADD_BUFF:
+            this.itemEffectAddBuff(target, effect);
+            break;
+        case Game_Action.EFFECT_ADD_DEBUFF:
+            this.itemEffectAddDebuff(target, effect);
+            break;
+        case Game_Action.EFFECT_REMOVE_BUFF:
+            this.itemEffectRemoveBuff(target, effect);
+            break;
+        case Game_Action.EFFECT_REMOVE_DEBUFF:
+            this.itemEffectRemoveDebuff(target, effect);
+            break;
+        case Game_Action.EFFECT_SPECIAL:
+            this.itemEffectSpecial(target, effect);
+            break;
+        case Game_Action.EFFECT_GROW:
+            this.itemEffectGrow(target, effect);
+            break;
+        case Game_Action.EFFECT_LEARN_SKILL:
+            this.itemEffectLearnSkill(target, effect);
+            break;
+        case Game_Action.EFFECT_COMMON_EVENT:
+            this.itemEffectCommonEvent(target, effect);
+            break;
     }
 };
 
@@ -771,8 +771,7 @@ Game_Action.prototype.itemEffectLearnSkill = function(target, effect) {
     }
 };
 
-Game_Action.prototype.itemEffectCommonEvent = function(target, effect) {
-};
+Game_Action.prototype.itemEffectCommonEvent = function(target, effect) {};
 
 Game_Action.prototype.makeSuccess = function(target) {
     target.result().success = true;
@@ -794,3 +793,4 @@ Game_Action.prototype.applyGlobal = function() {
         }
     }, this);
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_EquipStatus-----------------------------------------------------------------------------
 // Window_EquipStatus
 //
 // The window for displaying parameter changes on the equipment screen.
@@ -87,3 +87,4 @@ Window_EquipStatus.prototype.drawNewParam = function(x, y, paramId) {
     this.changeTextColor(this.paramchangeTextColor(diffvalue));
     this.drawText(newValue, x, y, 48, 'right');
 };
+

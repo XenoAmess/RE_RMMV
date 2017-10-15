@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Gameover-----------------------------------------------------------------------------
 // Scene_Gameover
 //
 // The scene class of the game over screen.
@@ -61,3 +61,4 @@ Scene_Gameover.prototype.isTriggered = function() {
 Scene_Gameover.prototype.gotoTitle = function() {
     SceneManager.goto(Scene_Title);
 };
+

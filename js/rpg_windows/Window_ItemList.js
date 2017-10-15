@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ItemList-----------------------------------------------------------------------------
 // Window_ItemList
 //
 // The window for selecting an item on the item screen.
@@ -47,16 +47,16 @@ Window_ItemList.prototype.isCurrentItemEnabled = function() {
 
 Window_ItemList.prototype.includes = function(item) {
     switch (this._category) {
-    case 'item':
-        return DataManager.isItem(item) && item.itypeId === 1;
-    case 'weapon':
-        return DataManager.isWeapon(item);
-    case 'armor':
-        return DataManager.isArmor(item);
-    case 'keyItem':
-        return DataManager.isItem(item) && item.itypeId === 2;
-    default:
-        return false;
+        case 'item':
+            return DataManager.isItem(item) && item.itypeId === 1;
+        case 'weapon':
+            return DataManager.isWeapon(item);
+        case 'armor':
+            return DataManager.isArmor(item);
+        case 'keyItem':
+            return DataManager.isItem(item) && item.itypeId === 2;
+        default:
+            return false;
     }
 };
 
@@ -115,3 +115,4 @@ Window_ItemList.prototype.refresh = function() {
     this.createContents();
     this.drawAllItems();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Item-----------------------------------------------------------------------------
 // Scene_Item
 //
 // The scene class of the item screen.
@@ -26,7 +26,7 @@ Scene_Item.prototype.createCategoryWindow = function() {
     this._categoryWindow = new Window_ItemCategory();
     this._categoryWindow.setHelpWindow(this._helpWindow);
     this._categoryWindow.y = this._helpWindow.height;
-    this._categoryWindow.setHandler('ok',     this.onCategoryOk.bind(this));
+    this._categoryWindow.setHandler('ok', this.onCategoryOk.bind(this));
     this._categoryWindow.setHandler('cancel', this.popScene.bind(this));
     this.addWindow(this._categoryWindow);
 };
@@ -36,7 +36,7 @@ Scene_Item.prototype.createItemWindow = function() {
     var wh = Graphics.boxHeight - wy;
     this._itemWindow = new Window_ItemList(0, wy, Graphics.boxWidth, wh);
     this._itemWindow.setHelpWindow(this._helpWindow);
-    this._itemWindow.setHandler('ok',     this.onItemOk.bind(this));
+    this._itemWindow.setHandler('ok', this.onItemOk.bind(this));
     this._itemWindow.setHandler('cancel', this.onItemCancel.bind(this));
     this.addWindow(this._itemWindow);
     this._categoryWindow.setItemWindow(this._itemWindow);
@@ -78,3 +78,4 @@ Scene_Item.prototype.useItem = function() {
     Scene_ItemBase.prototype.useItem.call(this);
     this._itemWindow.redrawCurrentItem();
 };
+

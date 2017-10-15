@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:PluginManager-----------------------------------------------------------------------------
 // PluginManager
 //
 // The static class that manages the plugins.
@@ -7,10 +7,10 @@ function PluginManager() {
     throw new Error('This is a static class');
 }
 
-PluginManager._path         = 'js/plugins/';
-PluginManager._scripts      = [];
-PluginManager._errorUrls    = [];
-PluginManager._parameters   = {};
+PluginManager._path = 'js/plugins/';
+PluginManager._scripts = [];
+PluginManager._errorUrls = [];
+PluginManager._parameters = {};
 
 PluginManager.setup = function(plugins) {
     plugins.forEach(function(plugin) {
@@ -51,3 +51,4 @@ PluginManager.loadScript = function(name) {
 PluginManager.onError = function(e) {
     this._errorUrls.push(e.target._url);
 };
+

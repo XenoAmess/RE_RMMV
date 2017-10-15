@@ -1,10 +1,10 @@
-//=============================================================================
+//xenoSplitPos:Scene_Base----------------------------------------------------------------------------
 
 /**
  * The Superclass of all scene within the game.
- * 
+ *
  * @class Scene_Base
- * @constructor 
+ * @constructor
  * @extends Stage
  */
 function Scene_Base() {
@@ -17,8 +17,8 @@ Scene_Base.prototype.constructor = Scene_Base;
 
 /**
  * Create a instance of Scene_Base.
- * 
- * @instance 
+ *
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.initialize = function() {
@@ -32,9 +32,9 @@ Scene_Base.prototype.initialize = function() {
 
 /**
  * Attach a reservation to the reserve queue.
- * 
+ *
  * @method attachReservation
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.attachReservation = function() {
@@ -43,9 +43,9 @@ Scene_Base.prototype.attachReservation = function() {
 
 /**
  * Remove the reservation from the Reserve queue.
- * 
+ *
  * @method detachReservation
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.detachReservation = function() {
@@ -54,19 +54,18 @@ Scene_Base.prototype.detachReservation = function() {
 
 /**
  * Create the components and add them to the rendering process.
- * 
+ *
  * @method create
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
-Scene_Base.prototype.create = function() {
-};
+Scene_Base.prototype.create = function() {};
 
 /**
  * Returns whether the scene is active or not.
- * 
+ *
  * @method isActive
- * @instance 
+ * @instance
  * @memberof Scene_Base
  * @return {Boolean} return true if the scene is active
  */
@@ -76,9 +75,9 @@ Scene_Base.prototype.isActive = function() {
 
 /**
  * Return whether the scene is ready to start or not.
- * 
+ *
  * @method isReady
- * @instance 
+ * @instance
  * @memberof Scene_Base
  * @return {Boolean} Return true if the scene is ready to start
  */
@@ -88,9 +87,9 @@ Scene_Base.prototype.isReady = function() {
 
 /**
  * Start the scene processing.
- * 
+ *
  * @method start
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.start = function() {
@@ -99,9 +98,9 @@ Scene_Base.prototype.start = function() {
 
 /**
  * Update the scene processing each new frame.
- * 
+ *
  * @method update
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.update = function() {
@@ -111,9 +110,9 @@ Scene_Base.prototype.update = function() {
 
 /**
  * Stop the scene processing.
- * 
+ *
  * @method stop
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.stop = function() {
@@ -123,7 +122,7 @@ Scene_Base.prototype.stop = function() {
 
 /**
  * Return whether the scene is busy or not.
- * 
+ *
  * @method isBusy
  * @instance
  * @memberof Scene_Base
@@ -135,20 +134,19 @@ Scene_Base.prototype.isBusy = function() {
 
 /**
  * Terminate the scene before switching to a another scene.
- * 
+ *
  * @method terminate
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
-Scene_Base.prototype.terminate = function() {
-};
+Scene_Base.prototype.terminate = function() {};
 
 /**
  * Create the layer for the windows children
  * and add it to the rendering process.
- * 
+ *
  * @method createWindowLayer
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.createWindowLayer = function() {
@@ -163,9 +161,9 @@ Scene_Base.prototype.createWindowLayer = function() {
 
 /**
  * Add the children window to the windowLayer processing.
- * 
+ *
  * @method addWindow
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.addWindow = function(window) {
@@ -174,12 +172,12 @@ Scene_Base.prototype.addWindow = function(window) {
 
 /**
  * Request a fadeIn screen process.
- * 
+ *
  * @method startFadeIn
  * @param {Number} [duration=30] The time the process will take for fadeIn the screen
  * @param {Boolean} [white=false] If true the fadein will be process with a white color else it's will be black
- * 
- * @instance 
+ *
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.startFadeIn = function(duration, white) {
@@ -191,12 +189,12 @@ Scene_Base.prototype.startFadeIn = function(duration, white) {
 
 /**
  * Request a fadeOut screen process.
- * 
+ *
  * @method startFadeOut
  * @param {Number} [duration=30] The time the process will take for fadeOut the screen
  * @param {Boolean} [white=false] If true the fadeOut will be process with a white color else it's will be black
- * 
- * @instance 
+ *
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.startFadeOut = function(duration, white) {
@@ -209,9 +207,9 @@ Scene_Base.prototype.startFadeOut = function(duration, white) {
 /**
  * Create a Screen sprite for the fadein and fadeOut purpose and
  * add it to the rendering process.
- * 
+ *
  * @method createFadeSprite
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.createFadeSprite = function(white) {
@@ -228,9 +226,9 @@ Scene_Base.prototype.createFadeSprite = function(white) {
 
 /**
  * Update the screen fade processing.
- * 
+ *
  * @method updateFade
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.updateFade = function() {
@@ -247,9 +245,9 @@ Scene_Base.prototype.updateFade = function() {
 
 /**
  * Update the children of the scene EACH frame.
- * 
+ *
  * @method updateChildren
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.updateChildren = function() {
@@ -263,9 +261,9 @@ Scene_Base.prototype.updateChildren = function() {
 /**
  * Pop the scene from the stack array and switch to the
  * previous scene.
- * 
+ *
  * @method popScene
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.popScene = function() {
@@ -274,9 +272,9 @@ Scene_Base.prototype.popScene = function() {
 
 /**
  * Check whether the game should be triggering a gameover.
- * 
+ *
  * @method checkGameover
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.checkGameover = function() {
@@ -287,9 +285,9 @@ Scene_Base.prototype.checkGameover = function() {
 
 /**
  * Slowly fade out all the visual and audio of the scene.
- * 
+ *
  * @method fadeOutAll
- * @instance 
+ * @instance
  * @memberof Scene_Base
  */
 Scene_Base.prototype.fadeOutAll = function() {
@@ -302,9 +300,9 @@ Scene_Base.prototype.fadeOutAll = function() {
 
 /**
  * Return the screen fade speed value.
- * 
+ *
  * @method fadeSpeed
- * @instance 
+ * @instance
  * @memberof Scene_Base
  * @return {Number} Return the fade speed
  */
@@ -314,12 +312,13 @@ Scene_Base.prototype.fadeSpeed = function() {
 
 /**
  * Return a slow screen fade speed value.
- * 
+ *
  * @method slowFadeSpeed
- * @instance 
+ * @instance
  * @memberof Scene_Base
  * @return {Number} Return the fade speed
  */
 Scene_Base.prototype.slowFadeSpeed = function() {
     return this.fadeSpeed() * 2;
 };
+

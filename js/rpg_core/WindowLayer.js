@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:WindowLayer-----------------------------------------------------------------------------
 /**
  * The layer which contains game windows.
  *
@@ -29,7 +29,7 @@ WindowLayer.prototype.initialize = function() {
     this.filterArea = new PIXI.Rectangle();
     this.filters = [WindowLayer.voidFilter];
 
-    //temporary fix for memory leak bug
+    // temporary fix for memory leak bug
     this.on('removed', this.onRemoveAsAChild);
 };
 
@@ -75,10 +75,14 @@ Object.defineProperty(WindowLayer.prototype, 'height', {
  * Sets the x, y, width, and height all at once.
  *
  * @method move
- * @param {Number} x The x coordinate of the window layer
- * @param {Number} y The y coordinate of the window layer
- * @param {Number} width The width of the window layer
- * @param {Number} height The height of the window layer
+ * @param {Number}
+ *            x The x coordinate of the window layer
+ * @param {Number}
+ *            y The y coordinate of the window layer
+ * @param {Number}
+ *            width The width of the window layer
+ * @param {Number}
+ *            height The height of the window layer
  */
 WindowLayer.prototype.move = function(x, y, width, height) {
     this.x = x;
@@ -102,7 +106,8 @@ WindowLayer.prototype.update = function() {
 
 /**
  * @method _renderCanvas
- * @param {Object} renderSession
+ * @param {Object}
+ *            renderSession
  * @private
  */
 WindowLayer.prototype.renderCanvas = function(renderer) {
@@ -156,8 +161,10 @@ WindowLayer.prototype.renderCanvas = function(renderer) {
 
 /**
  * @method _canvasClearWindowRect
- * @param {Object} renderSession
- * @param {Window} window
+ * @param {Object}
+ *            renderSession
+ * @param {Window}
+ *            window
  * @private
  */
 WindowLayer.prototype._canvasClearWindowRect = function(renderSession, window) {
@@ -170,7 +177,8 @@ WindowLayer.prototype._canvasClearWindowRect = function(renderSession, window) {
 
 /**
  * @method _renderWebGL
- * @param {Object} renderSession
+ * @param {Object}
+ *            renderSession
  * @private
  */
 WindowLayer.prototype.renderWebGL = function(renderer) {
@@ -178,7 +186,7 @@ WindowLayer.prototype.renderWebGL = function(renderer) {
         return;
     }
 
-    if (this.children.length==0) {
+    if (this.children.length == 0) {
         return;
     }
 
@@ -219,7 +227,8 @@ WindowLayer.prototype.renderWebGL = function(renderer) {
 
 /**
  * @method _maskWindow
- * @param {Window} window
+ * @param {Window}
+ *            window
  * @private
  */
 WindowLayer.prototype._maskWindow = function(window, shift) {
@@ -266,7 +275,8 @@ WindowLayer.prototype._maskWindow = function(window, shift) {
  * Adds a child to the container.
  *
  * @method addChild
- * @param {Object} child The child to add
+ * @param {Object}
+ *            child The child to add
  * @return {Object} The child that was added
  */
 
@@ -274,8 +284,10 @@ WindowLayer.prototype._maskWindow = function(window, shift) {
  * Adds a child to the container at a specified index.
  *
  * @method addChildAt
- * @param {Object} child The child to add
- * @param {Number} index The index to place the child in
+ * @param {Object}
+ *            child The child to add
+ * @param {Number}
+ *            index The index to place the child in
  * @return {Object} The child that was added
  */
 
@@ -283,7 +295,8 @@ WindowLayer.prototype._maskWindow = function(window, shift) {
  * Removes a child from the container.
  *
  * @method removeChild
- * @param {Object} child The child to remove
+ * @param {Object}
+ *            child The child to remove
  * @return {Object} The child that was removed
  */
 
@@ -291,6 +304,8 @@ WindowLayer.prototype._maskWindow = function(window, shift) {
  * Removes a child from the specified index position.
  *
  * @method removeChildAt
- * @param {Number} index The index to get the child from
+ * @param {Number}
+ *            index The index to get the child from
  * @return {Object} The child that was removed
  */
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:SoundManager-----------------------------------------------------------------------------
 // SoundManager
 //
 // The static class that plays sound effects defined in the database.
@@ -121,3 +121,4 @@ SoundManager.playUseItem = function() {
 SoundManager.playUseSkill = function() {
     this.playSystemSound(23);
 };
+

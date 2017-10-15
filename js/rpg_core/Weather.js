@@ -1,6 +1,5 @@
-//-----------------------------------------------------------------------------
-/**
- * The weather effect which displays rain, storm, or snow.
+//xenoSplitPos:Weather-----------------------------------------------------------------------------
+/* displays rain, storm, or snow.
  *
  * @class Weather
  * @constructor
@@ -133,15 +132,15 @@ Weather.prototype._removeSprite = function() {
  */
 Weather.prototype._updateSprite = function(sprite) {
     switch (this.type) {
-    case 'rain':
-        this._updateRainSprite(sprite);
-        break;
-    case 'storm':
-        this._updateStormSprite(sprite);
-        break;
-    case 'snow':
-        this._updateSnowSprite(sprite);
-        break;
+        case 'rain':
+            this._updateRainSprite(sprite);
+            break;
+        case 'storm':
+            this._updateStormSprite(sprite);
+            break;
+        case 'snow':
+            this._updateSnowSprite(sprite);
+            break;
     }
     if (sprite.opacity < 40) {
         this._rebornSprite(sprite);
@@ -197,3 +196,4 @@ Weather.prototype._rebornSprite = function(sprite) {
     sprite.ay = Math.randomInt(Graphics.height + 200) - 200 + this.origin.y;
     sprite.opacity = 160 + Math.randomInt(60);
 };
+

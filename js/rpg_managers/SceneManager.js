@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:SceneManager-----------------------------------------------------------------------------
 // SceneManager
 //
 // The static class that manages scene transitions.
@@ -15,18 +15,18 @@ SceneManager._getTimeInMsWithoutMobileSafari = function() {
     return performance.now();
 };
 
-SceneManager._scene             = null;
-SceneManager._nextScene         = null;
-SceneManager._stack             = [];
-SceneManager._stopped           = false;
-SceneManager._sceneStarted      = false;
-SceneManager._exiting           = false;
-SceneManager._previousClass     = null;
-SceneManager._backgroundBitmap  = null;
-SceneManager._screenWidth       = 816;
-SceneManager._screenHeight      = 624;
-SceneManager._boxWidth          = 816;
-SceneManager._boxHeight         = 624;
+SceneManager._scene = null;
+SceneManager._nextScene = null;
+SceneManager._stack = [];
+SceneManager._stopped = false;
+SceneManager._sceneStarted = false;
+SceneManager._exiting = false;
+SceneManager._previousClass = null;
+SceneManager._backgroundBitmap = null;
+SceneManager._screenWidth = 816;
+SceneManager._screenHeight = 624;
+SceneManager._boxWidth = 816;
+SceneManager._boxHeight = 624;
 SceneManager._deltaTime = 1.0 / 60.0;
 if (!Utils.isMobileSafari()) SceneManager._currentTime = SceneManager._getTimeInMsWithoutMobileSafari();
 SceneManager._accumulator = 0.0;
@@ -108,8 +108,13 @@ SceneManager.initNwjs = function() {
         var gui = require('nw.gui');
         var win = gui.Window.get();
         if (process.platform === 'darwin' && !win.menu) {
-            var menubar = new gui.Menu({ type: 'menubar' });
-            var option = { hideEdit: true, hideWindow: true };
+            var menubar = new gui.Menu({
+                type: 'menubar'
+            });
+            var option = {
+                hideEdit: true,
+                hideWindow: true
+            };
             menubar.createMacBuiltin('Game', option);
             win.menu = menubar;
         }
@@ -156,23 +161,22 @@ SceneManager.onError = function(e) {
         this.stop();
         Graphics.printError('Error', e.message);
         AudioManager.stopAll();
-    } catch (e2) {
-    }
+    } catch (e2) {}
 };
 
 SceneManager.onKeyDown = function(event) {
     if (!event.ctrlKey && !event.altKey) {
         switch (event.keyCode) {
-        case 116:   // F5
-            if (Utils.isNwjs()) {
-                location.reload();
-            }
-            break;
-        case 119:   // F8
-            if (Utils.isNwjs() && Utils.isOptionValid('test')) {
-                require('nw.gui').Window.get().showDevTools();
-            }
-            break;
+            case 116: // F5
+                if (Utils.isNwjs()) {
+                    location.reload();
+                }
+                break;
+            case 119: // F8
+                if (Utils.isNwjs() && Utils.isOptionValid('test')) {
+                    require('nw.gui').Window.get().showDevTools();
+                }
+                break;
         }
     }
 };
@@ -360,3 +364,4 @@ SceneManager.resume = function() {
         this._accumulator = 0;
     }
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Input-----------------------------------------------------------------------------
 /**
  * The static class that handles input data from the keyboard and gamepads.
  *
@@ -46,30 +46,30 @@ Input.keyRepeatInterval = 6;
  * @type Object
  */
 Input.keyMapper = {
-    9: 'tab',       // tab
-    13: 'ok',       // enter
-    16: 'shift',    // shift
-    17: 'control',  // control
-    18: 'control',  // alt
-    27: 'escape',   // escape
-    32: 'ok',       // space
-    33: 'pageup',   // pageup
+    9: 'tab', // tab
+    13: 'ok', // enter
+    16: 'shift', // shift
+    17: 'control', // control
+    18: 'control', // alt
+    27: 'escape', // escape
+    32: 'ok', // space
+    33: 'pageup', // pageup
     34: 'pagedown', // pagedown
-    37: 'left',     // left arrow
-    38: 'up',       // up arrow
-    39: 'right',    // right arrow
-    40: 'down',     // down arrow
-    45: 'escape',   // insert
-    81: 'pageup',   // Q
+    37: 'left', // left arrow
+    38: 'up', // up arrow
+    39: 'right', // right arrow
+    40: 'down', // down arrow
+    45: 'escape', // insert
+    81: 'pageup', // Q
     87: 'pagedown', // W
-    88: 'escape',   // X
-    90: 'ok',       // Z
-    96: 'escape',   // numpad 0
-    98: 'down',     // numpad 2
-    100: 'left',    // numpad 4
-    102: 'right',   // numpad 6
-    104: 'up',      // numpad 8
-    120: 'debug'    // F9
+    88: 'escape', // X
+    90: 'ok', // Z
+    96: 'escape', // numpad 0
+    98: 'down', // numpad 2
+    100: 'left', // numpad 4
+    102: 'right', // numpad 6
+    104: 'up', // numpad 8
+    120: 'debug' // F9
 };
 
 /**
@@ -80,16 +80,16 @@ Input.keyMapper = {
  * @type Object
  */
 Input.gamepadMapper = {
-    0: 'ok',        // A
-    1: 'cancel',    // B
-    2: 'shift',     // X
-    3: 'menu',      // Y
-    4: 'pageup',    // LB
-    5: 'pagedown',  // RB
-    12: 'up',       // D-pad up
-    13: 'down',     // D-pad down
-    14: 'left',     // D-pad left
-    15: 'right',    // D-pad right
+    0: 'ok', // A
+    1: 'cancel', // B
+    2: 'shift', // X
+    3: 'menu', // Y
+    4: 'pageup', // LB
+    5: 'pagedown', // RB
+    12: 'up', // D-pad up
+    13: 'down', // D-pad down
+    14: 'left', // D-pad left
+    15: 'right', // D-pad right
 };
 
 /**
@@ -139,7 +139,8 @@ Input.update = function() {
  *
  * @static
  * @method isPressed
- * @param {String} keyName The mapped name of the key
+ * @param {String}
+ *            keyName The mapped name of the key
  * @return {Boolean} True if the key is pressed
  */
 Input.isPressed = function(keyName) {
@@ -155,7 +156,8 @@ Input.isPressed = function(keyName) {
  *
  * @static
  * @method isTriggered
- * @param {String} keyName The mapped name of the key
+ * @param {String}
+ *            keyName The mapped name of the key
  * @return {Boolean} True if the key is triggered
  */
 Input.isTriggered = function(keyName) {
@@ -171,7 +173,8 @@ Input.isTriggered = function(keyName) {
  *
  * @static
  * @method isRepeated
- * @param {String} keyName The mapped name of the key
+ * @param {String}
+ *            keyName The mapped name of the key
  * @return {Boolean} True if the key is repeated
  */
 Input.isRepeated = function(keyName) {
@@ -179,9 +182,9 @@ Input.isRepeated = function(keyName) {
         return true;
     } else {
         return (this._latestButton === keyName &&
-                (this._pressedTime === 0 ||
-                 (this._pressedTime >= this.keyRepeatWait &&
-                  this._pressedTime % this.keyRepeatInterval === 0)));
+            (this._pressedTime === 0 ||
+                (this._pressedTime >= this.keyRepeatWait &&
+                    this._pressedTime % this.keyRepeatInterval === 0)));
     }
 };
 
@@ -190,7 +193,8 @@ Input.isRepeated = function(keyName) {
  *
  * @static
  * @method isLongPressed
- * @param {String} keyName The mapped name of the key
+ * @param {String}
+ *            keyName The mapped name of the key
  * @return {Boolean} True if the key is long-pressed
  */
 Input.isLongPressed = function(keyName) {
@@ -198,12 +202,13 @@ Input.isLongPressed = function(keyName) {
         return true;
     } else {
         return (this._latestButton === keyName &&
-                this._pressedTime >= this.keyRepeatWait);
+            this._pressedTime >= this.keyRepeatWait);
     }
 };
 
 /**
- * [read-only] The four direction value as a number of the numpad, or 0 for neutral.
+ * [read-only] The four direction value as a number of the numpad, or 0 for
+ * neutral.
  *
  * @static
  * @property dir4
@@ -217,7 +222,8 @@ Object.defineProperty(Input, 'dir4', {
 });
 
 /**
- * [read-only] The eight direction value as a number of the numpad, or 0 for neutral.
+ * [read-only] The eight direction value as a number of the numpad, or 0 for
+ * neutral.
  *
  * @static
  * @property dir8
@@ -276,14 +282,15 @@ Input._setupEventHandlers = function() {
 /**
  * @static
  * @method _onKeyDown
- * @param {KeyboardEvent} event
+ * @param {KeyboardEvent}
+ *            event
  * @private
  */
 Input._onKeyDown = function(event) {
     if (this._shouldPreventDefault(event.keyCode)) {
         event.preventDefault();
     }
-    if (event.keyCode === 144) {    // Numlock
+    if (event.keyCode === 144) { // Numlock
         this.clear();
     }
     var buttonName = this.keyMapper[event.keyCode];
@@ -297,19 +304,20 @@ Input._onKeyDown = function(event) {
 /**
  * @static
  * @method _shouldPreventDefault
- * @param {Number} keyCode
+ * @param {Number}
+ *            keyCode
  * @private
  */
 Input._shouldPreventDefault = function(keyCode) {
     switch (keyCode) {
-    case 8:     // backspace
-    case 33:    // pageup
-    case 34:    // pagedown
-    case 37:    // left arrow
-    case 38:    // up arrow
-    case 39:    // right arrow
-    case 40:    // down arrow
-        return true;
+        case 8: // backspace
+        case 33: // pageup
+        case 34: // pagedown
+        case 37: // left arrow
+        case 38: // up arrow
+        case 39: // right arrow
+        case 40: // down arrow
+            return true;
     }
     return false;
 };
@@ -317,7 +325,8 @@ Input._shouldPreventDefault = function(keyCode) {
 /**
  * @static
  * @method _onKeyUp
- * @param {KeyboardEvent} event
+ * @param {KeyboardEvent}
+ *            event
  * @private
  */
 Input._onKeyUp = function(event) {
@@ -325,7 +334,7 @@ Input._onKeyUp = function(event) {
     if (buttonName) {
         this._currentState[buttonName] = false;
     }
-    if (event.keyCode === 0) {  // For QtWebEngine on OS X
+    if (event.keyCode === 0) { // For QtWebEngine on OS X
         this.clear();
     }
 };
@@ -361,8 +370,10 @@ Input._pollGamepads = function() {
 /**
  * @static
  * @method _updateGamepadState
- * @param {Gamepad} gamepad
- * @param {Number} index
+ * @param {Gamepad}
+ *            gamepad
+ * @param {Number}
+ *            index
  * @private
  */
 Input._updateGamepadState = function(gamepad) {
@@ -379,14 +390,14 @@ Input._updateGamepadState = function(gamepad) {
         newState[i] = buttons[i].pressed;
     }
     if (axes[1] < -threshold) {
-        newState[12] = true;    // up
+        newState[12] = true; // up
     } else if (axes[1] > threshold) {
-        newState[13] = true;    // down
+        newState[13] = true; // down
     }
     if (axes[0] < -threshold) {
-        newState[14] = true;    // left
+        newState[14] = true; // left
     } else if (axes[0] > threshold) {
-        newState[15] = true;    // right
+        newState[15] = true; // right
     }
     for (var j = 0; j < newState.length; j++) {
         if (newState[j] !== lastState[j]) {
@@ -462,14 +473,16 @@ Input._signY = function() {
 /**
  * @static
  * @method _makeNumpadDirection
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @return {Number}
  * @private
  */
 Input._makeNumpadDirection = function(x, y) {
     if (x !== 0 || y !== 0) {
-        return  5 - y * 3 + x;
+        return 5 - y * 3 + x;
     }
     return 0;
 };
@@ -477,10 +490,12 @@ Input._makeNumpadDirection = function(x, y) {
 /**
  * @static
  * @method _isEscapeCompatible
- * @param {String} keyName
+ * @param {String}
+ *            keyName
  * @return {Boolean}
  * @private
  */
 Input._isEscapeCompatible = function(keyName) {
     return keyName === 'cancel' || keyName === 'menu';
 };
+

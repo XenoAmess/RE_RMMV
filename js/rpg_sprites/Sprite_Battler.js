@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Battler-----------------------------------------------------------------------------
 // Sprite_Battler
 //
 // The superclass of Sprite_Actor and Sprite_Enemy.
@@ -69,11 +69,9 @@ Sprite_Battler.prototype.updateMain = function() {
     this.updatePosition();
 };
 
-Sprite_Battler.prototype.updateBitmap = function() {
-};
+Sprite_Battler.prototype.updateBitmap = function() {};
 
-Sprite_Battler.prototype.updateFrame = function() {
-};
+Sprite_Battler.prototype.updateFrame = function() {};
 
 Sprite_Battler.prototype.updateMove = function() {
     if (this._movementDuration > 0) {
@@ -173,8 +171,7 @@ Sprite_Battler.prototype.startMove = function(x, y, duration) {
     }
 };
 
-Sprite_Battler.prototype.onMoveEnd = function() {
-};
+Sprite_Battler.prototype.onMoveEnd = function() {};
 
 Sprite_Battler.prototype.isEffecting = function() {
     return false;
@@ -187,3 +184,4 @@ Sprite_Battler.prototype.isMoving = function() {
 Sprite_Battler.prototype.inHomePosition = function() {
     return this._offsetX === 0 && this._offsetY === 0;
 };
+

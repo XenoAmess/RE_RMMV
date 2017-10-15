@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_File-----------------------------------------------------------------------------
 // Scene_File
 //
 // The superclass of Scene_Save and Scene_Load.
@@ -42,7 +42,7 @@ Scene_File.prototype.createListWindow = function() {
     var width = Graphics.boxWidth;
     var height = Graphics.boxHeight - y;
     this._listWindow = new Window_SavefileList(x, y, width, height);
-    this._listWindow.setHandler('ok',     this.onSavefileOk.bind(this));
+    this._listWindow.setHandler('ok', this.onSavefileOk.bind(this));
     this._listWindow.setHandler('cancel', this.popScene.bind(this));
     this._listWindow.select(this.firstSavefileIndex());
     this._listWindow.setTopRow(this.firstSavefileIndex() - 2);
@@ -67,5 +67,5 @@ Scene_File.prototype.firstSavefileIndex = function() {
     return 0;
 };
 
-Scene_File.prototype.onSavefileOk = function() {
-};
+Scene_File.prototype.onSavefileOk = function() {};
+

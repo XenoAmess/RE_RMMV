@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Boot-----------------------------------------------------------------------------
 // Scene_Boot
 //
 // The scene class for initializing the entire game.
@@ -50,7 +50,7 @@ Scene_Boot.prototype.isReady = function() {
 Scene_Boot.prototype.isGameFontLoaded = function() {
     if (Graphics.isFontLoaded('GameFont')) {
         return true;
-    } else if (!Graphics.canUseCssFontLoading()){
+    } else if (!Graphics.canUseCssFontLoading()) {
         var elapsed = Date.now() - this._startDate;
         if (elapsed >= 60000) {
             throw new Error('Failed to load GameFont');
@@ -85,3 +85,4 @@ Scene_Boot.prototype.checkPlayerLocation = function() {
         throw new Error('Player\'s starting position is not set');
     }
 };
+

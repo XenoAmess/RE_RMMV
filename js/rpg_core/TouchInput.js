@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:TouchInput-----------------------------------------------------------------------------
 /**
  * The static class that handles input data from the mouse and touchscreen.
  *
@@ -112,8 +112,8 @@ TouchInput.isTriggered = function() {
 };
 
 /**
- * Checks whether the left mouse button or touchscreen is just pressed
- * or a pseudo key repeat occurred.
+ * Checks whether the left mouse button or touchscreen is just pressed or a
+ * pseudo key repeat occurred.
  *
  * @static
  * @method isRepeated
@@ -121,9 +121,9 @@ TouchInput.isTriggered = function() {
  */
 TouchInput.isRepeated = function() {
     return (this.isPressed() &&
-            (this._triggered ||
-             (this._pressedTime >= this.keyRepeatWait &&
-              this._pressedTime % this.keyRepeatInterval === 0)));
+        (this._triggered ||
+            (this._pressedTime >= this.keyRepeatWait &&
+                this._pressedTime % this.keyRepeatInterval === 0)));
 };
 
 /**
@@ -131,7 +131,8 @@ TouchInput.isRepeated = function() {
  *
  * @static
  * @method isLongPressed
- * @return {Boolean} True if the left mouse button or touchscreen is long-pressed
+ * @return {Boolean} True if the left mouse button or touchscreen is
+ *         long-pressed
  */
 TouchInput.isLongPressed = function() {
     return this.isPressed() && this._pressedTime >= this.keyRepeatWait;
@@ -251,8 +252,12 @@ TouchInput._setupEventHandlers = function() {
     document.addEventListener('mousemove', this._onMouseMove.bind(this));
     document.addEventListener('mouseup', this._onMouseUp.bind(this));
     document.addEventListener('wheel', this._onWheel.bind(this));
-    document.addEventListener('touchstart', this._onTouchStart.bind(this), isSupportPassive ? {passive: false} : false);
-    document.addEventListener('touchmove', this._onTouchMove.bind(this), isSupportPassive ? {passive: false} : false);
+    document.addEventListener('touchstart', this._onTouchStart.bind(this), isSupportPassive ? {
+        passive: false
+    } : false);
+    document.addEventListener('touchmove', this._onTouchMove.bind(this), isSupportPassive ? {
+        passive: false
+    } : false);
     document.addEventListener('touchend', this._onTouchEnd.bind(this));
     document.addEventListener('touchcancel', this._onTouchCancel.bind(this));
     document.addEventListener('pointerdown', this._onPointerDown.bind(this));
@@ -261,7 +266,8 @@ TouchInput._setupEventHandlers = function() {
 /**
  * @static
  * @method _onMouseDown
- * @param {MouseEvent} event
+ * @param {MouseEvent}
+ *            event
  * @private
  */
 TouchInput._onMouseDown = function(event) {
@@ -277,7 +283,8 @@ TouchInput._onMouseDown = function(event) {
 /**
  * @static
  * @method _onLeftButtonDown
- * @param {MouseEvent} event
+ * @param {MouseEvent}
+ *            event
  * @private
  */
 TouchInput._onLeftButtonDown = function(event) {
@@ -293,16 +300,17 @@ TouchInput._onLeftButtonDown = function(event) {
 /**
  * @static
  * @method _onMiddleButtonDown
- * @param {MouseEvent} event
+ * @param {MouseEvent}
+ *            event
  * @private
  */
-TouchInput._onMiddleButtonDown = function(event) {
-};
+TouchInput._onMiddleButtonDown = function(event) {};
 
 /**
  * @static
  * @method _onRightButtonDown
- * @param {MouseEvent} event
+ * @param {MouseEvent}
+ *            event
  * @private
  */
 TouchInput._onRightButtonDown = function(event) {
@@ -316,7 +324,8 @@ TouchInput._onRightButtonDown = function(event) {
 /**
  * @static
  * @method _onMouseMove
- * @param {MouseEvent} event
+ * @param {MouseEvent}
+ *            event
  * @private
  */
 TouchInput._onMouseMove = function(event) {
@@ -330,7 +339,8 @@ TouchInput._onMouseMove = function(event) {
 /**
  * @static
  * @method _onMouseUp
- * @param {MouseEvent} event
+ * @param {MouseEvent}
+ *            event
  * @private
  */
 TouchInput._onMouseUp = function(event) {
@@ -345,7 +355,8 @@ TouchInput._onMouseUp = function(event) {
 /**
  * @static
  * @method _onWheel
- * @param {WheelEvent} event
+ * @param {WheelEvent}
+ *            event
  * @private
  */
 TouchInput._onWheel = function(event) {
@@ -357,7 +368,8 @@ TouchInput._onWheel = function(event) {
 /**
  * @static
  * @method _onTouchStart
- * @param {TouchEvent} event
+ * @param {TouchEvent}
+ *            event
  * @private
  */
 TouchInput._onTouchStart = function(event) {
@@ -384,7 +396,8 @@ TouchInput._onTouchStart = function(event) {
 /**
  * @static
  * @method _onTouchMove
- * @param {TouchEvent} event
+ * @param {TouchEvent}
+ *            event
  * @private
  */
 TouchInput._onTouchMove = function(event) {
@@ -399,7 +412,8 @@ TouchInput._onTouchMove = function(event) {
 /**
  * @static
  * @method _onTouchEnd
- * @param {TouchEvent} event
+ * @param {TouchEvent}
+ *            event
  * @private
  */
 TouchInput._onTouchEnd = function(event) {
@@ -415,7 +429,8 @@ TouchInput._onTouchEnd = function(event) {
 /**
  * @static
  * @method _onTouchCancel
- * @param {TouchEvent} event
+ * @param {TouchEvent}
+ *            event
  * @private
  */
 TouchInput._onTouchCancel = function(event) {
@@ -425,7 +440,8 @@ TouchInput._onTouchCancel = function(event) {
 /**
  * @static
  * @method _onPointerDown
- * @param {PointerEvent} event
+ * @param {PointerEvent}
+ *            event
  * @private
  */
 TouchInput._onPointerDown = function(event) {
@@ -443,8 +459,10 @@ TouchInput._onPointerDown = function(event) {
 /**
  * @static
  * @method _onTrigger
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 TouchInput._onTrigger = function(x, y) {
@@ -457,8 +475,10 @@ TouchInput._onTrigger = function(x, y) {
 /**
  * @static
  * @method _onCancel
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 TouchInput._onCancel = function(x, y) {
@@ -470,8 +490,10 @@ TouchInput._onCancel = function(x, y) {
 /**
  * @static
  * @method _onMove
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 TouchInput._onMove = function(x, y) {
@@ -483,8 +505,10 @@ TouchInput._onMove = function(x, y) {
 /**
  * @static
  * @method _onRelease
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 TouchInput._onRelease = function(x, y) {
@@ -492,3 +516,4 @@ TouchInput._onRelease = function(x, y) {
     this._x = x;
     this._y = y;
 };
+

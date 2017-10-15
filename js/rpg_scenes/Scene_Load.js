@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Load-----------------------------------------------------------------------------
 // Scene_Load
 //
 // The scene class of the load screen.
@@ -62,3 +62,4 @@ Scene_Load.prototype.reloadMapIfUpdated = function() {
         $gamePlayer.requestMapReload();
     }
 };
+

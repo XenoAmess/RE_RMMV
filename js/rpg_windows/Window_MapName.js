@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_MapName-----------------------------------------------------------------------------
 // Window_MapName
 //
 // The window for displaying the map name on the map screen.
@@ -70,3 +70,4 @@ Window_MapName.prototype.drawBackground = function(x, y, width, height) {
     this.contents.gradientFillRect(x, y, width / 2, height, color2, color1);
     this.contents.gradientFillRect(x + width / 2, y, width / 2, height, color1, color2);
 };
+

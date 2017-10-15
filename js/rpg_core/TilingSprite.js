@@ -1,10 +1,11 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:TilingSprite-----------------------------------------------------------------------------
 /**
  * The sprite object for a tiling image.
  *
  * @class TilingSprite
  * @constructor
- * @param {Bitmap} bitmap The image for the tiling sprite
+ * @param {Bitmap}
+ *            bitmap The image for the tiling sprite
  */
 function TilingSprite() {
     this.initialize.apply(this, arguments);
@@ -39,7 +40,8 @@ TilingSprite.prototype._renderWebGL_PIXI = PIXI.extras.PictureTilingSprite.proto
 
 /**
  * @method _renderCanvas
- * @param {Object} renderer
+ * @param {Object}
+ *            renderer
  * @private
  */
 TilingSprite.prototype._renderCanvas = function(renderer) {
@@ -53,7 +55,8 @@ TilingSprite.prototype._renderCanvas = function(renderer) {
 
 /**
  * @method _renderWebGL
- * @param {Object} renderer
+ * @param {Object}
+ *            renderer
  * @private
  */
 TilingSprite.prototype._renderWebGL = function(renderer) {
@@ -124,10 +127,14 @@ TilingSprite.prototype.update = function() {
  * Sets the x, y, width, and height all at once.
  *
  * @method move
- * @param {Number} x The x coordinate of the tiling sprite
- * @param {Number} y The y coordinate of the tiling sprite
- * @param {Number} width The width of the tiling sprite
- * @param {Number} height The height of the tiling sprite
+ * @param {Number}
+ *            x The x coordinate of the tiling sprite
+ * @param {Number}
+ *            y The y coordinate of the tiling sprite
+ * @param {Number}
+ *            width The width of the tiling sprite
+ * @param {Number}
+ *            height The height of the tiling sprite
  */
 TilingSprite.prototype.move = function(x, y, width, height) {
     this.x = x || 0;
@@ -140,10 +147,14 @@ TilingSprite.prototype.move = function(x, y, width, height) {
  * Specifies the region of the image that the tiling sprite will use.
  *
  * @method setFrame
- * @param {Number} x The x coordinate of the frame
- * @param {Number} y The y coordinate of the frame
- * @param {Number} width The width of the frame
- * @param {Number} height The height of the frame
+ * @param {Number}
+ *            x The x coordinate of the frame
+ * @param {Number}
+ *            y The y coordinate of the frame
+ * @param {Number}
+ *            width The width of the frame
+ * @param {Number}
+ *            height The height of the frame
  */
 TilingSprite.prototype.setFrame = function(x, y, width, height) {
     this._frame.x = x;
@@ -194,7 +205,8 @@ TilingSprite.prototype._speedUpCustomBlendModes = Sprite.prototype._speedUpCusto
 
 /**
  * @method _renderWebGL
- * @param {Object} renderer
+ * @param {Object}
+ *            renderer
  * @private
  */
 TilingSprite.prototype._renderWebGL = function(renderer) {
@@ -230,3 +242,4 @@ TilingSprite.prototype._renderWebGL = function(renderer) {
  * @property y
  * @type Number
  */
+

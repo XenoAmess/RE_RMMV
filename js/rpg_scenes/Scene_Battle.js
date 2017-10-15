@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Battle-----------------------------------------------------------------------------
 // Scene_Battle
 //
 // The scene class of the battle screen.
@@ -40,7 +40,7 @@ Scene_Battle.prototype.update = function() {
 
 Scene_Battle.prototype.updateBattleProcess = function() {
     if (!this.isAnyInputWindowActive() || BattleManager.isAborting() ||
-            BattleManager.isBattleEnd()) {
+        BattleManager.isBattleEnd()) {
         BattleManager.update();
         this.changeInputWindow();
     }
@@ -48,11 +48,11 @@ Scene_Battle.prototype.updateBattleProcess = function() {
 
 Scene_Battle.prototype.isAnyInputWindowActive = function() {
     return (this._partyCommandWindow.active ||
-            this._actorCommandWindow.active ||
-            this._skillWindow.active ||
-            this._itemWindow.active ||
-            this._actorWindow.active ||
-            this._enemyWindow.active);
+        this._actorCommandWindow.active ||
+        this._skillWindow.active ||
+        this._itemWindow.active ||
+        this._actorWindow.active ||
+        this._enemyWindow.active);
 };
 
 Scene_Battle.prototype.changeInputWindow = function() {
@@ -90,7 +90,7 @@ Scene_Battle.prototype.terminate = function() {
 
 Scene_Battle.prototype.needsSlowFadeOut = function() {
     return (SceneManager.isNextScene(Scene_Title) ||
-            SceneManager.isNextScene(Scene_Gameover));
+        SceneManager.isNextScene(Scene_Gameover));
 };
 
 Scene_Battle.prototype.updateStatusWindow = function() {
@@ -165,7 +165,7 @@ Scene_Battle.prototype.createStatusWindow = function() {
 
 Scene_Battle.prototype.createPartyCommandWindow = function() {
     this._partyCommandWindow = new Window_PartyCommand();
-    this._partyCommandWindow.setHandler('fight',  this.commandFight.bind(this));
+    this._partyCommandWindow.setHandler('fight', this.commandFight.bind(this));
     this._partyCommandWindow.setHandler('escape', this.commandEscape.bind(this));
     this._partyCommandWindow.deselect();
     this.addWindow(this._partyCommandWindow);
@@ -174,9 +174,9 @@ Scene_Battle.prototype.createPartyCommandWindow = function() {
 Scene_Battle.prototype.createActorCommandWindow = function() {
     this._actorCommandWindow = new Window_ActorCommand();
     this._actorCommandWindow.setHandler('attack', this.commandAttack.bind(this));
-    this._actorCommandWindow.setHandler('skill',  this.commandSkill.bind(this));
-    this._actorCommandWindow.setHandler('guard',  this.commandGuard.bind(this));
-    this._actorCommandWindow.setHandler('item',   this.commandItem.bind(this));
+    this._actorCommandWindow.setHandler('skill', this.commandSkill.bind(this));
+    this._actorCommandWindow.setHandler('guard', this.commandGuard.bind(this));
+    this._actorCommandWindow.setHandler('item', this.commandItem.bind(this));
     this._actorCommandWindow.setHandler('cancel', this.selectPreviousCommand.bind(this));
     this.addWindow(this._actorCommandWindow);
 };
@@ -192,7 +192,7 @@ Scene_Battle.prototype.createSkillWindow = function() {
     var wh = this._statusWindow.y - wy;
     this._skillWindow = new Window_BattleSkill(0, wy, Graphics.boxWidth, wh);
     this._skillWindow.setHelpWindow(this._helpWindow);
-    this._skillWindow.setHandler('ok',     this.onSkillOk.bind(this));
+    this._skillWindow.setHandler('ok', this.onSkillOk.bind(this));
     this._skillWindow.setHandler('cancel', this.onSkillCancel.bind(this));
     this.addWindow(this._skillWindow);
 };
@@ -202,14 +202,14 @@ Scene_Battle.prototype.createItemWindow = function() {
     var wh = this._statusWindow.y - wy;
     this._itemWindow = new Window_BattleItem(0, wy, Graphics.boxWidth, wh);
     this._itemWindow.setHelpWindow(this._helpWindow);
-    this._itemWindow.setHandler('ok',     this.onItemOk.bind(this));
+    this._itemWindow.setHandler('ok', this.onItemOk.bind(this));
     this._itemWindow.setHandler('cancel', this.onItemCancel.bind(this));
     this.addWindow(this._itemWindow);
 };
 
 Scene_Battle.prototype.createActorWindow = function() {
     this._actorWindow = new Window_BattleActor(0, this._statusWindow.y);
-    this._actorWindow.setHandler('ok',     this.onActorOk.bind(this));
+    this._actorWindow.setHandler('ok', this.onActorOk.bind(this));
     this._actorWindow.setHandler('cancel', this.onActorCancel.bind(this));
     this.addWindow(this._actorWindow);
 };
@@ -217,7 +217,7 @@ Scene_Battle.prototype.createActorWindow = function() {
 Scene_Battle.prototype.createEnemyWindow = function() {
     this._enemyWindow = new Window_BattleEnemy(0, this._statusWindow.y);
     this._enemyWindow.x = Graphics.boxWidth - this._enemyWindow.width;
-    this._enemyWindow.setHandler('ok',     this.onEnemyOk.bind(this));
+    this._enemyWindow.setHandler('ok', this.onEnemyOk.bind(this));
     this._enemyWindow.setHandler('cancel', this.onEnemyCancel.bind(this));
     this.addWindow(this._enemyWindow);
 };
@@ -314,14 +314,14 @@ Scene_Battle.prototype.onActorOk = function() {
 Scene_Battle.prototype.onActorCancel = function() {
     this._actorWindow.hide();
     switch (this._actorCommandWindow.currentSymbol()) {
-    case 'skill':
-        this._skillWindow.show();
-        this._skillWindow.activate();
-        break;
-    case 'item':
-        this._itemWindow.show();
-        this._itemWindow.activate();
-        break;
+        case 'skill':
+            this._skillWindow.show();
+            this._skillWindow.activate();
+            break;
+        case 'item':
+            this._itemWindow.show();
+            this._itemWindow.activate();
+            break;
     }
 };
 
@@ -344,17 +344,17 @@ Scene_Battle.prototype.onEnemyOk = function() {
 Scene_Battle.prototype.onEnemyCancel = function() {
     this._enemyWindow.hide();
     switch (this._actorCommandWindow.currentSymbol()) {
-    case 'attack':
-        this._actorCommandWindow.activate();
-        break;
-    case 'skill':
-        this._skillWindow.show();
-        this._skillWindow.activate();
-        break;
-    case 'item':
-        this._itemWindow.show();
-        this._itemWindow.activate();
-        break;
+        case 'attack':
+            this._actorCommandWindow.activate();
+            break;
+        case 'skill':
+            this._skillWindow.show();
+            this._skillWindow.activate();
+            break;
+        case 'item':
+            this._itemWindow.show();
+            this._itemWindow.activate();
+            break;
     }
 };
 
@@ -402,3 +402,4 @@ Scene_Battle.prototype.endCommandSelection = function() {
     this._actorCommandWindow.close();
     this._statusWindow.deselect();
 };
+

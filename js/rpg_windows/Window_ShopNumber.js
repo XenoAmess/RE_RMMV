@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ShopNumber-----------------------------------------------------------------------------
 // Window_ShopNumber
 //
 // The window for inputting quantity of items to buy or sell on the shop
@@ -169,8 +169,7 @@ Window_ShopNumber.prototype.isOkTriggered = function() {
     return Input.isTriggered('ok');
 };
 
-Window_ShopNumber.prototype.playOkSound = function() {
-};
+Window_ShopNumber.prototype.playOkSound = function() {};
 
 Window_ShopNumber.prototype.processNumberChange = function() {
     if (this.isOpenAndActive()) {
@@ -200,7 +199,7 @@ Window_ShopNumber.prototype.changeNumber = function(amount) {
 
 Window_ShopNumber.prototype.updateCursor = function() {
     this.setCursorRect(this.cursorX(), this.itemY(),
-                       this.cursorWidth(), this.lineHeight());
+        this.cursorWidth(), this.lineHeight());
 };
 
 Window_ShopNumber.prototype.onButtonUp = function() {
@@ -222,3 +221,4 @@ Window_ShopNumber.prototype.onButtonDown2 = function() {
 Window_ShopNumber.prototype.onButtonOk = function() {
     this.processOk();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_GameEnd-----------------------------------------------------------------------------
 // Scene_GameEnd
 //
 // The scene class of the game end screen.
@@ -31,8 +31,8 @@ Scene_GameEnd.prototype.createBackground = function() {
 
 Scene_GameEnd.prototype.createCommandWindow = function() {
     this._commandWindow = new Window_GameEnd();
-    this._commandWindow.setHandler('toTitle',  this.commandToTitle.bind(this));
-    this._commandWindow.setHandler('cancel',   this.popScene.bind(this));
+    this._commandWindow.setHandler('toTitle', this.commandToTitle.bind(this));
+    this._commandWindow.setHandler('cancel', this.popScene.bind(this));
     this.addWindow(this._commandWindow);
 };
 
@@ -40,3 +40,4 @@ Scene_GameEnd.prototype.commandToTitle = function() {
     this.fadeOutAll();
     SceneManager.goto(Scene_Title);
 };
+

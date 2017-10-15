@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Actors-----------------------------------------------------------------------------
 // Game_Actors
 //
 // The wrapper class for an actor array.
@@ -20,3 +20,4 @@ Game_Actors.prototype.actor = function(actorId) {
     }
     return null;
 };
+

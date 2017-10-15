@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Graphics-----------------------------------------------------------------------------
 /**
  * The static class that carries out graphics processing.
  *
@@ -8,7 +8,7 @@ function Graphics() {
     throw new Error('This is a static class');
 }
 
-Graphics._cssFontLoading =  document.fonts && document.fonts.ready;
+Graphics._cssFontLoading = document.fonts && document.fonts.ready;
 Graphics._fontLoaded = null;
 Graphics._videoVolume = 1;
 
@@ -17,10 +17,12 @@ Graphics._videoVolume = 1;
  *
  * @static
  * @method initialize
- * @param {Number} width The width of the game screen
- * @param {Number} height The height of the game screen
- * @param {String} type The type of the renderer.
- *                 'canvas', 'webgl', or 'auto'.
+ * @param {Number}
+ *            width The width of the game screen
+ * @param {Number}
+ *            height The height of the game screen
+ * @param {String}
+ *            type The type of the renderer. 'canvas', 'webgl', or 'auto'.
  */
 Graphics.initialize = function(width, height, type) {
     this._width = width || 800;
@@ -65,17 +67,17 @@ Graphics.initialize = function(width, height, type) {
 };
 
 
-Graphics._setupCssFontLoading = function(){
-    if(Graphics._cssFontLoading){
-        document.fonts.ready.then(function(fonts){
+Graphics._setupCssFontLoading = function() {
+    if (Graphics._cssFontLoading) {
+        document.fonts.ready.then(function(fonts) {
             Graphics._fontLoaded = fonts;
-        }).catch(function(error){
+        }).catch(function(error) {
             SceneManager.onError(error);
         });
     }
 };
 
-Graphics.canUseCssFontLoading = function(){
+Graphics.canUseCssFontLoading = function() {
     return !!this._cssFontLoading;
 };
 
@@ -86,7 +88,7 @@ Graphics.canUseCssFontLoading = function(){
  * @property frameCount
  * @type Number
  */
-Graphics.frameCount     = 0;
+Graphics.frameCount = 0;
 
 /**
  * The alias of PIXI.blendModes.NORMAL.
@@ -96,7 +98,7 @@ Graphics.frameCount     = 0;
  * @type Number
  * @final
  */
-Graphics.BLEND_NORMAL   = 0;
+Graphics.BLEND_NORMAL = 0;
 
 /**
  * The alias of PIXI.blendModes.ADD.
@@ -106,7 +108,7 @@ Graphics.BLEND_NORMAL   = 0;
  * @type Number
  * @final
  */
-Graphics.BLEND_ADD      = 1;
+Graphics.BLEND_ADD = 1;
 
 /**
  * The alias of PIXI.blendModes.MULTIPLY.
@@ -126,7 +128,7 @@ Graphics.BLEND_MULTIPLY = 2;
  * @type Number
  * @final
  */
-Graphics.BLEND_SCREEN   = 3;
+Graphics.BLEND_SCREEN = 3;
 
 /**
  * Marks the beginning of each frame for FPSMeter.
@@ -157,7 +159,8 @@ Graphics.tickEnd = function() {
  *
  * @static
  * @method render
- * @param {Stage} stage The stage object to be rendered
+ * @param {Stage}
+ *            stage The stage object to be rendered
  */
 Graphics.render = function(stage) {
     if (this._skipCount === 0) {
@@ -250,7 +253,8 @@ Graphics.startLoading = function() {
 };
 
 /**
- * Increments the loading counter and displays the "Now Loading" image if necessary.
+ * Increments the loading counter and displays the "Now Loading" image if
+ * necessary.
  *
  * @static
  * @method updateLoading
@@ -277,7 +281,8 @@ Graphics.endLoading = function() {
  *
  * @static
  * @method printLoadingError
- * @param {String} url The url of the resource failed to load
+ * @param {String}
+ *            url The url of the resource failed to load
  */
 Graphics.printLoadingError = function(url) {
     if (this._errorPrinter && !this._errorShowed) {
@@ -314,8 +319,10 @@ Graphics.eraseLoadingError = function() {
  *
  * @static
  * @method printError
- * @param {String} name The name of the error
- * @param {String} message The message of the error
+ * @param {String}
+ *            name The name of the error
+ * @param {String}
+ *            message The message of the error
  */
 Graphics.printError = function(name, message) {
     this._errorShowed = true;
@@ -357,8 +364,10 @@ Graphics.hideFps = function() {
  *
  * @static
  * @method loadFont
- * @param {String} name The face name of the font
- * @param {String} url The url of the font file
+ * @param {String}
+ *            name The face name of the font
+ * @param {String}
+ *            url The url of the font file
  */
 Graphics.loadFont = function(name, url) {
     var style = document.createElement('style');
@@ -375,13 +384,14 @@ Graphics.loadFont = function(name, url) {
  *
  * @static
  * @method isFontLoaded
- * @param {String} name The face name of the font
+ * @param {String}
+ *            name The face name of the font
  * @return {Boolean} True if the font file is loaded
  */
 Graphics.isFontLoaded = function(name) {
     if (Graphics._cssFontLoading) {
-        if(Graphics._fontLoaded){
-            return Graphics._fontLoaded.check('10px "'+name+'"');
+        if (Graphics._fontLoaded) {
+            return Graphics._fontLoaded.check('10px "' + name + '"');
         }
 
         return false;
@@ -405,7 +415,8 @@ Graphics.isFontLoaded = function(name) {
  *
  * @static
  * @method playVideo
- * @param {String} src
+ * @param {String}
+ *            src
  */
 Graphics.playVideo = function(src) {
     this._videoLoader = ResourceHandler.createLoader(null, this._playVideo.bind(this, src), this._onVideoError.bind(this));
@@ -415,7 +426,8 @@ Graphics.playVideo = function(src) {
 /**
  * @static
  * @method _playVideo
- * @param {String} src
+ * @param {String}
+ *            src
  * @private
  */
 Graphics._playVideo = function(src) {
@@ -443,7 +455,8 @@ Graphics.isVideoPlaying = function() {
  *
  * @static
  * @method canPlayVideoType
- * @param {String} type The video type to test support for
+ * @param {String}
+ *            type The video type to test support for
  * @return {Boolean} True if the browser can play the specified video type
  */
 Graphics.canPlayVideoType = function(type) {
@@ -455,7 +468,8 @@ Graphics.canPlayVideoType = function(type) {
  *
  * @static
  * @method setVideoVolume
- * @param {Number} value
+ * @param {Number}
+ *            value
  */
 Graphics.setVideoVolume = function(value) {
     this._videoVolume = value;
@@ -465,12 +479,13 @@ Graphics.setVideoVolume = function(value) {
 };
 
 /**
- * Converts an x coordinate on the page to the corresponding
- * x coordinate on the canvas area.
+ * Converts an x coordinate on the page to the corresponding x coordinate on the
+ * canvas area.
  *
  * @static
  * @method pageToCanvasX
- * @param {Number} x The x coordinate on the page to be converted
+ * @param {Number}
+ *            x The x coordinate on the page to be converted
  * @return {Number} The x coordinate on the canvas area
  */
 Graphics.pageToCanvasX = function(x) {
@@ -483,12 +498,13 @@ Graphics.pageToCanvasX = function(x) {
 };
 
 /**
- * Converts a y coordinate on the page to the corresponding
- * y coordinate on the canvas area.
+ * Converts a y coordinate on the page to the corresponding y coordinate on the
+ * canvas area.
  *
  * @static
  * @method pageToCanvasY
- * @param {Number} y The y coordinate on the page to be converted
+ * @param {Number}
+ *            y The y coordinate on the page to be converted
  * @return {Number} The y coordinate on the canvas area
  */
 Graphics.pageToCanvasY = function(y) {
@@ -505,8 +521,10 @@ Graphics.pageToCanvasY = function(y) {
  *
  * @static
  * @method isInsideCanvas
- * @param {Number} x The x coordinate on the canvas area
- * @param {Number} y The y coordinate on the canvas area
+ * @param {Number}
+ *            x The x coordinate on the canvas area
+ * @param {Number}
+ *            y The y coordinate on the canvas area
  * @return {Boolean} True if the specified point is inside the game canvas area
  */
 Graphics.isInsideCanvas = function(x, y) {
@@ -666,14 +684,16 @@ Graphics._updateRealScale = function() {
 /**
  * @static
  * @method _makeErrorHtml
- * @param {String} name
- * @param {String} message
+ * @param {String}
+ *            name
+ * @param {String}
+ *            message
  * @return {String}
  * @private
  */
 Graphics._makeErrorHtml = function(name, message) {
     return ('<font color="yellow"><b>' + name + '</b></font><br>' +
-            '<font color="white">' + message + '</font><br>');
+        '<font color="white">' + message + '</font><br>');
 };
 
 /**
@@ -869,21 +889,23 @@ Graphics._createRenderer = function() {
     PIXI.dontSayHello = true;
     var width = this._width;
     var height = this._height;
-    var options = { view: this._canvas };
+    var options = {
+        view: this._canvas
+    };
     try {
         switch (this._rendererType) {
-        case 'canvas':
-            this._renderer = new PIXI.CanvasRenderer(width, height, options);
-            break;
-        case 'webgl':
-            this._renderer = new PIXI.WebGLRenderer(width, height, options);
-            break;
-        default:
-            this._renderer = PIXI.autoDetectRenderer(width, height, options);
-            break;
+            case 'canvas':
+                this._renderer = new PIXI.CanvasRenderer(width, height, options);
+                break;
+            case 'webgl':
+                this._renderer = new PIXI.WebGLRenderer(width, height, options);
+                break;
+            default:
+                this._renderer = PIXI.autoDetectRenderer(width, height, options);
+                break;
         }
 
-        if(this._renderer && this._renderer.textureGC)
+        if (this._renderer && this._renderer.textureGC)
             this._renderer.textureGC.maxIdle = 1;
 
     } catch (e) {
@@ -908,7 +930,12 @@ Graphics._updateRenderer = function() {
  * @private
  */
 Graphics._createFPSMeter = function() {
-    var options = { graph: 1, decimals: 0, theme: 'transparent', toggleOn: null };
+    var options = {
+        graph: 1,
+        decimals: 0,
+        theme: 'transparent',
+        toggleOn: null
+    };
     this._fpsMeter = new FPSMeter(options);
     this._fpsMeter.hide();
 };
@@ -961,7 +988,8 @@ Graphics._createGameFontLoader = function() {
 /**
  * @static
  * @method _createFontLoader
- * @param {String} name
+ * @param {String}
+ *            name
  * @private
  */
 Graphics._createFontLoader = function(name) {
@@ -983,7 +1011,8 @@ Graphics._createFontLoader = function(name) {
 /**
  * @static
  * @method _centerElement
- * @param {HTMLElement} element
+ * @param {HTMLElement}
+ *            element
  * @private
  */
 Graphics._centerElement = function(element) {
@@ -1019,7 +1048,9 @@ Graphics._disableTextSelection = function() {
  */
 Graphics._disableContextMenu = function() {
     var elements = document.body.getElementsByTagName('*');
-    var oncontextmenu = function() { return false; };
+    var oncontextmenu = function() {
+        return false;
+    };
     for (var i = 0; i < elements.length; i++) {
         elements[i].oncontextmenu = oncontextmenu;
     }
@@ -1071,7 +1102,8 @@ Graphics._onVideoEnd = function() {
 /**
  * @static
  * @method _updateVisibility
- * @param {Boolean} videoVisible
+ * @param {Boolean}
+ *            videoVisible
  * @private
  */
 Graphics._updateVisibility = function(videoVisible) {
@@ -1112,24 +1144,25 @@ Graphics._onWindowResize = function() {
 /**
  * @static
  * @method _onKeyDown
- * @param {KeyboardEvent} event
+ * @param {KeyboardEvent}
+ *            event
  * @private
  */
 Graphics._onKeyDown = function(event) {
     if (!event.ctrlKey && !event.altKey) {
         switch (event.keyCode) {
-        case 113:   // F2
-            event.preventDefault();
-            this._switchFPSMeter();
-            break;
-        case 114:   // F3
-            event.preventDefault();
-            this._switchStretchMode();
-            break;
-        case 115:   // F4
-            event.preventDefault();
-            this._switchFullScreen();
-            break;
+            case 113: // F2
+                event.preventDefault();
+                this._switchFPSMeter();
+                break;
+            case 114: // F3
+                event.preventDefault();
+                this._switchStretchMode();
+                break;
+            case 115: // F4
+                event.preventDefault();
+                this._switchFullScreen();
+                break;
         }
     }
 };
@@ -1137,7 +1170,8 @@ Graphics._onKeyDown = function(event) {
 /**
  * @static
  * @method _onTouchEnd
- * @param {TouchEvent} event
+ * @param {TouchEvent}
+ *            event
  * @private
  */
 Graphics._onTouchEnd = function(event) {
@@ -1200,8 +1234,8 @@ Graphics._switchFullScreen = function() {
  */
 Graphics._isFullScreen = function() {
     return ((document.fullScreenElement && document.fullScreenElement !== null) ||
-            (!document.mozFullScreen && !document.webkitFullscreenElement &&
-             !document.msFullscreenElement));
+        (!document.mozFullScreen && !document.webkitFullscreenElement &&
+            !document.msFullscreenElement));
 };
 
 /**
@@ -1238,3 +1272,4 @@ Graphics._cancelFullScreen = function() {
         document.msExitFullscreen();
     }
 };
+

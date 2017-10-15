@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Gold-----------------------------------------------------------------------------
 // Window_Gold
 //
 // The window for displaying the party's gold.
@@ -44,3 +44,4 @@ Window_Gold.prototype.open = function() {
     this.refresh();
     Window_Base.prototype.open.call(this);
 };
+

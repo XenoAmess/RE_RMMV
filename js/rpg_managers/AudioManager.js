@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:AudioManager-----------------------------------------------------------------------------
 // AudioManager
 //
 // The static class that handles BGM, BGS, ME and SE.
@@ -7,21 +7,21 @@ function AudioManager() {
     throw new Error('This is a static class');
 }
 
-AudioManager._masterVolume   = 1;   // (min: 0, max: 1)
-AudioManager._bgmVolume      = 100;
-AudioManager._bgsVolume      = 100;
-AudioManager._meVolume       = 100;
-AudioManager._seVolume       = 100;
-AudioManager._currentBgm     = null;
-AudioManager._currentBgs     = null;
-AudioManager._bgmBuffer      = null;
-AudioManager._bgsBuffer      = null;
-AudioManager._meBuffer       = null;
-AudioManager._seBuffers      = [];
-AudioManager._staticBuffers  = [];
+AudioManager._masterVolume = 1; // (min: 0, max: 1)
+AudioManager._bgmVolume = 100;
+AudioManager._bgsVolume = 100;
+AudioManager._meVolume = 100;
+AudioManager._seVolume = 100;
+AudioManager._currentBgm = null;
+AudioManager._currentBgs = null;
+AudioManager._bgmBuffer = null;
+AudioManager._bgsBuffer = null;
+AudioManager._meBuffer = null;
+AudioManager._seBuffers = [];
+AudioManager._staticBuffers = [];
 AudioManager._replayFadeTime = 0.5;
-AudioManager._path           = 'audio/';
-AudioManager._blobUrl        = null;
+AudioManager._path = 'audio/';
+AudioManager._blobUrl = null;
 
 Object.defineProperty(AudioManager, 'masterVolume', {
     get: function() {
@@ -83,11 +83,10 @@ AudioManager.playBgm = function(bgm, pos) {
         this.updateBgmParameters(bgm);
     } else {
         this.stopBgm();
-        if (bgm.name) { 
-            if(Decrypter.hasEncryptedAudio && this.shouldUseHtml5Audio()){
+        if (bgm.name) {
+            if (Decrypter.hasEncryptedAudio && this.shouldUseHtml5Audio()) {
                 this.playEncryptedBgm(bgm, pos);
-            }
-            else {
+            } else {
                 this._bgmBuffer = this.createBuffer('bgm', bgm.name);
                 this.updateBgmParameters(bgm);
                 if (!this._meBuffer) {
@@ -106,7 +105,7 @@ AudioManager.playEncryptedBgm = function(bgm, pos) {
     Decrypter.decryptHTML5Audio(url, bgm, pos);
 };
 
-AudioManager.createDecryptBuffer = function(url, bgm, pos){
+AudioManager.createDecryptBuffer = function(url, bgm, pos) {
     this._blobUrl = url;
     this._bgmBuffer = this.createBuffer('bgm', bgm.name);
     this.updateBgmParameters(bgm);
@@ -129,7 +128,7 @@ AudioManager.replayBgm = function(bgm) {
 
 AudioManager.isCurrentBgm = function(bgm) {
     return (this._currentBgm && this._bgmBuffer &&
-            this._currentBgm.name === bgm.name);
+        this._currentBgm.name === bgm.name);
 };
 
 AudioManager.updateBgmParameters = function(bgm) {
@@ -194,7 +193,7 @@ AudioManager.replayBgs = function(bgs) {
 
 AudioManager.isCurrentBgs = function(bgs) {
     return (this._currentBgs && this._bgsBuffer &&
-            this._currentBgs.name === bgs.name);
+        this._currentBgs.name === bgs.name);
 };
 
 AudioManager.updateBgsParameters = function(bgs) {
@@ -364,14 +363,18 @@ AudioManager.saveBgs = function() {
 };
 
 AudioManager.makeEmptyAudioObject = function() {
-    return { name: '', volume: 0, pitch: 0 };
+    return {
+        name: '',
+        volume: 0,
+        pitch: 0
+    };
 };
 
 AudioManager.createBuffer = function(folder, name) {
     var ext = this.audioFileExt();
     var url = this._path + folder + '/' + encodeURIComponent(name) + ext;
     if (this.shouldUseHtml5Audio() && folder === 'bgm') {
-        if(this._blobUrl) Html5Audio.setup(this._blobUrl);
+        if (this._blobUrl) Html5Audio.setup(this._blobUrl);
         else Html5Audio.setup(url);
         return Html5Audio;
     } else {
@@ -398,7 +401,7 @@ AudioManager.audioFileExt = function() {
 AudioManager.shouldUseHtml5Audio = function() {
     // The only case where we wanted html5audio was android/ no encrypt
     // Atsuma-ru asked to force webaudio there too, so just return false for ALL    // return Utils.isAndroidChrome() && !Decrypter.hasEncryptedAudio;
- return false;
+    return false;
 };
 
 AudioManager.checkErrors = function() {
@@ -418,3 +421,4 @@ AudioManager.checkWebAudioError = function(webAudio) {
         throw new Error('Failed to load: ' + webAudio.url);
     }
 };
+

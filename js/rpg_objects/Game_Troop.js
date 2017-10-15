@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Troop-----------------------------------------------------------------------------
 // Game_Troop
 //
 // The game object class for a troop and the battle-related data.
@@ -11,12 +11,12 @@ Game_Troop.prototype = Object.create(Game_Unit.prototype);
 Game_Troop.prototype.constructor = Game_Troop;
 
 Game_Troop.LETTER_TABLE_HALF = [
-    ' A',' B',' C',' D',' E',' F',' G',' H',' I',' J',' K',' L',' M',
-    ' N',' O',' P',' Q',' R',' S',' T',' U',' V',' W',' X',' Y',' Z'
+    ' A', ' B', ' C', ' D', ' E', ' F', ' G', ' H', ' I', ' J', ' K', ' L', ' M',
+    ' N', ' O', ' P', ' Q', ' R', ' S', ' T', ' U', ' V', ' W', ' X', ' Y', ' Z'
 ];
 Game_Troop.LETTER_TABLE_FULL = [
-    'Ａ','Ｂ','Ｃ','Ｄ','Ｅ','Ｆ','Ｇ','Ｈ','Ｉ','Ｊ','Ｋ','Ｌ','Ｍ',
-    'Ｎ','Ｏ','Ｐ','Ｑ','Ｒ','Ｓ','Ｔ','Ｕ','Ｖ','Ｗ','Ｘ','Ｙ','Ｚ'
+    'Ａ', 'Ｂ', 'Ｃ', 'Ｄ', 'Ｅ', 'Ｆ', 'Ｇ', 'Ｈ', 'Ｉ', 'Ｊ', 'Ｋ', 'Ｌ', 'Ｍ',
+    'Ｎ', 'Ｏ', 'Ｐ', 'Ｑ', 'Ｒ', 'Ｓ', 'Ｔ', 'Ｕ', 'Ｖ', 'Ｗ', 'Ｘ', 'Ｙ', 'Ｚ'
 ];
 
 Game_Troop.prototype.initialize = function() {
@@ -93,7 +93,7 @@ Game_Troop.prototype.makeUniqueNames = function() {
 
 Game_Troop.prototype.letterTable = function() {
     return $gameSystem.isCJK() ? Game_Troop.LETTER_TABLE_FULL :
-            Game_Troop.LETTER_TABLE_HALF;
+        Game_Troop.LETTER_TABLE_HALF;
 };
 
 Game_Troop.prototype.enemyNames = function() {
@@ -110,8 +110,8 @@ Game_Troop.prototype.enemyNames = function() {
 Game_Troop.prototype.meetsConditions = function(page) {
     var c = page.conditions;
     if (!c.turnEnding && !c.turnValid && !c.enemyValid &&
-            !c.actorValid && !c.switchValid) {
-        return false;  // Conditions not set
+        !c.actorValid && !c.switchValid) {
+        return false; // Conditions not set
     }
     if (c.turnEnding) {
         if (!BattleManager.isTurnEnd()) {
@@ -200,3 +200,4 @@ Game_Troop.prototype.makeDropItems = function() {
         return r.concat(enemy.makeDropItems());
     }, []);
 };
+

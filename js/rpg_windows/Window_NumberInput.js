@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_NumberInput-----------------------------------------------------------------------------
 // Window_NumberInput
 //
 // The window used for the event command [Input Number].
@@ -213,3 +213,4 @@ Window_NumberInput.prototype.onButtonOk = function() {
     this.processOk();
     this.hideButtons();
 };
+

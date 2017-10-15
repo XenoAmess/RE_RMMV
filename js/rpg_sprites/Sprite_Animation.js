@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Animation-----------------------------------------------------------------------------
 // Sprite_Animation
 //
 // The sprite for displaying an animation.
@@ -226,7 +226,7 @@ Sprite_Animation.prototype.updateFrame = function() {
 
 Sprite_Animation.prototype.currentFrameIndex = function() {
     return (this._animation.frames.length -
-            Math.floor((this._duration + this._rate - 1) / this._rate));
+        Math.floor((this._duration + this._rate - 1) / this._rate));
 };
 
 Sprite_Animation.prototype.updateAllCellSprites = function(frame) {
@@ -253,10 +253,10 @@ Sprite_Animation.prototype.updateCellSprite = function(sprite, cell) {
         sprite.rotation = cell[4] * Math.PI / 180;
         sprite.scale.x = cell[3] / 100;
 
-        if(cell[5]){
+        if (cell[5]) {
             sprite.scale.x *= -1;
         }
-        if(mirror){
+        if (mirror) {
             sprite.x *= -1;
             sprite.rotation *= -1;
             sprite.scale.x *= -1;
@@ -274,15 +274,15 @@ Sprite_Animation.prototype.updateCellSprite = function(sprite, cell) {
 Sprite_Animation.prototype.processTimingData = function(timing) {
     var duration = timing.flashDuration * this._rate;
     switch (timing.flashScope) {
-    case 1:
-        this.startFlash(timing.flashColor, duration);
-        break;
-    case 2:
-        this.startScreenFlash(timing.flashColor, duration);
-        break;
-    case 3:
-        this.startHiding(duration);
-        break;
+        case 1:
+            this.startFlash(timing.flashColor, duration);
+            break;
+        case 2:
+            this.startScreenFlash(timing.flashColor, duration);
+            break;
+        case 3:
+            this.startHiding(duration);
+            break;
     }
     if (!this._duplicated && timing.se) {
         AudioManager.playSe(timing.se);
@@ -306,3 +306,4 @@ Sprite_Animation.prototype.startHiding = function(duration) {
     this._hidingDuration = duration;
     this._target.hide();
 };
+

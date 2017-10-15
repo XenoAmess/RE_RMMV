@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_BattleStatus-----------------------------------------------------------------------------
 // Window_BattleStatus
 //
 // The window for displaying the status of party members on the battle screen.
@@ -85,5 +85,6 @@ Window_BattleStatus.prototype.drawGaugeAreaWithTp = function(rect, actor) {
 
 Window_BattleStatus.prototype.drawGaugeAreaWithoutTp = function(rect, actor) {
     this.drawActorHp(actor, rect.x + 0, rect.y, 201);
-    this.drawActorMp(actor, rect.x + 216,  rect.y, 114);
+    this.drawActorMp(actor, rect.x + 216, rect.y, 114);
 };
+

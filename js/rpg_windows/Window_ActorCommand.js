@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ActorCommand-----------------------------------------------------------------------------
 // Window_ActorCommand
 //
 // The window for selecting an actor's action on the battle screen.
@@ -92,3 +92,4 @@ Window_ActorCommand.prototype.selectLast = function() {
         }
     }
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Utils-----------------------------------------------------------------------------
 /**
  * The static class that defines utility methods.
  *
@@ -26,16 +26,15 @@ Utils.RPGMAKER_NAME = 'MV';
  * @type String
  * @final
  */
-Utils.RPGMAKER_VERSION = "1.4.1";
-
-Utils.RPGMAKER_ENGINE = "community-1.2c";
+Utils.RPGMAKER_VERSION = "1.5.1";
 
 /**
  * Checks whether the option is in the query string.
  *
  * @static
  * @method isOptionValid
- * @param {String} name The option name
+ * @param {String}
+ *            name The option name
  * @return {Boolean} True if the option is in the query string
  */
 Utils.isOptionValid = function(name) {
@@ -50,6 +49,11 @@ Utils.isOptionValid = function(name) {
  * @return {Boolean} True if the platform is NW.js
  */
 Utils.isNwjs = function() {
+    try {
+        var tmp = require("nw.gui");
+    } catch (err) {
+        return false;
+    }
     return typeof require === 'function' && typeof process === 'object';
 };
 
@@ -75,7 +79,7 @@ Utils.isMobileDevice = function() {
 Utils.isMobileSafari = function() {
     var agent = navigator.userAgent;
     return !!(agent.match(/iPhone|iPad|iPod/) && agent.match(/AppleWebKit/) &&
-              !agent.match('CriOS'));
+        !agent.match('CriOS'));
 };
 
 /**
@@ -116,9 +120,12 @@ Utils.canReadGameFiles = function() {
  *
  * @static
  * @method rgbToCssColor
- * @param {Number} r The red value in the range (0, 255)
- * @param {Number} g The green value in the range (0, 255)
- * @param {Number} b The blue value in the range (0, 255)
+ * @param {Number}
+ *            r The red value in the range (0, 255)
+ * @param {Number}
+ *            g The green value in the range (0, 255)
+ * @param {Number}
+ *            b The blue value in the range (0, 255)
  * @return {String} CSS color string
  */
 Utils.rgbToCssColor = function(r, g, b) {
@@ -129,14 +136,14 @@ Utils.rgbToCssColor = function(r, g, b) {
 };
 
 Utils._id = 1;
-Utils.generateRuntimeId = function(){
+Utils.generateRuntimeId = function() {
     return Utils._id++;
 };
 
 Utils._supportPassiveEvent = null;
 /**
  * Test this browser support passive event feature
- * 
+ *
  * @static
  * @method isSupportPassiveEvent
  * @return {Boolean} this browser support passive event or not
@@ -149,9 +156,12 @@ Utils.isSupportPassiveEvent = function() {
     // https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md#feature-detection
     var passive = false;
     var options = Object.defineProperty({}, "passive", {
-        get: function() { passive = true; }
+        get: function() {
+            passive = true;
+        }
     });
     window.addEventListener("test", null, options);
     Utils._supportPassiveEvent = passive;
     return passive;
 }
+

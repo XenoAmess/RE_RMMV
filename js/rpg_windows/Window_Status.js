@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Status-----------------------------------------------------------------------------
 // Window_Status
 //
 // The window for displaying full status on the status screen.
@@ -125,3 +125,4 @@ Window_Status.prototype.drawProfile = function(x, y) {
 Window_Status.prototype.maxEquipmentLines = function() {
     return 6;
 };
+

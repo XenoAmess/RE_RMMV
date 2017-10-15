@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Debug-----------------------------------------------------------------------------
 // Scene_Debug
 //
 // The scene class of the debug screen.
@@ -23,7 +23,7 @@ Scene_Debug.prototype.create = function() {
 
 Scene_Debug.prototype.createRangeWindow = function() {
     this._rangeWindow = new Window_DebugRange(0, 0);
-    this._rangeWindow.setHandler('ok',     this.onRangeOk.bind(this));
+    this._rangeWindow.setHandler('ok', this.onRangeOk.bind(this));
     this._rangeWindow.setHandler('cancel', this.popScene.bind(this));
     this.addWindow(this._rangeWindow);
 };
@@ -70,8 +70,9 @@ Scene_Debug.prototype.helpText = function() {
         return 'Enter : ON / OFF';
     } else {
         return ('Left     :  -1\n' +
-                'Right    :  +1\n' +
-                'Pageup   : -10\n' +
-                'Pagedown : +10');
+            'Right    :  +1\n' +
+            'Pageup   : -10\n' +
+            'Pagedown : +10');
     }
 };
+

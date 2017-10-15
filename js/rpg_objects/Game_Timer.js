@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Timer-----------------------------------------------------------------------------
 // Game_Timer
 //
 // The game object class for the timer.
@@ -41,3 +41,4 @@ Game_Timer.prototype.seconds = function() {
 Game_Timer.prototype.onExpire = function() {
     BattleManager.abort();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Help-----------------------------------------------------------------------------
 // Window_Help
 //
 // The window for displaying the description of the selected item.
@@ -36,3 +36,4 @@ Window_Help.prototype.refresh = function() {
     this.contents.clear();
     this.drawTextEx(this._text, this.textPadding(), 0);
 };
+

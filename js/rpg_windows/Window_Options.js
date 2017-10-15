@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Options-----------------------------------------------------------------------------
 // Window_Options
 //
 // The window for changing various settings on the options screen.
@@ -143,3 +143,4 @@ Window_Options.prototype.getConfigValue = function(symbol) {
 Window_Options.prototype.setConfigValue = function(symbol, volume) {
     ConfigManager[symbol] = volume;
 };
+

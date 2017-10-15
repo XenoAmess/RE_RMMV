@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:DataManager-----------------------------------------------------------------------------
 // DataManager
 //
 // The static class that manages the database and game objects.
@@ -7,55 +7,96 @@ function DataManager() {
     throw new Error('This is a static class');
 }
 
-var $dataActors       = null;
-var $dataClasses      = null;
-var $dataSkills       = null;
-var $dataItems        = null;
-var $dataWeapons      = null;
-var $dataArmors       = null;
-var $dataEnemies      = null;
-var $dataTroops       = null;
-var $dataStates       = null;
-var $dataAnimations   = null;
-var $dataTilesets     = null;
+var $dataActors = null;
+var $dataClasses = null;
+var $dataSkills = null;
+var $dataItems = null;
+var $dataWeapons = null;
+var $dataArmors = null;
+var $dataEnemies = null;
+var $dataTroops = null;
+var $dataStates = null;
+var $dataAnimations = null;
+var $dataTilesets = null;
 var $dataCommonEvents = null;
-var $dataSystem       = null;
-var $dataMapInfos     = null;
-var $dataMap          = null;
-var $gameTemp         = null;
-var $gameSystem       = null;
-var $gameScreen       = null;
-var $gameTimer        = null;
-var $gameMessage      = null;
-var $gameSwitches     = null;
-var $gameVariables    = null;
+var $dataSystem = null;
+var $dataMapInfos = null;
+var $dataMap = null;
+var $gameTemp = null;
+var $gameSystem = null;
+var $gameScreen = null;
+var $gameTimer = null;
+var $gameMessage = null;
+var $gameSwitches = null;
+var $gameVariables = null;
 var $gameSelfSwitches = null;
-var $gameActors       = null;
-var $gameParty        = null;
-var $gameTroop        = null;
-var $gameMap          = null;
-var $gamePlayer       = null;
-var $testEvent        = null;
+var $gameActors = null;
+var $gameParty = null;
+var $gameTroop = null;
+var $gameMap = null;
+var $gamePlayer = null;
+var $testEvent = null;
 
-DataManager._globalId       = 'RPGMV';
+DataManager._globalId = 'RPGMV';
 DataManager._lastAccessedId = 1;
-DataManager._errorUrl       = null;
+DataManager._errorUrl = null;
 
-DataManager._databaseFiles = [
-    { name: '$dataActors',       src: 'Actors.json'       },
-    { name: '$dataClasses',      src: 'Classes.json'      },
-    { name: '$dataSkills',       src: 'Skills.json'       },
-    { name: '$dataItems',        src: 'Items.json'        },
-    { name: '$dataWeapons',      src: 'Weapons.json'      },
-    { name: '$dataArmors',       src: 'Armors.json'       },
-    { name: '$dataEnemies',      src: 'Enemies.json'      },
-    { name: '$dataTroops',       src: 'Troops.json'       },
-    { name: '$dataStates',       src: 'States.json'       },
-    { name: '$dataAnimations',   src: 'Animations.json'   },
-    { name: '$dataTilesets',     src: 'Tilesets.json'     },
-    { name: '$dataCommonEvents', src: 'CommonEvents.json' },
-    { name: '$dataSystem',       src: 'System.json'       },
-    { name: '$dataMapInfos',     src: 'MapInfos.json'     }
+DataManager._databaseFiles = [{
+        name: '$dataActors',
+        src: 'Actors.json'
+    },
+    {
+        name: '$dataClasses',
+        src: 'Classes.json'
+    },
+    {
+        name: '$dataSkills',
+        src: 'Skills.json'
+    },
+    {
+        name: '$dataItems',
+        src: 'Items.json'
+    },
+    {
+        name: '$dataWeapons',
+        src: 'Weapons.json'
+    },
+    {
+        name: '$dataArmors',
+        src: 'Armors.json'
+    },
+    {
+        name: '$dataEnemies',
+        src: 'Enemies.json'
+    },
+    {
+        name: '$dataTroops',
+        src: 'Troops.json'
+    },
+    {
+        name: '$dataStates',
+        src: 'States.json'
+    },
+    {
+        name: '$dataAnimations',
+        src: 'Animations.json'
+    },
+    {
+        name: '$dataTilesets',
+        src: 'Tilesets.json'
+    },
+    {
+        name: '$dataCommonEvents',
+        src: 'CommonEvents.json'
+    },
+    {
+        name: '$dataSystem',
+        src: 'System.json'
+    },
+    {
+        name: '$dataMapInfos',
+        src: 'MapInfos.json'
+    }
 ];
 
 DataManager.loadDatabase = function() {
@@ -194,19 +235,19 @@ DataManager.isArmor = function(item) {
 };
 
 DataManager.createGameObjects = function() {
-    $gameTemp          = new Game_Temp();
-    $gameSystem        = new Game_System();
-    $gameScreen        = new Game_Screen();
-    $gameTimer         = new Game_Timer();
-    $gameMessage       = new Game_Message();
-    $gameSwitches      = new Game_Switches();
-    $gameVariables     = new Game_Variables();
-    $gameSelfSwitches  = new Game_SelfSwitches();
-    $gameActors        = new Game_Actors();
-    $gameParty         = new Game_Party();
-    $gameTroop         = new Game_Troop();
-    $gameMap           = new Game_Map();
-    $gamePlayer        = new Game_Player();
+    $gameTemp = new Game_Temp();
+    $gameSystem = new Game_System();
+    $gameScreen = new Game_Screen();
+    $gameTimer = new Game_Timer();
+    $gameMessage = new Game_Message();
+    $gameSwitches = new Game_Switches();
+    $gameVariables = new Game_Variables();
+    $gameSelfSwitches = new Game_SelfSwitches();
+    $gameActors = new Game_Actors();
+    $gameParty = new Game_Party();
+    $gameTroop = new Game_Troop();
+    $gameMap = new Game_Map();
+    $gamePlayer = new Game_Player();
 };
 
 DataManager.setupNewGame = function() {
@@ -267,7 +308,7 @@ DataManager.isThisGameFile = function(savefileId) {
         } else {
             var savefile = globalInfo[savefileId];
             return (savefile.globalId === this._globalId &&
-                    savefile.title === $dataSystem.gameTitle);
+                savefile.title === $dataSystem.gameTitle);
         }
     } else {
         return false;
@@ -339,8 +380,7 @@ DataManager.saveGame = function(savefileId) {
         try {
             StorageManager.remove(savefileId);
             StorageManager.restoreBackup(savefileId);
-        } catch (e2) {
-        }
+        } catch (e2) {}
         return false;
     }
 };
@@ -414,40 +454,41 @@ DataManager.selectSavefileForNewGame = function() {
 
 DataManager.makeSavefileInfo = function() {
     var info = {};
-    info.globalId   = this._globalId;
-    info.title      = $dataSystem.gameTitle;
+    info.globalId = this._globalId;
+    info.title = $dataSystem.gameTitle;
     info.characters = $gameParty.charactersForSavefile();
-    info.faces      = $gameParty.facesForSavefile();
-    info.playtime   = $gameSystem.playtimeText();
-    info.timestamp  = Date.now();
+    info.faces = $gameParty.facesForSavefile();
+    info.playtime = $gameSystem.playtimeText();
+    info.timestamp = Date.now();
     return info;
 };
 
 DataManager.makeSaveContents = function() {
     // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
     var contents = {};
-    contents.system       = $gameSystem;
-    contents.screen       = $gameScreen;
-    contents.timer        = $gameTimer;
-    contents.switches     = $gameSwitches;
-    contents.variables    = $gameVariables;
+    contents.system = $gameSystem;
+    contents.screen = $gameScreen;
+    contents.timer = $gameTimer;
+    contents.switches = $gameSwitches;
+    contents.variables = $gameVariables;
     contents.selfSwitches = $gameSelfSwitches;
-    contents.actors       = $gameActors;
-    contents.party        = $gameParty;
-    contents.map          = $gameMap;
-    contents.player       = $gamePlayer;
+    contents.actors = $gameActors;
+    contents.party = $gameParty;
+    contents.map = $gameMap;
+    contents.player = $gamePlayer;
     return contents;
 };
 
 DataManager.extractSaveContents = function(contents) {
-    $gameSystem        = contents.system;
-    $gameScreen        = contents.screen;
-    $gameTimer         = contents.timer;
-    $gameSwitches      = contents.switches;
-    $gameVariables     = contents.variables;
-    $gameSelfSwitches  = contents.selfSwitches;
-    $gameActors        = contents.actors;
-    $gameParty         = contents.party;
-    $gameMap           = contents.map;
-    $gamePlayer        = contents.player;
+    $gameSystem = contents.system;
+    $gameScreen = contents.screen;
+    $gameTimer = contents.timer;
+    $gameSwitches = contents.switches;
+    $gameVariables = contents.variables;
+    $gameSelfSwitches = contents.selfSwitches;
+    $gameActors = contents.actors;
+    $gameParty = contents.party;
+    $gameMap = contents.map;
+    $gamePlayer = contents.player;
 };
+

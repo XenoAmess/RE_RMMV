@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Event-----------------------------------------------------------------------------
 // Game_Event
 //
 // The game object class for an event. It contains functionality for event page
@@ -50,7 +50,7 @@ Game_Event.prototype.list = function() {
 
 Game_Event.prototype.isCollidedWithCharacters = function(x, y) {
     return (Game_Character.prototype.isCollidedWithCharacters.call(this, x, y) ||
-            this.isCollidedWithPlayerCharacters(x, y));
+        this.isCollidedWithPlayerCharacters(x, y));
 };
 
 Game_Event.prototype.isCollidedWithEvents = function(x, y) {
@@ -89,17 +89,17 @@ Game_Event.prototype.updateStop = function() {
 
 Game_Event.prototype.updateSelfMovement = function() {
     if (!this._locked && this.isNearTheScreen() &&
-            this.checkStop(this.stopCountThreshold())) {
+        this.checkStop(this.stopCountThreshold())) {
         switch (this._moveType) {
-        case 1:
-            this.moveTypeRandom();
-            break;
-        case 2:
-            this.moveTypeTowardPlayer();
-            break;
-        case 3:
-            this.moveTypeCustom();
-            break;
+            case 1:
+                this.moveTypeRandom();
+                break;
+            case 2:
+                this.moveTypeTowardPlayer();
+                break;
+            case 3:
+                this.moveTypeCustom();
+                break;
         }
     }
 };
@@ -110,30 +110,36 @@ Game_Event.prototype.stopCountThreshold = function() {
 
 Game_Event.prototype.moveTypeRandom = function() {
     switch (Math.randomInt(6)) {
-    case 0: case 1:
-        this.moveRandom();
-        break;
-    case 2: case 3: case 4:
-        this.moveForward();
-        break;
-    case 5:
-        this.resetStopCount();
-        break;
+        case 0:
+        case 1:
+            this.moveRandom();
+            break;
+        case 2:
+        case 3:
+        case 4:
+            this.moveForward();
+            break;
+        case 5:
+            this.resetStopCount();
+            break;
     }
 };
 
 Game_Event.prototype.moveTypeTowardPlayer = function() {
     if (this.isNearThePlayer()) {
         switch (Math.randomInt(6)) {
-        case 0: case 1: case 2: case 3:
-            this.moveTowardPlayer();
-            break;
-        case 4:
-            this.moveRandom();
-            break;
-        case 5:
-            this.moveForward();
-            break;
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                this.moveTowardPlayer();
+                break;
+            case 4:
+                this.moveRandom();
+                break;
+            case 5:
+                this.moveForward();
+                break;
         }
     } else {
         this.moveRandom();
@@ -166,7 +172,7 @@ Game_Event.prototype.start = function() {
     var list = this.list();
     if (list && list.length > 1) {
         this._starting = true;
-        if (this.isTriggerIn([0,1,2])) {
+        if (this.isTriggerIn([0, 1, 2])) {
             this.lock();
         }
     }
@@ -336,3 +342,4 @@ Game_Event.prototype.forceMoveRoute = function(moveRoute) {
     Game_Character.prototype.forceMoveRoute.call(this, moveRoute);
     this._prelockDirection = 0;
 };
+

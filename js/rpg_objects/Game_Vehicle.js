@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Vehicle-----------------------------------------------------------------------------
 // Game_Vehicle
 //
 // The game object class for a vehicle.
@@ -231,3 +231,4 @@ Game_Vehicle.prototype.isLandOk = function(x, y, d) {
     }
     return true;
 };
+

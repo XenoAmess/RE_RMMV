@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Save-----------------------------------------------------------------------------
 // Scene_Save
 //
 // The scene class of the save screen.
@@ -38,7 +38,7 @@ Scene_Save.prototype.onSavefileOk = function() {
 
 Scene_Save.prototype.onSaveSuccess = function() {
     SoundManager.playSave();
-	StorageManager.cleanBackup(this.savefileId());
+    StorageManager.cleanBackup(this.savefileId());
     this.popScene();
 };
 
@@ -46,3 +46,4 @@ Scene_Save.prototype.onSaveFailure = function() {
     SoundManager.playBuzzer();
     this.activateListWindow();
 };
+

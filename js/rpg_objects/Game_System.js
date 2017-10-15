@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_System-----------------------------------------------------------------------------
 // Game_System
 //
 // The game object class for the system data.
@@ -210,5 +210,6 @@ Game_System.prototype.replayWalkingBgm = function() {
 };
 
 Game_System.prototype.saveWalkingBgm2 = function() {
-	this._walkingBgm = $dataMap.bgm;
+    this._walkingBgm = $dataMap.bgm;
 };
+

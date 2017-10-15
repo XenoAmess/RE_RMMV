@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Selectable-----------------------------------------------------------------------------
 // Window_Selectable
 //
 // The window class with cursor movement and scroll functions.
@@ -58,7 +58,7 @@ Window_Selectable.prototype.spacing = function() {
 
 Window_Selectable.prototype.itemWidth = function() {
     return Math.floor((this.width - this.padding * 2 +
-                       this.spacing()) / this.maxCols() - this.spacing());
+        this.spacing()) / this.maxCols() - this.spacing());
 };
 
 Window_Selectable.prototype.itemHeight = function() {
@@ -199,7 +199,7 @@ Window_Selectable.prototype.isOpenAndActive = function() {
 
 Window_Selectable.prototype.isCursorMovable = function() {
     return (this.isOpenAndActive() && !this._cursorFixed &&
-            !this._cursorAll && this.maxItems() > 0);
+        !this._cursorAll && this.maxItems() > 0);
 };
 
 Window_Selectable.prototype.cursorDown = function(wrap) {
@@ -548,8 +548,7 @@ Window_Selectable.prototype.drawAllItems = function() {
     }
 };
 
-Window_Selectable.prototype.drawItem = function(index) {
-};
+Window_Selectable.prototype.drawItem = function(index) {};
 
 Window_Selectable.prototype.clearItem = function(index) {
     var rect = this.itemRect(index);
@@ -573,3 +572,4 @@ Window_Selectable.prototype.refresh = function() {
         this.drawAllItems();
     }
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_CharacterBase-----------------------------------------------------------------------------
 // Game_CharacterBase
 //
 // The superclass of Game_Character. It handles basic information, such as
@@ -9,8 +9,18 @@ function Game_CharacterBase() {
 }
 
 Object.defineProperties(Game_CharacterBase.prototype, {
-    x: { get: function() { return this._x; }, configurable: true },
-    y: { get: function() { return this._y; }, configurable: true }
+    x: {
+        get: function() {
+            return this._x;
+        },
+        configurable: true
+    },
+    y: {
+        get: function() {
+            return this._y;
+        },
+        configurable: true
+    }
 });
 
 Game_CharacterBase.prototype.initialize = function() {
@@ -109,7 +119,7 @@ Game_CharacterBase.prototype.isJumping = function() {
 
 Game_CharacterBase.prototype.jumpHeight = function() {
     return (this._jumpPeak * this._jumpPeak -
-            Math.pow(Math.abs(this._jumpCount - this._jumpPeak), 2)) / 2;
+        Math.pow(Math.abs(this._jumpCount - this._jumpPeak), 2)) / 2;
 };
 
 Game_CharacterBase.prototype.isStopping = function() {
@@ -263,7 +273,7 @@ Game_CharacterBase.prototype.screenX = function() {
 Game_CharacterBase.prototype.screenY = function() {
     var th = $gameMap.tileHeight();
     return Math.round(this.scrolledY() * th + th -
-                      this.shiftY() - this.jumpHeight());
+        this.shiftY() - this.jumpHeight());
 };
 
 Game_CharacterBase.prototype.screenZ = function() {
@@ -375,7 +385,7 @@ Game_CharacterBase.prototype.resetPattern = function() {
 
 Game_CharacterBase.prototype.refreshBushDepth = function() {
     if (this.isNormalPriority() && !this.isObjectCharacter() &&
-            this.isOnBush() && !this.isJumping()) {
+        this.isOnBush() && !this.isJumping()) {
         if (!this.isMoving()) {
             this._bushDepth = 12;
         }
@@ -588,3 +598,4 @@ Game_CharacterBase.prototype.endAnimation = function() {
 Game_CharacterBase.prototype.endBalloon = function() {
     this._balloonPlaying = false;
 };
+

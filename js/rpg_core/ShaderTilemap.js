@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:ShaderTilemap-----------------------------------------------------------------------------
 /**
  * The tilemap which displays 2D tile-based game map using shaders
  *
@@ -8,15 +8,16 @@
 function ShaderTilemap() {
     Tilemap.apply(this, arguments);
     this.roundPixels = true;
-};
+}
 
 ShaderTilemap.prototype = Object.create(Tilemap.prototype);
 ShaderTilemap.prototype.constructor = ShaderTilemap;
 
 // we need this constant for some platforms (Samsung S4, S5, Tab4, HTC One H8)
 PIXI.glCore.VertexArrayObject.FORCE_NATIVE = true;
-PIXI.GC_MODES.DEFAULT = PIXI.GC_MODES.AUTO;
+PIXI.settings.GC_MODE = PIXI.GC_MODES.AUTO;
 PIXI.tilemap.TileRenderer.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+PIXI.tilemap.TileRenderer.DO_CLEAR = true;
 
 /**
  * Uploads animation state in renderer
@@ -26,9 +27,9 @@ PIXI.tilemap.TileRenderer.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
  */
 ShaderTilemap.prototype._hackRenderer = function(renderer) {
     var af = this.animationFrame % 4;
-    if (af==3) af = 1;
-    renderer.plugins.tile.tileAnim[0] = af * this._tileWidth;
-    renderer.plugins.tile.tileAnim[1] = (this.animationFrame % 3) * this._tileHeight;
+    if (af == 3) af = 1;
+    renderer.plugins.tilemap.tileAnim[0] = af * this._tileWidth;
+    renderer.plugins.tilemap.tileAnim[1] = (this.animationFrame % 3) * this._tileHeight;
     return renderer;
 };
 
@@ -36,7 +37,8 @@ ShaderTilemap.prototype._hackRenderer = function(renderer) {
  * PIXI render method
  *
  * @method renderCanvas
- * @param {Object} pixi renderer
+ * @param {Object}
+ *            pixi renderer
  */
 ShaderTilemap.prototype.renderCanvas = function(renderer) {
     this._hackRenderer(renderer);
@@ -48,7 +50,8 @@ ShaderTilemap.prototype.renderCanvas = function(renderer) {
  * PIXI render method
  *
  * @method renderWebGL
- * @param {Object} pixi renderer
+ * @param {Object}
+ *            pixi renderer
  */
 ShaderTilemap.prototype.renderWebGL = function(renderer) {
     this._hackRenderer(renderer);
@@ -74,7 +77,9 @@ ShaderTilemap.prototype.refresh = function() {
  * @method updateBitmaps
  */
 ShaderTilemap.prototype.refreshTileset = function() {
-    var bitmaps = this.bitmaps.map(function(x) { return x._baseTexture ? new PIXI.Texture(x._baseTexture) : x; } );
+    var bitmaps = this.bitmaps.map(function(x) {
+        return x._baseTexture ? new PIXI.Texture(x._baseTexture) : x;
+    });
     this.lowerLayer.setBitmaps(bitmaps);
     this.upperLayer.setBitmaps(bitmaps);
 };
@@ -120,7 +125,8 @@ ShaderTilemap.prototype._createLayers = function() {
     this._needsRepaint = true;
 
     if (!this.lowerZLayer) {
-        //@hackerham: create layers only in initialization. Doesn't depend on width/height
+        // @hackerham: create layers only in initialization. Doesn't depend on
+        // width/height
         this.addChild(this.lowerZLayer = new PIXI.tilemap.ZLayer(this, 0));
         this.addChild(this.upperZLayer = new PIXI.tilemap.ZLayer(this, 4));
 
@@ -135,8 +141,10 @@ ShaderTilemap.prototype._createLayers = function() {
 
 /**
  * @method _updateLayerPositions
- * @param {Number} startX
- * @param {Number} startY
+ * @param {Number}
+ *            startX
+ * @param {Number}
+ *            startY
  * @private
  */
 ShaderTilemap.prototype._updateLayerPositions = function(startX, startY) {
@@ -155,8 +163,10 @@ ShaderTilemap.prototype._updateLayerPositions = function(startX, startY) {
 
 /**
  * @method _paintAllTiles
- * @param {Number} startX
- * @param {Number} startY
+ * @param {Number}
+ *            startX
+ * @param {Number}
+ *            startY
  * @private
  */
 ShaderTilemap.prototype._paintAllTiles = function(startX, startY) {
@@ -173,16 +183,21 @@ ShaderTilemap.prototype._paintAllTiles = function(startX, startY) {
 
 /**
  * @method _paintTiles
- * @param {Number} startX
- * @param {Number} startY
- * @param {Number} x
- * @param {Number} y
+ * @param {Number}
+ *            startX
+ * @param {Number}
+ *            startY
+ * @param {Number}
+ *            x
+ * @param {Number}
+ *            y
  * @private
  */
 ShaderTilemap.prototype._paintTiles = function(startX, startY, x, y) {
     var mx = startX + x;
     var my = startY + y;
-    var dx = x * this._tileWidth, dy = y * this._tileHeight;
+    var dx = x * this._tileWidth,
+        dy = y * this._tileHeight;
     var tileId0 = this._readMapData(mx, my, 0);
     var tileId1 = this._readMapData(mx, my, 1);
     var tileId2 = this._readMapData(mx, my, 2);
@@ -229,10 +244,14 @@ ShaderTilemap.prototype._paintTiles = function(startX, startY, x, y) {
 
 /**
  * @method _drawTile
- * @param {Array} layers
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Array}
+ *            layers
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 ShaderTilemap.prototype._drawTile = function(layer, tileId, dx, dy) {
@@ -247,10 +266,14 @@ ShaderTilemap.prototype._drawTile = function(layer, tileId, dx, dy) {
 
 /**
  * @method _drawNormalTile
- * @param {Array} layers
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Array}
+ *            layers
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 ShaderTilemap.prototype._drawNormalTile = function(layer, tileId, dx, dy) {
@@ -272,10 +295,14 @@ ShaderTilemap.prototype._drawNormalTile = function(layer, tileId, dx, dy) {
 
 /**
  * @method _drawAutotile
- * @param {Array} layers
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Array}
+ *            layers
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 ShaderTilemap.prototype._drawAutotile = function(layer, tileId, dx, dy) {
@@ -288,7 +315,8 @@ ShaderTilemap.prototype._drawAutotile = function(layer, tileId, dx, dy) {
     var by = 0;
     var setNumber = 0;
     var isTable = false;
-    var animX = 0, animY = 0;
+    var animX = 0,
+        animY = 0;
 
     if (Tilemap.isTileA1(tileId)) {
         setNumber = 0;
@@ -309,8 +337,7 @@ ShaderTilemap.prototype._drawAutotile = function(layer, tileId, dx, dy) {
             by = ty * 6 + Math.floor(tx / 2) % 2 * 3;
             if (kind % 2 === 0) {
                 animX = 2;
-            }
-            else {
+            } else {
                 bx += 6;
                 autotileTable = Tilemap.WATERFALL_AUTOTILE_TABLE;
                 animY = 1;
@@ -349,13 +376,13 @@ ShaderTilemap.prototype._drawAutotile = function(layer, tileId, dx, dy) {
             var qsx2 = qsx;
             var qsy2 = 3;
             if (qsy === 1) {
-                //qsx2 = [0, 3, 2, 1][qsx];
-                qsx2 = (4-qsx)%4;
+                // qsx2 = [0, 3, 2, 1][qsx];
+                qsx2 = (4 - qsx) % 4;
             }
             var sx2 = (bx * 2 + qsx2) * w1;
             var sy2 = (by * 2 + qsy2) * h1;
             layer.addRect(setNumber, sx2, sy2, dx1, dy1, w1, h1, animX, animY);
-            layer.addRect(setNumber, sx1, sy1, dx1, dy1+h1/2, w1, h1/2, animX, animY);
+            layer.addRect(setNumber, sx1, sy1, dx1, dy1 + h1 / 2, w1, h1 / 2, animX, animY);
         } else {
             layer.addRect(setNumber, sx1, sy1, dx1, dy1, w1, h1, animX, animY);
         }
@@ -364,10 +391,14 @@ ShaderTilemap.prototype._drawAutotile = function(layer, tileId, dx, dy) {
 
 /**
  * @method _drawTableEdge
- * @param {Array} layers
- * @param {Number} tileId
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Array}
+ *            layers
+ * @param {Number}
+ *            tileId
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 ShaderTilemap.prototype._drawTableEdge = function(layer, tileId, dx, dy) {
@@ -390,16 +421,19 @@ ShaderTilemap.prototype._drawTableEdge = function(layer, tileId, dx, dy) {
             var sy1 = (by * 2 + qsy) * h1 + h1 / 2;
             var dx1 = dx + (i % 2) * w1;
             var dy1 = dy + Math.floor(i / 2) * h1;
-            layer.addRect(setNumber, sx1, sy1, dx1, dy1, w1, h1/2);
+            layer.addRect(setNumber, sx1, sy1, dx1, dy1, w1, h1 / 2);
         }
     }
 };
 
 /**
  * @method _drawShadow
- * @param {Number} shadowBits
- * @param {Number} dx
- * @param {Number} dy
+ * @param {Number}
+ *            shadowBits
+ * @param {Number}
+ *            dx
+ * @param {Number}
+ *            dy
  * @private
  */
 ShaderTilemap.prototype._drawShadow = function(layer, shadowBits, dx, dy) {
@@ -415,3 +449,4 @@ ShaderTilemap.prototype._drawShadow = function(layer, shadowBits, dx, dy) {
         }
     }
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Character-----------------------------------------------------------------------------
 // Game_Character
 //
 // The superclass of Game_Player, Game_Follower, GameVehicle, and Game_Event.
@@ -10,52 +10,52 @@ function Game_Character() {
 Game_Character.prototype = Object.create(Game_CharacterBase.prototype);
 Game_Character.prototype.constructor = Game_Character;
 
-Game_Character.ROUTE_END               = 0;
-Game_Character.ROUTE_MOVE_DOWN         = 1;
-Game_Character.ROUTE_MOVE_LEFT         = 2;
-Game_Character.ROUTE_MOVE_RIGHT        = 3;
-Game_Character.ROUTE_MOVE_UP           = 4;
-Game_Character.ROUTE_MOVE_LOWER_L      = 5;
-Game_Character.ROUTE_MOVE_LOWER_R      = 6;
-Game_Character.ROUTE_MOVE_UPPER_L      = 7;
-Game_Character.ROUTE_MOVE_UPPER_R      = 8;
-Game_Character.ROUTE_MOVE_RANDOM       = 9;
-Game_Character.ROUTE_MOVE_TOWARD       = 10;
-Game_Character.ROUTE_MOVE_AWAY         = 11;
-Game_Character.ROUTE_MOVE_FORWARD      = 12;
-Game_Character.ROUTE_MOVE_BACKWARD     = 13;
-Game_Character.ROUTE_JUMP              = 14;
-Game_Character.ROUTE_WAIT              = 15;
-Game_Character.ROUTE_TURN_DOWN         = 16;
-Game_Character.ROUTE_TURN_LEFT         = 17;
-Game_Character.ROUTE_TURN_RIGHT        = 18;
-Game_Character.ROUTE_TURN_UP           = 19;
-Game_Character.ROUTE_TURN_90D_R        = 20;
-Game_Character.ROUTE_TURN_90D_L        = 21;
-Game_Character.ROUTE_TURN_180D         = 22;
-Game_Character.ROUTE_TURN_90D_R_L      = 23;
-Game_Character.ROUTE_TURN_RANDOM       = 24;
-Game_Character.ROUTE_TURN_TOWARD       = 25;
-Game_Character.ROUTE_TURN_AWAY         = 26;
-Game_Character.ROUTE_SWITCH_ON         = 27;
-Game_Character.ROUTE_SWITCH_OFF        = 28;
-Game_Character.ROUTE_CHANGE_SPEED      = 29;
-Game_Character.ROUTE_CHANGE_FREQ       = 30;
-Game_Character.ROUTE_WALK_ANIME_ON     = 31;
-Game_Character.ROUTE_WALK_ANIME_OFF    = 32;
-Game_Character.ROUTE_STEP_ANIME_ON     = 33;
-Game_Character.ROUTE_STEP_ANIME_OFF    = 34;
-Game_Character.ROUTE_DIR_FIX_ON        = 35;
-Game_Character.ROUTE_DIR_FIX_OFF       = 36;
-Game_Character.ROUTE_THROUGH_ON        = 37;
-Game_Character.ROUTE_THROUGH_OFF       = 38;
-Game_Character.ROUTE_TRANSPARENT_ON    = 39;
-Game_Character.ROUTE_TRANSPARENT_OFF   = 40;
-Game_Character.ROUTE_CHANGE_IMAGE      = 41;
-Game_Character.ROUTE_CHANGE_OPACITY    = 42;
+Game_Character.ROUTE_END = 0;
+Game_Character.ROUTE_MOVE_DOWN = 1;
+Game_Character.ROUTE_MOVE_LEFT = 2;
+Game_Character.ROUTE_MOVE_RIGHT = 3;
+Game_Character.ROUTE_MOVE_UP = 4;
+Game_Character.ROUTE_MOVE_LOWER_L = 5;
+Game_Character.ROUTE_MOVE_LOWER_R = 6;
+Game_Character.ROUTE_MOVE_UPPER_L = 7;
+Game_Character.ROUTE_MOVE_UPPER_R = 8;
+Game_Character.ROUTE_MOVE_RANDOM = 9;
+Game_Character.ROUTE_MOVE_TOWARD = 10;
+Game_Character.ROUTE_MOVE_AWAY = 11;
+Game_Character.ROUTE_MOVE_FORWARD = 12;
+Game_Character.ROUTE_MOVE_BACKWARD = 13;
+Game_Character.ROUTE_JUMP = 14;
+Game_Character.ROUTE_WAIT = 15;
+Game_Character.ROUTE_TURN_DOWN = 16;
+Game_Character.ROUTE_TURN_LEFT = 17;
+Game_Character.ROUTE_TURN_RIGHT = 18;
+Game_Character.ROUTE_TURN_UP = 19;
+Game_Character.ROUTE_TURN_90D_R = 20;
+Game_Character.ROUTE_TURN_90D_L = 21;
+Game_Character.ROUTE_TURN_180D = 22;
+Game_Character.ROUTE_TURN_90D_R_L = 23;
+Game_Character.ROUTE_TURN_RANDOM = 24;
+Game_Character.ROUTE_TURN_TOWARD = 25;
+Game_Character.ROUTE_TURN_AWAY = 26;
+Game_Character.ROUTE_SWITCH_ON = 27;
+Game_Character.ROUTE_SWITCH_OFF = 28;
+Game_Character.ROUTE_CHANGE_SPEED = 29;
+Game_Character.ROUTE_CHANGE_FREQ = 30;
+Game_Character.ROUTE_WALK_ANIME_ON = 31;
+Game_Character.ROUTE_WALK_ANIME_OFF = 32;
+Game_Character.ROUTE_STEP_ANIME_ON = 33;
+Game_Character.ROUTE_STEP_ANIME_OFF = 34;
+Game_Character.ROUTE_DIR_FIX_ON = 35;
+Game_Character.ROUTE_DIR_FIX_OFF = 36;
+Game_Character.ROUTE_THROUGH_ON = 37;
+Game_Character.ROUTE_THROUGH_OFF = 38;
+Game_Character.ROUTE_TRANSPARENT_ON = 39;
+Game_Character.ROUTE_TRANSPARENT_OFF = 40;
+Game_Character.ROUTE_CHANGE_IMAGE = 41;
+Game_Character.ROUTE_CHANGE_OPACITY = 42;
 Game_Character.ROUTE_CHANGE_BLEND_MODE = 43;
-Game_Character.ROUTE_PLAY_SE           = 44;
-Game_Character.ROUTE_SCRIPT            = 45;
+Game_Character.ROUTE_PLAY_SE = 44;
+Game_Character.ROUTE_SCRIPT = 45;
 
 Game_Character.prototype.initialize = function() {
     Game_CharacterBase.prototype.initialize.call(this);
@@ -72,14 +72,14 @@ Game_Character.prototype.initMembers = function() {
 };
 
 Game_Character.prototype.memorizeMoveRoute = function() {
-    this._originalMoveRoute       = this._moveRoute;
-    this._originalMoveRouteIndex  = this._moveRouteIndex;
+    this._originalMoveRoute = this._moveRoute;
+    this._originalMoveRouteIndex = this._moveRouteIndex;
 };
 
 Game_Character.prototype.restoreMoveRoute = function() {
-    this._moveRoute          = this._originalMoveRoute;
-    this._moveRouteIndex     = this._originalMoveRouteIndex;
-    this._originalMoveRoute  = null;
+    this._moveRoute = this._originalMoveRoute;
+    this._moveRouteIndex = this._originalMoveRouteIndex;
+    this._originalMoveRoute = null;
 };
 
 Game_Character.prototype.isMoveRouteForcing = function() {
@@ -126,144 +126,144 @@ Game_Character.prototype.processMoveCommand = function(command) {
     var gc = Game_Character;
     var params = command.parameters;
     switch (command.code) {
-    case gc.ROUTE_END:
-        this.processRouteEnd();
-        break;
-    case gc.ROUTE_MOVE_DOWN:
-        this.moveStraight(2);
-        break;
-    case gc.ROUTE_MOVE_LEFT:
-        this.moveStraight(4);
-        break;
-    case gc.ROUTE_MOVE_RIGHT:
-        this.moveStraight(6);
-        break;
-    case gc.ROUTE_MOVE_UP:
-        this.moveStraight(8);
-        break;
-    case gc.ROUTE_MOVE_LOWER_L:
-        this.moveDiagonally(4, 2);
-        break;
-    case gc.ROUTE_MOVE_LOWER_R:
-        this.moveDiagonally(6, 2);
-        break;
-    case gc.ROUTE_MOVE_UPPER_L:
-        this.moveDiagonally(4, 8);
-        break;
-    case gc.ROUTE_MOVE_UPPER_R:
-        this.moveDiagonally(6, 8);
-        break;
-    case gc.ROUTE_MOVE_RANDOM:
-        this.moveRandom();
-        break;
-    case gc.ROUTE_MOVE_TOWARD:
-        this.moveTowardPlayer();
-        break;
-    case gc.ROUTE_MOVE_AWAY:
-        this.moveAwayFromPlayer();
-        break;
-    case gc.ROUTE_MOVE_FORWARD:
-        this.moveForward();
-        break;
-    case gc.ROUTE_MOVE_BACKWARD:
-        this.moveBackward();
-        break;
-    case gc.ROUTE_JUMP:
-        this.jump(params[0], params[1]);
-        break;
-    case gc.ROUTE_WAIT:
-        this._waitCount = params[0] - 1;
-        break;
-    case gc.ROUTE_TURN_DOWN:
-        this.setDirection(2);
-        break;
-    case gc.ROUTE_TURN_LEFT:
-        this.setDirection(4);
-        break;
-    case gc.ROUTE_TURN_RIGHT:
-        this.setDirection(6);
-        break;
-    case gc.ROUTE_TURN_UP:
-        this.setDirection(8);
-        break;
-    case gc.ROUTE_TURN_90D_R:
-        this.turnRight90();
-        break;
-    case gc.ROUTE_TURN_90D_L:
-        this.turnLeft90();
-        break;
-    case gc.ROUTE_TURN_180D:
-        this.turn180();
-        break;
-    case gc.ROUTE_TURN_90D_R_L:
-        this.turnRightOrLeft90();
-        break;
-    case gc.ROUTE_TURN_RANDOM:
-        this.turnRandom();
-        break;
-    case gc.ROUTE_TURN_TOWARD:
-        this.turnTowardPlayer();
-        break;
-    case gc.ROUTE_TURN_AWAY:
-        this.turnAwayFromPlayer();
-        break;
-    case gc.ROUTE_SWITCH_ON:
-        $gameSwitches.setValue(params[0], true);
-        break;
-    case gc.ROUTE_SWITCH_OFF:
-        $gameSwitches.setValue(params[0], false);
-        break;
-    case gc.ROUTE_CHANGE_SPEED:
-        this.setMoveSpeed(params[0]);
-        break;
-    case gc.ROUTE_CHANGE_FREQ:
-        this.setMoveFrequency(params[0]);
-        break;
-    case gc.ROUTE_WALK_ANIME_ON:
-        this.setWalkAnime(true);
-        break;
-    case gc.ROUTE_WALK_ANIME_OFF:
-        this.setWalkAnime(false);
-        break;
-    case gc.ROUTE_STEP_ANIME_ON:
-        this.setStepAnime(true);
-        break;
-    case gc.ROUTE_STEP_ANIME_OFF:
-        this.setStepAnime(false);
-        break;
-    case gc.ROUTE_DIR_FIX_ON:
-        this.setDirectionFix(true);
-        break;
-    case gc.ROUTE_DIR_FIX_OFF:
-        this.setDirectionFix(false);
-        break;
-    case gc.ROUTE_THROUGH_ON:
-        this.setThrough(true);
-        break;
-    case gc.ROUTE_THROUGH_OFF:
-        this.setThrough(false);
-        break;
-    case gc.ROUTE_TRANSPARENT_ON:
-        this.setTransparent(true);
-        break;
-    case gc.ROUTE_TRANSPARENT_OFF:
-        this.setTransparent(false);
-        break;
-    case gc.ROUTE_CHANGE_IMAGE:
-        this.setImage(params[0], params[1]);
-        break;
-    case gc.ROUTE_CHANGE_OPACITY:
-        this.setOpacity(params[0]);
-        break;
-    case gc.ROUTE_CHANGE_BLEND_MODE:
-        this.setBlendMode(params[0]);
-        break;
-    case gc.ROUTE_PLAY_SE:
-        AudioManager.playSe(params[0]);
-        break;
-    case gc.ROUTE_SCRIPT:
-        eval(params[0]);
-        break;
+        case gc.ROUTE_END:
+            this.processRouteEnd();
+            break;
+        case gc.ROUTE_MOVE_DOWN:
+            this.moveStraight(2);
+            break;
+        case gc.ROUTE_MOVE_LEFT:
+            this.moveStraight(4);
+            break;
+        case gc.ROUTE_MOVE_RIGHT:
+            this.moveStraight(6);
+            break;
+        case gc.ROUTE_MOVE_UP:
+            this.moveStraight(8);
+            break;
+        case gc.ROUTE_MOVE_LOWER_L:
+            this.moveDiagonally(4, 2);
+            break;
+        case gc.ROUTE_MOVE_LOWER_R:
+            this.moveDiagonally(6, 2);
+            break;
+        case gc.ROUTE_MOVE_UPPER_L:
+            this.moveDiagonally(4, 8);
+            break;
+        case gc.ROUTE_MOVE_UPPER_R:
+            this.moveDiagonally(6, 8);
+            break;
+        case gc.ROUTE_MOVE_RANDOM:
+            this.moveRandom();
+            break;
+        case gc.ROUTE_MOVE_TOWARD:
+            this.moveTowardPlayer();
+            break;
+        case gc.ROUTE_MOVE_AWAY:
+            this.moveAwayFromPlayer();
+            break;
+        case gc.ROUTE_MOVE_FORWARD:
+            this.moveForward();
+            break;
+        case gc.ROUTE_MOVE_BACKWARD:
+            this.moveBackward();
+            break;
+        case gc.ROUTE_JUMP:
+            this.jump(params[0], params[1]);
+            break;
+        case gc.ROUTE_WAIT:
+            this._waitCount = params[0] - 1;
+            break;
+        case gc.ROUTE_TURN_DOWN:
+            this.setDirection(2);
+            break;
+        case gc.ROUTE_TURN_LEFT:
+            this.setDirection(4);
+            break;
+        case gc.ROUTE_TURN_RIGHT:
+            this.setDirection(6);
+            break;
+        case gc.ROUTE_TURN_UP:
+            this.setDirection(8);
+            break;
+        case gc.ROUTE_TURN_90D_R:
+            this.turnRight90();
+            break;
+        case gc.ROUTE_TURN_90D_L:
+            this.turnLeft90();
+            break;
+        case gc.ROUTE_TURN_180D:
+            this.turn180();
+            break;
+        case gc.ROUTE_TURN_90D_R_L:
+            this.turnRightOrLeft90();
+            break;
+        case gc.ROUTE_TURN_RANDOM:
+            this.turnRandom();
+            break;
+        case gc.ROUTE_TURN_TOWARD:
+            this.turnTowardPlayer();
+            break;
+        case gc.ROUTE_TURN_AWAY:
+            this.turnAwayFromPlayer();
+            break;
+        case gc.ROUTE_SWITCH_ON:
+            $gameSwitches.setValue(params[0], true);
+            break;
+        case gc.ROUTE_SWITCH_OFF:
+            $gameSwitches.setValue(params[0], false);
+            break;
+        case gc.ROUTE_CHANGE_SPEED:
+            this.setMoveSpeed(params[0]);
+            break;
+        case gc.ROUTE_CHANGE_FREQ:
+            this.setMoveFrequency(params[0]);
+            break;
+        case gc.ROUTE_WALK_ANIME_ON:
+            this.setWalkAnime(true);
+            break;
+        case gc.ROUTE_WALK_ANIME_OFF:
+            this.setWalkAnime(false);
+            break;
+        case gc.ROUTE_STEP_ANIME_ON:
+            this.setStepAnime(true);
+            break;
+        case gc.ROUTE_STEP_ANIME_OFF:
+            this.setStepAnime(false);
+            break;
+        case gc.ROUTE_DIR_FIX_ON:
+            this.setDirectionFix(true);
+            break;
+        case gc.ROUTE_DIR_FIX_OFF:
+            this.setDirectionFix(false);
+            break;
+        case gc.ROUTE_THROUGH_ON:
+            this.setThrough(true);
+            break;
+        case gc.ROUTE_THROUGH_OFF:
+            this.setThrough(false);
+            break;
+        case gc.ROUTE_TRANSPARENT_ON:
+            this.setTransparent(true);
+            break;
+        case gc.ROUTE_TRANSPARENT_OFF:
+            this.setTransparent(false);
+            break;
+        case gc.ROUTE_CHANGE_IMAGE:
+            this.setImage(params[0], params[1]);
+            break;
+        case gc.ROUTE_CHANGE_OPACITY:
+            this.setOpacity(params[0]);
+            break;
+        case gc.ROUTE_CHANGE_BLEND_MODE:
+            this.setBlendMode(params[0]);
+            break;
+        case gc.ROUTE_PLAY_SE:
+            AudioManager.playSe(params[0]);
+            break;
+        case gc.ROUTE_SCRIPT:
+            eval(params[0]);
+            break;
     }
 };
 
@@ -383,35 +383,35 @@ Game_Character.prototype.advanceMoveRouteIndex = function() {
 
 Game_Character.prototype.turnRight90 = function() {
     switch (this.direction()) {
-    case 2:
-        this.setDirection(4);
-        break;
-    case 4:
-        this.setDirection(8);
-        break;
-    case 6:
-        this.setDirection(2);
-        break;
-    case 8:
-        this.setDirection(6);
-        break;
+        case 2:
+            this.setDirection(4);
+            break;
+        case 4:
+            this.setDirection(8);
+            break;
+        case 6:
+            this.setDirection(2);
+            break;
+        case 8:
+            this.setDirection(6);
+            break;
     }
 };
 
 Game_Character.prototype.turnLeft90 = function() {
     switch (this.direction()) {
-    case 2:
-        this.setDirection(6);
-        break;
-    case 4:
-        this.setDirection(2);
-        break;
-    case 6:
-        this.setDirection(8);
-        break;
-    case 8:
-        this.setDirection(4);
-        break;
+        case 2:
+            this.setDirection(6);
+            break;
+        case 4:
+            this.setDirection(2);
+            break;
+        case 6:
+            this.setDirection(8);
+            break;
+        case 8:
+            this.setDirection(4);
+            break;
     }
 };
 
@@ -421,12 +421,12 @@ Game_Character.prototype.turn180 = function() {
 
 Game_Character.prototype.turnRightOrLeft90 = function() {
     switch (Math.randomInt(2)) {
-    case 0:
-        this.turnRight90();
-        break;
-    case 1:
-        this.turnLeft90();
-        break;
+        case 0:
+            this.turnRight90();
+            break;
+        case 1:
+            this.turnLeft90();
+            break;
     }
 };
 
@@ -557,3 +557,4 @@ Game_Character.prototype.findDirectionTo = function(goalX, goalY) {
 Game_Character.prototype.searchLimit = function() {
     return 12;
 };
+

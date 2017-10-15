@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Status-----------------------------------------------------------------------------
 // Scene_Status
 //
 // The scene class of the status screen.
@@ -17,9 +17,9 @@ Scene_Status.prototype.initialize = function() {
 Scene_Status.prototype.create = function() {
     Scene_MenuBase.prototype.create.call(this);
     this._statusWindow = new Window_Status();
-    this._statusWindow.setHandler('cancel',   this.popScene.bind(this));
+    this._statusWindow.setHandler('cancel', this.popScene.bind(this));
     this._statusWindow.setHandler('pagedown', this.nextActor.bind(this));
-    this._statusWindow.setHandler('pageup',   this.previousActor.bind(this));
+    this._statusWindow.setHandler('pageup', this.previousActor.bind(this));
     this._statusWindow.reserveFaceImages();
     this.addWindow(this._statusWindow);
 };
@@ -38,3 +38,4 @@ Scene_Status.prototype.onActorChange = function() {
     this.refreshActor();
     this._statusWindow.activate();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Command-----------------------------------------------------------------------------
 // Window_Command
 //
 // The superclass of windows for selecting a command.
@@ -41,8 +41,7 @@ Window_Command.prototype.clearCommandList = function() {
     this._list = [];
 };
 
-Window_Command.prototype.makeCommandList = function() {
-};
+Window_Command.prototype.makeCommandList = function() {};
 
 Window_Command.prototype.addCommand = function(name, symbol, enabled, ext) {
     if (enabled === undefined) {
@@ -51,7 +50,12 @@ Window_Command.prototype.addCommand = function(name, symbol, enabled, ext) {
     if (ext === undefined) {
         ext = null;
     }
-    this._list.push({ name: name, symbol: symbol, enabled: enabled, ext: ext});
+    this._list.push({
+        name: name,
+        symbol: symbol,
+        enabled: enabled,
+        ext: ext
+    });
 };
 
 Window_Command.prototype.commandName = function(index) {
@@ -151,3 +155,4 @@ Window_Command.prototype.refresh = function() {
     this.createContents();
     Window_Selectable.prototype.refresh.call(this);
 };
+

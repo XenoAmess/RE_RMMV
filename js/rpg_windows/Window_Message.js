@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Message-----------------------------------------------------------------------------
 // Window_Message
 //
 // The window for displaying text messages.
@@ -33,7 +33,8 @@ Window_Message.prototype.initMembers = function() {
 
 Window_Message.prototype.subWindows = function() {
     return [this._goldWindow, this._choiceWindow,
-            this._numberWindow, this._itemWindow];
+        this._numberWindow, this._itemWindow
+    ];
 };
 
 Window_Message.prototype.createSubWindows = function() {
@@ -165,8 +166,8 @@ Window_Message.prototype.updateInput = function() {
 
 Window_Message.prototype.isAnySubWindowActive = function() {
     return (this._choiceWindow.active ||
-            this._numberWindow.active ||
-            this._itemWindow.active);
+        this._numberWindow.active ||
+        this._itemWindow.active);
 };
 
 Window_Message.prototype.updateMessage = function() {
@@ -221,17 +222,17 @@ Window_Message.prototype.startInput = function() {
 
 Window_Message.prototype.isTriggered = function() {
     return (Input.isRepeated('ok') || Input.isRepeated('cancel') ||
-            TouchInput.isRepeated());
+        TouchInput.isRepeated());
 };
 
 Window_Message.prototype.doesContinue = function() {
     return ($gameMessage.hasText() && !$gameMessage.scrollMode() &&
-            !this.areSettingsChanged());
+        !this.areSettingsChanged());
 };
 
 Window_Message.prototype.areSettingsChanged = function() {
     return (this._background !== $gameMessage.background() ||
-            this._positionType !== $gameMessage.positionType());
+        this._positionType !== $gameMessage.positionType());
 };
 
 Window_Message.prototype.updateShowFast = function() {
@@ -287,35 +288,35 @@ Window_Message.prototype.isEndOfText = function(textState) {
 
 Window_Message.prototype.needsNewPage = function(textState) {
     return (!this.isEndOfText(textState) &&
-            textState.y + textState.height > this.contents.height);
+        textState.y + textState.height > this.contents.height);
 };
 
 Window_Message.prototype.processEscapeCharacter = function(code, textState) {
     switch (code) {
-    case '$':
-        this._goldWindow.open();
-        break;
-    case '.':
-        this.startWait(15);
-        break;
-    case '|':
-        this.startWait(60);
-        break;
-    case '!':
-        this.startPause();
-        break;
-    case '>':
-        this._lineShowFast = true;
-        break;
-    case '<':
-        this._lineShowFast = false;
-        break;
-    case '^':
-        this._pauseSkip = true;
-        break;
-    default:
-        Window_Base.prototype.processEscapeCharacter.call(this, code, textState);
-        break;
+        case '$':
+            this._goldWindow.open();
+            break;
+        case '.':
+            this.startWait(15);
+            break;
+        case '|':
+            this.startWait(60);
+            break;
+        case '!':
+            this.startPause();
+            break;
+        case '>':
+            this._lineShowFast = true;
+            break;
+        case '<':
+            this._lineShowFast = false;
+            break;
+        case '^':
+            this._pauseSkip = true;
+            break;
+        default:
+            Window_Base.prototype.processEscapeCharacter.call(this, code, textState);
+            break;
     }
 };
 
@@ -327,3 +328,4 @@ Window_Message.prototype.startPause = function() {
     this.startWait(10);
     this.pause = true;
 };
+

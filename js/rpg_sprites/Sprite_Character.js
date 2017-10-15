@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Character-----------------------------------------------------------------------------
 // Sprite_Character
 //
 // The sprite for displaying a character.
@@ -73,9 +73,9 @@ Sprite_Character.prototype.updateBitmap = function() {
 
 Sprite_Character.prototype.isImageChanged = function() {
     return (this._tilesetId !== $gameMap.tilesetId() ||
-            this._tileId !== this._character.tileId() ||
-            this._characterName !== this._character.characterName() ||
-            this._characterIndex !== this._character.characterIndex());
+        this._tileId !== this._character.tileId() ||
+        this._characterName !== this._character.characterName() ||
+        this._characterIndex !== this._character.characterIndex());
 };
 
 Sprite_Character.prototype.setTileBitmap = function() {
@@ -170,7 +170,7 @@ Sprite_Character.prototype.updateHalfBodySprites = function() {
         this.createHalfBodySprites();
         this._upperBody.bitmap = this.bitmap;
         this._upperBody.visible = true;
-        this._upperBody.y = - this._bushDepth;
+        this._upperBody.y = -this._bushDepth;
         this._lowerBody.bitmap = this.bitmap;
         this._lowerBody.visible = true;
         this._upperBody.setBlendColor(this.getBlendColor());
@@ -265,3 +265,4 @@ Sprite_Character.prototype.endBalloon = function() {
 Sprite_Character.prototype.isBalloonPlaying = function() {
     return !!this._balloonSprite;
 };
+

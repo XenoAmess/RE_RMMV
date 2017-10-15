@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_HorzCommand-----------------------------------------------------------------------------
 // Window_HorzCommand
 //
 // The command window for the horizontal selection format.
@@ -25,3 +25,4 @@ Window_HorzCommand.prototype.maxCols = function() {
 Window_HorzCommand.prototype.itemTextAlign = function() {
     return 'center';
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_EquipItem-----------------------------------------------------------------------------
 // Window_EquipItem
 //
 // The window for selecting an equipment item on the equipment screen.
@@ -46,8 +46,7 @@ Window_EquipItem.prototype.isEnabled = function(item) {
     return true;
 };
 
-Window_EquipItem.prototype.selectLast = function() {
-};
+Window_EquipItem.prototype.selectLast = function() {};
 
 Window_EquipItem.prototype.setStatusWindow = function(statusWindow) {
     this._statusWindow = statusWindow;
@@ -63,5 +62,5 @@ Window_EquipItem.prototype.updateHelp = function() {
     }
 };
 
-Window_EquipItem.prototype.playOkSound = function() {
-};
+Window_EquipItem.prototype.playOkSound = function() {};
+

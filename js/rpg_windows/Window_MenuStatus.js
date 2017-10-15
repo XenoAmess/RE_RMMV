@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_MenuStatus-----------------------------------------------------------------------------
 // Window_MenuStatus
 //
 // The window for displaying party member status on the menu screen.
@@ -115,3 +115,4 @@ Window_MenuStatus.prototype.setPendingIndex = function(index) {
     this.redrawItem(this._pendingIndex);
     this.redrawItem(lastPendingIndex);
 };
+

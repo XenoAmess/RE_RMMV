@@ -1,4 +1,4 @@
-
+//xenoSplitPos:Decrypter-----------------------------------------------------------------------------
 function Decrypter() {
     throw new Error('This is a static class');
 }
@@ -16,9 +16,9 @@ Decrypter.SIGNATURE = "5250474d56000000";
 Decrypter.VER = "000301";
 Decrypter.REMAIN = "0000000000";
 
-Decrypter.checkImgIgnore = function(url){
-    for(var cnt = 0; cnt < this._ignoreList.length; cnt++) {
-        if(url === this._ignoreList[cnt]) return true;
+Decrypter.checkImgIgnore = function(url) {
+    for (var cnt = 0; cnt < this._ignoreList.length; cnt++) {
+        if (url === this._ignoreList[cnt]) return true;
     }
     return false;
 };
@@ -31,8 +31,8 @@ Decrypter.decryptImg = function(url, bitmap) {
     requestFile.responseType = "arraybuffer";
     requestFile.send();
 
-    requestFile.onload = function () {
-        if(this.status < Decrypter._xhrOk) {
+    requestFile.onload = function() {
+        if (this.status < Decrypter._xhrOk) {
             var arrayBuffer = Decrypter.decryptArrayBuffer(requestFile.response);
             bitmap._image.src = Decrypter.createBlobUrl(arrayBuffer);
             bitmap._image.addEventListener('load', bitmap._loadListener = Bitmap.prototype._onLoad.bind(bitmap));
@@ -40,7 +40,7 @@ Decrypter.decryptImg = function(url, bitmap) {
         }
     };
 
-    requestFile.onerror = function () {
+    requestFile.onerror = function() {
         if (bitmap._loader) {
             bitmap._loader();
         } else {
@@ -55,8 +55,8 @@ Decrypter.decryptHTML5Audio = function(url, bgm, pos) {
     requestFile.responseType = "arraybuffer";
     requestFile.send();
 
-    requestFile.onload = function () {
-        if(this.status < Decrypter._xhrOk) {
+    requestFile.onload = function() {
+        if (this.status < Decrypter._xhrOk) {
             var arrayBuffer = Decrypter.decryptArrayBuffer(requestFile.response);
             var url = Decrypter.createBlobUrl(arrayBuffer);
             AudioManager.createDecryptBuffer(url, bgm, pos);
@@ -98,7 +98,7 @@ Decrypter.decryptArrayBuffer = function(arrayBuffer) {
     return arrayBuffer;
 };
 
-Decrypter.createBlobUrl = function(arrayBuffer){
+Decrypter.createBlobUrl = function(arrayBuffer) {
     var blob = new Blob([arrayBuffer]);
     return window.URL.createObjectURL(blob);
 };
@@ -107,14 +107,15 @@ Decrypter.extToEncryptExt = function(url) {
     var ext = url.split('.').pop();
     var encryptedExt = ext;
 
-    if(ext === "ogg") encryptedExt = ".rpgmvo";
-    else if(ext === "m4a") encryptedExt = ".rpgmvm";
-    else if(ext === "png") encryptedExt = ".rpgmvp";
+    if (ext === "ogg") encryptedExt = ".rpgmvo";
+    else if (ext === "m4a") encryptedExt = ".rpgmvm";
+    else if (ext === "png") encryptedExt = ".rpgmvp";
     else encryptedExt = ext;
 
     return url.slice(0, url.lastIndexOf(ext) - 1) + encryptedExt;
 };
 
-Decrypter.readEncryptionkey = function(){
+Decrypter.readEncryptionkey = function() {
     this._encryptionKey = $dataSystem.encryptionKey.split(/(.{2})/).filter(Boolean);
 };
+

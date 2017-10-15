@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Enemy-----------------------------------------------------------------------------
 // Game_Enemy
 //
 // The game object class for an enemy.
@@ -163,17 +163,17 @@ Game_Enemy.prototype.performDamage = function() {
 Game_Enemy.prototype.performCollapse = function() {
     Game_Battler.prototype.performCollapse.call(this);
     switch (this.collapseType()) {
-    case 0:
-        this.requestEffect('collapse');
-        SoundManager.playEnemyCollapse();
-        break;
-    case 1:
-        this.requestEffect('bossCollapse');
-        SoundManager.playBossCollapse1();
-        break;
-    case 2:
-        this.requestEffect('instantCollapse');
-        break;
+        case 0:
+            this.requestEffect('collapse');
+            SoundManager.playEnemyCollapse();
+            break;
+        case 1:
+            this.requestEffect('bossCollapse');
+            SoundManager.playBossCollapse1();
+            break;
+        case 2:
+            this.requestEffect('instantCollapse');
+            break;
     }
 };
 
@@ -194,20 +194,20 @@ Game_Enemy.prototype.meetsCondition = function(action) {
     var param1 = action.conditionParam1;
     var param2 = action.conditionParam2;
     switch (action.conditionType) {
-    case 1:
-        return this.meetsTurnCondition(param1, param2);
-    case 2:
-        return this.meetsHpCondition(param1, param2);
-    case 3:
-        return this.meetsMpCondition(param1, param2);
-    case 4:
-        return this.meetsStateCondition(param1);
-    case 5:
-        return this.meetsPartyLevelCondition(param1);
-    case 6:
-        return this.meetsSwitchCondition(param1);
-    default:
-        return true;
+        case 1:
+            return this.meetsTurnCondition(param1, param2);
+        case 2:
+            return this.meetsHpCondition(param1, param2);
+        case 3:
+            return this.meetsMpCondition(param1, param2);
+        case 4:
+            return this.meetsStateCondition(param1);
+        case 5:
+            return this.meetsPartyLevelCondition(param1);
+        case 6:
+            return this.meetsSwitchCondition(param1);
+        default:
+            return true;
     }
 };
 
@@ -287,3 +287,4 @@ Game_Enemy.prototype.makeActions = function() {
     }
     this.setActionState('waiting');
 };
+

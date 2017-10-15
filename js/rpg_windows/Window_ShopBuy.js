@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ShopBuy-----------------------------------------------------------------------------
 // Window_ShopBuy
 //
 // The window for selecting an item to buy on the shop screen.
@@ -46,7 +46,7 @@ Window_ShopBuy.prototype.price = function(item) {
 
 Window_ShopBuy.prototype.isEnabled = function(item) {
     return (item && this.price(item) <= this._money &&
-            !$gameParty.hasMaxItems(item));
+        !$gameParty.hasMaxItems(item));
 };
 
 Window_ShopBuy.prototype.refresh = function() {
@@ -61,15 +61,15 @@ Window_ShopBuy.prototype.makeItemList = function() {
     this._shopGoods.forEach(function(goods) {
         var item = null;
         switch (goods[0]) {
-        case 0:
-            item = $dataItems[goods[1]];
-            break;
-        case 1:
-            item = $dataWeapons[goods[1]];
-            break;
-        case 2:
-            item = $dataArmors[goods[1]];
-            break;
+            case 0:
+                item = $dataItems[goods[1]];
+                break;
+            case 1:
+                item = $dataWeapons[goods[1]];
+                break;
+            case 2:
+                item = $dataArmors[goods[1]];
+                break;
         }
         if (item) {
             this._data.push(item);
@@ -86,7 +86,7 @@ Window_ShopBuy.prototype.drawItem = function(index) {
     this.changePaintOpacity(this.isEnabled(item));
     this.drawItemName(item, rect.x, rect.y, rect.width - priceWidth);
     this.drawText(this.price(item), rect.x + rect.width - priceWidth,
-                  rect.y, priceWidth, 'right');
+        rect.y, priceWidth, 'right');
     this.changePaintOpacity(true);
 };
 
@@ -101,3 +101,4 @@ Window_ShopBuy.prototype.updateHelp = function() {
         this._statusWindow.setItem(this.item());
     }
 };
+

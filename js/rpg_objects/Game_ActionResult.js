@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_ActionResult-----------------------------------------------------------------------------
 // Game_ActionResult
 //
 // The game object class for a result of a battle action. For convinience, all
@@ -45,8 +45,8 @@ Game_ActionResult.prototype.removedStateObjects = function() {
 
 Game_ActionResult.prototype.isStatusAffected = function() {
     return (this.addedStates.length > 0 || this.removedStates.length > 0 ||
-            this.addedBuffs.length > 0 || this.addedDebuffs.length > 0 ||
-            this.removedBuffs.length > 0);
+        this.addedBuffs.length > 0 || this.addedDebuffs.length > 0 ||
+        this.removedBuffs.length > 0);
 };
 
 Game_ActionResult.prototype.isHit = function() {
@@ -102,3 +102,4 @@ Game_ActionResult.prototype.pushRemovedBuff = function(paramId) {
         this.removedBuffs.push(paramId);
     }
 };
+

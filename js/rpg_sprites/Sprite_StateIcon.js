@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_StateIcon-----------------------------------------------------------------------------
 // Sprite_StateIcon
 //
 // The sprite for displaying state icons.
@@ -16,7 +16,7 @@ Sprite_StateIcon.prototype.initialize = function() {
     this.loadBitmap();
 };
 
-Sprite_StateIcon._iconWidth  = 32;
+Sprite_StateIcon._iconWidth = 32;
 Sprite_StateIcon._iconHeight = 32;
 
 Sprite_StateIcon.prototype.initMembers = function() {
@@ -75,3 +75,4 @@ Sprite_StateIcon.prototype.updateFrame = function() {
     var sy = Math.floor(this._iconIndex / 16) * ph;
     this.setFrame(sx, sy, pw, ph);
 };
+

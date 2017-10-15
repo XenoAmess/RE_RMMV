@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Item-----------------------------------------------------------------------------
 // Game_Item
 //
 // The game object class for handling skills, items, weapons, and armor. It is
@@ -81,3 +81,4 @@ Game_Item.prototype.setEquip = function(isWeapon, itemId) {
     this._dataClass = isWeapon ? 'weapon' : 'armor';
     this._itemId = itemId;
 };
+

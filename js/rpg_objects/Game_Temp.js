@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Temp-----------------------------------------------------------------------------
 // Game_Temp
 //
 // The game object class for temporary data that is not included in save data.
@@ -55,3 +55,4 @@ Game_Temp.prototype.destinationX = function() {
 Game_Temp.prototype.destinationY = function() {
     return this._destinationY;
 };
+

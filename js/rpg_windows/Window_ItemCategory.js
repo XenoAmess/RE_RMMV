@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ItemCategory-----------------------------------------------------------------------------
 // Window_ItemCategory
 //
 // The window for selecting a category of items on the item and shop screens.
@@ -30,9 +30,9 @@ Window_ItemCategory.prototype.update = function() {
 };
 
 Window_ItemCategory.prototype.makeCommandList = function() {
-    this.addCommand(TextManager.item,    'item');
-    this.addCommand(TextManager.weapon,  'weapon');
-    this.addCommand(TextManager.armor,   'armor');
+    this.addCommand(TextManager.item, 'item');
+    this.addCommand(TextManager.weapon, 'weapon');
+    this.addCommand(TextManager.armor, 'armor');
     this.addCommand(TextManager.keyItem, 'keyItem');
 };
 
@@ -40,3 +40,4 @@ Window_ItemCategory.prototype.setItemWindow = function(itemWindow) {
     this._itemWindow = itemWindow;
     this.update();
 };
+

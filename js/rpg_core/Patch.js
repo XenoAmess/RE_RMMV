@@ -1,3 +1,5 @@
+//xenoSplitPos:Patch-----------------------------------------------------------------------------
+/*
 (function() {
     //patch from triacontane (@triacontane)
     //This patch clears mapchip atlas which was drawn before.
@@ -26,3 +28,5 @@
         gl.texSubImage2D(gl.TEXTURE_2D, 0, x, y, this.format, this.type, baseTex.source);
     };
 })();
+*/
+

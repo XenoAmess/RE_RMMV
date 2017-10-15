@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:ResourceHandler-----------------------------------------------------------------------------
 /**
  * The static class that handles resource loading.
  *
@@ -51,3 +51,4 @@ ResourceHandler.retry = function() {
         this._reloaders.length = 0;
     }
 };
+

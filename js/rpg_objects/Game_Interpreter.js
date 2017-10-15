@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Interpreter-----------------------------------------------------------------------------
 // Game_Interpreter
 //
 // The interpreter for running event commands.
@@ -110,36 +110,36 @@ Game_Interpreter.prototype.updateWaitCount = function() {
 Game_Interpreter.prototype.updateWaitMode = function() {
     var waiting = false;
     switch (this._waitMode) {
-    case 'message':
-        waiting = $gameMessage.isBusy();
-        break;
-    case 'transfer':
-        waiting = $gamePlayer.isTransferring();
-        break;
-    case 'scroll':
-        waiting = $gameMap.isScrolling();
-        break;
-    case 'route':
-        waiting = this._character.isMoveRouteForcing();
-        break;
-    case 'animation':
-        waiting = this._character.isAnimationPlaying();
-        break;
-    case 'balloon':
-        waiting = this._character.isBalloonPlaying();
-        break;
-    case 'gather':
-        waiting = $gamePlayer.areFollowersGathering();
-        break;
-    case 'action':
-        waiting = BattleManager.isActionForced();
-        break;
-    case 'video':
-        waiting = Graphics.isVideoPlaying();
-        break;
-    case 'image':
-        waiting = !ImageManager.isReady();
-        break;
+        case 'message':
+            waiting = $gameMessage.isBusy();
+            break;
+        case 'transfer':
+            waiting = $gamePlayer.isTransferring();
+            break;
+        case 'scroll':
+            waiting = $gameMap.isScrolling();
+            break;
+        case 'route':
+            waiting = this._character.isMoveRouteForcing();
+            break;
+        case 'animation':
+            waiting = this._character.isAnimationPlaying();
+            break;
+        case 'balloon':
+            waiting = this._character.isBalloonPlaying();
+            break;
+        case 'gather':
+            waiting = $gamePlayer.areFollowersGathering();
+            break;
+        case 'action':
+            waiting = BattleManager.isActionForced();
+            break;
+        case 'video':
+            waiting = Graphics.isVideoPlaying();
+            break;
+        case 'image':
+            waiting = !ImageManager.isReady();
+            break;
     }
     if (!waiting) {
         this._waitMode = '';
@@ -299,23 +299,23 @@ Game_Interpreter.prototype.command101 = function() {
         $gameMessage.setFaceImage(this._params[0], this._params[1]);
         $gameMessage.setBackground(this._params[2]);
         $gameMessage.setPositionType(this._params[3]);
-        while (this.nextEventCode() === 401) {  // Text data
+        while (this.nextEventCode() === 401) { // Text data
             this._index++;
             $gameMessage.add(this.currentCommand().parameters[0]);
         }
         switch (this.nextEventCode()) {
-        case 102:  // Show Choices
-            this._index++;
-            this.setupChoices(this.currentCommand().parameters);
-            break;
-        case 103:  // Input Number
-            this._index++;
-            this.setupNumInput(this.currentCommand().parameters);
-            break;
-        case 104:  // Select Item
-            this._index++;
-            this.setupItemChoice(this.currentCommand().parameters);
-            break;
+            case 102: // Show Choices
+                this._index++;
+                this.setupChoices(this.currentCommand().parameters);
+                break;
+            case 103: // Input Number
+                this._index++;
+                this.setupNumInput(this.currentCommand().parameters);
+                break;
+            case 104: // Select Item
+                this._index++;
+                this.setupItemChoice(this.currentCommand().parameters);
+                break;
         }
         this._index++;
         this.setWaitMode('message');
@@ -422,10 +422,10 @@ Game_Interpreter.prototype.command108 = function() {
 Game_Interpreter.prototype.command111 = function() {
     var result = false;
     switch (this._params[0]) {
-        case 0:  // Switch
+        case 0: // Switch
             result = ($gameSwitches.value(this._params[1]) === (this._params[2] === 0));
             break;
-        case 1:  // Variable
+        case 1: // Variable
             var value1 = $gameVariables.value(this._params[1]);
             var value2;
             if (this._params[2] === 0) {
@@ -434,33 +434,33 @@ Game_Interpreter.prototype.command111 = function() {
                 value2 = $gameVariables.value(this._params[3]);
             }
             switch (this._params[4]) {
-                case 0:  // Equal to
+                case 0: // Equal to
                     result = (value1 === value2);
                     break;
-                case 1:  // Greater than or Equal to
+                case 1: // Greater than or Equal to
                     result = (value1 >= value2);
                     break;
-                case 2:  // Less than or Equal to
+                case 2: // Less than or Equal to
                     result = (value1 <= value2);
                     break;
-                case 3:  // Greater than
+                case 3: // Greater than
                     result = (value1 > value2);
                     break;
-                case 4:  // Less than
+                case 4: // Less than
                     result = (value1 < value2);
                     break;
-                case 5:  // Not Equal to
+                case 5: // Not Equal to
                     result = (value1 !== value2);
                     break;
             }
             break;
-        case 2:  // Self Switch
+        case 2: // Self Switch
             if (this._eventId > 0) {
                 var key = [this._mapId, this._eventId, this._params[1]];
                 result = ($gameSelfSwitches.value(key) === (this._params[2] === 0));
             }
             break;
-        case 3:  // Timer
+        case 3: // Timer
             if ($gameTimer.isWorking()) {
                 if (this._params[2] === 0) {
                     result = ($gameTimer.seconds() >= this._params[1]);
@@ -469,83 +469,83 @@ Game_Interpreter.prototype.command111 = function() {
                 }
             }
             break;
-        case 4:  // Actor
+        case 4: // Actor
             var actor = $gameActors.actor(this._params[1]);
             if (actor) {
                 var n = this._params[3];
                 switch (this._params[2]) {
-                    case 0:  // In the Party
+                    case 0: // In the Party
                         result = $gameParty.members().contains(actor);
                         break;
-                    case 1:  // Name
+                    case 1: // Name
                         result = (actor.name() === n);
                         break;
-                    case 2:  // Class
+                    case 2: // Class
                         result = actor.isClass($dataClasses[n]);
                         break;
-                    case 3:  // Skill
+                    case 3: // Skill
                         result = actor.hasSkill(n);
                         break;
-                    case 4:  // Weapon
+                    case 4: // Weapon
                         result = actor.hasWeapon($dataWeapons[n]);
                         break;
-                    case 5:  // Armor
+                    case 5: // Armor
                         result = actor.hasArmor($dataArmors[n]);
                         break;
-                    case 6:  // State
+                    case 6: // State
                         result = actor.isStateAffected(n);
                         break;
                 }
             }
             break;
-        case 5:  // Enemy
+        case 5: // Enemy
             var enemy = $gameTroop.members()[this._params[1]];
             if (enemy) {
                 switch (this._params[2]) {
-                    case 0:  // Appeared
+                    case 0: // Appeared
                         result = enemy.isAlive();
                         break;
-                    case 1:  // State
+                    case 1: // State
                         result = enemy.isStateAffected(this._params[3]);
                         break;
                 }
             }
             break;
-        case 6:  // Character
+        case 6: // Character
             var character = this.character(this._params[1]);
             if (character) {
                 result = (character.direction() === this._params[2]);
             }
             break;
-        case 7:  // Gold
+        case 7: // Gold
             switch (this._params[2]) {
-                case 0:  // Greater than or equal to
+                case 0: // Greater than or equal to
                     result = ($gameParty.gold() >= this._params[1]);
                     break;
-                case 1:  // Less than or equal to
+                case 1: // Less than or equal to
                     result = ($gameParty.gold() <= this._params[1]);
                     break;
-                case 2:  // Less than
+                case 2: // Less than
                     result = ($gameParty.gold() < this._params[1]);
                     break;
             }
             break;
-        case 8:  // Item
+        case 8: // Item
             result = $gameParty.hasItem($dataItems[this._params[1]]);
             break;
-        case 9:  // Weapon
+        case 9: // Weapon
             result = $gameParty.hasItem($dataWeapons[this._params[1]], this._params[2]);
             break;
-        case 10:  // Armor
+        case 10: // Armor
             result = $gameParty.hasItem($dataArmors[this._params[1]], this._params[2]);
             break;
-        case 11:  // Button
+        case 11: // Button
             result = Input.isPressed(this._params[1]);
             break;
-        case 12:  // Script
+        case 12: // Script
             result = !!eval(this._params[1]);
             break;
-        case 13:  // Vehicle
+        case 13: // Vehicle
             result = ($gamePlayer.vehicle() === $gameMap.vehicle(this._params[1]));
             break;
     }
@@ -654,22 +654,26 @@ Game_Interpreter.prototype.command121 = function() {
 // Control Variables
 Game_Interpreter.prototype.command122 = function() {
     var value = 0;
-    switch (this._params[3]) {  // Operand
-    case 0:  // Constant
-        value = this._params[4];
-        break;
-    case 1:  // Variable
-        value = $gameVariables.value(this._params[4]);
-        break;
-    case 2:  // Random
-        value = this._params[4] + Math.randomInt(this._params[5] - this._params[4] + 1);
-        break;
-    case 3:  // Game Data
-        value = this.gameDataOperand(this._params[4], this._params[5], this._params[6]);
-        break;
-    case 4:  // Script
-        value = eval(this._params[4]);
-        break;
+    switch (this._params[3]) { // Operand
+        case 0: // Constant
+            value = this._params[4];
+            break;
+        case 1: // Variable
+            value = $gameVariables.value(this._params[4]);
+            break;
+        case 2: // Random
+            value = this._params[5] - this._params[4] + 1;
+            for (var i = this._params[0]; i <= this._params[1]; i++) {
+                this.operateVariable(i, this._params[2], this._params[4] + Math.randomInt(value));
+            }
+            return true;
+            break;
+        case 3: // Game Data
+            value = this.gameDataOperand(this._params[4], this._params[5], this._params[6]);
+            break;
+        case 4: // Script
+            value = eval(this._params[4]);
+            break;
     }
     for (var i = this._params[0]; i <= this._params[1]; i++) {
         this.operateVariable(i, this._params[2], value);
@@ -679,90 +683,90 @@ Game_Interpreter.prototype.command122 = function() {
 
 Game_Interpreter.prototype.gameDataOperand = function(type, param1, param2) {
     switch (type) {
-    case 0:  // Item
-        return $gameParty.numItems($dataItems[param1]);
-    case 1:  // Weapon
-        return $gameParty.numItems($dataWeapons[param1]);
-    case 2:  // Armor
-        return $gameParty.numItems($dataArmors[param1]);
-    case 3:  // Actor
-        var actor = $gameActors.actor(param1);
-        if (actor) {
-            switch (param2) {
-            case 0:  // Level
-                return actor.level;
-            case 1:  // EXP
-                return actor.currentExp();
-            case 2:  // HP
-                return actor.hp;
-            case 3:  // MP
-                return actor.mp;
-            default:    // Parameter
-                if (param2 >= 4 && param2 <= 11) {
-                    return actor.param(param2 - 4);
+        case 0: // Item
+            return $gameParty.numItems($dataItems[param1]);
+        case 1: // Weapon
+            return $gameParty.numItems($dataWeapons[param1]);
+        case 2: // Armor
+            return $gameParty.numItems($dataArmors[param1]);
+        case 3: // Actor
+            var actor = $gameActors.actor(param1);
+            if (actor) {
+                switch (param2) {
+                    case 0: // Level
+                        return actor.level;
+                    case 1: // EXP
+                        return actor.currentExp();
+                    case 2: // HP
+                        return actor.hp;
+                    case 3: // MP
+                        return actor.mp;
+                    default: // Parameter
+                        if (param2 >= 4 && param2 <= 11) {
+                            return actor.param(param2 - 4);
+                        }
                 }
             }
-        }
-        break;
-    case 4:  // Enemy
-        var enemy = $gameTroop.members()[param1];
-        if (enemy) {
-            switch (param2) {
-            case 0:  // HP
-                return enemy.hp;
-            case 1:  // MP
-                return enemy.mp;
-            default:    // Parameter
-                if (param2 >= 2 && param2 <= 9) {
-                    return enemy.param(param2 - 2);
+            break;
+        case 4: // Enemy
+            var enemy = $gameTroop.members()[param1];
+            if (enemy) {
+                switch (param2) {
+                    case 0: // HP
+                        return enemy.hp;
+                    case 1: // MP
+                        return enemy.mp;
+                    default: // Parameter
+                        if (param2 >= 2 && param2 <= 9) {
+                            return enemy.param(param2 - 2);
+                        }
                 }
             }
-        }
-        break;
-    case 5:  // Character
-        var character = this.character(param1);
-        if (character) {
-            switch (param2) {
-            case 0:  // Map X
-                return character.x;
-            case 1:  // Map Y
-                return character.y;
-            case 2:  // Direction
-                return character.direction();
-            case 3:  // Screen X
-                return character.screenX();
-            case 4:  // Screen Y
-                return character.screenY();
+            break;
+        case 5: // Character
+            var character = this.character(param1);
+            if (character) {
+                switch (param2) {
+                    case 0: // Map X
+                        return character.x;
+                    case 1: // Map Y
+                        return character.y;
+                    case 2: // Direction
+                        return character.direction();
+                    case 3: // Screen X
+                        return character.screenX();
+                    case 4: // Screen Y
+                        return character.screenY();
+                }
             }
-        }
-        break;
-    case 6:  // Party
-        actor = $gameParty.members()[param1];
-        return actor ? actor.actorId() : 0;
-    case 7:  // Other
-        switch (param1) {
-        case 0:  // Map ID
-            return $gameMap.mapId();
-        case 1:  // Party Members
-            return $gameParty.size();
-        case 2:  // Gold
-            return $gameParty.gold();
-        case 3:  // Steps
-            return $gameParty.steps();
-        case 4:  // Play Time
-            return $gameSystem.playtime();
-        case 5:  // Timer
-            return $gameTimer.seconds();
-        case 6:  // Save Count
-            return $gameSystem.saveCount();
-        case 7:  // Battle Count
-            return $gameSystem.battleCount();
-        case 8:  // Win Count
-            return $gameSystem.winCount();
-        case 9:  // Escape Count
-            return $gameSystem.escapeCount();
-        }
-        break;
+            break;
+        case 6: // Party
+            actor = $gameParty.members()[param1];
+            return actor ? actor.actorId() : 0;
+        case 7: // Other
+            switch (param1) {
+                case 0: // Map ID
+                    return $gameMap.mapId();
+                case 1: // Party Members
+                    return $gameParty.size();
+                case 2: // Gold
+                    return $gameParty.gold();
+                case 3: // Steps
+                    return $gameParty.steps();
+                case 4: // Play Time
+                    return $gameSystem.playtime();
+                case 5: // Timer
+                    return $gameTimer.seconds();
+                case 6: // Save Count
+                    return $gameSystem.saveCount();
+                case 7: // Battle Count
+                    return $gameSystem.battleCount();
+                case 8: // Win Count
+                    return $gameSystem.winCount();
+                case 9: // Escape Count
+                    return $gameSystem.escapeCount();
+            }
+            break;
     }
     return 0;
 };
@@ -771,24 +775,24 @@ Game_Interpreter.prototype.operateVariable = function(variableId, operationType,
     try {
         var oldValue = $gameVariables.value(variableId);
         switch (operationType) {
-        case 0:  // Set
-            $gameVariables.setValue(variableId, oldValue = value);
-            break;
-        case 1:  // Add
-            $gameVariables.setValue(variableId, oldValue + value);
-            break;
-        case 2:  // Sub
-            $gameVariables.setValue(variableId, oldValue - value);
-            break;
-        case 3:  // Mul
-            $gameVariables.setValue(variableId, oldValue * value);
-            break;
-        case 4:  // Div
-            $gameVariables.setValue(variableId, oldValue / value);
-            break;
-        case 5:  // Mod
-            $gameVariables.setValue(variableId, oldValue % value);
-            break;
+            case 0: // Set
+                $gameVariables.setValue(variableId, oldValue = value);
+                break;
+            case 1: // Add
+                $gameVariables.setValue(variableId, oldValue + value);
+                break;
+            case 2: // Sub
+                $gameVariables.setValue(variableId, oldValue - value);
+                break;
+            case 3: // Mul
+                $gameVariables.setValue(variableId, oldValue * value);
+                break;
+            case 4: // Div
+                $gameVariables.setValue(variableId, oldValue / value);
+                break;
+            case 5: // Mod
+                $gameVariables.setValue(variableId, oldValue % value);
+                break;
         }
     } catch (e) {
         $gameVariables.setValue(variableId, 0);
@@ -806,9 +810,9 @@ Game_Interpreter.prototype.command123 = function() {
 
 // Control Timer
 Game_Interpreter.prototype.command124 = function() {
-    if (this._params[0] === 0) {  // Start
+    if (this._params[0] === 0) { // Start
         $gameTimer.start(this._params[1] * 60);
-    } else {  // Stop
+    } else { // Stop
         $gameTimer.stop();
     }
     return true;
@@ -846,12 +850,12 @@ Game_Interpreter.prototype.command128 = function() {
 Game_Interpreter.prototype.command129 = function() {
     var actor = $gameActors.actor(this._params[0]);
     if (actor) {
-        if (this._params[1] === 0) {  // Add
-            if (this._params[2]) {   // Initialize
+        if (this._params[1] === 0) { // Add
+            if (this._params[2]) { // Initialize
                 $gameActors.actor(this._params[0]).setup(this._params[0]);
             }
             $gameParty.addActor(this._params[0]);
-        } else {  // Remove
+        } else { // Remove
             $gameParty.removeActor(this._params[0]);
         }
     }
@@ -936,11 +940,11 @@ Game_Interpreter.prototype.command140 = function() {
 Game_Interpreter.prototype.command201 = function() {
     if (!$gameParty.inBattle() && !$gameMessage.isBusy()) {
         var mapId, x, y;
-        if (this._params[0] === 0) {  // Direct designation
+        if (this._params[0] === 0) { // Direct designation
             mapId = this._params[1];
             x = this._params[2];
             y = this._params[3];
-        } else {  // Designation with variables
+        } else { // Designation with variables
             mapId = $gameVariables.value(this._params[1]);
             x = $gameVariables.value(this._params[2]);
             y = $gameVariables.value(this._params[3]);
@@ -955,11 +959,11 @@ Game_Interpreter.prototype.command201 = function() {
 // Set Vehicle Location
 Game_Interpreter.prototype.command202 = function() {
     var mapId, x, y;
-    if (this._params[1] === 0) {  // Direct designation
+    if (this._params[1] === 0) { // Direct designation
         mapId = this._params[2];
         x = this._params[3];
         y = this._params[4];
-    } else {  // Designation with variables
+    } else { // Designation with variables
         mapId = $gameVariables.value(this._params[2]);
         x = $gameVariables.value(this._params[3]);
         y = $gameVariables.value(this._params[4]);
@@ -975,13 +979,13 @@ Game_Interpreter.prototype.command202 = function() {
 Game_Interpreter.prototype.command203 = function() {
     var character = this.character(this._params[0]);
     if (character) {
-        if (this._params[1] === 0) {  // Direct designation
+        if (this._params[1] === 0) { // Direct designation
             character.locate(this._params[2], this._params[3]);
-        } else if (this._params[1] === 1) {  // Designation with variables
+        } else if (this._params[1] === 1) { // Designation with variables
             var x = $gameVariables.value(this._params[2]);
             var y = $gameVariables.value(this._params[3]);
             character.locate(x, y);
-        } else {  // Exchange with another event
+        } else { // Exchange with another event
             var character2 = this.character(this._params[2]);
             if (character2) {
                 character.swap(character2);
@@ -1139,10 +1143,10 @@ Game_Interpreter.prototype.command230 = function() {
 // Show Picture
 Game_Interpreter.prototype.command231 = function() {
     var x, y;
-    if (this._params[3] === 0) {  // Direct designation
+    if (this._params[3] === 0) { // Direct designation
         x = this._params[4];
         y = this._params[5];
-    } else {  // Designation with variables
+    } else { // Designation with variables
         x = $gameVariables.value(this._params[4]);
         y = $gameVariables.value(this._params[5]);
     }
@@ -1154,10 +1158,10 @@ Game_Interpreter.prototype.command231 = function() {
 // Move Picture
 Game_Interpreter.prototype.command232 = function() {
     var x, y;
-    if (this._params[3] === 0) {  // Direct designation
+    if (this._params[3] === 0) { // Direct designation
         x = this._params[4];
         y = this._params[5];
-    } else {  // Designation with variables
+    } else { // Designation with variables
         x = $gameVariables.value(this._params[4]);
         y = $gameVariables.value(this._params[5]);
     }
@@ -1290,13 +1294,15 @@ Game_Interpreter.prototype.command281 = function() {
 // Change Tileset
 Game_Interpreter.prototype.command282 = function() {
     var tileset = $dataTilesets[this._params[0]];
-    if(!this._imageReservationId){
+    if (!this._imageReservationId) {
         this._imageReservationId = Utils.generateRuntimeId();
     }
 
     var allReady = tileset.tilesetNames.map(function(tilesetName) {
         return ImageManager.reserveTileset(tilesetName, 0, this._imageReservationId);
-    }, this).every(function(bitmap) {return bitmap.isReady();});
+    }, this).every(function(bitmap) {
+        return bitmap.isReady();
+    });
 
     if (allReady) {
         $gameMap.changeTileset(this._params[0]);
@@ -1325,29 +1331,29 @@ Game_Interpreter.prototype.command284 = function() {
 // Get Location Info
 Game_Interpreter.prototype.command285 = function() {
     var x, y, value;
-    if (this._params[2] === 0) {  // Direct designation
+    if (this._params[2] === 0) { // Direct designation
         x = this._params[3];
         y = this._params[4];
-    } else {  // Designation with variables
+    } else { // Designation with variables
         x = $gameVariables.value(this._params[3]);
         y = $gameVariables.value(this._params[4]);
     }
     switch (this._params[1]) {
-    case 0:     // Terrain Tag
-        value = $gameMap.terrainTag(x, y);
-        break;
-    case 1:     // Event ID
-        value = $gameMap.eventIdXy(x, y);
-        break;
-    case 2:     // Tile ID (Layer 1)
-    case 3:     // Tile ID (Layer 2)
-    case 4:     // Tile ID (Layer 3)
-    case 5:     // Tile ID (Layer 4)
-        value = $gameMap.tileId(x, y, this._params[1] - 2);
-        break;
-    default:    // Region ID
-        value = $gameMap.regionId(x, y);
-        break;
+        case 0: // Terrain Tag
+            value = $gameMap.terrainTag(x, y);
+            break;
+        case 1: // Event ID
+            value = $gameMap.eventIdXy(x, y);
+            break;
+        case 2: // Tile ID (Layer 1)
+        case 3: // Tile ID (Layer 2)
+        case 4: // Tile ID (Layer 3)
+        case 5: // Tile ID (Layer 4)
+            value = $gameMap.tileId(x, y, this._params[1] - 2);
+            break;
+        default: // Region ID
+            value = $gameMap.regionId(x, y);
+            break;
     }
     $gameVariables.setValue(this._params[0], value);
     return true;
@@ -1357,11 +1363,11 @@ Game_Interpreter.prototype.command285 = function() {
 Game_Interpreter.prototype.command301 = function() {
     if (!$gameParty.inBattle()) {
         var troopId;
-        if (this._params[0] === 0) {  // Direct designation
+        if (this._params[0] === 0) { // Direct designation
             troopId = this._params[1];
-        } else if (this._params[0] === 1) {  // Designation with a variable
+        } else if (this._params[0] === 1) { // Designation with a variable
             troopId = $gameVariables.value(this._params[1]);
-        } else {  // Same as Random Encounter
+        } else { // Same as Random Encounter
             troopId = $gamePlayer.makeEncounterTroopId();
         }
         if ($dataTroops[troopId]) {
@@ -1655,13 +1661,13 @@ Game_Interpreter.prototype.command336 = function() {
 // Show Battle Animation
 Game_Interpreter.prototype.command337 = function() {
     if (this._params[2] == true) {
-        this.iterateEnemyIndex(-1,function(enemy) {
+        this.iterateEnemyIndex(-1, function(enemy) {
             if (enemy.isAlive()) {
-                enemy.startAnimation(this._params[1],false,0);
+                enemy.startAnimation(this._params[1], false, 0);
             }
         }.bind(this));
     } else {
-        this.iterateEnemyIndex(this._params[0], function (enemy) {
+        this.iterateEnemyIndex(this._params[0], function(enemy) {
             if (enemy.isAlive()) {
                 enemy.startAnimation(this._params[1], false, 0);
             }
@@ -1740,18 +1746,18 @@ Game_Interpreter.prototype.pluginCommand = function(command, args) {
     // to be overridden by plugins
 };
 
-Game_Interpreter.requestImages = function(list, commonList){
-    if(!list) return;
+Game_Interpreter.requestImages = function(list, commonList) {
+    if (!list) return;
 
-    list.forEach(function(command){
+    list.forEach(function(command) {
         var params = command.parameters;
-        switch(command.code){
+        switch (command.code) {
             // Show Text
             case 101:
                 ImageManager.requestFace(params[0]);
                 break;
 
-            // Common Event
+                // Common Event
             case 117:
                 var commonEvent = $dataCommonEvents[params[0]];
                 if (commonEvent) {
@@ -1765,7 +1771,7 @@ Game_Interpreter.requestImages = function(list, commonList){
                 }
                 break;
 
-            // Change Party Member
+                // Change Party Member
             case 129:
                 var actor = $gameActors.actor(params[0]);
                 if (actor && params[1] === 0) {
@@ -1774,21 +1780,22 @@ Game_Interpreter.requestImages = function(list, commonList){
                 }
                 break;
 
-            // Set Movement Route
+                // Set Movement Route
             case 205:
-                if(params[1]){
-                    params[1].list.forEach(function(command){
+                if (params[1]) {
+                    params[1].list.forEach(function(command) {
                         var params = command.parameters;
-                        if(command.code === Game_Character.ROUTE_CHANGE_IMAGE){
+                        if (command.code === Game_Character.ROUTE_CHANGE_IMAGE) {
                             ImageManager.requestCharacter(params[0]);
                         }
                     });
                 }
                 break;
 
-            // Show Animation, Show Battle Animation
-            case 212: case 337:
-                if(params[1]) {
+                // Show Animation, Show Battle Animation
+            case 212:
+            case 337:
+                if (params[1]) {
                     var animation = $dataAnimations[params[1]];
                     var name1 = animation.animation1Name;
                     var name2 = animation.animation2Name;
@@ -1799,7 +1806,7 @@ Game_Interpreter.requestImages = function(list, commonList){
                 }
                 break;
 
-            // Change Player Followers
+                // Change Player Followers
             case 216:
                 if (params[0] === 0) {
                     $gamePlayer.followers().forEach(function(follower) {
@@ -1809,20 +1816,20 @@ Game_Interpreter.requestImages = function(list, commonList){
                 }
                 break;
 
-            // Show Picture
+                // Show Picture
             case 231:
                 ImageManager.requestPicture(params[1]);
                 break;
 
-            // Change Tileset
+                // Change Tileset
             case 282:
                 var tileset = $dataTilesets[params[0]];
-                tileset.tilesetNames.forEach(function(tilesetName){
+                tileset.tilesetNames.forEach(function(tilesetName) {
                     ImageManager.requestTileset(tilesetName);
                 });
                 break;
 
-            // Change Battle Back
+                // Change Battle Back
             case 283:
                 if ($gameParty.inBattle()) {
                     ImageManager.requestBattleback1(params[0]);
@@ -1830,29 +1837,29 @@ Game_Interpreter.requestImages = function(list, commonList){
                 }
                 break;
 
-            // Change Parallax
+                // Change Parallax
             case 284:
                 if (!$gameParty.inBattle()) {
                     ImageManager.requestParallax(params[0]);
                 }
                 break;
 
-            // Change Actor Images
+                // Change Actor Images
             case 322:
                 ImageManager.requestCharacter(params[1]);
                 ImageManager.requestFace(params[3]);
                 ImageManager.requestSvActor(params[5]);
                 break;
 
-            // Change Vehicle Image
+                // Change Vehicle Image
             case 323:
                 var vehicle = $gameMap.vehicle(params[0]);
-                if(vehicle){
+                if (vehicle) {
                     ImageManager.requestCharacter(params[1]);
                 }
                 break;
 
-            // Enemy Transform
+                // Enemy Transform
             case 336:
                 var enemy = $dataEnemies[params[1]];
                 var name = enemy.battlerName;
@@ -1866,3 +1873,4 @@ Game_Interpreter.requestImages = function(list, commonList){
         }
     });
 };
+

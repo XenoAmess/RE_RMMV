@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_BattleEnemy-----------------------------------------------------------------------------
 // Window_BattleEnemy
 //
 // The window for selecting a target enemy on the battle screen.
@@ -75,3 +75,4 @@ Window_BattleEnemy.prototype.select = function(index) {
     Window_Selectable.prototype.select.call(this, index);
     $gameTroop.select(this.enemy());
 };
+

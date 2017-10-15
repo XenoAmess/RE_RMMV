@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Skill-----------------------------------------------------------------------------
 // Scene_Skill
 //
 // The scene class of the skill screen.
@@ -32,10 +32,10 @@ Scene_Skill.prototype.createSkillTypeWindow = function() {
     var wy = this._helpWindow.height;
     this._skillTypeWindow = new Window_SkillType(0, wy);
     this._skillTypeWindow.setHelpWindow(this._helpWindow);
-    this._skillTypeWindow.setHandler('skill',    this.commandSkill.bind(this));
-    this._skillTypeWindow.setHandler('cancel',   this.popScene.bind(this));
+    this._skillTypeWindow.setHandler('skill', this.commandSkill.bind(this));
+    this._skillTypeWindow.setHandler('cancel', this.popScene.bind(this));
     this._skillTypeWindow.setHandler('pagedown', this.nextActor.bind(this));
-    this._skillTypeWindow.setHandler('pageup',   this.previousActor.bind(this));
+    this._skillTypeWindow.setHandler('pageup', this.previousActor.bind(this));
     this.addWindow(this._skillTypeWindow);
 };
 
@@ -56,7 +56,7 @@ Scene_Skill.prototype.createItemWindow = function() {
     var wh = Graphics.boxHeight - wy;
     this._itemWindow = new Window_SkillList(wx, wy, ww, wh);
     this._itemWindow.setHelpWindow(this._helpWindow);
-    this._itemWindow.setHandler('ok',     this.onItemOk.bind(this));
+    this._itemWindow.setHandler('ok', this.onItemOk.bind(this));
     this._itemWindow.setHandler('cancel', this.onItemCancel.bind(this));
     this._skillTypeWindow.setSkillWindow(this._itemWindow);
     this.addWindow(this._itemWindow);
@@ -102,3 +102,4 @@ Scene_Skill.prototype.onActorChange = function() {
     this.refreshActor();
     this._skillTypeWindow.activate();
 };
+

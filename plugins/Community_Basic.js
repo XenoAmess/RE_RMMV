@@ -1,21 +1,19 @@
 /*:
- * @plugindesc Basic plugin for manipulating important parameters..
+ * @plugindesc Plugin used to set basic parameters.
  * @author RM CoreScript team
  *
- * @help
- * Basic plugin for manipulating important parameters..
- * There is no plugin command.
+ * @help This plugin does not provide plugin commands.
  *
  * @param cacheLimit
- * @desc The upper limit of images' cached size (MPixel)
+ * @desc For setting the upper limit of image memory cache. (MPix)
  * @default 10
  *
  * @param screenWidth
- * @desc The resolution of screen width
+ * @desc For setting the screen width.
  * @default 816
  *
  * @param screenHeight
- * @desc The resolution of screen height
+ * @desc For setting the screen height.
  * @default 624
  *
  * @param changeWindowWidthTo
@@ -25,11 +23,11 @@
  * @desc If set, change window height to this value
  *
  * @param renderingMode
- * @desc The rendering mode (canvas/webgl/auto)
+ * @desc Rendering mode (canvas/webgl/auto)
  * @default auto
  *
  * @param alwaysDash
- * @desc The initial value whether the player always dashes (on/off)
+ * @desc To set initial value as to whether the player always dashes. (on/off)
  * @default off
  */
 
@@ -37,9 +35,7 @@
  * @plugindesc 基本的なパラメーターを設定するプラグインです。
  * @author RM CoreScript team
  *
- * @help
- * 基本的なパラメーターを設定するプラグインです。
- * このプラグインにはプラグインコマンドはありません。
+ * @help このプラグインにはプラグインコマンドはありません。
  *
  * @param cacheLimit
  * @desc 画像のメモリへのキャッシュの上限値 (MPix)
@@ -85,15 +81,15 @@
     var windowWidth;
     var windowHeight;
 
-    if(windowWidthTo){
+    if (windowWidthTo) {
         windowWidth = windowWidthTo;
-    }else if(screenWidth !== SceneManager._screenWidth){
+    } else if (screenWidth !== SceneManager._screenWidth) {
         windowWidth = screenWidth;
     }
 
-    if(windowHeightTo){
+    if (windowHeightTo) {
         windowHeight = windowHeightTo;
-    }else if(screenHeight !== SceneManager._screenHeight){
+    } else if (screenHeight !== SceneManager._screenHeight) {
         windowHeight = screenHeight;
     }
 

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window-----------------------------------------------------------------------------
 /**
  * The window in the game.
  *
@@ -269,10 +269,14 @@ Window.prototype.update = function() {
  * Sets the x, y, width, and height all at once.
  *
  * @method move
- * @param {Number} x The x coordinate of the window
- * @param {Number} y The y coordinate of the window
- * @param {Number} width The width of the window
- * @param {Number} height The height of the window
+ * @param {Number}
+ *            x The x coordinate of the window
+ * @param {Number}
+ *            y The y coordinate of the window
+ * @param {Number}
+ *            width The width of the window
+ * @param {Number}
+ *            height The height of the window
  */
 Window.prototype.move = function(x, y, width, height) {
     this.x = x || 0;
@@ -306,10 +310,14 @@ Window.prototype.isClosed = function() {
  * Sets the position of the command cursor.
  *
  * @method setCursorRect
- * @param {Number} x The x coordinate of the cursor
- * @param {Number} y The y coordinate of the cursor
- * @param {Number} width The width of the cursor
- * @param {Number} height The height of the cursor
+ * @param {Number}
+ *            x The x coordinate of the cursor
+ * @param {Number}
+ *            y The y coordinate of the cursor
+ * @param {Number}
+ *            width The width of the cursor
+ * @param {Number}
+ *            height The height of the cursor
  */
 Window.prototype.setCursorRect = function(x, y, width, height) {
     var cx = Math.floor(x || 0);
@@ -330,9 +338,12 @@ Window.prototype.setCursorRect = function(x, y, width, height) {
  * Changes the color of the background.
  *
  * @method setTone
- * @param {Number} r The red value in the range (-255, 255)
- * @param {Number} g The green value in the range (-255, 255)
- * @param {Number} b The blue value in the range (-255, 255)
+ * @param {Number}
+ *            r The red value in the range (-255, 255)
+ * @param {Number}
+ *            g The green value in the range (-255, 255)
+ * @param {Number}
+ *            b The blue value in the range (-255, 255)
  */
 Window.prototype.setTone = function(r, g, b) {
     var tone = this._colorTone;
@@ -346,7 +357,8 @@ Window.prototype.setTone = function(r, g, b) {
  * Adds a child between the background and contents.
  *
  * @method addChildToBack
- * @param {Object} child The child to add
+ * @param {Object}
+ *            child The child to add
  * @return {Object} The child that was added
  */
 Window.prototype.addChildToBack = function(child) {
@@ -456,14 +468,14 @@ Window.prototype._refreshFrame = function() {
         var skin = this._windowskin;
         var p = 96;
         var q = 96;
-        bitmap.blt(skin, p+m, 0+0, p-m*2, m, m, 0, w-m*2, m);
-        bitmap.blt(skin, p+m, 0+q-m, p-m*2, m, m, h-m, w-m*2, m);
-        bitmap.blt(skin, p+0, 0+m, m, p-m*2, 0, m, m, h-m*2);
-        bitmap.blt(skin, p+q-m, 0+m, m, p-m*2, w-m, m, m, h-m*2);
-        bitmap.blt(skin, p+0, 0+0, m, m, 0, 0, m, m);
-        bitmap.blt(skin, p+q-m, 0+0, m, m, w-m, 0, m, m);
-        bitmap.blt(skin, p+0, 0+q-m, m, m, 0, h-m, m, m);
-        bitmap.blt(skin, p+q-m, 0+q-m, m, m, w-m, h-m, m, m);
+        bitmap.blt(skin, p + m, 0 + 0, p - m * 2, m, m, 0, w - m * 2, m);
+        bitmap.blt(skin, p + m, 0 + q - m, p - m * 2, m, m, h - m, w - m * 2, m);
+        bitmap.blt(skin, p + 0, 0 + m, m, p - m * 2, 0, m, m, h - m * 2);
+        bitmap.blt(skin, p + q - m, 0 + m, m, p - m * 2, w - m, m, m, h - m * 2);
+        bitmap.blt(skin, p + 0, 0 + 0, m, m, 0, 0, m, m);
+        bitmap.blt(skin, p + q - m, 0 + 0, m, m, w - m, 0, m, m);
+        bitmap.blt(skin, p + 0, 0 + q - m, m, m, 0, h - m, m, m);
+        bitmap.blt(skin, p + q - m, 0 + q - m, m, m, w - m, h - m, m, m);
     }
 };
 
@@ -494,15 +506,15 @@ Window.prototype._refreshCursor = function() {
         var skin = this._windowskin;
         var p = 96;
         var q = 48;
-        bitmap.blt(skin, p+m, p+m, q-m*2, q-m*2, ox+m, oy+m, w-m*2, h-m*2);
-        bitmap.blt(skin, p+m, p+0, q-m*2, m, ox+m, oy+0, w-m*2, m);
-        bitmap.blt(skin, p+m, p+q-m, q-m*2, m, ox+m, oy+h-m, w-m*2, m);
-        bitmap.blt(skin, p+0, p+m, m, q-m*2, ox+0, oy+m, m, h-m*2);
-        bitmap.blt(skin, p+q-m, p+m, m, q-m*2, ox+w-m, oy+m, m, h-m*2);
-        bitmap.blt(skin, p+0, p+0, m, m, ox+0, oy+0, m, m);
-        bitmap.blt(skin, p+q-m, p+0, m, m, ox+w-m, oy+0, m, m);
-        bitmap.blt(skin, p+0, p+q-m, m, m, ox+0, oy+h-m, m, m);
-        bitmap.blt(skin, p+q-m, p+q-m, m, m, ox+w-m, oy+h-m, m, m);
+        bitmap.blt(skin, p + m, p + m, q - m * 2, q - m * 2, ox + m, oy + m, w - m * 2, h - m * 2);
+        bitmap.blt(skin, p + m, p + 0, q - m * 2, m, ox + m, oy + 0, w - m * 2, m);
+        bitmap.blt(skin, p + m, p + q - m, q - m * 2, m, ox + m, oy + h - m, w - m * 2, m);
+        bitmap.blt(skin, p + 0, p + m, m, q - m * 2, ox + 0, oy + m, m, h - m * 2);
+        bitmap.blt(skin, p + q - m, p + m, m, q - m * 2, ox + w - m, oy + m, m, h - m * 2);
+        bitmap.blt(skin, p + 0, p + 0, m, m, ox + 0, oy + 0, m, m);
+        bitmap.blt(skin, p + q - m, p + 0, m, m, ox + w - m, oy + 0, m, m);
+        bitmap.blt(skin, p + 0, p + q - m, m, m, ox + 0, oy + h - m, m, m);
+        bitmap.blt(skin, p + q - m, p + q - m, m, m, ox + w - m, oy + h - m, m, m);
     }
 };
 
@@ -522,19 +534,19 @@ Window.prototype._refreshArrows = function() {
     var w = this._width;
     var h = this._height;
     var p = 24;
-    var q = p/2;
-    var sx = 96+p;
-    var sy = 0+p;
+    var q = p / 2;
+    var sx = 96 + p;
+    var sy = 0 + p;
     this._downArrowSprite.bitmap = this._windowskin;
     this._downArrowSprite.anchor.x = 0.5;
     this._downArrowSprite.anchor.y = 0.5;
-    this._downArrowSprite.setFrame(sx+q, sy+q+p, p, q);
-    this._downArrowSprite.move(w/2, h-q);
+    this._downArrowSprite.setFrame(sx + q, sy + q + p, p, q);
+    this._downArrowSprite.move(w / 2, h - q);
     this._upArrowSprite.bitmap = this._windowskin;
     this._upArrowSprite.anchor.x = 0.5;
     this._upArrowSprite.anchor.y = 0.5;
-    this._upArrowSprite.setFrame(sx+q, sy, p, q);
-    this._upArrowSprite.move(w/2, q);
+    this._upArrowSprite.setFrame(sx + q, sy, p, q);
+    this._upArrowSprite.move(w / 2, q);
 };
 
 /**
@@ -611,7 +623,7 @@ Window.prototype._updatePauseSign = function() {
     } else if (sprite.alpha < 1) {
         sprite.alpha = Math.min(sprite.alpha + 0.1, 1);
     }
-    sprite.setFrame(sx+x*p, sy+y*p, p, p);
+    sprite.setFrame(sx + x * p, sy + y * p, p, p);
     sprite.visible = this.isOpen();
 };
 
@@ -656,7 +668,8 @@ Window.prototype._updatePauseSign = function() {
  * Adds a child to the container.
  *
  * @method addChild
- * @param {Object} child The child to add
+ * @param {Object}
+ *            child The child to add
  * @return {Object} The child that was added
  */
 
@@ -664,8 +677,10 @@ Window.prototype._updatePauseSign = function() {
  * Adds a child to the container at a specified index.
  *
  * @method addChildAt
- * @param {Object} child The child to add
- * @param {Number} index The index to place the child in
+ * @param {Object}
+ *            child The child to add
+ * @param {Number}
+ *            index The index to place the child in
  * @return {Object} The child that was added
  */
 
@@ -673,7 +688,8 @@ Window.prototype._updatePauseSign = function() {
  * Removes a child from the container.
  *
  * @method removeChild
- * @param {Object} child The child to remove
+ * @param {Object}
+ *            child The child to remove
  * @return {Object} The child that was removed
  */
 
@@ -681,6 +697,8 @@ Window.prototype._updatePauseSign = function() {
  * Removes a child from the specified index position.
  *
  * @method removeChildAt
- * @param {Number} index The index to get the child from
+ * @param {Number}
+ *            index The index to get the child from
  * @return {Object} The child that was removed
  */
+

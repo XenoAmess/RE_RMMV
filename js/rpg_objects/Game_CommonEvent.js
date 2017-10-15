@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_CommonEvent-----------------------------------------------------------------------------
 // Game_CommonEvent
 //
 // The game object class for a common event. It contains functionality for
@@ -44,3 +44,4 @@ Game_CommonEvent.prototype.update = function() {
         this._interpreter.update();
     }
 };
+

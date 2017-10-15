@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Base-----------------------------------------------------------------------------
 // Window_Base
 //
 // The superclass of all windows within the game.
@@ -23,9 +23,9 @@ Window_Base.prototype.initialize = function(x, y, width, height) {
     this._dimmerSprite = null;
 };
 
-Window_Base._iconWidth  = 32;
+Window_Base._iconWidth = 32;
 Window_Base._iconHeight = 32;
-Window_Base._faceWidth  = 144;
+Window_Base._faceWidth = 144;
 Window_Base._faceHeight = 144;
 
 Window_Base.prototype.lineHeight = function() {
@@ -258,7 +258,12 @@ Window_Base.prototype.textWidth = function(text) {
 
 Window_Base.prototype.drawTextEx = function(text, x, y) {
     if (text) {
-        var textState = { index: 0, x: x, y: y, left: x };
+        var textState = {
+            index: 0,
+            x: x,
+            y: y,
+            left: x
+        };
         textState.text = this.convertEscapeCharacters(text);
         textState.height = this.calcTextHeight(textState, false);
         this.resetFontSettings();
@@ -302,18 +307,18 @@ Window_Base.prototype.partyMemberName = function(n) {
 
 Window_Base.prototype.processCharacter = function(textState) {
     switch (textState.text[textState.index]) {
-    case '\n':
-        this.processNewLine(textState);
-        break;
-    case '\f':
-        this.processNewPage(textState);
-        break;
-    case '\x1b':
-        this.processEscapeCharacter(this.obtainEscapeCode(textState), textState);
-        break;
-    default:
-        this.processNormalCharacter(textState);
-        break;
+        case '\n':
+            this.processNewLine(textState);
+            break;
+        case '\f':
+            this.processNewPage(textState);
+            break;
+        case '\x1b':
+            this.processEscapeCharacter(this.obtainEscapeCode(textState), textState);
+            break;
+        default:
+            this.processNormalCharacter(textState);
+            break;
     }
 };
 
@@ -359,18 +364,18 @@ Window_Base.prototype.obtainEscapeParam = function(textState) {
 
 Window_Base.prototype.processEscapeCharacter = function(code, textState) {
     switch (code) {
-    case 'C':
-        this.changeTextColor(this.textColor(this.obtainEscapeParam(textState)));
-        break;
-    case 'I':
-        this.processDrawIcon(this.obtainEscapeParam(textState), textState);
-        break;
-    case '{':
-        this.makeFontBigger();
-        break;
-    case '}':
-        this.makeFontSmaller();
-        break;
+        case 'C':
+            this.changeTextColor(this.textColor(this.obtainEscapeParam(textState)));
+            break;
+        case 'I':
+            this.processDrawIcon(this.obtainEscapeParam(textState), textState);
+            break;
+        case '{':
+            this.makeFontBigger();
+            break;
+        case '}':
+            this.makeFontSmaller();
+            break;
     }
 };
 
@@ -525,7 +530,7 @@ Window_Base.prototype.drawActorIcons = function(actor, x, y, width) {
 };
 
 Window_Base.prototype.drawCurrentAndMax = function(current, max, x, y,
-                                                   width, color1, color2) {
+    width, color1, color2) {
     var labelWidth = this.textWidth('HP');
     var valueWidth = this.textWidth('0000');
     var slashWidth = this.textWidth('/');
@@ -552,7 +557,7 @@ Window_Base.prototype.drawActorHp = function(actor, x, y, width) {
     this.changeTextColor(this.systemColor());
     this.drawText(TextManager.hpA, x, y, 44);
     this.drawCurrentAndMax(actor.hp, actor.mhp, x, y, width,
-                           this.hpColor(actor), this.normalColor());
+        this.hpColor(actor), this.normalColor());
 };
 
 Window_Base.prototype.drawActorMp = function(actor, x, y, width) {
@@ -563,7 +568,7 @@ Window_Base.prototype.drawActorMp = function(actor, x, y, width) {
     this.changeTextColor(this.systemColor());
     this.drawText(TextManager.mpA, x, y, 44);
     this.drawCurrentAndMax(actor.mp, actor.mmp, x, y, width,
-                           this.mpColor(actor), this.normalColor());
+        this.mpColor(actor), this.normalColor());
 };
 
 Window_Base.prototype.drawActorTp = function(actor, x, y, width) {
@@ -703,3 +708,4 @@ Window_Base.prototype.reserveFaceImages = function() {
         ImageManager.reserveFace(actor.faceName());
     }, this);
 };
+

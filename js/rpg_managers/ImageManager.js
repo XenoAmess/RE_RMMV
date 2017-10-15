@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:ImageManager-----------------------------------------------------------------------------
 // ImageManager
 //
 // The static class that loads images, creates bitmap objects and retains them.
@@ -13,8 +13,8 @@ ImageManager._imageCache = new ImageCache();
 ImageManager._requestQueue = new RequestQueue();
 ImageManager._systemReservationId = Utils.generateRuntimeId();
 
-ImageManager._generateCacheKey = function(path, hue){
-    return  path + ':' + hue;
+ImageManager._generateCacheKey = function(path, hue) {
+    return path + ':' + hue;
 };
 
 ImageManager.loadAnimation = function(filename, hue) {
@@ -86,7 +86,7 @@ ImageManager.loadBitmap = function(folder, filename, hue, smooth) {
 
 ImageManager.loadEmptyBitmap = function() {
     var empty = this._imageCache.get('empty');
-    if(!empty){
+    if (!empty) {
         empty = new Bitmap();
         this._imageCache.add('empty', empty);
         this._imageCache.reserve('empty', empty, this._systemReservationId);
@@ -104,7 +104,7 @@ ImageManager.loadNormalBitmap = function(path, hue) {
             bitmap.rotateHue(hue);
         });
         this._imageCache.add(key, bitmap);
-    }else if(!bitmap.isReady()){
+    } else if (!bitmap.isReady()) {
         bitmap.decode();
     }
 
@@ -201,18 +201,18 @@ ImageManager.reserveBitmap = function(folder, filename, hue, smooth, reservation
     }
 };
 
-ImageManager.reserveNormalBitmap = function(path, hue, reservationId){
+ImageManager.reserveNormalBitmap = function(path, hue, reservationId) {
     var bitmap = this.loadNormalBitmap(path, hue);
     this._imageCache.reserve(this._generateCacheKey(path, hue), bitmap, reservationId);
 
     return bitmap;
 };
 
-ImageManager.releaseReservation = function(reservationId){
+ImageManager.releaseReservation = function(reservationId) {
     this._imageCache.releaseReservation(reservationId);
 };
 
-ImageManager.setDefaultReservationId = function(reservationId){
+ImageManager.setDefaultReservationId = function(reservationId) {
     this._defaultReservationId = reservationId;
 };
 
@@ -284,27 +284,28 @@ ImageManager.requestBitmap = function(folder, filename, hue, smooth) {
     }
 };
 
-ImageManager.requestNormalBitmap = function(path, hue){
+ImageManager.requestNormalBitmap = function(path, hue) {
     var key = this._generateCacheKey(path, hue);
     var bitmap = this._imageCache.get(key);
-    if(!bitmap){
+    if (!bitmap) {
         bitmap = Bitmap.request(path);
-        bitmap.addLoadListener(function(){
+        bitmap.addLoadListener(function() {
             bitmap.rotateHue(hue);
         });
         this._imageCache.add(key, bitmap);
         this._requestQueue.enqueue(key, bitmap);
-    }else{
+    } else {
         this._requestQueue.raisePriority(key);
     }
 
     return bitmap;
 };
 
-ImageManager.update = function(){
+ImageManager.update = function() {
     this._requestQueue.update();
 };
 
-ImageManager.clearRequest = function(){
+ImageManager.clearRequest = function() {
     this._requestQueue.clear();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Scene_Options-----------------------------------------------------------------------------
 // Scene_Options
 //
 // The scene class of the options screen.
@@ -29,3 +29,4 @@ Scene_Options.prototype.createOptionsWindow = function() {
     this._optionsWindow.setHandler('cancel', this.popScene.bind(this));
     this.addWindow(this._optionsWindow);
 };
+

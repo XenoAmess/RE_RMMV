@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:StorageManager-----------------------------------------------------------------------------
 // StorageManager
 //
 // The static class that manages storage for saving game data.
@@ -69,17 +69,17 @@ StorageManager.backupExists = function(savefileId) {
 };
 
 StorageManager.cleanBackup = function(savefileId) {
-	if (this.backupExists(savefileId)) {
-		if (this.isLocalMode()) {
-			var fs = require('fs');
+    if (this.backupExists(savefileId)) {
+        if (this.isLocalMode()) {
+            var fs = require('fs');
             var dirPath = this.localFileDirectoryPath();
             var filePath = this.localFilePath(savefileId);
             fs.unlinkSync(filePath + ".bak");
-		} else {
-		    var key = this.webStorageKey(savefileId);
-			localStorage.removeItem(key + "bak");
-		}
-	}
+        } else {
+            var key = this.webStorageKey(savefileId);
+            localStorage.removeItem(key + "bak");
+        }
+    }
 };
 
 StorageManager.restoreBackup = function(savefileId) {
@@ -125,7 +125,9 @@ StorageManager.loadFromLocalFile = function(savefileId) {
     var fs = require('fs');
     var filePath = this.localFilePath(savefileId);
     if (fs.existsSync(filePath)) {
-        data = fs.readFileSync(filePath, { encoding: 'utf8' });
+        data = fs.readFileSync(filePath, {
+            encoding: 'utf8'
+        });
     }
     return LZString.decompressFromBase64(data);
 };
@@ -135,7 +137,9 @@ StorageManager.loadFromLocalBackupFile = function(savefileId) {
     var fs = require('fs');
     var filePath = this.localFilePath(savefileId) + ".bak";
     if (fs.existsSync(filePath)) {
-        data = fs.readFileSync(filePath, { encoding: 'utf8' });
+        data = fs.readFileSync(filePath, {
+            encoding: 'utf8'
+        });
     }
     return LZString.decompressFromBase64(data);
 };
@@ -219,3 +223,4 @@ StorageManager.webStorageKey = function(savefileId) {
         return 'RPG File%1'.format(savefileId);
     }
 };
+

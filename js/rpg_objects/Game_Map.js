@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Map-----------------------------------------------------------------------------
 // Game_Map
 //
 // The game object class for a map. It contains scrolling and passage
@@ -124,11 +124,11 @@ Game_Map.prototype.vehicles = function() {
 };
 
 Game_Map.prototype.vehicle = function(type) {
-    if (type ===  0 || type === 'boat') {
+    if (type === 0 || type === 'boat') {
         return this.boat();
-    } else if (type ===  1 || type === 'ship') {
+    } else if (type === 1 || type === 'ship') {
         return this.ship();
-    } else if (type ===  2 || type === 'airship') {
+    } else if (type === 2 || type === 'airship') {
         return this.airship();
     } else {
         return null;
@@ -309,7 +309,7 @@ Game_Map.prototype.screenTileY = function() {
 
 Game_Map.prototype.adjustX = function(x) {
     if (this.isLoopHorizontal() && x < this._displayX -
-            (this.width() - this.screenTileX()) / 2) {
+        (this.width() - this.screenTileX()) / 2) {
         return x - this._displayX + $dataMap.width;
     } else {
         return x - this._displayX;
@@ -318,7 +318,7 @@ Game_Map.prototype.adjustX = function(x) {
 
 Game_Map.prototype.adjustY = function(y) {
     if (this.isLoopVertical() && y < this._displayY -
-            (this.height() - this.screenTileY()) / 2) {
+        (this.height() - this.screenTileY()) / 2) {
         return y - this._displayY + $dataMap.height;
     } else {
         return y - this._displayY;
@@ -517,9 +517,9 @@ Game_Map.prototype.checkPassage = function(x, y, bit) {
     var tiles = this.allTiles(x, y);
     for (var i = 0; i < tiles.length; i++) {
         var flag = flags[tiles[i]];
-        if ((flag & 0x10) !== 0)  // [*] No effect on passage
+        if ((flag & 0x10) !== 0) // [*] No effect on passage
             continue;
-        if ((flag & bit) === 0)   // [o] Passable
+        if ((flag & bit) === 0) // [o] Passable
             return true;
         if ((flag & bit) === bit) // [x] Impassable
             return false;
@@ -650,18 +650,18 @@ Game_Map.prototype.scrollDistance = function() {
 
 Game_Map.prototype.doScroll = function(direction, distance) {
     switch (direction) {
-    case 2:
-        this.scrollDown(distance);
-        break;
-    case 4:
-        this.scrollLeft(distance);
-        break;
-    case 6:
-        this.scrollRight(distance);
-        break;
-    case 8:
-        this.scrollUp(distance);
-        break;
+        case 2:
+            this.scrollDown(distance);
+            break;
+        case 4:
+            this.scrollLeft(distance);
+            break;
+        case 6:
+            this.scrollRight(distance);
+            break;
+        case 8:
+            this.scrollUp(distance);
+            break;
     }
 };
 
@@ -791,3 +791,4 @@ Game_Map.prototype.isAnyEventStarting = function() {
         return event.isStarting();
     });
 };
+

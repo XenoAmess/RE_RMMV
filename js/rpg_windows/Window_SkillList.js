@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_SkillList-----------------------------------------------------------------------------
 // Window_SkillList
 //
 // The window for selecting a skill on the skill screen.
@@ -118,3 +118,4 @@ Window_SkillList.prototype.refresh = function() {
     this.createContents();
     this.drawAllItems();
 };
+

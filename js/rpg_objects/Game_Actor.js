@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_Actor-----------------------------------------------------------------------------
 // Game_Actor
 //
 // The game object class for an actor.
@@ -39,7 +39,7 @@ Game_Actor.prototype.initMembers = function() {
     this._equips = [];
     this._actionInputIndex = 0;
     this._lastMenuSkill = new Game_Item();
-    this._lastBattleSkill  = new Game_Item();
+    this._lastBattleSkill = new Game_Item();
     this._lastCommandSymbol = '';
 };
 
@@ -141,8 +141,8 @@ Game_Actor.prototype.expForLevel = function(level) {
     var extra = c.expParams[1];
     var acc_a = c.expParams[2];
     var acc_b = c.expParams[3];
-    return Math.round(basis*(Math.pow(level-1, 0.9+acc_a/250))*level*
-            (level+1)/(6+Math.pow(level,2)/50/acc_b)+(level-1)*extra);
+    return Math.round(basis * (Math.pow(level - 1, 0.9 + acc_a / 250)) * level *
+        (level + 1) / (6 + Math.pow(level, 2) / 50 / acc_b) + (level - 1) * extra);
 };
 
 Game_Actor.prototype.initExp = function() {
@@ -237,12 +237,12 @@ Game_Actor.prototype.hasArmor = function(armor) {
 
 Game_Actor.prototype.isEquipChangeOk = function(slotId) {
     return (!this.isEquipTypeLocked(this.equipSlots()[slotId]) &&
-            !this.isEquipTypeSealed(this.equipSlots()[slotId]));
+        !this.isEquipTypeSealed(this.equipSlots()[slotId]));
 };
 
 Game_Actor.prototype.changeEquip = function(slotId, item) {
     if (this.tradeItemWithParty(item, this.equips()[slotId]) &&
-            (!item || this.equipSlots()[slotId] === item.etypeId)) {
+        (!item || this.equipSlots()[slotId] === item.etypeId)) {
         this._equips[slotId].setObject(item);
         this.refresh();
     }
@@ -351,8 +351,8 @@ Game_Actor.prototype.isSkillWtypeOk = function(skill) {
     var wtypeId1 = skill.requiredWtypeId1;
     var wtypeId2 = skill.requiredWtypeId2;
     if ((wtypeId1 === 0 && wtypeId2 === 0) ||
-            (wtypeId1 > 0 && this.isWtypeEquipped(wtypeId1)) ||
-            (wtypeId2 > 0 && this.isWtypeEquipped(wtypeId2))) {
+        (wtypeId1 > 0 && this.isWtypeEquipped(wtypeId1)) ||
+        (wtypeId2 > 0 && this.isWtypeEquipped(wtypeId2))) {
         return true;
     } else {
         return false;
@@ -449,7 +449,7 @@ Game_Actor.prototype.bareHandsElementId = function() {
 
 Game_Actor.prototype.paramMax = function(paramId) {
     if (paramId === 0) {
-        return 9999;    // MHP
+        return 9999; // MHP
     }
     return Game_Battler.prototype.paramMax.call(this, paramId);
 };
@@ -891,3 +891,4 @@ Game_Actor.prototype.meetsUsableItemConditions = function(item) {
     }
     return Game_BattlerBase.prototype.meetsUsableItemConditions.call(this, item);
 };
+

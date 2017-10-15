@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Weapon-----------------------------------------------------------------------------
 // Sprite_Weapon
 //
 // The sprite for displaying a weapon image for attacking.
@@ -78,3 +78,4 @@ Sprite_Weapon.prototype.updateFrame = function() {
 Sprite_Weapon.prototype.isPlaying = function() {
     return this._weaponImageId > 0;
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ShopCommand-----------------------------------------------------------------------------
 // Window_ShopCommand
 //
 // The window for selecting buy/sell on the shop screen.
@@ -25,7 +25,8 @@ Window_ShopCommand.prototype.maxCols = function() {
 };
 
 Window_ShopCommand.prototype.makeCommandList = function() {
-    this.addCommand(TextManager.buy,    'buy');
-    this.addCommand(TextManager.sell,   'sell',   !this._purchaseOnly);
+    this.addCommand(TextManager.buy, 'buy');
+    this.addCommand(TextManager.sell, 'sell', !this._purchaseOnly);
     this.addCommand(TextManager.cancel, 'cancel');
 };
+
