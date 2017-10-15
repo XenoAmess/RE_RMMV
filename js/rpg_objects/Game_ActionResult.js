@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_ActionResult-----------------------------------------------------------------------------
 // Game_ActionResult
 //
 // The game object class for a result of a battle action. For convinience, all
@@ -8,11 +8,11 @@ function Game_ActionResult() {
     this.initialize.apply(this, arguments);
 }
 
-Game_ActionResult.prototype.initialize = function() {
+Game_ActionResult.prototype.initialize = function () {
     this.clear();
 };
 
-Game_ActionResult.prototype.clear = function() {
+Game_ActionResult.prototype.clear = function () {
     this.used = false;
     this.missed = false;
     this.evaded = false;
@@ -31,74 +31,75 @@ Game_ActionResult.prototype.clear = function() {
     this.removedBuffs = [];
 };
 
-Game_ActionResult.prototype.addedStateObjects = function() {
-    return this.addedStates.map(function(id) {
+Game_ActionResult.prototype.addedStateObjects = function () {
+    return this.addedStates.map(function (id) {
         return $dataStates[id];
     });
 };
 
-Game_ActionResult.prototype.removedStateObjects = function() {
-    return this.removedStates.map(function(id) {
+Game_ActionResult.prototype.removedStateObjects = function () {
+    return this.removedStates.map(function (id) {
         return $dataStates[id];
     });
 };
 
-Game_ActionResult.prototype.isStatusAffected = function() {
+Game_ActionResult.prototype.isStatusAffected = function () {
     return (this.addedStates.length > 0 || this.removedStates.length > 0 ||
-            this.addedBuffs.length > 0 || this.addedDebuffs.length > 0 ||
-            this.removedBuffs.length > 0);
+        this.addedBuffs.length > 0 || this.addedDebuffs.length > 0 ||
+        this.removedBuffs.length > 0);
 };
 
-Game_ActionResult.prototype.isHit = function() {
+Game_ActionResult.prototype.isHit = function () {
     return this.used && !this.missed && !this.evaded;
 };
 
-Game_ActionResult.prototype.isStateAdded = function(stateId) {
+Game_ActionResult.prototype.isStateAdded = function (stateId) {
     return this.addedStates.contains(stateId);
 };
 
-Game_ActionResult.prototype.pushAddedState = function(stateId) {
+Game_ActionResult.prototype.pushAddedState = function (stateId) {
     if (!this.isStateAdded(stateId)) {
         this.addedStates.push(stateId);
     }
 };
 
-Game_ActionResult.prototype.isStateRemoved = function(stateId) {
+Game_ActionResult.prototype.isStateRemoved = function (stateId) {
     return this.removedStates.contains(stateId);
 };
 
-Game_ActionResult.prototype.pushRemovedState = function(stateId) {
+Game_ActionResult.prototype.pushRemovedState = function (stateId) {
     if (!this.isStateRemoved(stateId)) {
         this.removedStates.push(stateId);
     }
 };
 
-Game_ActionResult.prototype.isBuffAdded = function(paramId) {
+Game_ActionResult.prototype.isBuffAdded = function (paramId) {
     return this.addedBuffs.contains(paramId);
 };
 
-Game_ActionResult.prototype.pushAddedBuff = function(paramId) {
+Game_ActionResult.prototype.pushAddedBuff = function (paramId) {
     if (!this.isBuffAdded(paramId)) {
         this.addedBuffs.push(paramId);
     }
 };
 
-Game_ActionResult.prototype.isDebuffAdded = function(paramId) {
+Game_ActionResult.prototype.isDebuffAdded = function (paramId) {
     return this.addedDebuffs.contains(paramId);
 };
 
-Game_ActionResult.prototype.pushAddedDebuff = function(paramId) {
+Game_ActionResult.prototype.pushAddedDebuff = function (paramId) {
     if (!this.isDebuffAdded(paramId)) {
         this.addedDebuffs.push(paramId);
     }
 };
 
-Game_ActionResult.prototype.isBuffRemoved = function(paramId) {
+Game_ActionResult.prototype.isBuffRemoved = function (paramId) {
     return this.removedBuffs.contains(paramId);
 };
 
-Game_ActionResult.prototype.pushRemovedBuff = function(paramId) {
+Game_ActionResult.prototype.pushRemovedBuff = function (paramId) {
     if (!this.isBuffRemoved(paramId)) {
         this.removedBuffs.push(paramId);
     }
 };
+

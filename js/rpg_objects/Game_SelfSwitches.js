@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Game_SelfSwitches-----------------------------------------------------------------------------
 // Game_SelfSwitches
 //
 // The game object class for self switches.
@@ -7,19 +7,19 @@ function Game_SelfSwitches() {
     this.initialize.apply(this, arguments);
 }
 
-Game_SelfSwitches.prototype.initialize = function() {
+Game_SelfSwitches.prototype.initialize = function () {
     this.clear();
 };
 
-Game_SelfSwitches.prototype.clear = function() {
+Game_SelfSwitches.prototype.clear = function () {
     this._data = {};
 };
 
-Game_SelfSwitches.prototype.value = function(key) {
+Game_SelfSwitches.prototype.value = function (key) {
     return !!this._data[key];
 };
 
-Game_SelfSwitches.prototype.setValue = function(key, value) {
+Game_SelfSwitches.prototype.setValue = function (key, value) {
     if (value) {
         this._data[key] = true;
     } else {
@@ -28,6 +28,7 @@ Game_SelfSwitches.prototype.setValue = function(key, value) {
     this.onChange();
 };
 
-Game_SelfSwitches.prototype.onChange = function() {
+Game_SelfSwitches.prototype.onChange = function () {
     $gameMap.requestRefresh();
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:JsExtensions-----------------------------------------------------------------------------
 /**
  * This is not a class, but contains some methods that will be added to the
  * standard Javascript objects.
@@ -13,35 +13,43 @@ function JsExtensions() {
  * Returns a number whose value is limited to the given range.
  *
  * @method Number.prototype.clamp
- * @param {Number} min The lower boundary
- * @param {Number} max The upper boundary
+ * @param {Number}
+ *            min The lower boundary
+ * @param {Number}
+ *            max The upper boundary
  * @return {Number} A number in the range (min, max)
  */
-Number.prototype.clamp = function(min, max) {
-    return Math.min(Math.max(this, min), max);
+Number.prototype.clamp = function (min, max) {
+    if (this > max) return max;
+    if (this < min) return min;
+    return this;
 };
 
 /**
  * Returns a modulo value which is always positive.
  *
  * @method Number.prototype.mod
- * @param {Number} n The divisor
+ * @param {Number}
+ *            n The divisor
  * @return {Number} A modulo value
  */
-Number.prototype.mod = function(n) {
-    return ((this % n) + n) % n;
+Number.prototype.mod = function (n) {
+    if (this > 0) return this % n;
+    if (this == 0) return 0;
+    return this % n + n;
 };
 
 /**
  * Replaces %1, %2 and so on in the string to the arguments.
  *
  * @method String.prototype.format
- * @param {Any} ...args The objects to format
+ * @param {Any}
+ *            ...args The objects to format
  * @return {String} A formatted string
  */
-String.prototype.format = function() {
+String.prototype.format = function () {
     var args = arguments;
-    return this.replace(/%([0-9]+)/g, function(s, n) {
+    return this.replace(/%([0-9]+)/g, function (s, n) {
         return args[Number(n) - 1];
     });
 };
@@ -50,14 +58,19 @@ String.prototype.format = function() {
  * Makes a number string with leading zeros.
  *
  * @method String.prototype.padZero
- * @param {Number} length The length of the output string
+ * @param {Number}
+ *            length The length of the output string
  * @return {String} A string with leading zeros
  */
-String.prototype.padZero = function(length){
+var rpg_core_js_String_prototype_padZero_0 = new Array('');
+String.prototype.padZero = function (length) {
     var s = this;
-    while (s.length < length) {
-        s = '0' + s;
+    var dist = length - s.length;
+    if (dist <= 0) return s;
+    while (rpg_core_js_String_prototype_padZero_0.length <= dist) {
+        rpg_core_js_String_prototype_padZero_0.push(rpg_core_js_String_prototype_padZero_0[rpg_core_js_String_prototype_padZero_0.length - 1] + '0');
     }
+    s = rpg_core_js_String_prototype_padZero_0[dist] + s;
     return s;
 };
 
@@ -65,10 +78,11 @@ String.prototype.padZero = function(length){
  * Makes a number string with leading zeros.
  *
  * @method Number.prototype.padZero
- * @param {Number} length The length of the output string
+ * @param {Number}
+ *            length The length of the output string
  * @return {String} A string with leading zeros
  */
-Number.prototype.padZero = function(length){
+Number.prototype.padZero = function (length) {
     return String(this).padZero(length);
 };
 
@@ -77,12 +91,13 @@ Object.defineProperties(Array.prototype, {
      * Checks whether the two arrays are same.
      *
      * @method Array.prototype.equals
-     * @param {Array} array The array to compare to
+     * @param {Array}
+     *            array The array to compare to
      * @return {Boolean} True if the two arrays are same
      */
     equals: {
         enumerable: false,
-        value: function(array) {
+        value: function (array) {
             if (!array || this.length !== array.length) {
                 return false;
             }
@@ -106,7 +121,7 @@ Object.defineProperties(Array.prototype, {
      */
     clone: {
         enumerable: false,
-        value: function() {
+        value: function () {
             return this.slice(0);
         }
     },
@@ -114,12 +129,13 @@ Object.defineProperties(Array.prototype, {
      * Checks whether the array contains a given element.
      *
      * @method Array.prototype.contains
-     * @param {Any} element The element to search for
+     * @param {Any}
+     *            element The element to search for
      * @return {Boolean} True if the array contains a given element
      */
-    contains : {
+    contains: {
         enumerable: false,
-        value: function(element) {
+        value: function (element) {
             return this.indexOf(element) >= 0;
         }
     }
@@ -129,10 +145,11 @@ Object.defineProperties(Array.prototype, {
  * Checks whether the string contains a given string.
  *
  * @method String.prototype.contains
- * @param {String} string The string to search for
+ * @param {String}
+ *            string The string to search for
  * @return {Boolean} True if the string contains a given string
  */
-String.prototype.contains = function(string) {
+String.prototype.contains = function (string) {
     return this.indexOf(string) >= 0;
 };
 
@@ -141,9 +158,11 @@ String.prototype.contains = function(string) {
  *
  * @static
  * @method Math.randomInt
- * @param {Number} max The upper boundary (excluded)
+ * @param {Number}
+ *            max The upper boundary (excluded)
  * @return {Number} A random integer
  */
-Math.randomInt = function(max) {
+Math.randomInt = function (max) {
     return Math.floor(max * Math.random());
 };
+

@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Sprite_Animation-----------------------------------------------------------------------------
 // Sprite_Animation
 //
 // The sprite for displaying an animation.
@@ -13,13 +13,13 @@ Sprite_Animation.prototype.constructor = Sprite_Animation;
 Sprite_Animation._checker1 = {};
 Sprite_Animation._checker2 = {};
 
-Sprite_Animation.prototype.initialize = function() {
+Sprite_Animation.prototype.initialize = function () {
     Sprite.prototype.initialize.call(this);
     this._reduceArtifacts = true;
     this.initMembers();
 };
 
-Sprite_Animation.prototype.initMembers = function() {
+Sprite_Animation.prototype.initMembers = function () {
     this._target = null;
     this._animation = null;
     this._mirror = false;
@@ -38,7 +38,7 @@ Sprite_Animation.prototype.initMembers = function() {
     this.z = 8;
 };
 
-Sprite_Animation.prototype.setup = function(target, animation, mirror, delay) {
+Sprite_Animation.prototype.setup = function (target, animation, mirror, delay) {
     this._target = target;
     this._animation = animation;
     this._mirror = mirror;
@@ -52,22 +52,22 @@ Sprite_Animation.prototype.setup = function(target, animation, mirror, delay) {
     }
 };
 
-Sprite_Animation.prototype.remove = function() {
+Sprite_Animation.prototype.remove = function () {
     if (this.parent && this.parent.removeChild(this)) {
         this._target.setBlendColor([0, 0, 0, 0]);
         this._target.show();
     }
 };
 
-Sprite_Animation.prototype.setupRate = function() {
+Sprite_Animation.prototype.setupRate = function () {
     this._rate = 4;
 };
 
-Sprite_Animation.prototype.setupDuration = function() {
+Sprite_Animation.prototype.setupDuration = function () {
     this._duration = this._animation.frames.length * this._rate + 1;
 };
 
-Sprite_Animation.prototype.update = function() {
+Sprite_Animation.prototype.update = function () {
     Sprite.prototype.update.call(this);
     this.updateMain();
     this.updateFlash();
@@ -77,7 +77,7 @@ Sprite_Animation.prototype.update = function() {
     Sprite_Animation._checker2 = {};
 };
 
-Sprite_Animation.prototype.updateFlash = function() {
+Sprite_Animation.prototype.updateFlash = function () {
     if (this._flashDuration > 0) {
         var d = this._flashDuration--;
         this._flashColor[3] *= (d - 1) / d;
@@ -85,7 +85,7 @@ Sprite_Animation.prototype.updateFlash = function() {
     }
 };
 
-Sprite_Animation.prototype.updateScreenFlash = function() {
+Sprite_Animation.prototype.updateScreenFlash = function () {
     if (this._screenFlashDuration > 0) {
         var d = this._screenFlashDuration--;
         if (this._screenFlashSprite) {
@@ -97,7 +97,7 @@ Sprite_Animation.prototype.updateScreenFlash = function() {
     }
 };
 
-Sprite_Animation.prototype.absoluteX = function() {
+Sprite_Animation.prototype.absoluteX = function () {
     var x = 0;
     var object = this;
     while (object) {
@@ -107,7 +107,7 @@ Sprite_Animation.prototype.absoluteX = function() {
     return x;
 };
 
-Sprite_Animation.prototype.absoluteY = function() {
+Sprite_Animation.prototype.absoluteY = function () {
     var y = 0;
     var object = this;
     while (object) {
@@ -117,7 +117,7 @@ Sprite_Animation.prototype.absoluteY = function() {
     return y;
 };
 
-Sprite_Animation.prototype.updateHiding = function() {
+Sprite_Animation.prototype.updateHiding = function () {
     if (this._hidingDuration > 0) {
         this._hidingDuration--;
         if (this._hidingDuration === 0) {
@@ -126,11 +126,11 @@ Sprite_Animation.prototype.updateHiding = function() {
     }
 };
 
-Sprite_Animation.prototype.isPlaying = function() {
+Sprite_Animation.prototype.isPlaying = function () {
     return this._duration > 0;
 };
 
-Sprite_Animation.prototype.loadBitmaps = function() {
+Sprite_Animation.prototype.loadBitmaps = function () {
     var name1 = this._animation.animation1Name;
     var name2 = this._animation.animation2Name;
     var hue1 = this._animation.animation1Hue;
@@ -139,11 +139,11 @@ Sprite_Animation.prototype.loadBitmaps = function() {
     this._bitmap2 = ImageManager.loadAnimation(name2, hue2);
 };
 
-Sprite_Animation.prototype.isReady = function() {
+Sprite_Animation.prototype.isReady = function () {
     return this._bitmap1 && this._bitmap1.isReady() && this._bitmap2 && this._bitmap2.isReady();
 };
 
-Sprite_Animation.prototype.createSprites = function() {
+Sprite_Animation.prototype.createSprites = function () {
     if (!Sprite_Animation._checker2[this._animation]) {
         this.createCellSprites();
         if (this._animation.position === 3) {
@@ -161,7 +161,7 @@ Sprite_Animation.prototype.createSprites = function() {
     }
 };
 
-Sprite_Animation.prototype.createCellSprites = function() {
+Sprite_Animation.prototype.createCellSprites = function () {
     this._cellSprites = [];
     for (var i = 0; i < 16; i++) {
         var sprite = new Sprite();
@@ -172,12 +172,12 @@ Sprite_Animation.prototype.createCellSprites = function() {
     }
 };
 
-Sprite_Animation.prototype.createScreenFlashSprite = function() {
+Sprite_Animation.prototype.createScreenFlashSprite = function () {
     this._screenFlashSprite = new ScreenSprite();
     this.addChild(this._screenFlashSprite);
 };
 
-Sprite_Animation.prototype.updateMain = function() {
+Sprite_Animation.prototype.updateMain = function () {
     if (this.isPlaying() && this.isReady()) {
         if (this._delay > 0) {
             this._delay--;
@@ -191,7 +191,7 @@ Sprite_Animation.prototype.updateMain = function() {
     }
 };
 
-Sprite_Animation.prototype.updatePosition = function() {
+Sprite_Animation.prototype.updatePosition = function () {
     if (this._animation.position === 3) {
         this.x = this.parent.width / 2;
         this.y = this.parent.height / 2;
@@ -212,11 +212,11 @@ Sprite_Animation.prototype.updatePosition = function() {
     }
 };
 
-Sprite_Animation.prototype.updateFrame = function() {
+Sprite_Animation.prototype.updateFrame = function () {
     if (this._duration > 0) {
         var frameIndex = this.currentFrameIndex();
         this.updateAllCellSprites(this._animation.frames[frameIndex]);
-        this._animation.timings.forEach(function(timing) {
+        this._animation.timings.forEach(function (timing) {
             if (timing.frame === frameIndex) {
                 this.processTimingData(timing);
             }
@@ -224,12 +224,12 @@ Sprite_Animation.prototype.updateFrame = function() {
     }
 };
 
-Sprite_Animation.prototype.currentFrameIndex = function() {
+Sprite_Animation.prototype.currentFrameIndex = function () {
     return (this._animation.frames.length -
-            Math.floor((this._duration + this._rate - 1) / this._rate));
+        Math.floor((this._duration + this._rate - 1) / this._rate));
 };
 
-Sprite_Animation.prototype.updateAllCellSprites = function(frame) {
+Sprite_Animation.prototype.updateAllCellSprites = function (frame) {
     for (var i = 0; i < this._cellSprites.length; i++) {
         var sprite = this._cellSprites[i];
         if (i < frame.length) {
@@ -240,7 +240,7 @@ Sprite_Animation.prototype.updateAllCellSprites = function(frame) {
     }
 };
 
-Sprite_Animation.prototype.updateCellSprite = function(sprite, cell) {
+Sprite_Animation.prototype.updateCellSprite = function (sprite, cell) {
     var pattern = cell[0];
     if (pattern >= 0) {
         var sx = pattern % 5 * 192;
@@ -253,10 +253,10 @@ Sprite_Animation.prototype.updateCellSprite = function(sprite, cell) {
         sprite.rotation = cell[4] * Math.PI / 180;
         sprite.scale.x = cell[3] / 100;
 
-        if(cell[5]){
+        if (cell[5]) {
             sprite.scale.x *= -1;
         }
-        if(mirror){
+        if (mirror) {
             sprite.x *= -1;
             sprite.rotation *= -1;
             sprite.scale.x *= -1;
@@ -271,30 +271,30 @@ Sprite_Animation.prototype.updateCellSprite = function(sprite, cell) {
     }
 };
 
-Sprite_Animation.prototype.processTimingData = function(timing) {
+Sprite_Animation.prototype.processTimingData = function (timing) {
     var duration = timing.flashDuration * this._rate;
     switch (timing.flashScope) {
-    case 1:
-        this.startFlash(timing.flashColor, duration);
-        break;
-    case 2:
-        this.startScreenFlash(timing.flashColor, duration);
-        break;
-    case 3:
-        this.startHiding(duration);
-        break;
+        case 1:
+            this.startFlash(timing.flashColor, duration);
+            break;
+        case 2:
+            this.startScreenFlash(timing.flashColor, duration);
+            break;
+        case 3:
+            this.startHiding(duration);
+            break;
     }
     if (!this._duplicated && timing.se) {
         AudioManager.playSe(timing.se);
     }
 };
 
-Sprite_Animation.prototype.startFlash = function(color, duration) {
+Sprite_Animation.prototype.startFlash = function (color, duration) {
     this._flashColor = color.clone();
     this._flashDuration = duration;
 };
 
-Sprite_Animation.prototype.startScreenFlash = function(color, duration) {
+Sprite_Animation.prototype.startScreenFlash = function (color, duration) {
     this._screenFlashDuration = duration;
     if (this._screenFlashSprite) {
         this._screenFlashSprite.setColor(color[0], color[1], color[2]);
@@ -302,7 +302,8 @@ Sprite_Animation.prototype.startScreenFlash = function(color, duration) {
     }
 };
 
-Sprite_Animation.prototype.startHiding = function(duration) {
+Sprite_Animation.prototype.startHiding = function (duration) {
     this._hidingDuration = duration;
     this._target.hide();
 };
+

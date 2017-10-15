@@ -1,61 +1,54 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Bitmap-----------------------------------------------------------------------------
 /**
  * The basic object that represents an image.
  *
  * @class Bitmap
  * @constructor
- * @param {Number} width The width of the bitmap
- * @param {Number} height The height of the bitmap
+ * @param {Number}
+ *            width The width of the bitmap
+ * @param {Number}
+ *            height The height of the bitmap
  */
 function Bitmap() {
     this.initialize.apply(this, arguments);
 }
 
-//for iOS. img consumes memory. so reuse it.
+// for iOS. img consumes memory. so reuse it.
 Bitmap._reuseImages = [];
 
 
 /**
  * Bitmap states(Bitmap._loadingState):
  *
- * none:
- * Empty Bitmap
+ * none: Empty Bitmap
  *
- * pending:
- * Url requested, but pending to load until startRequest called
+ * pending: Url requested, but pending to load until startRequest called
  *
- * purged:
- * Url request completed and purged.
+ * purged: Url request completed and purged.
  *
- * requesting:
- * Requesting supplied URI now.
+ * requesting: Requesting supplied URI now.
  *
- * requestCompleted:
- * Request completed
+ * requestCompleted: Request completed
  *
- * decrypting:
- * requesting encrypted data from supplied URI or decrypting it.
+ * decrypting: requesting encrypted data from supplied URI or decrypting it.
  *
- * decryptCompleted:
- * Decrypt completed
+ * decryptCompleted: Decrypt completed
  *
- * loaded:
- * loaded. isReady() === true, so It's usable.
+ * loaded: loaded. isReady() === true, so It's usable.
  *
- * error:
- * error occurred
+ * error: error occurred
  *
  */
 
 
-Bitmap.prototype._createCanvas = function(width, height){
+Bitmap.prototype._createCanvas = function (width, height) {
     this.__canvas = this.__canvas || document.createElement('canvas');
     this.__context = this.__canvas.getContext('2d');
 
     this.__canvas.width = Math.max(width || 0, 1);
     this.__canvas.height = Math.max(height || 0, 1);
 
-    if(this._image){
+    if (this._image) {
         var w = Math.max(this._image.width || 0, 1);
         var h = Math.max(this._image.height || 0, 1);
         this.__canvas.width = w;
@@ -68,7 +61,7 @@ Bitmap.prototype._createCanvas = function(width, height){
     this._setDirty();
 };
 
-Bitmap.prototype._createBaseTexture = function(source){
+Bitmap.prototype._createBaseTexture = function (source) {
     this.__baseTexture = new PIXI.BaseTexture(source);
     this.__baseTexture.mipmap = false;
     this.__baseTexture.width = source.width;
@@ -81,7 +74,7 @@ Bitmap.prototype._createBaseTexture = function(source){
     }
 };
 
-Bitmap.prototype._clearImgInstance = function(){
+Bitmap.prototype._clearImgInstance = function () {
     this._image.src = "";
     this._image.onload = null;
     this._image.onerror = null;
@@ -93,39 +86,39 @@ Bitmap.prototype._clearImgInstance = function(){
 };
 
 //
-//We don't want to waste memory, so creating canvas is deferred.
+// We don't want to waste memory, so creating canvas is deferred.
 //
 Object.defineProperties(Bitmap.prototype, {
     _canvas: {
-        get: function(){
-            if(!this.__canvas)this._createCanvas();
+        get: function () {
+            if (!this.__canvas) this._createCanvas();
             return this.__canvas;
         }
     },
     _context: {
-        get: function(){
-            if(!this.__context)this._createCanvas();
+        get: function () {
+            if (!this.__context) this._createCanvas();
             return this.__context;
         }
     },
 
     _baseTexture: {
-        get: function(){
-            if(!this.__baseTexture) this._createBaseTexture(this._image || this.__canvas);
+        get: function () {
+            if (!this.__baseTexture) this._createBaseTexture(this._image || this.__canvas);
             return this.__baseTexture;
         }
     }
 });
 
-Bitmap.prototype._renewCanvas = function(){
+Bitmap.prototype._renewCanvas = function () {
     var newImage = this._image;
-    if(newImage && this.__canvas && (this.__canvas.width < newImage.width || this.__canvas.height < newImage.height)){
+    if (newImage && this.__canvas && (this.__canvas.width < newImage.width || this.__canvas.height < newImage.height)) {
         this._createCanvas();
     }
 };
 
-Bitmap.prototype.initialize = function(width, height) {
-    if(!this._defer){
+Bitmap.prototype.initialize = function (width, height) {
+    if (!this._defer) {
         this._createCanvas(width, height);
     }
 
@@ -139,6 +132,7 @@ Bitmap.prototype.initialize = function(width, height) {
 
     /**
      * Cache entry, for images. In all cases _url is the same as cacheEntry.key
+     *
      * @type CacheEntry
      */
     this.cacheEntry = null;
@@ -197,10 +191,11 @@ Bitmap.prototype.initialize = function(width, height) {
  *
  * @static
  * @method load
- * @param {String} url The image url of the texture
+ * @param {String}
+ *            url The image url of the texture
  * @return Bitmap
  */
-Bitmap.load = function(url) {
+Bitmap.load = function (url) {
     var bitmap = Object.create(Bitmap.prototype);
     bitmap._defer = true;
     bitmap.initialize();
@@ -216,10 +211,11 @@ Bitmap.load = function(url) {
  *
  * @static
  * @method snap
- * @param {Stage} stage The stage object
+ * @param {Stage}
+ *            stage The stage object
  * @return Bitmap
  */
-Bitmap.snap = function(stage) {
+Bitmap.snap = function (stage) {
     var width = Graphics.width;
     var height = Graphics.height;
     var bitmap = new Bitmap(width, height);
@@ -238,7 +234,9 @@ Bitmap.snap = function(stage) {
     } else {
 
     }
-    renderTexture.destroy({ destroyBase: true });
+    renderTexture.destroy({
+        destroyBase: true
+    });
     bitmap._setDirty();
     return bitmap;
 };
@@ -249,7 +247,7 @@ Bitmap.snap = function(stage) {
  * @method isReady
  * @return {Boolean} True if the bitmap is ready to render
  */
-Bitmap.prototype.isReady = function() {
+Bitmap.prototype.isReady = function () {
     return this._loadingState === 'loaded' || this._loadingState === 'none';
 };
 
@@ -259,15 +257,16 @@ Bitmap.prototype.isReady = function() {
  * @method isError
  * @return {Boolean} True if a loading error has occurred
  */
-Bitmap.prototype.isError = function() {
+Bitmap.prototype.isError = function () {
     return this._loadingState === 'error';
 };
 
 /**
  * touch the resource
+ *
  * @method touch
  */
-Bitmap.prototype.touch = function() {
+Bitmap.prototype.touch = function () {
     if (this.cacheEntry) {
         this.cacheEntry.touch();
     }
@@ -280,7 +279,7 @@ Bitmap.prototype.touch = function() {
  * @type String
  */
 Object.defineProperty(Bitmap.prototype, 'url', {
-    get: function() {
+    get: function () {
         return this._url;
     },
     configurable: true
@@ -293,7 +292,7 @@ Object.defineProperty(Bitmap.prototype, 'url', {
  * @type PIXI.BaseTexture
  */
 Object.defineProperty(Bitmap.prototype, 'baseTexture', {
-    get: function() {
+    get: function () {
         return this._baseTexture;
     },
     configurable: true
@@ -306,7 +305,7 @@ Object.defineProperty(Bitmap.prototype, 'baseTexture', {
  * @type HTMLCanvasElement
  */
 Object.defineProperty(Bitmap.prototype, 'canvas', {
-    get: function() {
+    get: function () {
         return this._canvas;
     },
     configurable: true
@@ -319,7 +318,7 @@ Object.defineProperty(Bitmap.prototype, 'canvas', {
  * @type CanvasRenderingContext2D
  */
 Object.defineProperty(Bitmap.prototype, 'context', {
-    get: function() {
+    get: function () {
         return this._context;
     },
     configurable: true
@@ -332,9 +331,9 @@ Object.defineProperty(Bitmap.prototype, 'context', {
  * @type Number
  */
 Object.defineProperty(Bitmap.prototype, 'width', {
-    get: function() {
-        if(this.isReady()){
-            return this._image? this._image.width: this._canvas.width;
+    get: function () {
+        if (this.isReady()) {
+            return this._image ? this._image.width : this._canvas.width;
         }
 
         return 0;
@@ -349,9 +348,9 @@ Object.defineProperty(Bitmap.prototype, 'width', {
  * @type Number
  */
 Object.defineProperty(Bitmap.prototype, 'height', {
-    get: function() {
-        if(this.isReady()){
-            return this._image? this._image.height: this._canvas.height;
+    get: function () {
+        if (this.isReady()) {
+            return this._image ? this._image.height : this._canvas.height;
         }
 
         return 0;
@@ -366,7 +365,7 @@ Object.defineProperty(Bitmap.prototype, 'height', {
  * @type Rectangle
  */
 Object.defineProperty(Bitmap.prototype, 'rect', {
-    get: function() {
+    get: function () {
         return new Rectangle(0, 0, this.width, this.height);
     },
     configurable: true
@@ -379,13 +378,13 @@ Object.defineProperty(Bitmap.prototype, 'rect', {
  * @type Boolean
  */
 Object.defineProperty(Bitmap.prototype, 'smooth', {
-    get: function() {
+    get: function () {
         return this._smooth;
     },
-    set: function(value) {
+    set: function (value) {
         if (this._smooth !== value) {
             this._smooth = value;
-            if(this.__baseTexture){
+            if (this.__baseTexture) {
                 if (this._smooth) {
                     this._baseTexture.scaleMode = PIXI.SCALE_MODES.LINEAR;
                 } else {
@@ -404,14 +403,14 @@ Object.defineProperty(Bitmap.prototype, 'smooth', {
  * @type Number
  */
 Object.defineProperty(Bitmap.prototype, 'paintOpacity', {
-    get: function() {
+    get: function () {
         return this._paintOpacity;
     },
-    set: function(value) {
-      if (this._paintOpacity !== value) {
-          this._paintOpacity = value;
-          this._context.globalAlpha = this._paintOpacity / 255;
-      }
+    set: function (value) {
+        if (this._paintOpacity !== value) {
+            this._paintOpacity = value;
+            this._context.globalAlpha = this._paintOpacity / 255;
+        }
     },
     configurable: true
 });
@@ -420,10 +419,12 @@ Object.defineProperty(Bitmap.prototype, 'paintOpacity', {
  * Resizes the bitmap.
  *
  * @method resize
- * @param {Number} width The new width of the bitmap
- * @param {Number} height The new height of the bitmap
+ * @param {Number}
+ *            width The new width of the bitmap
+ * @param {Number}
+ *            height The new height of the bitmap
  */
-Bitmap.prototype.resize = function(width, height) {
+Bitmap.prototype.resize = function (width, height) {
     width = Math.max(width || 0, 1);
     height = Math.max(height || 0, 1);
     this._canvas.width = width;
@@ -436,21 +437,30 @@ Bitmap.prototype.resize = function(width, height) {
  * Performs a block transfer.
  *
  * @method blt
- * @param {Bitmap} source The bitmap to draw
- * @param {Number} sx The x coordinate in the source
- * @param {Number} sy The y coordinate in the source
- * @param {Number} sw The width of the source image
- * @param {Number} sh The height of the source image
- * @param {Number} dx The x coordinate in the destination
- * @param {Number} dy The y coordinate in the destination
- * @param {Number} [dw=sw] The width to draw the image in the destination
- * @param {Number} [dh=sh] The height to draw the image in the destination
+ * @param {Bitmap}
+ *            source The bitmap to draw
+ * @param {Number}
+ *            sx The x coordinate in the source
+ * @param {Number}
+ *            sy The y coordinate in the source
+ * @param {Number}
+ *            sw The width of the source image
+ * @param {Number}
+ *            sh The height of the source image
+ * @param {Number}
+ *            dx The x coordinate in the destination
+ * @param {Number}
+ *            dy The y coordinate in the destination
+ * @param {Number}
+ *            [dw=sw] The width to draw the image in the destination
+ * @param {Number}
+ *            [dh=sh] The height to draw the image in the destination
  */
-Bitmap.prototype.blt = function(source, sx, sy, sw, sh, dx, dy, dw, dh) {
+Bitmap.prototype.blt = function (source, sx, sy, sw, sh, dx, dy, dw, dh) {
     dw = dw || sw;
     dh = dh || sh;
     if (sx >= 0 && sy >= 0 && sw > 0 && sh > 0 && dw > 0 && dh > 0 &&
-            sx + sw <= source.width && sy + sh <= source.height) {
+        sx + sw <= source.width && sy + sh <= source.height) {
         this._context.globalCompositeOperation = 'source-over';
         this._context.drawImage(source._canvas, sx, sy, sw, sh, dx, dy, dw, dh);
         this._setDirty();
@@ -458,20 +468,30 @@ Bitmap.prototype.blt = function(source, sx, sy, sw, sh, dx, dy, dw, dh) {
 };
 
 /**
- * Performs a block transfer, using assumption that original image was not modified (no hue)
+ * Performs a block transfer, using assumption that original image was not
+ * modified (no hue)
  *
  * @method blt
- * @param {Bitmap} source The bitmap to draw
- * @param {Number} sx The x coordinate in the source
- * @param {Number} sy The y coordinate in the source
- * @param {Number} sw The width of the source image
- * @param {Number} sh The height of the source image
- * @param {Number} dx The x coordinate in the destination
- * @param {Number} dy The y coordinate in the destination
- * @param {Number} [dw=sw] The width to draw the image in the destination
- * @param {Number} [dh=sh] The height to draw the image in the destination
+ * @param {Bitmap}
+ *            source The bitmap to draw
+ * @param {Number}
+ *            sx The x coordinate in the source
+ * @param {Number}
+ *            sy The y coordinate in the source
+ * @param {Number}
+ *            sw The width of the source image
+ * @param {Number}
+ *            sh The height of the source image
+ * @param {Number}
+ *            dx The x coordinate in the destination
+ * @param {Number}
+ *            dy The y coordinate in the destination
+ * @param {Number}
+ *            [dw=sw] The width to draw the image in the destination
+ * @param {Number}
+ *            [dh=sh] The height to draw the image in the destination
  */
-Bitmap.prototype.bltImage = function(source, sx, sy, sw, sh, dx, dy, dw, dh) {
+Bitmap.prototype.bltImage = function (source, sx, sy, sw, sh, dx, dy, dw, dh) {
     dw = dw || sw;
     dh = dh || sh;
     if (sx >= 0 && sy >= 0 && sw > 0 && sh > 0 && dw > 0 && dh > 0 &&
@@ -486,11 +506,13 @@ Bitmap.prototype.bltImage = function(source, sx, sy, sw, sh, dx, dy, dw, dh) {
  * Returns pixel color at the specified point.
  *
  * @method getPixel
- * @param {Number} x The x coordinate of the pixel in the bitmap
- * @param {Number} y The y coordinate of the pixel in the bitmap
+ * @param {Number}
+ *            x The x coordinate of the pixel in the bitmap
+ * @param {Number}
+ *            y The y coordinate of the pixel in the bitmap
  * @return {String} The pixel color (hex format)
  */
-Bitmap.prototype.getPixel = function(x, y) {
+Bitmap.prototype.getPixel = function (x, y) {
     var data = this._context.getImageData(x, y, 1, 1).data;
     var result = '#';
     for (var i = 0; i < 3; i++) {
@@ -503,11 +525,13 @@ Bitmap.prototype.getPixel = function(x, y) {
  * Returns alpha pixel value at the specified point.
  *
  * @method getAlphaPixel
- * @param {Number} x The x coordinate of the pixel in the bitmap
- * @param {Number} y The y coordinate of the pixel in the bitmap
+ * @param {Number}
+ *            x The x coordinate of the pixel in the bitmap
+ * @param {Number}
+ *            y The y coordinate of the pixel in the bitmap
  * @return {String} The alpha value
  */
-Bitmap.prototype.getAlphaPixel = function(x, y) {
+Bitmap.prototype.getAlphaPixel = function (x, y) {
     var data = this._context.getImageData(x, y, 1, 1).data;
     return data[3];
 };
@@ -516,12 +540,16 @@ Bitmap.prototype.getAlphaPixel = function(x, y) {
  * Clears the specified rectangle.
  *
  * @method clearRect
- * @param {Number} x The x coordinate for the upper-left corner
- * @param {Number} y The y coordinate for the upper-left corner
- * @param {Number} width The width of the rectangle to clear
- * @param {Number} height The height of the rectangle to clear
+ * @param {Number}
+ *            x The x coordinate for the upper-left corner
+ * @param {Number}
+ *            y The y coordinate for the upper-left corner
+ * @param {Number}
+ *            width The width of the rectangle to clear
+ * @param {Number}
+ *            height The height of the rectangle to clear
  */
-Bitmap.prototype.clearRect = function(x, y, width, height) {
+Bitmap.prototype.clearRect = function (x, y, width, height) {
     this._context.clearRect(x, y, width, height);
     this._setDirty();
 };
@@ -531,7 +559,7 @@ Bitmap.prototype.clearRect = function(x, y, width, height) {
  *
  * @method clear
  */
-Bitmap.prototype.clear = function() {
+Bitmap.prototype.clear = function () {
     this.clearRect(0, 0, this.width, this.height);
 };
 
@@ -539,13 +567,18 @@ Bitmap.prototype.clear = function() {
  * Fills the specified rectangle.
  *
  * @method fillRect
- * @param {Number} x The x coordinate for the upper-left corner
- * @param {Number} y The y coordinate for the upper-left corner
- * @param {Number} width The width of the rectangle to fill
- * @param {Number} height The height of the rectangle to fill
- * @param {String} color The color of the rectangle in CSS format
+ * @param {Number}
+ *            x The x coordinate for the upper-left corner
+ * @param {Number}
+ *            y The y coordinate for the upper-left corner
+ * @param {Number}
+ *            width The width of the rectangle to fill
+ * @param {Number}
+ *            height The height of the rectangle to fill
+ * @param {String}
+ *            color The color of the rectangle in CSS format
  */
-Bitmap.prototype.fillRect = function(x, y, width, height, color) {
+Bitmap.prototype.fillRect = function (x, y, width, height, color) {
     var context = this._context;
     context.save();
     context.fillStyle = color;
@@ -558,9 +591,10 @@ Bitmap.prototype.fillRect = function(x, y, width, height, color) {
  * Fills the entire bitmap.
  *
  * @method fillAll
- * @param {String} color The color of the rectangle in CSS format
+ * @param {String}
+ *            color The color of the rectangle in CSS format
  */
-Bitmap.prototype.fillAll = function(color) {
+Bitmap.prototype.fillAll = function (color) {
     this.fillRect(0, 0, this.width, this.height, color);
 };
 
@@ -568,16 +602,23 @@ Bitmap.prototype.fillAll = function(color) {
  * Draws the rectangle with a gradation.
  *
  * @method gradientFillRect
- * @param {Number} x The x coordinate for the upper-left corner
- * @param {Number} y The y coordinate for the upper-left corner
- * @param {Number} width The width of the rectangle to fill
- * @param {Number} height The height of the rectangle to fill
- * @param {String} color1 The gradient starting color
- * @param {String} color2 The gradient ending color
- * @param {Boolean} vertical Wether the gradient should be draw as vertical or not
+ * @param {Number}
+ *            x The x coordinate for the upper-left corner
+ * @param {Number}
+ *            y The y coordinate for the upper-left corner
+ * @param {Number}
+ *            width The width of the rectangle to fill
+ * @param {Number}
+ *            height The height of the rectangle to fill
+ * @param {String}
+ *            color1 The gradient starting color
+ * @param {String}
+ *            color2 The gradient ending color
+ * @param {Boolean}
+ *            vertical Wether the gradient should be draw as vertical or not
  */
-Bitmap.prototype.gradientFillRect = function(x, y, width, height, color1,
-                                             color2, vertical) {
+Bitmap.prototype.gradientFillRect = function (x, y, width, height, color1,
+                                              color2, vertical) {
     var context = this._context;
     var grad;
     if (vertical) {
@@ -598,12 +639,16 @@ Bitmap.prototype.gradientFillRect = function(x, y, width, height, color1,
  * Draw a bitmap in the shape of a circle
  *
  * @method drawCircle
- * @param {Number} x The x coordinate based on the circle center
- * @param {Number} y The y coordinate based on the circle center
- * @param {Number} radius The radius of the circle
- * @param {String} color The color of the circle in CSS format
+ * @param {Number}
+ *            x The x coordinate based on the circle center
+ * @param {Number}
+ *            y The y coordinate based on the circle center
+ * @param {Number}
+ *            radius The radius of the circle
+ * @param {String}
+ *            color The color of the circle in CSS format
  */
-Bitmap.prototype.drawCircle = function(x, y, radius, color) {
+Bitmap.prototype.drawCircle = function (x, y, radius, color) {
     var context = this._context;
     context.save();
     context.fillStyle = color;
@@ -618,16 +663,22 @@ Bitmap.prototype.drawCircle = function(x, y, radius, color) {
  * Draws the outline text to the bitmap.
  *
  * @method drawText
- * @param {String} text The text that will be drawn
- * @param {Number} x The x coordinate for the left of the text
- * @param {Number} y The y coordinate for the top of the text
- * @param {Number} maxWidth The maximum allowed width of the text
- * @param {Number} lineHeight The height of the text line
- * @param {String} align The alignment of the text
+ * @param {String}
+ *            text The text that will be drawn
+ * @param {Number}
+ *            x The x coordinate for the left of the text
+ * @param {Number}
+ *            y The y coordinate for the top of the text
+ * @param {Number}
+ *            maxWidth The maximum allowed width of the text
+ * @param {Number}
+ *            lineHeight The height of the text line
+ * @param {String}
+ *            align The alignment of the text
  */
-Bitmap.prototype.drawText = function(text, x, y, maxWidth, lineHeight, align) {
+Bitmap.prototype.drawText = function (text, x, y, maxWidth, lineHeight, align) {
     // Note: Firefox has a bug with textBaseline: Bug 737852
-    //       So we use 'alphabetic' here.
+    // So we use 'alphabetic' here.
     if (text !== undefined) {
         var tx = x;
         var ty = y + lineHeight - (lineHeight - this.fontSize * 0.7) / 2;
@@ -657,10 +708,11 @@ Bitmap.prototype.drawText = function(text, x, y, maxWidth, lineHeight, align) {
  * Returns the width of the specified text.
  *
  * @method measureTextWidth
- * @param {String} text The text to be measured
+ * @param {String}
+ *            text The text to be measured
  * @return {Number} The width of the text in pixels
  */
-Bitmap.prototype.measureTextWidth = function(text) {
+Bitmap.prototype.measureTextWidth = function (text) {
     var context = this._context;
     context.save();
     context.font = this._makeFontNameText();
@@ -673,11 +725,14 @@ Bitmap.prototype.measureTextWidth = function(text) {
  * Changes the color tone of the entire bitmap.
  *
  * @method adjustTone
- * @param {Number} r The red strength in the range (-255, 255)
- * @param {Number} g The green strength in the range (-255, 255)
- * @param {Number} b The blue strength in the range (-255, 255)
+ * @param {Number}
+ *            r The red strength in the range (-255, 255)
+ * @param {Number}
+ *            g The green strength in the range (-255, 255)
+ * @param {Number}
+ *            b The blue strength in the range (-255, 255)
  */
-Bitmap.prototype.adjustTone = function(r, g, b) {
+Bitmap.prototype.adjustTone = function (r, g, b) {
     if ((r || g || b) && this.width > 0 && this.height > 0) {
         var context = this._context;
         var imageData = context.getImageData(0, 0, this.width, this.height);
@@ -696,9 +751,10 @@ Bitmap.prototype.adjustTone = function(r, g, b) {
  * Rotates the hue of the entire bitmap.
  *
  * @method rotateHue
- * @param {Number} offset The hue offset in 360 degrees
+ * @param {Number}
+ *            offset The hue offset in 360 degrees
  */
-Bitmap.prototype.rotateHue = function(offset) {
+Bitmap.prototype.rotateHue = function (offset) {
     function rgbToHsl(r, g, b) {
         var cmin = Math.min(r, g, b);
         var cmax = Math.max(r, g, b);
@@ -767,7 +823,7 @@ Bitmap.prototype.rotateHue = function(offset) {
  *
  * @method blur
  */
-Bitmap.prototype.blur = function() {
+Bitmap.prototype.blur = function () {
     for (var i = 0; i < 2; i++) {
         var w = this.width;
         var h = this.height;
@@ -801,9 +857,10 @@ Bitmap.prototype.blur = function() {
  * Add a callback function that will be called when the bitmap is loaded.
  *
  * @method addLoadListener
- * @param {Function} listner The callback function
+ * @param {Function}
+ *            listner The callback function
  */
-Bitmap.prototype.addLoadListener = function(listner) {
+Bitmap.prototype.addLoadListener = function (listner) {
     if (!this.isReady()) {
         this._loadListeners.push(listner);
     } else {
@@ -815,20 +872,24 @@ Bitmap.prototype.addLoadListener = function(listner) {
  * @method _makeFontNameText
  * @private
  */
-Bitmap.prototype._makeFontNameText = function() {
+Bitmap.prototype._makeFontNameText = function () {
     return (this.fontItalic ? 'Italic ' : '') +
-            this.fontSize + 'px ' + this.fontFace;
+        this.fontSize + 'px ' + this.fontFace;
 };
 
 /**
  * @method _drawTextOutline
- * @param {String} text
- * @param {Number} tx
- * @param {Number} ty
- * @param {Number} maxWidth
+ * @param {String}
+ *            text
+ * @param {Number}
+ *            tx
+ * @param {Number}
+ *            ty
+ * @param {Number}
+ *            maxWidth
  * @private
  */
-Bitmap.prototype._drawTextOutline = function(text, tx, ty, maxWidth) {
+Bitmap.prototype._drawTextOutline = function (text, tx, ty, maxWidth) {
     var context = this._context;
     context.strokeStyle = this.outlineColor;
     context.lineWidth = this.outlineWidth;
@@ -838,13 +899,17 @@ Bitmap.prototype._drawTextOutline = function(text, tx, ty, maxWidth) {
 
 /**
  * @method _drawTextBody
- * @param {String} text
- * @param {Number} tx
- * @param {Number} ty
- * @param {Number} maxWidth
+ * @param {String}
+ *            text
+ * @param {Number}
+ *            tx
+ * @param {Number}
+ *            ty
+ * @param {Number}
+ *            maxWidth
  * @private
  */
-Bitmap.prototype._drawTextBody = function(text, tx, ty, maxWidth) {
+Bitmap.prototype._drawTextBody = function (text, tx, ty, maxWidth) {
     var context = this._context;
     context.fillStyle = this.textColor;
     context.fillText(text, tx, ty, maxWidth);
@@ -854,18 +919,18 @@ Bitmap.prototype._drawTextBody = function(text, tx, ty, maxWidth) {
  * @method _onLoad
  * @private
  */
-Bitmap.prototype._onLoad = function() {
+Bitmap.prototype._onLoad = function () {
     this._image.removeEventListener('load', this._loadListener);
     this._image.removeEventListener('error', this._errorListener);
 
     this._renewCanvas();
 
-    switch(this._loadingState){
+    switch (this._loadingState) {
         case 'requesting':
             this._loadingState = 'requestCompleted';
-            if(this._decodeAfterRequest){
+            if (this._decodeAfterRequest) {
                 this.decode();
-            }else{
+            } else {
                 this._loadingState = 'purged';
                 this._clearImgInstance();
             }
@@ -874,9 +939,9 @@ Bitmap.prototype._onLoad = function() {
         case 'decrypting':
             window.URL.revokeObjectURL(this._image.src);
             this._loadingState = 'decryptCompleted';
-            if(this._decodeAfterRequest){
+            if (this._decodeAfterRequest) {
                 this.decode();
-            }else{
+            } else {
                 this._loadingState = 'purged';
                 this._clearImgInstance();
             }
@@ -884,17 +949,19 @@ Bitmap.prototype._onLoad = function() {
     }
 };
 
-Bitmap.prototype.decode = function(){
-    switch(this._loadingState){
-        case 'requestCompleted': case 'decryptCompleted':
+Bitmap.prototype.decode = function () {
+    switch (this._loadingState) {
+        case 'requestCompleted':
+        case 'decryptCompleted':
             this._loadingState = 'loaded';
 
-            if(!this.__canvas) this._createBaseTexture(this._image);
+            if (!this.__canvas) this._createBaseTexture(this._image);
             this._setDirty();
             this._callLoadListeners();
             break;
 
-        case 'requesting': case 'decrypting':
+        case 'requesting':
+        case 'decrypting':
             this._decodeAfterRequest = true;
             if (!this._loader) {
                 this._loader = ResourceHandler.createLoader(this._url, this._requestImage.bind(this, this._url), this._onError.bind(this));
@@ -903,7 +970,9 @@ Bitmap.prototype.decode = function(){
             }
             break;
 
-        case 'pending': case 'purged': case 'error':
+        case 'pending':
+        case 'purged':
+        case 'error':
             this._decodeAfterRequest = true;
             this._requestImage(this._url);
             break;
@@ -914,7 +983,7 @@ Bitmap.prototype.decode = function(){
  * @method _callLoadListeners
  * @private
  */
-Bitmap.prototype._callLoadListeners = function() {
+Bitmap.prototype._callLoadListeners = function () {
     while (this._loadListeners.length > 0) {
         var listener = this._loadListeners.shift();
         listener(this);
@@ -925,7 +994,7 @@ Bitmap.prototype._callLoadListeners = function() {
  * @method _onError
  * @private
  */
-Bitmap.prototype._onError = function() {
+Bitmap.prototype._onError = function () {
     this._image.removeEventListener('load', this._loadListener);
     this._image.removeEventListener('error', this._errorListener);
     this._loadingState = 'error';
@@ -935,22 +1004,23 @@ Bitmap.prototype._onError = function() {
  * @method _setDirty
  * @private
  */
-Bitmap.prototype._setDirty = function() {
+Bitmap.prototype._setDirty = function () {
     this._dirty = true;
 };
 
 /**
  * updates texture is bitmap was dirty
+ *
  * @method checkDirty
  */
-Bitmap.prototype.checkDirty = function() {
+Bitmap.prototype.checkDirty = function () {
     if (this._dirty) {
         this._baseTexture.update();
         this._dirty = false;
     }
 };
 
-Bitmap.request = function(url){
+Bitmap.request = function (url) {
     var bitmap = Object.create(Bitmap.prototype);
     bitmap._defer = true;
     bitmap.initialize();
@@ -961,10 +1031,10 @@ Bitmap.request = function(url){
     return bitmap;
 };
 
-Bitmap.prototype._requestImage = function(url){
-    if(Bitmap._reuseImages.length !== 0){
+Bitmap.prototype._requestImage = function (url) {
+    if (Bitmap._reuseImages.length !== 0) {
         this._image = Bitmap._reuseImages.pop();
-    }else{
+    } else {
         this._image = new Image();
     }
 
@@ -976,7 +1046,7 @@ Bitmap.prototype._requestImage = function(url){
     this._url = url;
     this._loadingState = 'requesting';
 
-    if(!Decrypter.checkImgIgnore(url) && Decrypter.hasEncryptedImages) {
+    if (!Decrypter.checkImgIgnore(url) && Decrypter.hasEncryptedImages) {
         this._loadingState = 'decrypting';
         Decrypter.decryptImg(url, this);
     } else {
@@ -987,19 +1057,20 @@ Bitmap.prototype._requestImage = function(url){
     }
 };
 
-Bitmap.prototype.isRequestOnly = function(){
+Bitmap.prototype.isRequestOnly = function () {
     return !(this._decodeAfterRequest || this.isReady());
 };
 
-Bitmap.prototype.isRequestReady = function(){
+Bitmap.prototype.isRequestReady = function () {
     return this._loadingState !== 'pending' &&
         this._loadingState !== 'requesting' &&
         this._loadingState !== 'decrypting';
 };
 
-Bitmap.prototype.startRequest = function(){
-    if(this._loadingState === 'pending'){
+Bitmap.prototype.startRequest = function () {
+    if (this._loadingState === 'pending') {
         this._decodeAfterRequest = false;
         this._requestImage(this._url);
     }
 };
+

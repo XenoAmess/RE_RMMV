@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Message-----------------------------------------------------------------------------
 // Window_Message
 //
 // The window for displaying text messages.
@@ -10,7 +10,7 @@ function Window_Message() {
 Window_Message.prototype = Object.create(Window_Base.prototype);
 Window_Message.prototype.constructor = Window_Message;
 
-Window_Message.prototype.initialize = function() {
+Window_Message.prototype.initialize = function () {
     var width = this.windowWidth();
     var height = this.windowHeight();
     var x = (Graphics.boxWidth - width) / 2;
@@ -21,7 +21,7 @@ Window_Message.prototype.initialize = function() {
     this.updatePlacement();
 };
 
-Window_Message.prototype.initMembers = function() {
+Window_Message.prototype.initMembers = function () {
     this._imageReservationId = Utils.generateRuntimeId();
     this._background = 0;
     this._positionType = 2;
@@ -31,12 +31,13 @@ Window_Message.prototype.initMembers = function() {
     this.clearFlags();
 };
 
-Window_Message.prototype.subWindows = function() {
+Window_Message.prototype.subWindows = function () {
     return [this._goldWindow, this._choiceWindow,
-            this._numberWindow, this._itemWindow];
+        this._numberWindow, this._itemWindow
+    ];
 };
 
-Window_Message.prototype.createSubWindows = function() {
+Window_Message.prototype.createSubWindows = function () {
     this._goldWindow = new Window_Gold(0, 0);
     this._goldWindow.x = Graphics.boxWidth - this._goldWindow.width;
     this._goldWindow.openness = 0;
@@ -45,25 +46,25 @@ Window_Message.prototype.createSubWindows = function() {
     this._itemWindow = new Window_EventItem(this);
 };
 
-Window_Message.prototype.windowWidth = function() {
+Window_Message.prototype.windowWidth = function () {
     return Graphics.boxWidth;
 };
 
-Window_Message.prototype.windowHeight = function() {
+Window_Message.prototype.windowHeight = function () {
     return this.fittingHeight(this.numVisibleRows());
 };
 
-Window_Message.prototype.clearFlags = function() {
+Window_Message.prototype.clearFlags = function () {
     this._showFast = false;
     this._lineShowFast = false;
     this._pauseSkip = false;
 };
 
-Window_Message.prototype.numVisibleRows = function() {
+Window_Message.prototype.numVisibleRows = function () {
     return 4;
 };
 
-Window_Message.prototype.update = function() {
+Window_Message.prototype.update = function () {
     this.checkToNotClose();
     Window_Base.prototype.update.call(this);
     while (!this.isOpening() && !this.isClosing()) {
@@ -84,7 +85,7 @@ Window_Message.prototype.update = function() {
     }
 };
 
-Window_Message.prototype.checkToNotClose = function() {
+Window_Message.prototype.checkToNotClose = function () {
     if (this.isClosing() && this.isOpen()) {
         if (this.doesContinue()) {
             this.open();
@@ -92,11 +93,11 @@ Window_Message.prototype.checkToNotClose = function() {
     }
 };
 
-Window_Message.prototype.canStart = function() {
+Window_Message.prototype.canStart = function () {
     return $gameMessage.hasText() && !$gameMessage.scrollMode();
 };
 
-Window_Message.prototype.startMessage = function() {
+Window_Message.prototype.startMessage = function () {
     this._textState = {};
     this._textState.index = 0;
     this._textState.text = this.convertEscapeCharacters($gameMessage.allText());
@@ -106,24 +107,24 @@ Window_Message.prototype.startMessage = function() {
     this.open();
 };
 
-Window_Message.prototype.updatePlacement = function() {
+Window_Message.prototype.updatePlacement = function () {
     this._positionType = $gameMessage.positionType();
     this.y = this._positionType * (Graphics.boxHeight - this.height) / 2;
     this._goldWindow.y = this.y > 0 ? 0 : Graphics.boxHeight - this._goldWindow.height;
 };
 
-Window_Message.prototype.updateBackground = function() {
+Window_Message.prototype.updateBackground = function () {
     this._background = $gameMessage.background();
     this.setBackgroundType(this._background);
 };
 
-Window_Message.prototype.terminateMessage = function() {
+Window_Message.prototype.terminateMessage = function () {
     this.close();
     this._goldWindow.close();
     $gameMessage.clear();
 };
 
-Window_Message.prototype.updateWait = function() {
+Window_Message.prototype.updateWait = function () {
     if (this._waitCount > 0) {
         this._waitCount--;
         return true;
@@ -132,7 +133,7 @@ Window_Message.prototype.updateWait = function() {
     }
 };
 
-Window_Message.prototype.updateLoading = function() {
+Window_Message.prototype.updateLoading = function () {
     if (this._faceBitmap) {
         if (this._faceBitmap.isReady()) {
             this.drawMessageFace();
@@ -146,7 +147,7 @@ Window_Message.prototype.updateLoading = function() {
     }
 };
 
-Window_Message.prototype.updateInput = function() {
+Window_Message.prototype.updateInput = function () {
     if (this.isAnySubWindowActive()) {
         return true;
     }
@@ -163,13 +164,13 @@ Window_Message.prototype.updateInput = function() {
     return false;
 };
 
-Window_Message.prototype.isAnySubWindowActive = function() {
+Window_Message.prototype.isAnySubWindowActive = function () {
     return (this._choiceWindow.active ||
-            this._numberWindow.active ||
-            this._itemWindow.active);
+        this._numberWindow.active ||
+        this._itemWindow.active);
 };
 
-Window_Message.prototype.updateMessage = function() {
+Window_Message.prototype.updateMessage = function () {
     if (this._textState) {
         while (!this.isEndOfText(this._textState)) {
             if (this.needsNewPage(this._textState)) {
@@ -193,7 +194,7 @@ Window_Message.prototype.updateMessage = function() {
     }
 };
 
-Window_Message.prototype.onEndOfText = function() {
+Window_Message.prototype.onEndOfText = function () {
     if (!this.startInput()) {
         if (!this._pauseSkip) {
             this.startPause();
@@ -204,7 +205,7 @@ Window_Message.prototype.onEndOfText = function() {
     this._textState = null;
 };
 
-Window_Message.prototype.startInput = function() {
+Window_Message.prototype.startInput = function () {
     if ($gameMessage.isChoice()) {
         this._choiceWindow.start();
         return true;
@@ -219,28 +220,28 @@ Window_Message.prototype.startInput = function() {
     }
 };
 
-Window_Message.prototype.isTriggered = function() {
+Window_Message.prototype.isTriggered = function () {
     return (Input.isRepeated('ok') || Input.isRepeated('cancel') ||
-            TouchInput.isRepeated());
+        TouchInput.isRepeated());
 };
 
-Window_Message.prototype.doesContinue = function() {
+Window_Message.prototype.doesContinue = function () {
     return ($gameMessage.hasText() && !$gameMessage.scrollMode() &&
-            !this.areSettingsChanged());
+        !this.areSettingsChanged());
 };
 
-Window_Message.prototype.areSettingsChanged = function() {
+Window_Message.prototype.areSettingsChanged = function () {
     return (this._background !== $gameMessage.background() ||
-            this._positionType !== $gameMessage.positionType());
+        this._positionType !== $gameMessage.positionType());
 };
 
-Window_Message.prototype.updateShowFast = function() {
+Window_Message.prototype.updateShowFast = function () {
     if (this.isTriggered()) {
         this._showFast = true;
     }
 };
 
-Window_Message.prototype.newPage = function(textState) {
+Window_Message.prototype.newPage = function (textState) {
     this.contents.clear();
     this.resetFontSettings();
     this.clearFlags();
@@ -251,20 +252,20 @@ Window_Message.prototype.newPage = function(textState) {
     textState.height = this.calcTextHeight(textState, false);
 };
 
-Window_Message.prototype.loadMessageFace = function() {
+Window_Message.prototype.loadMessageFace = function () {
     this._faceBitmap = ImageManager.reserveFace($gameMessage.faceName(), 0, this._imageReservationId);
 };
 
-Window_Message.prototype.drawMessageFace = function() {
+Window_Message.prototype.drawMessageFace = function () {
     this.drawFace($gameMessage.faceName(), $gameMessage.faceIndex(), 0, 0);
     ImageManager.releaseReservation(this._imageReservationId);
 };
 
-Window_Message.prototype.newLineX = function() {
+Window_Message.prototype.newLineX = function () {
     return $gameMessage.faceName() === '' ? 0 : 168;
 };
 
-Window_Message.prototype.processNewLine = function(textState) {
+Window_Message.prototype.processNewLine = function (textState) {
     this._lineShowFast = false;
     Window_Base.prototype.processNewLine.call(this, textState);
     if (this.needsNewPage(textState)) {
@@ -272,7 +273,7 @@ Window_Message.prototype.processNewLine = function(textState) {
     }
 };
 
-Window_Message.prototype.processNewPage = function(textState) {
+Window_Message.prototype.processNewPage = function (textState) {
     Window_Base.prototype.processNewPage.call(this, textState);
     if (textState.text[textState.index] === '\n') {
         textState.index++;
@@ -281,49 +282,50 @@ Window_Message.prototype.processNewPage = function(textState) {
     this.startPause();
 };
 
-Window_Message.prototype.isEndOfText = function(textState) {
+Window_Message.prototype.isEndOfText = function (textState) {
     return textState.index >= textState.text.length;
 };
 
-Window_Message.prototype.needsNewPage = function(textState) {
+Window_Message.prototype.needsNewPage = function (textState) {
     return (!this.isEndOfText(textState) &&
-            textState.y + textState.height > this.contents.height);
+        textState.y + textState.height > this.contents.height);
 };
 
-Window_Message.prototype.processEscapeCharacter = function(code, textState) {
+Window_Message.prototype.processEscapeCharacter = function (code, textState) {
     switch (code) {
-    case '$':
-        this._goldWindow.open();
-        break;
-    case '.':
-        this.startWait(15);
-        break;
-    case '|':
-        this.startWait(60);
-        break;
-    case '!':
-        this.startPause();
-        break;
-    case '>':
-        this._lineShowFast = true;
-        break;
-    case '<':
-        this._lineShowFast = false;
-        break;
-    case '^':
-        this._pauseSkip = true;
-        break;
-    default:
-        Window_Base.prototype.processEscapeCharacter.call(this, code, textState);
-        break;
+        case '$':
+            this._goldWindow.open();
+            break;
+        case '.':
+            this.startWait(15);
+            break;
+        case '|':
+            this.startWait(60);
+            break;
+        case '!':
+            this.startPause();
+            break;
+        case '>':
+            this._lineShowFast = true;
+            break;
+        case '<':
+            this._lineShowFast = false;
+            break;
+        case '^':
+            this._pauseSkip = true;
+            break;
+        default:
+            Window_Base.prototype.processEscapeCharacter.call(this, code, textState);
+            break;
     }
 };
 
-Window_Message.prototype.startWait = function(count) {
+Window_Message.prototype.startWait = function (count) {
     this._waitCount = count;
 };
 
-Window_Message.prototype.startPause = function() {
+Window_Message.prototype.startPause = function () {
     this.startWait(10);
     this.pause = true;
 };
+

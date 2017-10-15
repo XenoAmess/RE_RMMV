@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Graphics-----------------------------------------------------------------------------
 /**
  * The static class that carries out graphics processing.
  *
@@ -8,7 +8,7 @@ function Graphics() {
     throw new Error('This is a static class');
 }
 
-Graphics._cssFontLoading =  document.fonts && document.fonts.ready;
+Graphics._cssFontLoading = document.fonts && document.fonts.ready;
 Graphics._fontLoaded = null;
 Graphics._videoVolume = 1;
 
@@ -17,12 +17,14 @@ Graphics._videoVolume = 1;
  *
  * @static
  * @method initialize
- * @param {Number} width The width of the game screen
- * @param {Number} height The height of the game screen
- * @param {String} type The type of the renderer.
- *                 'canvas', 'webgl', or 'auto'.
+ * @param {Number}
+ *            width The width of the game screen
+ * @param {Number}
+ *            height The height of the game screen
+ * @param {String}
+ *            type The type of the renderer. 'canvas', 'webgl', or 'auto'.
  */
-Graphics.initialize = function(width, height, type) {
+Graphics.initialize = function (width, height, type) {
     this._width = width || 800;
     this._height = height || 600;
     this._rendererType = type || 'auto';
@@ -65,17 +67,17 @@ Graphics.initialize = function(width, height, type) {
 };
 
 
-Graphics._setupCssFontLoading = function(){
-    if(Graphics._cssFontLoading){
-        document.fonts.ready.then(function(fonts){
+Graphics._setupCssFontLoading = function () {
+    if (Graphics._cssFontLoading) {
+        document.fonts.ready.then(function (fonts) {
             Graphics._fontLoaded = fonts;
-        }).catch(function(error){
+        }).catch(function (error) {
             SceneManager.onError(error);
         });
     }
 };
 
-Graphics.canUseCssFontLoading = function(){
+Graphics.canUseCssFontLoading = function () {
     return !!this._cssFontLoading;
 };
 
@@ -86,7 +88,7 @@ Graphics.canUseCssFontLoading = function(){
  * @property frameCount
  * @type Number
  */
-Graphics.frameCount     = 0;
+Graphics.frameCount = 0;
 
 /**
  * The alias of PIXI.blendModes.NORMAL.
@@ -96,7 +98,7 @@ Graphics.frameCount     = 0;
  * @type Number
  * @final
  */
-Graphics.BLEND_NORMAL   = 0;
+Graphics.BLEND_NORMAL = 0;
 
 /**
  * The alias of PIXI.blendModes.ADD.
@@ -106,7 +108,7 @@ Graphics.BLEND_NORMAL   = 0;
  * @type Number
  * @final
  */
-Graphics.BLEND_ADD      = 1;
+Graphics.BLEND_ADD = 1;
 
 /**
  * The alias of PIXI.blendModes.MULTIPLY.
@@ -126,7 +128,7 @@ Graphics.BLEND_MULTIPLY = 2;
  * @type Number
  * @final
  */
-Graphics.BLEND_SCREEN   = 3;
+Graphics.BLEND_SCREEN = 3;
 
 /**
  * Marks the beginning of each frame for FPSMeter.
@@ -134,7 +136,7 @@ Graphics.BLEND_SCREEN   = 3;
  * @static
  * @method tickStart
  */
-Graphics.tickStart = function() {
+Graphics.tickStart = function () {
     if (this._fpsMeter) {
         this._fpsMeter.tickStart();
     }
@@ -146,7 +148,7 @@ Graphics.tickStart = function() {
  * @static
  * @method tickEnd
  */
-Graphics.tickEnd = function() {
+Graphics.tickEnd = function () {
     if (this._fpsMeter && this._rendered) {
         this._fpsMeter.tick();
     }
@@ -157,9 +159,10 @@ Graphics.tickEnd = function() {
  *
  * @static
  * @method render
- * @param {Stage} stage The stage object to be rendered
+ * @param {Stage}
+ *            stage The stage object to be rendered
  */
-Graphics.render = function(stage) {
+Graphics.render = function (stage) {
     if (this._skipCount === 0) {
         var startTime = Date.now();
         if (stage) {
@@ -186,7 +189,7 @@ Graphics.render = function(stage) {
  * @method isWebGL
  * @return {Boolean} True if the renderer type is WebGL
  */
-Graphics.isWebGL = function() {
+Graphics.isWebGL = function () {
     return this._renderer && this._renderer.type === PIXI.RENDERER_TYPE.WEBGL;
 };
 
@@ -197,7 +200,7 @@ Graphics.isWebGL = function() {
  * @method hasWebGL
  * @return {Boolean} True if the current browser supports WebGL.
  */
-Graphics.hasWebGL = function() {
+Graphics.hasWebGL = function () {
     try {
         var canvas = document.createElement('canvas');
         return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
@@ -213,7 +216,7 @@ Graphics.hasWebGL = function() {
  * @method canUseDifferenceBlend
  * @return {Boolean} True if the canvas blend mode 'difference' is supported
  */
-Graphics.canUseDifferenceBlend = function() {
+Graphics.canUseDifferenceBlend = function () {
     return this._canUseDifferenceBlend;
 };
 
@@ -224,7 +227,7 @@ Graphics.canUseDifferenceBlend = function() {
  * @method canUseSaturationBlend
  * @return {Boolean} True if the canvas blend mode 'saturation' is supported
  */
-Graphics.canUseSaturationBlend = function() {
+Graphics.canUseSaturationBlend = function () {
     return this._canUseSaturationBlend;
 };
 
@@ -234,7 +237,7 @@ Graphics.canUseSaturationBlend = function() {
  * @static
  * @method setLoadingImage
  */
-Graphics.setLoadingImage = function(src) {
+Graphics.setLoadingImage = function (src) {
     this._loadingImage = new Image();
     this._loadingImage.src = src;
 };
@@ -245,17 +248,18 @@ Graphics.setLoadingImage = function(src) {
  * @static
  * @method startLoading
  */
-Graphics.startLoading = function() {
+Graphics.startLoading = function () {
     this._loadingCount = 0;
 };
 
 /**
- * Increments the loading counter and displays the "Now Loading" image if necessary.
+ * Increments the loading counter and displays the "Now Loading" image if
+ * necessary.
  *
  * @static
  * @method updateLoading
  */
-Graphics.updateLoading = function() {
+Graphics.updateLoading = function () {
     this._loadingCount++;
     this._paintUpperCanvas();
     this._upperCanvas.style.opacity = 1;
@@ -267,7 +271,7 @@ Graphics.updateLoading = function() {
  * @static
  * @method endLoading
  */
-Graphics.endLoading = function() {
+Graphics.endLoading = function () {
     this._clearUpperCanvas();
     this._upperCanvas.style.opacity = 0;
 };
@@ -277,9 +281,10 @@ Graphics.endLoading = function() {
  *
  * @static
  * @method printLoadingError
- * @param {String} url The url of the resource failed to load
+ * @param {String}
+ *            url The url of the resource failed to load
  */
-Graphics.printLoadingError = function(url) {
+Graphics.printLoadingError = function (url) {
     if (this._errorPrinter && !this._errorShowed) {
         this._errorPrinter.innerHTML = this._makeErrorHtml('Loading Error', 'Failed to load: ' + url);
         var button = document.createElement('button');
@@ -287,7 +292,7 @@ Graphics.printLoadingError = function(url) {
         button.style.fontSize = '24px';
         button.style.color = '#ffffff';
         button.style.backgroundColor = '#000000';
-        button.onmousedown = button.ontouchstart = function(event) {
+        button.onmousedown = button.ontouchstart = function (event) {
             ResourceHandler.retry();
             event.stopPropagation();
         };
@@ -302,7 +307,7 @@ Graphics.printLoadingError = function(url) {
  * @static
  * @method eraseLoadingError
  */
-Graphics.eraseLoadingError = function() {
+Graphics.eraseLoadingError = function () {
     if (this._errorPrinter && !this._errorShowed) {
         this._errorPrinter.innerHTML = '';
         this.startLoading();
@@ -314,10 +319,12 @@ Graphics.eraseLoadingError = function() {
  *
  * @static
  * @method printError
- * @param {String} name The name of the error
- * @param {String} message The message of the error
+ * @param {String}
+ *            name The name of the error
+ * @param {String}
+ *            message The message of the error
  */
-Graphics.printError = function(name, message) {
+Graphics.printError = function (name, message) {
     this._errorShowed = true;
     if (this._errorPrinter) {
         this._errorPrinter.innerHTML = this._makeErrorHtml(name, message);
@@ -332,7 +339,7 @@ Graphics.printError = function(name, message) {
  * @static
  * @method showFps
  */
-Graphics.showFps = function() {
+Graphics.showFps = function () {
     if (this._fpsMeter) {
         this._fpsMeter.show();
         this._modeBox.style.opacity = 1;
@@ -345,7 +352,7 @@ Graphics.showFps = function() {
  * @static
  * @method hideFps
  */
-Graphics.hideFps = function() {
+Graphics.hideFps = function () {
     if (this._fpsMeter) {
         this._fpsMeter.hide();
         this._modeBox.style.opacity = 0;
@@ -357,10 +364,12 @@ Graphics.hideFps = function() {
  *
  * @static
  * @method loadFont
- * @param {String} name The face name of the font
- * @param {String} url The url of the font file
+ * @param {String}
+ *            name The face name of the font
+ * @param {String}
+ *            url The url of the font file
  */
-Graphics.loadFont = function(name, url) {
+Graphics.loadFont = function (name, url) {
     var style = document.createElement('style');
     var head = document.getElementsByTagName('head');
     var rule = '@font-face { font-family: "' + name + '"; src: url("' + url + '"); }';
@@ -375,13 +384,14 @@ Graphics.loadFont = function(name, url) {
  *
  * @static
  * @method isFontLoaded
- * @param {String} name The face name of the font
+ * @param {String}
+ *            name The face name of the font
  * @return {Boolean} True if the font file is loaded
  */
-Graphics.isFontLoaded = function(name) {
+Graphics.isFontLoaded = function (name) {
     if (Graphics._cssFontLoading) {
-        if(Graphics._fontLoaded){
-            return Graphics._fontLoaded.check('10px "'+name+'"');
+        if (Graphics._fontLoaded) {
+            return Graphics._fontLoaded.check('10px "' + name + '"');
         }
 
         return false;
@@ -405,9 +415,10 @@ Graphics.isFontLoaded = function(name) {
  *
  * @static
  * @method playVideo
- * @param {String} src
+ * @param {String}
+ *            src
  */
-Graphics.playVideo = function(src) {
+Graphics.playVideo = function (src) {
     this._videoLoader = ResourceHandler.createLoader(null, this._playVideo.bind(this, src), this._onVideoError.bind(this));
     this._playVideo(src);
 };
@@ -415,10 +426,11 @@ Graphics.playVideo = function(src) {
 /**
  * @static
  * @method _playVideo
- * @param {String} src
+ * @param {String}
+ *            src
  * @private
  */
-Graphics._playVideo = function(src) {
+Graphics._playVideo = function (src) {
     this._video.src = src;
     this._video.onloadeddata = this._onVideoLoad.bind(this);
     this._video.onerror = this._videoLoader;
@@ -434,7 +446,7 @@ Graphics._playVideo = function(src) {
  * @method isVideoPlaying
  * @return {Boolean} True if the video is playing
  */
-Graphics.isVideoPlaying = function() {
+Graphics.isVideoPlaying = function () {
     return this._videoLoading || this._isVideoVisible();
 };
 
@@ -443,10 +455,11 @@ Graphics.isVideoPlaying = function() {
  *
  * @static
  * @method canPlayVideoType
- * @param {String} type The video type to test support for
+ * @param {String}
+ *            type The video type to test support for
  * @return {Boolean} True if the browser can play the specified video type
  */
-Graphics.canPlayVideoType = function(type) {
+Graphics.canPlayVideoType = function (type) {
     return this._video && this._video.canPlayType(type);
 };
 
@@ -455,9 +468,10 @@ Graphics.canPlayVideoType = function(type) {
  *
  * @static
  * @method setVideoVolume
- * @param {Number} value
+ * @param {Number}
+ *            value
  */
-Graphics.setVideoVolume = function(value) {
+Graphics.setVideoVolume = function (value) {
     this._videoVolume = value;
     if (this._video) {
         this._video.volume = this._videoVolume;
@@ -465,15 +479,16 @@ Graphics.setVideoVolume = function(value) {
 };
 
 /**
- * Converts an x coordinate on the page to the corresponding
- * x coordinate on the canvas area.
+ * Converts an x coordinate on the page to the corresponding x coordinate on the
+ * canvas area.
  *
  * @static
  * @method pageToCanvasX
- * @param {Number} x The x coordinate on the page to be converted
+ * @param {Number}
+ *            x The x coordinate on the page to be converted
  * @return {Number} The x coordinate on the canvas area
  */
-Graphics.pageToCanvasX = function(x) {
+Graphics.pageToCanvasX = function (x) {
     if (this._canvas) {
         var left = this._canvas.offsetLeft;
         return Math.round((x - left) / this._realScale);
@@ -483,15 +498,16 @@ Graphics.pageToCanvasX = function(x) {
 };
 
 /**
- * Converts a y coordinate on the page to the corresponding
- * y coordinate on the canvas area.
+ * Converts a y coordinate on the page to the corresponding y coordinate on the
+ * canvas area.
  *
  * @static
  * @method pageToCanvasY
- * @param {Number} y The y coordinate on the page to be converted
+ * @param {Number}
+ *            y The y coordinate on the page to be converted
  * @return {Number} The y coordinate on the canvas area
  */
-Graphics.pageToCanvasY = function(y) {
+Graphics.pageToCanvasY = function (y) {
     if (this._canvas) {
         var top = this._canvas.offsetTop;
         return Math.round((y - top) / this._realScale);
@@ -505,18 +521,20 @@ Graphics.pageToCanvasY = function(y) {
  *
  * @static
  * @method isInsideCanvas
- * @param {Number} x The x coordinate on the canvas area
- * @param {Number} y The y coordinate on the canvas area
+ * @param {Number}
+ *            x The x coordinate on the canvas area
+ * @param {Number}
+ *            y The y coordinate on the canvas area
  * @return {Boolean} True if the specified point is inside the game canvas area
  */
-Graphics.isInsideCanvas = function(x, y) {
+Graphics.isInsideCanvas = function (x, y) {
     return (x >= 0 && x < this._width && y >= 0 && y < this._height);
 };
 
 /**
  * Calls pixi.js garbage collector
  */
-Graphics.callGC = function() {
+Graphics.callGC = function () {
     if (Graphics.isWebGL()) {
         Graphics._renderer.textureGC.run();
     }
@@ -531,10 +549,10 @@ Graphics.callGC = function() {
  * @type Number
  */
 Object.defineProperty(Graphics, 'width', {
-    get: function() {
+    get: function () {
         return this._width;
     },
-    set: function(value) {
+    set: function (value) {
         if (this._width !== value) {
             this._width = value;
             this._updateAllElements();
@@ -551,10 +569,10 @@ Object.defineProperty(Graphics, 'width', {
  * @type Number
  */
 Object.defineProperty(Graphics, 'height', {
-    get: function() {
+    get: function () {
         return this._height;
     },
-    set: function(value) {
+    set: function (value) {
         if (this._height !== value) {
             this._height = value;
             this._updateAllElements();
@@ -571,10 +589,10 @@ Object.defineProperty(Graphics, 'height', {
  * @type Number
  */
 Object.defineProperty(Graphics, 'boxWidth', {
-    get: function() {
+    get: function () {
         return this._boxWidth;
     },
-    set: function(value) {
+    set: function (value) {
         this._boxWidth = value;
     },
     configurable: true
@@ -588,10 +606,10 @@ Object.defineProperty(Graphics, 'boxWidth', {
  * @type Number
  */
 Object.defineProperty(Graphics, 'boxHeight', {
-    get: function() {
+    get: function () {
         return this._boxHeight;
     },
-    set: function(value) {
+    set: function (value) {
         this._boxHeight = value;
     },
     configurable: true
@@ -605,10 +623,10 @@ Object.defineProperty(Graphics, 'boxHeight', {
  * @type Number
  */
 Object.defineProperty(Graphics, 'scale', {
-    get: function() {
+    get: function () {
         return this._scale;
     },
-    set: function(value) {
+    set: function (value) {
         if (this._scale !== value) {
             this._scale = value;
             this._updateAllElements();
@@ -622,7 +640,7 @@ Object.defineProperty(Graphics, 'scale', {
  * @method _createAllElements
  * @private
  */
-Graphics._createAllElements = function() {
+Graphics._createAllElements = function () {
     this._createErrorPrinter();
     this._createCanvas();
     this._createVideo();
@@ -638,7 +656,7 @@ Graphics._createAllElements = function() {
  * @method _updateAllElements
  * @private
  */
-Graphics._updateAllElements = function() {
+Graphics._updateAllElements = function () {
     this._updateRealScale();
     this._updateErrorPrinter();
     this._updateCanvas();
@@ -653,7 +671,7 @@ Graphics._updateAllElements = function() {
  * @method _updateRealScale
  * @private
  */
-Graphics._updateRealScale = function() {
+Graphics._updateRealScale = function () {
     if (this._stretchEnabled) {
         var h = window.innerWidth / this._width;
         var v = window.innerHeight / this._height;
@@ -666,14 +684,16 @@ Graphics._updateRealScale = function() {
 /**
  * @static
  * @method _makeErrorHtml
- * @param {String} name
- * @param {String} message
+ * @param {String}
+ *            name
+ * @param {String}
+ *            message
  * @return {String}
  * @private
  */
-Graphics._makeErrorHtml = function(name, message) {
+Graphics._makeErrorHtml = function (name, message) {
     return ('<font color="yellow"><b>' + name + '</b></font><br>' +
-            '<font color="white">' + message + '</font><br>');
+        '<font color="white">' + message + '</font><br>');
 };
 
 /**
@@ -681,7 +701,7 @@ Graphics._makeErrorHtml = function(name, message) {
  * @method _defaultStretchMode
  * @private
  */
-Graphics._defaultStretchMode = function() {
+Graphics._defaultStretchMode = function () {
     return Utils.isNwjs() || Utils.isMobileDevice();
 };
 
@@ -690,7 +710,7 @@ Graphics._defaultStretchMode = function() {
  * @method _testCanvasBlendModes
  * @private
  */
-Graphics._testCanvasBlendModes = function() {
+Graphics._testCanvasBlendModes = function () {
     var canvas, context, imageData1, imageData2;
     canvas = document.createElement('canvas');
     canvas.width = 1;
@@ -719,7 +739,7 @@ Graphics._testCanvasBlendModes = function() {
  * @method _modifyExistingElements
  * @private
  */
-Graphics._modifyExistingElements = function() {
+Graphics._modifyExistingElements = function () {
     var elements = document.getElementsByTagName('*');
     for (var i = 0; i < elements.length; i++) {
         if (elements[i].style.zIndex > 0) {
@@ -733,7 +753,7 @@ Graphics._modifyExistingElements = function() {
  * @method _createErrorPrinter
  * @private
  */
-Graphics._createErrorPrinter = function() {
+Graphics._createErrorPrinter = function () {
     this._errorPrinter = document.createElement('p');
     this._errorPrinter.id = 'ErrorPrinter';
     this._updateErrorPrinter();
@@ -745,7 +765,7 @@ Graphics._createErrorPrinter = function() {
  * @method _updateErrorPrinter
  * @private
  */
-Graphics._updateErrorPrinter = function() {
+Graphics._updateErrorPrinter = function () {
     this._errorPrinter.width = this._width * 0.9;
     this._errorPrinter.height = 40;
     this._errorPrinter.style.textAlign = 'center';
@@ -760,7 +780,7 @@ Graphics._updateErrorPrinter = function() {
  * @method _createCanvas
  * @private
  */
-Graphics._createCanvas = function() {
+Graphics._createCanvas = function () {
     this._canvas = document.createElement('canvas');
     this._canvas.id = 'GameCanvas';
     this._updateCanvas();
@@ -772,7 +792,7 @@ Graphics._createCanvas = function() {
  * @method _updateCanvas
  * @private
  */
-Graphics._updateCanvas = function() {
+Graphics._updateCanvas = function () {
     this._canvas.width = this._width;
     this._canvas.height = this._height;
     this._canvas.style.zIndex = 1;
@@ -784,7 +804,7 @@ Graphics._updateCanvas = function() {
  * @method _createVideo
  * @private
  */
-Graphics._createVideo = function() {
+Graphics._createVideo = function () {
     this._video = document.createElement('video');
     this._video.id = 'GameVideo';
     this._video.style.opacity = 0;
@@ -800,7 +820,7 @@ Graphics._createVideo = function() {
  * @method _updateVideo
  * @private
  */
-Graphics._updateVideo = function() {
+Graphics._updateVideo = function () {
     this._video.width = this._width;
     this._video.height = this._height;
     this._video.style.zIndex = 2;
@@ -812,7 +832,7 @@ Graphics._updateVideo = function() {
  * @method _createUpperCanvas
  * @private
  */
-Graphics._createUpperCanvas = function() {
+Graphics._createUpperCanvas = function () {
     this._upperCanvas = document.createElement('canvas');
     this._upperCanvas.id = 'UpperCanvas';
     this._updateUpperCanvas();
@@ -824,7 +844,7 @@ Graphics._createUpperCanvas = function() {
  * @method _updateUpperCanvas
  * @private
  */
-Graphics._updateUpperCanvas = function() {
+Graphics._updateUpperCanvas = function () {
     this._upperCanvas.width = this._width;
     this._upperCanvas.height = this._height;
     this._upperCanvas.style.zIndex = 3;
@@ -836,7 +856,7 @@ Graphics._updateUpperCanvas = function() {
  * @method _clearUpperCanvas
  * @private
  */
-Graphics._clearUpperCanvas = function() {
+Graphics._clearUpperCanvas = function () {
     var context = this._upperCanvas.getContext('2d');
     context.clearRect(0, 0, this._width, this._height);
 };
@@ -846,7 +866,7 @@ Graphics._clearUpperCanvas = function() {
  * @method _paintUpperCanvas
  * @private
  */
-Graphics._paintUpperCanvas = function() {
+Graphics._paintUpperCanvas = function () {
     this._clearUpperCanvas();
     if (this._loadingImage && this._loadingCount >= 20) {
         var context = this._upperCanvas.getContext('2d');
@@ -865,25 +885,27 @@ Graphics._paintUpperCanvas = function() {
  * @method _createRenderer
  * @private
  */
-Graphics._createRenderer = function() {
+Graphics._createRenderer = function () {
     PIXI.dontSayHello = true;
     var width = this._width;
     var height = this._height;
-    var options = { view: this._canvas };
+    var options = {
+        view: this._canvas
+    };
     try {
         switch (this._rendererType) {
-        case 'canvas':
-            this._renderer = new PIXI.CanvasRenderer(width, height, options);
-            break;
-        case 'webgl':
-            this._renderer = new PIXI.WebGLRenderer(width, height, options);
-            break;
-        default:
-            this._renderer = PIXI.autoDetectRenderer(width, height, options);
-            break;
+            case 'canvas':
+                this._renderer = new PIXI.CanvasRenderer(width, height, options);
+                break;
+            case 'webgl':
+                this._renderer = new PIXI.WebGLRenderer(width, height, options);
+                break;
+            default:
+                this._renderer = PIXI.autoDetectRenderer(width, height, options);
+                break;
         }
 
-        if(this._renderer && this._renderer.textureGC)
+        if (this._renderer && this._renderer.textureGC)
             this._renderer.textureGC.maxIdle = 1;
 
     } catch (e) {
@@ -896,7 +918,7 @@ Graphics._createRenderer = function() {
  * @method _updateRenderer
  * @private
  */
-Graphics._updateRenderer = function() {
+Graphics._updateRenderer = function () {
     if (this._renderer) {
         this._renderer.resize(this._width, this._height);
     }
@@ -907,8 +929,13 @@ Graphics._updateRenderer = function() {
  * @method _createFPSMeter
  * @private
  */
-Graphics._createFPSMeter = function() {
-    var options = { graph: 1, decimals: 0, theme: 'transparent', toggleOn: null };
+Graphics._createFPSMeter = function () {
+    var options = {
+        graph: 1,
+        decimals: 0,
+        theme: 'transparent',
+        toggleOn: null
+    };
     this._fpsMeter = new FPSMeter(options);
     this._fpsMeter.hide();
 };
@@ -918,7 +945,7 @@ Graphics._createFPSMeter = function() {
  * @method _createModeBox
  * @private
  */
-Graphics._createModeBox = function() {
+Graphics._createModeBox = function () {
     var box = document.createElement('div');
     box.id = 'modeTextBack';
     box.style.position = 'absolute';
@@ -954,17 +981,18 @@ Graphics._createModeBox = function() {
  * @method _createGameFontLoader
  * @private
  */
-Graphics._createGameFontLoader = function() {
+Graphics._createGameFontLoader = function () {
     this._createFontLoader('GameFont');
 };
 
 /**
  * @static
  * @method _createFontLoader
- * @param {String} name
+ * @param {String}
+ *            name
  * @private
  */
-Graphics._createFontLoader = function(name) {
+Graphics._createFontLoader = function (name) {
     var div = document.createElement('div');
     var text = document.createTextNode('.');
     div.style.fontFamily = name;
@@ -983,10 +1011,11 @@ Graphics._createFontLoader = function(name) {
 /**
  * @static
  * @method _centerElement
- * @param {HTMLElement} element
+ * @param {HTMLElement}
+ *            element
  * @private
  */
-Graphics._centerElement = function(element) {
+Graphics._centerElement = function (element) {
     var width = element.width * this._realScale;
     var height = element.height * this._realScale;
     element.style.position = 'absolute';
@@ -1004,7 +1033,7 @@ Graphics._centerElement = function(element) {
  * @method _disableTextSelection
  * @private
  */
-Graphics._disableTextSelection = function() {
+Graphics._disableTextSelection = function () {
     var body = document.body;
     body.style.userSelect = 'none';
     body.style.webkitUserSelect = 'none';
@@ -1017,9 +1046,11 @@ Graphics._disableTextSelection = function() {
  * @method _disableContextMenu
  * @private
  */
-Graphics._disableContextMenu = function() {
+Graphics._disableContextMenu = function () {
     var elements = document.body.getElementsByTagName('*');
-    var oncontextmenu = function() { return false; };
+    var oncontextmenu = function () {
+        return false;
+    };
     for (var i = 0; i < elements.length; i++) {
         elements[i].oncontextmenu = oncontextmenu;
     }
@@ -1030,7 +1061,7 @@ Graphics._disableContextMenu = function() {
  * @method _applyCanvasFilter
  * @private
  */
-Graphics._applyCanvasFilter = function() {
+Graphics._applyCanvasFilter = function () {
     if (this._canvas) {
         this._canvas.style.opacity = 0.5;
         this._canvas.style.filter = 'blur(8px)';
@@ -1043,7 +1074,7 @@ Graphics._applyCanvasFilter = function() {
  * @method _onVideoLoad
  * @private
  */
-Graphics._onVideoLoad = function() {
+Graphics._onVideoLoad = function () {
     this._video.play();
     this._updateVisibility(true);
     this._videoLoading = false;
@@ -1054,7 +1085,7 @@ Graphics._onVideoLoad = function() {
  * @method _onVideoError
  * @private
  */
-Graphics._onVideoError = function() {
+Graphics._onVideoError = function () {
     this._updateVisibility(false);
     this._videoLoading = false;
 };
@@ -1064,17 +1095,18 @@ Graphics._onVideoError = function() {
  * @method _onVideoEnd
  * @private
  */
-Graphics._onVideoEnd = function() {
+Graphics._onVideoEnd = function () {
     this._updateVisibility(false);
 };
 
 /**
  * @static
  * @method _updateVisibility
- * @param {Boolean} videoVisible
+ * @param {Boolean}
+ *            videoVisible
  * @private
  */
-Graphics._updateVisibility = function(videoVisible) {
+Graphics._updateVisibility = function (videoVisible) {
     this._video.style.opacity = videoVisible ? 1 : 0;
     this._canvas.style.opacity = videoVisible ? 0 : 1;
 };
@@ -1085,7 +1117,7 @@ Graphics._updateVisibility = function(videoVisible) {
  * @return {Boolean}
  * @private
  */
-Graphics._isVideoVisible = function() {
+Graphics._isVideoVisible = function () {
     return this._video.style.opacity > 0;
 };
 
@@ -1094,7 +1126,7 @@ Graphics._isVideoVisible = function() {
  * @method _setupEventHandlers
  * @private
  */
-Graphics._setupEventHandlers = function() {
+Graphics._setupEventHandlers = function () {
     window.addEventListener('resize', this._onWindowResize.bind(this));
     document.addEventListener('keydown', this._onKeyDown.bind(this));
     document.addEventListener('touchend', this._onTouchEnd.bind(this));
@@ -1105,31 +1137,32 @@ Graphics._setupEventHandlers = function() {
  * @method _onWindowResize
  * @private
  */
-Graphics._onWindowResize = function() {
+Graphics._onWindowResize = function () {
     this._updateAllElements();
 };
 
 /**
  * @static
  * @method _onKeyDown
- * @param {KeyboardEvent} event
+ * @param {KeyboardEvent}
+ *            event
  * @private
  */
-Graphics._onKeyDown = function(event) {
+Graphics._onKeyDown = function (event) {
     if (!event.ctrlKey && !event.altKey) {
         switch (event.keyCode) {
-        case 113:   // F2
-            event.preventDefault();
-            this._switchFPSMeter();
-            break;
-        case 114:   // F3
-            event.preventDefault();
-            this._switchStretchMode();
-            break;
-        case 115:   // F4
-            event.preventDefault();
-            this._switchFullScreen();
-            break;
+            case 113: // F2
+                event.preventDefault();
+                this._switchFPSMeter();
+                break;
+            case 114: // F3
+                event.preventDefault();
+                this._switchStretchMode();
+                break;
+            case 115: // F4
+                event.preventDefault();
+                this._switchFullScreen();
+                break;
         }
     }
 };
@@ -1137,10 +1170,11 @@ Graphics._onKeyDown = function(event) {
 /**
  * @static
  * @method _onTouchEnd
- * @param {TouchEvent} event
+ * @param {TouchEvent}
+ *            event
  * @private
  */
-Graphics._onTouchEnd = function(event) {
+Graphics._onTouchEnd = function (event) {
     if (!this._videoUnlocked) {
         this._video.play();
         this._videoUnlocked = true;
@@ -1155,7 +1189,7 @@ Graphics._onTouchEnd = function(event) {
  * @method _switchFPSMeter
  * @private
  */
-Graphics._switchFPSMeter = function() {
+Graphics._switchFPSMeter = function () {
     if (this._fpsMeter.isPaused) {
         this.showFps();
         this._fpsMeter.showFps();
@@ -1174,7 +1208,7 @@ Graphics._switchFPSMeter = function() {
  * @return {Boolean}
  * @private
  */
-Graphics._switchStretchMode = function() {
+Graphics._switchStretchMode = function () {
     this._stretchEnabled = !this._stretchEnabled;
     this._updateAllElements();
 };
@@ -1184,7 +1218,7 @@ Graphics._switchStretchMode = function() {
  * @method _switchFullScreen
  * @private
  */
-Graphics._switchFullScreen = function() {
+Graphics._switchFullScreen = function () {
     if (this._isFullScreen()) {
         this._requestFullScreen();
     } else {
@@ -1198,10 +1232,10 @@ Graphics._switchFullScreen = function() {
  * @return {Boolean}
  * @private
  */
-Graphics._isFullScreen = function() {
+Graphics._isFullScreen = function () {
     return ((document.fullScreenElement && document.fullScreenElement !== null) ||
-            (!document.mozFullScreen && !document.webkitFullscreenElement &&
-             !document.msFullscreenElement));
+        (!document.mozFullScreen && !document.webkitFullscreenElement &&
+            !document.msFullscreenElement));
 };
 
 /**
@@ -1209,7 +1243,7 @@ Graphics._isFullScreen = function() {
  * @method _requestFullScreen
  * @private
  */
-Graphics._requestFullScreen = function() {
+Graphics._requestFullScreen = function () {
     var element = document.body;
     if (element.requestFullScreen) {
         element.requestFullScreen();
@@ -1227,7 +1261,7 @@ Graphics._requestFullScreen = function() {
  * @method _cancelFullScreen
  * @private
  */
-Graphics._cancelFullScreen = function() {
+Graphics._cancelFullScreen = function () {
     if (document.cancelFullScreen) {
         document.cancelFullScreen();
     } else if (document.mozCancelFullScreen) {
@@ -1238,3 +1272,4 @@ Graphics._cancelFullScreen = function() {
         document.msExitFullscreen();
     }
 };
+

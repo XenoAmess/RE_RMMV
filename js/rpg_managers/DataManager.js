@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:DataManager-----------------------------------------------------------------------------
 // DataManager
 //
 // The static class that manages the database and game objects.
@@ -7,58 +7,99 @@ function DataManager() {
     throw new Error('This is a static class');
 }
 
-var $dataActors       = null;
-var $dataClasses      = null;
-var $dataSkills       = null;
-var $dataItems        = null;
-var $dataWeapons      = null;
-var $dataArmors       = null;
-var $dataEnemies      = null;
-var $dataTroops       = null;
-var $dataStates       = null;
-var $dataAnimations   = null;
-var $dataTilesets     = null;
+var $dataActors = null;
+var $dataClasses = null;
+var $dataSkills = null;
+var $dataItems = null;
+var $dataWeapons = null;
+var $dataArmors = null;
+var $dataEnemies = null;
+var $dataTroops = null;
+var $dataStates = null;
+var $dataAnimations = null;
+var $dataTilesets = null;
 var $dataCommonEvents = null;
-var $dataSystem       = null;
-var $dataMapInfos     = null;
-var $dataMap          = null;
-var $gameTemp         = null;
-var $gameSystem       = null;
-var $gameScreen       = null;
-var $gameTimer        = null;
-var $gameMessage      = null;
-var $gameSwitches     = null;
-var $gameVariables    = null;
+var $dataSystem = null;
+var $dataMapInfos = null;
+var $dataMap = null;
+var $gameTemp = null;
+var $gameSystem = null;
+var $gameScreen = null;
+var $gameTimer = null;
+var $gameMessage = null;
+var $gameSwitches = null;
+var $gameVariables = null;
 var $gameSelfSwitches = null;
-var $gameActors       = null;
-var $gameParty        = null;
-var $gameTroop        = null;
-var $gameMap          = null;
-var $gamePlayer       = null;
-var $testEvent        = null;
+var $gameActors = null;
+var $gameParty = null;
+var $gameTroop = null;
+var $gameMap = null;
+var $gamePlayer = null;
+var $testEvent = null;
 
-DataManager._globalId       = 'RPGMV';
+DataManager._globalId = 'RPGMV';
 DataManager._lastAccessedId = 1;
-DataManager._errorUrl       = null;
+DataManager._errorUrl = null;
 
-DataManager._databaseFiles = [
-    { name: '$dataActors',       src: 'Actors.json'       },
-    { name: '$dataClasses',      src: 'Classes.json'      },
-    { name: '$dataSkills',       src: 'Skills.json'       },
-    { name: '$dataItems',        src: 'Items.json'        },
-    { name: '$dataWeapons',      src: 'Weapons.json'      },
-    { name: '$dataArmors',       src: 'Armors.json'       },
-    { name: '$dataEnemies',      src: 'Enemies.json'      },
-    { name: '$dataTroops',       src: 'Troops.json'       },
-    { name: '$dataStates',       src: 'States.json'       },
-    { name: '$dataAnimations',   src: 'Animations.json'   },
-    { name: '$dataTilesets',     src: 'Tilesets.json'     },
-    { name: '$dataCommonEvents', src: 'CommonEvents.json' },
-    { name: '$dataSystem',       src: 'System.json'       },
-    { name: '$dataMapInfos',     src: 'MapInfos.json'     }
+DataManager._databaseFiles = [{
+    name: '$dataActors',
+    src: 'Actors.json'
+},
+    {
+        name: '$dataClasses',
+        src: 'Classes.json'
+    },
+    {
+        name: '$dataSkills',
+        src: 'Skills.json'
+    },
+    {
+        name: '$dataItems',
+        src: 'Items.json'
+    },
+    {
+        name: '$dataWeapons',
+        src: 'Weapons.json'
+    },
+    {
+        name: '$dataArmors',
+        src: 'Armors.json'
+    },
+    {
+        name: '$dataEnemies',
+        src: 'Enemies.json'
+    },
+    {
+        name: '$dataTroops',
+        src: 'Troops.json'
+    },
+    {
+        name: '$dataStates',
+        src: 'States.json'
+    },
+    {
+        name: '$dataAnimations',
+        src: 'Animations.json'
+    },
+    {
+        name: '$dataTilesets',
+        src: 'Tilesets.json'
+    },
+    {
+        name: '$dataCommonEvents',
+        src: 'CommonEvents.json'
+    },
+    {
+        name: '$dataSystem',
+        src: 'System.json'
+    },
+    {
+        name: '$dataMapInfos',
+        src: 'MapInfos.json'
+    }
 ];
 
-DataManager.loadDatabase = function() {
+DataManager.loadDatabase = function () {
     var test = this.isBattleTest() || this.isEventTest();
     var prefix = test ? 'Test_' : '';
     for (var i = 0; i < this._databaseFiles.length; i++) {
@@ -71,25 +112,25 @@ DataManager.loadDatabase = function() {
     }
 };
 
-DataManager.loadDataFile = function(name, src) {
+DataManager.loadDataFile = function (name, src) {
     var xhr = new XMLHttpRequest();
     var url = 'data/' + src;
     xhr.open('GET', url);
     xhr.overrideMimeType('application/json');
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status < 400) {
             window[name] = JSON.parse(xhr.responseText);
             DataManager.onLoad(window[name]);
         }
     };
-    xhr.onerror = this._mapLoader || function() {
+    xhr.onerror = this._mapLoader || function () {
         DataManager._errorUrl = DataManager._errorUrl || url;
     };
     window[name] = null;
     xhr.send();
 };
 
-DataManager.isDatabaseLoaded = function() {
+DataManager.isDatabaseLoaded = function () {
     this.checkError();
     for (var i = 0; i < this._databaseFiles.length; i++) {
         if (!window[this._databaseFiles[i].name]) {
@@ -99,7 +140,7 @@ DataManager.isDatabaseLoaded = function() {
     return true;
 };
 
-DataManager.loadMapData = function(mapId) {
+DataManager.loadMapData = function (mapId) {
     if (mapId > 0) {
         var filename = 'Map%1.json'.format(mapId.padZero(3));
         this._mapLoader = ResourceHandler.createLoader('data/' + filename, this.loadDataFile.bind(this, '$dataMap', filename));
@@ -109,7 +150,7 @@ DataManager.loadMapData = function(mapId) {
     }
 };
 
-DataManager.makeEmptyMap = function() {
+DataManager.makeEmptyMap = function () {
     $dataMap = {};
     $dataMap.data = [];
     $dataMap.events = [];
@@ -118,12 +159,12 @@ DataManager.makeEmptyMap = function() {
     $dataMap.scrollType = 3;
 };
 
-DataManager.isMapLoaded = function() {
+DataManager.isMapLoaded = function () {
     this.checkError();
     return !!$dataMap;
 };
 
-DataManager.onLoad = function(object) {
+DataManager.onLoad = function (object) {
     var array;
     if (object === $dataMap) {
         this.extractMetadata(object);
@@ -146,10 +187,10 @@ DataManager.onLoad = function(object) {
     }
 };
 
-DataManager.extractMetadata = function(data) {
+DataManager.extractMetadata = function (data) {
     var re = /<([^<>:]+)(:?)([^>]*)>/g;
     data.meta = {};
-    for (;;) {
+    for (; ;) {
         var match = re.exec(data.note);
         if (match) {
             if (match[2] === ':') {
@@ -163,53 +204,53 @@ DataManager.extractMetadata = function(data) {
     }
 };
 
-DataManager.checkError = function() {
+DataManager.checkError = function () {
     if (DataManager._errorUrl) {
         throw new Error('Failed to load: ' + DataManager._errorUrl);
     }
 };
 
-DataManager.isBattleTest = function() {
+DataManager.isBattleTest = function () {
     return Utils.isOptionValid('btest');
 };
 
-DataManager.isEventTest = function() {
+DataManager.isEventTest = function () {
     return Utils.isOptionValid('etest');
 };
 
-DataManager.isSkill = function(item) {
+DataManager.isSkill = function (item) {
     return item && $dataSkills.contains(item);
 };
 
-DataManager.isItem = function(item) {
+DataManager.isItem = function (item) {
     return item && $dataItems.contains(item);
 };
 
-DataManager.isWeapon = function(item) {
+DataManager.isWeapon = function (item) {
     return item && $dataWeapons.contains(item);
 };
 
-DataManager.isArmor = function(item) {
+DataManager.isArmor = function (item) {
     return item && $dataArmors.contains(item);
 };
 
-DataManager.createGameObjects = function() {
-    $gameTemp          = new Game_Temp();
-    $gameSystem        = new Game_System();
-    $gameScreen        = new Game_Screen();
-    $gameTimer         = new Game_Timer();
-    $gameMessage       = new Game_Message();
-    $gameSwitches      = new Game_Switches();
-    $gameVariables     = new Game_Variables();
-    $gameSelfSwitches  = new Game_SelfSwitches();
-    $gameActors        = new Game_Actors();
-    $gameParty         = new Game_Party();
-    $gameTroop         = new Game_Troop();
-    $gameMap           = new Game_Map();
-    $gamePlayer        = new Game_Player();
+DataManager.createGameObjects = function () {
+    $gameTemp = new Game_Temp();
+    $gameSystem = new Game_System();
+    $gameScreen = new Game_Screen();
+    $gameTimer = new Game_Timer();
+    $gameMessage = new Game_Message();
+    $gameSwitches = new Game_Switches();
+    $gameVariables = new Game_Variables();
+    $gameSelfSwitches = new Game_SelfSwitches();
+    $gameActors = new Game_Actors();
+    $gameParty = new Game_Party();
+    $gameTroop = new Game_Troop();
+    $gameMap = new Game_Map();
+    $gamePlayer = new Game_Player();
 };
 
-DataManager.setupNewGame = function() {
+DataManager.setupNewGame = function () {
     this.createGameObjects();
     this.selectSavefileForNewGame();
     $gameParty.setupStartingMembers();
@@ -218,7 +259,7 @@ DataManager.setupNewGame = function() {
     Graphics.frameCount = 0;
 };
 
-DataManager.setupBattleTest = function() {
+DataManager.setupBattleTest = function () {
     this.createGameObjects();
     $gameParty.setupBattleTest();
     BattleManager.setup($dataSystem.testTroopId, true, false);
@@ -226,7 +267,7 @@ DataManager.setupBattleTest = function() {
     BattleManager.playBattleBgm();
 };
 
-DataManager.setupEventTest = function() {
+DataManager.setupEventTest = function () {
     this.createGameObjects();
     this.selectSavefileForNewGame();
     $gameParty.setupStartingMembers();
@@ -234,7 +275,7 @@ DataManager.setupEventTest = function() {
     $gamePlayer.setTransparent(false);
 };
 
-DataManager.loadGlobalInfo = function() {
+DataManager.loadGlobalInfo = function () {
     var json;
     try {
         json = StorageManager.load(0);
@@ -255,11 +296,11 @@ DataManager.loadGlobalInfo = function() {
     }
 };
 
-DataManager.saveGlobalInfo = function(info) {
+DataManager.saveGlobalInfo = function (info) {
     StorageManager.save(0, JSON.stringify(info));
 };
 
-DataManager.isThisGameFile = function(savefileId) {
+DataManager.isThisGameFile = function (savefileId) {
     var globalInfo = this.loadGlobalInfo();
     if (globalInfo && globalInfo[savefileId]) {
         if (StorageManager.isLocalMode()) {
@@ -267,14 +308,14 @@ DataManager.isThisGameFile = function(savefileId) {
         } else {
             var savefile = globalInfo[savefileId];
             return (savefile.globalId === this._globalId &&
-                    savefile.title === $dataSystem.gameTitle);
+                savefile.title === $dataSystem.gameTitle);
         }
     } else {
         return false;
     }
 };
 
-DataManager.isAnySavefileExists = function() {
+DataManager.isAnySavefileExists = function () {
     var globalInfo = this.loadGlobalInfo();
     if (globalInfo) {
         for (var i = 1; i < globalInfo.length; i++) {
@@ -286,7 +327,7 @@ DataManager.isAnySavefileExists = function() {
     return false;
 };
 
-DataManager.latestSavefileId = function() {
+DataManager.latestSavefileId = function () {
     var globalInfo = this.loadGlobalInfo();
     var savefileId = 1;
     var timestamp = 0;
@@ -301,7 +342,7 @@ DataManager.latestSavefileId = function() {
     return savefileId;
 };
 
-DataManager.loadAllSavefileImages = function() {
+DataManager.loadAllSavefileImages = function () {
     var globalInfo = this.loadGlobalInfo();
     if (globalInfo) {
         for (var i = 1; i < globalInfo.length; i++) {
@@ -313,7 +354,7 @@ DataManager.loadAllSavefileImages = function() {
     }
 };
 
-DataManager.loadSavefileImages = function(info) {
+DataManager.loadSavefileImages = function (info) {
     if (info.characters) {
         for (var i = 0; i < info.characters.length; i++) {
             ImageManager.reserveCharacter(info.characters[i][0]);
@@ -326,11 +367,11 @@ DataManager.loadSavefileImages = function(info) {
     }
 };
 
-DataManager.maxSavefiles = function() {
+DataManager.maxSavefiles = function () {
     return 20;
 };
 
-DataManager.saveGame = function(savefileId) {
+DataManager.saveGame = function (savefileId) {
     try {
         StorageManager.backup(savefileId);
         return this.saveGameWithoutRescue(savefileId);
@@ -345,7 +386,7 @@ DataManager.saveGame = function(savefileId) {
     }
 };
 
-DataManager.loadGame = function(savefileId) {
+DataManager.loadGame = function (savefileId) {
     try {
         return this.loadGameWithoutRescue(savefileId);
     } catch (e) {
@@ -354,16 +395,16 @@ DataManager.loadGame = function(savefileId) {
     }
 };
 
-DataManager.loadSavefileInfo = function(savefileId) {
+DataManager.loadSavefileInfo = function (savefileId) {
     var globalInfo = this.loadGlobalInfo();
     return (globalInfo && globalInfo[savefileId]) ? globalInfo[savefileId] : null;
 };
 
-DataManager.lastAccessedSavefileId = function() {
+DataManager.lastAccessedSavefileId = function () {
     return this._lastAccessedId;
 };
 
-DataManager.saveGameWithoutRescue = function(savefileId) {
+DataManager.saveGameWithoutRescue = function (savefileId) {
     var json = JsonEx.stringify(this.makeSaveContents());
     if (json.length >= 200000) {
         console.warn('Save data too big!');
@@ -376,7 +417,7 @@ DataManager.saveGameWithoutRescue = function(savefileId) {
     return true;
 };
 
-DataManager.loadGameWithoutRescue = function(savefileId) {
+DataManager.loadGameWithoutRescue = function (savefileId) {
     var globalInfo = this.loadGlobalInfo();
     if (this.isThisGameFile(savefileId)) {
         var json = StorageManager.load(savefileId);
@@ -389,7 +430,7 @@ DataManager.loadGameWithoutRescue = function(savefileId) {
     }
 };
 
-DataManager.selectSavefileForNewGame = function() {
+DataManager.selectSavefileForNewGame = function () {
     var globalInfo = this.loadGlobalInfo();
     this._lastAccessedId = 1;
     if (globalInfo) {
@@ -412,42 +453,43 @@ DataManager.selectSavefileForNewGame = function() {
     }
 };
 
-DataManager.makeSavefileInfo = function() {
+DataManager.makeSavefileInfo = function () {
     var info = {};
-    info.globalId   = this._globalId;
-    info.title      = $dataSystem.gameTitle;
+    info.globalId = this._globalId;
+    info.title = $dataSystem.gameTitle;
     info.characters = $gameParty.charactersForSavefile();
-    info.faces      = $gameParty.facesForSavefile();
-    info.playtime   = $gameSystem.playtimeText();
-    info.timestamp  = Date.now();
+    info.faces = $gameParty.facesForSavefile();
+    info.playtime = $gameSystem.playtimeText();
+    info.timestamp = Date.now();
     return info;
 };
 
-DataManager.makeSaveContents = function() {
+DataManager.makeSaveContents = function () {
     // A save data does not contain $gameTemp, $gameMessage, and $gameTroop.
     var contents = {};
-    contents.system       = $gameSystem;
-    contents.screen       = $gameScreen;
-    contents.timer        = $gameTimer;
-    contents.switches     = $gameSwitches;
-    contents.variables    = $gameVariables;
+    contents.system = $gameSystem;
+    contents.screen = $gameScreen;
+    contents.timer = $gameTimer;
+    contents.switches = $gameSwitches;
+    contents.variables = $gameVariables;
     contents.selfSwitches = $gameSelfSwitches;
-    contents.actors       = $gameActors;
-    contents.party        = $gameParty;
-    contents.map          = $gameMap;
-    contents.player       = $gamePlayer;
+    contents.actors = $gameActors;
+    contents.party = $gameParty;
+    contents.map = $gameMap;
+    contents.player = $gamePlayer;
     return contents;
 };
 
-DataManager.extractSaveContents = function(contents) {
-    $gameSystem        = contents.system;
-    $gameScreen        = contents.screen;
-    $gameTimer         = contents.timer;
-    $gameSwitches      = contents.switches;
-    $gameVariables     = contents.variables;
-    $gameSelfSwitches  = contents.selfSwitches;
-    $gameActors        = contents.actors;
-    $gameParty         = contents.party;
-    $gameMap           = contents.map;
-    $gamePlayer        = contents.player;
+DataManager.extractSaveContents = function (contents) {
+    $gameSystem = contents.system;
+    $gameScreen = contents.screen;
+    $gameTimer = contents.timer;
+    $gameSwitches = contents.switches;
+    $gameVariables = contents.variables;
+    $gameSelfSwitches = contents.selfSwitches;
+    $gameActors = contents.actors;
+    $gameParty = contents.party;
+    $gameMap = contents.map;
+    $gamePlayer = contents.player;
 };
+

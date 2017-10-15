@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_ShopNumber-----------------------------------------------------------------------------
 // Window_ShopNumber
 //
 // The window for inputting quantity of items to buy or sell on the shop
@@ -11,7 +11,7 @@ function Window_ShopNumber() {
 Window_ShopNumber.prototype = Object.create(Window_Selectable.prototype);
 Window_ShopNumber.prototype.constructor = Window_ShopNumber;
 
-Window_ShopNumber.prototype.initialize = function(x, y, height) {
+Window_ShopNumber.prototype.initialize = function (x, y, height) {
     var width = this.windowWidth();
     Window_Selectable.prototype.initialize.call(this, x, y, width, height);
     this._item = null;
@@ -22,15 +22,15 @@ Window_ShopNumber.prototype.initialize = function(x, y, height) {
     this.createButtons();
 };
 
-Window_ShopNumber.prototype.windowWidth = function() {
+Window_ShopNumber.prototype.windowWidth = function () {
     return 456;
 };
 
-Window_ShopNumber.prototype.number = function() {
+Window_ShopNumber.prototype.number = function () {
     return this._number;
 };
 
-Window_ShopNumber.prototype.setup = function(item, max, price) {
+Window_ShopNumber.prototype.setup = function (item, max, price) {
     this._item = item;
     this._max = Math.floor(max);
     this._price = price;
@@ -40,12 +40,12 @@ Window_ShopNumber.prototype.setup = function(item, max, price) {
     this.refresh();
 };
 
-Window_ShopNumber.prototype.setCurrencyUnit = function(currencyUnit) {
+Window_ShopNumber.prototype.setCurrencyUnit = function (currencyUnit) {
     this._currencyUnit = currencyUnit;
     this.refresh();
 };
 
-Window_ShopNumber.prototype.createButtons = function() {
+Window_ShopNumber.prototype.createButtons = function () {
     var bitmap = ImageManager.loadSystem('ButtonSet');
     var buttonWidth = 48;
     var buttonHeight = 48;
@@ -68,7 +68,7 @@ Window_ShopNumber.prototype.createButtons = function() {
     this._buttons[4].setClickHandler(this.onButtonOk.bind(this));
 };
 
-Window_ShopNumber.prototype.placeButtons = function() {
+Window_ShopNumber.prototype.placeButtons = function () {
     var numButtons = this._buttons.length;
     var spacing = 16;
     var totalWidth = -spacing;
@@ -84,7 +84,7 @@ Window_ShopNumber.prototype.placeButtons = function() {
     }
 };
 
-Window_ShopNumber.prototype.updateButtonsVisiblity = function() {
+Window_ShopNumber.prototype.updateButtonsVisiblity = function () {
     if (TouchInput.date > Input.date) {
         this.showButtons();
     } else {
@@ -92,19 +92,19 @@ Window_ShopNumber.prototype.updateButtonsVisiblity = function() {
     }
 };
 
-Window_ShopNumber.prototype.showButtons = function() {
+Window_ShopNumber.prototype.showButtons = function () {
     for (var i = 0; i < this._buttons.length; i++) {
         this._buttons[i].visible = true;
     }
 };
 
-Window_ShopNumber.prototype.hideButtons = function() {
+Window_ShopNumber.prototype.hideButtons = function () {
     for (var i = 0; i < this._buttons.length; i++) {
         this._buttons[i].visible = false;
     }
 };
 
-Window_ShopNumber.prototype.refresh = function() {
+Window_ShopNumber.prototype.refresh = function () {
     this.contents.clear();
     this.drawItemName(this._item, 0, this.itemY());
     this.drawMultiplicationSign();
@@ -112,7 +112,7 @@ Window_ShopNumber.prototype.refresh = function() {
     this.drawTotalPrice();
 };
 
-Window_ShopNumber.prototype.drawMultiplicationSign = function() {
+Window_ShopNumber.prototype.drawMultiplicationSign = function () {
     var sign = '\u00d7';
     var width = this.textWidth(sign);
     var x = this.cursorX() - width * 2;
@@ -121,7 +121,7 @@ Window_ShopNumber.prototype.drawMultiplicationSign = function() {
     this.drawText(sign, x, y, width);
 };
 
-Window_ShopNumber.prototype.drawNumber = function() {
+Window_ShopNumber.prototype.drawNumber = function () {
     var x = this.cursorX();
     var y = this.itemY();
     var width = this.cursorWidth() - this.textPadding();
@@ -129,50 +129,50 @@ Window_ShopNumber.prototype.drawNumber = function() {
     this.drawText(this._number, x, y, width, 'right');
 };
 
-Window_ShopNumber.prototype.drawTotalPrice = function() {
+Window_ShopNumber.prototype.drawTotalPrice = function () {
     var total = this._price * this._number;
     var width = this.contentsWidth() - this.textPadding();
     this.drawCurrencyValue(total, this._currencyUnit, 0, this.priceY(), width);
 };
 
-Window_ShopNumber.prototype.itemY = function() {
+Window_ShopNumber.prototype.itemY = function () {
     return Math.round(this.contentsHeight() / 2 - this.lineHeight() * 1.5);
 };
 
-Window_ShopNumber.prototype.priceY = function() {
+Window_ShopNumber.prototype.priceY = function () {
     return Math.round(this.contentsHeight() / 2 + this.lineHeight() / 2);
 };
 
-Window_ShopNumber.prototype.buttonY = function() {
+Window_ShopNumber.prototype.buttonY = function () {
     return Math.round(this.priceY() + this.lineHeight() * 2.5);
 };
 
-Window_ShopNumber.prototype.cursorWidth = function() {
+Window_ShopNumber.prototype.cursorWidth = function () {
     var digitWidth = this.textWidth('0');
     return this.maxDigits() * digitWidth + this.textPadding() * 2;
 };
 
-Window_ShopNumber.prototype.cursorX = function() {
+Window_ShopNumber.prototype.cursorX = function () {
     return this.contentsWidth() - this.cursorWidth() - this.textPadding();
 };
 
-Window_ShopNumber.prototype.maxDigits = function() {
+Window_ShopNumber.prototype.maxDigits = function () {
     return 2;
 };
 
-Window_ShopNumber.prototype.update = function() {
+Window_ShopNumber.prototype.update = function () {
     Window_Selectable.prototype.update.call(this);
     this.processNumberChange();
 };
 
-Window_ShopNumber.prototype.isOkTriggered = function() {
+Window_ShopNumber.prototype.isOkTriggered = function () {
     return Input.isTriggered('ok');
 };
 
-Window_ShopNumber.prototype.playOkSound = function() {
+Window_ShopNumber.prototype.playOkSound = function () {
 };
 
-Window_ShopNumber.prototype.processNumberChange = function() {
+Window_ShopNumber.prototype.processNumberChange = function () {
     if (this.isOpenAndActive()) {
         if (Input.isRepeated('right')) {
             this.changeNumber(1);
@@ -189,7 +189,7 @@ Window_ShopNumber.prototype.processNumberChange = function() {
     }
 };
 
-Window_ShopNumber.prototype.changeNumber = function(amount) {
+Window_ShopNumber.prototype.changeNumber = function (amount) {
     var lastNumber = this._number;
     this._number = (this._number + amount).clamp(1, this._max);
     if (this._number !== lastNumber) {
@@ -198,27 +198,28 @@ Window_ShopNumber.prototype.changeNumber = function(amount) {
     }
 };
 
-Window_ShopNumber.prototype.updateCursor = function() {
+Window_ShopNumber.prototype.updateCursor = function () {
     this.setCursorRect(this.cursorX(), this.itemY(),
-                       this.cursorWidth(), this.lineHeight());
+        this.cursorWidth(), this.lineHeight());
 };
 
-Window_ShopNumber.prototype.onButtonUp = function() {
+Window_ShopNumber.prototype.onButtonUp = function () {
     this.changeNumber(1);
 };
 
-Window_ShopNumber.prototype.onButtonUp2 = function() {
+Window_ShopNumber.prototype.onButtonUp2 = function () {
     this.changeNumber(10);
 };
 
-Window_ShopNumber.prototype.onButtonDown = function() {
+Window_ShopNumber.prototype.onButtonDown = function () {
     this.changeNumber(-1);
 };
 
-Window_ShopNumber.prototype.onButtonDown2 = function() {
+Window_ShopNumber.prototype.onButtonDown2 = function () {
     this.changeNumber(-10);
 };
 
-Window_ShopNumber.prototype.onButtonOk = function() {
+Window_ShopNumber.prototype.onButtonOk = function () {
     this.processOk();
 };
+

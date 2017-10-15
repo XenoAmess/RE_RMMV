@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_NameEdit-----------------------------------------------------------------------------
 // Window_NameEdit
 //
 // The window for editing an actor's name on the name input screen.
@@ -10,7 +10,7 @@ function Window_NameEdit() {
 Window_NameEdit.prototype = Object.create(Window_Base.prototype);
 Window_NameEdit.prototype.constructor = Window_NameEdit;
 
-Window_NameEdit.prototype.initialize = function(actor, maxLength) {
+Window_NameEdit.prototype.initialize = function (actor, maxLength) {
     var width = this.windowWidth();
     var height = this.windowHeight();
     var x = (Graphics.boxWidth - width) / 2;
@@ -26,26 +26,26 @@ Window_NameEdit.prototype.initialize = function(actor, maxLength) {
     ImageManager.reserveFace(actor.faceName());
 };
 
-Window_NameEdit.prototype.windowWidth = function() {
+Window_NameEdit.prototype.windowWidth = function () {
     return 480;
 };
 
-Window_NameEdit.prototype.windowHeight = function() {
+Window_NameEdit.prototype.windowHeight = function () {
     return this.fittingHeight(4);
 };
 
-Window_NameEdit.prototype.name = function() {
+Window_NameEdit.prototype.name = function () {
     return this._name;
 };
 
-Window_NameEdit.prototype.restoreDefault = function() {
+Window_NameEdit.prototype.restoreDefault = function () {
     this._name = this._defaultName;
     this._index = this._name.length;
     this.refresh();
     return this._name.length > 0;
 };
 
-Window_NameEdit.prototype.add = function(ch) {
+Window_NameEdit.prototype.add = function (ch) {
     if (this._index < this._maxLength) {
         this._name += ch;
         this._index++;
@@ -56,7 +56,7 @@ Window_NameEdit.prototype.add = function(ch) {
     }
 };
 
-Window_NameEdit.prototype.back = function() {
+Window_NameEdit.prototype.back = function () {
     if (this._index > 0) {
         this._index--;
         this._name = this._name.slice(0, this._index);
@@ -67,22 +67,22 @@ Window_NameEdit.prototype.back = function() {
     }
 };
 
-Window_NameEdit.prototype.faceWidth = function() {
+Window_NameEdit.prototype.faceWidth = function () {
     return 144;
 };
 
-Window_NameEdit.prototype.charWidth = function() {
+Window_NameEdit.prototype.charWidth = function () {
     var text = $gameSystem.isJapanese() ? '\uff21' : 'A';
     return this.textWidth(text);
 };
 
-Window_NameEdit.prototype.left = function() {
+Window_NameEdit.prototype.left = function () {
     var nameCenter = (this.contentsWidth() + this.faceWidth()) / 2;
     var nameWidth = (this._maxLength + 1) * this.charWidth();
     return Math.min(nameCenter - nameWidth / 2, this.contentsWidth() - nameWidth);
 };
 
-Window_NameEdit.prototype.itemRect = function(index) {
+Window_NameEdit.prototype.itemRect = function (index) {
     return {
         x: this.left() + index * this.charWidth(),
         y: 54,
@@ -91,7 +91,7 @@ Window_NameEdit.prototype.itemRect = function(index) {
     };
 };
 
-Window_NameEdit.prototype.underlineRect = function(index) {
+Window_NameEdit.prototype.underlineRect = function (index) {
     var rect = this.itemRect(index);
     rect.x++;
     rect.y += rect.height - 4;
@@ -100,11 +100,11 @@ Window_NameEdit.prototype.underlineRect = function(index) {
     return rect;
 };
 
-Window_NameEdit.prototype.underlineColor = function() {
+Window_NameEdit.prototype.underlineColor = function () {
     return this.normalColor();
 };
 
-Window_NameEdit.prototype.drawUnderline = function(index) {
+Window_NameEdit.prototype.drawUnderline = function (index) {
     var rect = this.underlineRect(index);
     var color = this.underlineColor();
     this.contents.paintOpacity = 48;
@@ -112,13 +112,13 @@ Window_NameEdit.prototype.drawUnderline = function(index) {
     this.contents.paintOpacity = 255;
 };
 
-Window_NameEdit.prototype.drawChar = function(index) {
+Window_NameEdit.prototype.drawChar = function (index) {
     var rect = this.itemRect(index);
     this.resetTextColor();
     this.drawText(this._name[index] || '', rect.x, rect.y);
 };
 
-Window_NameEdit.prototype.refresh = function() {
+Window_NameEdit.prototype.refresh = function () {
     this.contents.clear();
     this.drawActorFace(this._actor, 0, 0);
     for (var i = 0; i < this._maxLength; i++) {
@@ -130,3 +130,4 @@ Window_NameEdit.prototype.refresh = function() {
     var rect = this.itemRect(this._index);
     this.setCursorRect(rect.x, rect.y, rect.width, rect.height);
 };
+

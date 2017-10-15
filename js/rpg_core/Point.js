@@ -1,11 +1,13 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Point-----------------------------------------------------------------------------
 /**
  * The point class.
  *
  * @class Point
  * @constructor
- * @param {Number} x The x coordinate
- * @param {Number} y The y coordinate
+ * @param {Number}
+ *            x The x coordinate
+ * @param {Number}
+ *            y The y coordinate
  */
 function Point() {
     this.initialize.apply(this, arguments);
@@ -14,7 +16,7 @@ function Point() {
 Point.prototype = Object.create(PIXI.Point.prototype);
 Point.prototype.constructor = Point;
 
-Point.prototype.initialize = function(x, y) {
+Point.prototype.initialize = function (x, y) {
     PIXI.Point.call(this, x, y);
 };
 
@@ -31,3 +33,4 @@ Point.prototype.initialize = function(x, y) {
  * @property y
  * @type Number
  */
+

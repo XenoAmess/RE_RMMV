@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Window_Options-----------------------------------------------------------------------------
 // Window_Options
 //
 // The window for changing various settings on the options screen.
@@ -10,42 +10,42 @@ function Window_Options() {
 Window_Options.prototype = Object.create(Window_Command.prototype);
 Window_Options.prototype.constructor = Window_Options;
 
-Window_Options.prototype.initialize = function() {
+Window_Options.prototype.initialize = function () {
     Window_Command.prototype.initialize.call(this, 0, 0);
     this.updatePlacement();
 };
 
-Window_Options.prototype.windowWidth = function() {
+Window_Options.prototype.windowWidth = function () {
     return 400;
 };
 
-Window_Options.prototype.windowHeight = function() {
+Window_Options.prototype.windowHeight = function () {
     return this.fittingHeight(Math.min(this.numVisibleRows(), 12));
 };
 
-Window_Options.prototype.updatePlacement = function() {
+Window_Options.prototype.updatePlacement = function () {
     this.x = (Graphics.boxWidth - this.width) / 2;
     this.y = (Graphics.boxHeight - this.height) / 2;
 };
 
-Window_Options.prototype.makeCommandList = function() {
+Window_Options.prototype.makeCommandList = function () {
     this.addGeneralOptions();
     this.addVolumeOptions();
 };
 
-Window_Options.prototype.addGeneralOptions = function() {
+Window_Options.prototype.addGeneralOptions = function () {
     this.addCommand(TextManager.alwaysDash, 'alwaysDash');
     this.addCommand(TextManager.commandRemember, 'commandRemember');
 };
 
-Window_Options.prototype.addVolumeOptions = function() {
+Window_Options.prototype.addVolumeOptions = function () {
     this.addCommand(TextManager.bgmVolume, 'bgmVolume');
     this.addCommand(TextManager.bgsVolume, 'bgsVolume');
     this.addCommand(TextManager.meVolume, 'meVolume');
     this.addCommand(TextManager.seVolume, 'seVolume');
 };
 
-Window_Options.prototype.drawItem = function(index) {
+Window_Options.prototype.drawItem = function (index) {
     var rect = this.itemRectForText(index);
     var statusWidth = this.statusWidth();
     var titleWidth = rect.width - statusWidth;
@@ -55,11 +55,11 @@ Window_Options.prototype.drawItem = function(index) {
     this.drawText(this.statusText(index), titleWidth, rect.y, statusWidth, 'right');
 };
 
-Window_Options.prototype.statusWidth = function() {
+Window_Options.prototype.statusWidth = function () {
     return 120;
 };
 
-Window_Options.prototype.statusText = function(index) {
+Window_Options.prototype.statusText = function (index) {
     var symbol = this.commandSymbol(index);
     var value = this.getConfigValue(symbol);
     if (this.isVolumeSymbol(symbol)) {
@@ -69,19 +69,19 @@ Window_Options.prototype.statusText = function(index) {
     }
 };
 
-Window_Options.prototype.isVolumeSymbol = function(symbol) {
+Window_Options.prototype.isVolumeSymbol = function (symbol) {
     return symbol.contains('Volume');
 };
 
-Window_Options.prototype.booleanStatusText = function(value) {
+Window_Options.prototype.booleanStatusText = function (value) {
     return value ? 'ON' : 'OFF';
 };
 
-Window_Options.prototype.volumeStatusText = function(value) {
+Window_Options.prototype.volumeStatusText = function (value) {
     return value + '%';
 };
 
-Window_Options.prototype.processOk = function() {
+Window_Options.prototype.processOk = function () {
     var index = this.index();
     var symbol = this.commandSymbol(index);
     var value = this.getConfigValue(symbol);
@@ -97,7 +97,7 @@ Window_Options.prototype.processOk = function() {
     }
 };
 
-Window_Options.prototype.cursorRight = function(wrap) {
+Window_Options.prototype.cursorRight = function (wrap) {
     var index = this.index();
     var symbol = this.commandSymbol(index);
     var value = this.getConfigValue(symbol);
@@ -110,7 +110,7 @@ Window_Options.prototype.cursorRight = function(wrap) {
     }
 };
 
-Window_Options.prototype.cursorLeft = function(wrap) {
+Window_Options.prototype.cursorLeft = function (wrap) {
     var index = this.index();
     var symbol = this.commandSymbol(index);
     var value = this.getConfigValue(symbol);
@@ -123,11 +123,11 @@ Window_Options.prototype.cursorLeft = function(wrap) {
     }
 };
 
-Window_Options.prototype.volumeOffset = function() {
+Window_Options.prototype.volumeOffset = function () {
     return 20;
 };
 
-Window_Options.prototype.changeValue = function(symbol, value) {
+Window_Options.prototype.changeValue = function (symbol, value) {
     var lastValue = this.getConfigValue(symbol);
     if (lastValue !== value) {
         this.setConfigValue(symbol, value);
@@ -136,10 +136,11 @@ Window_Options.prototype.changeValue = function(symbol, value) {
     }
 };
 
-Window_Options.prototype.getConfigValue = function(symbol) {
+Window_Options.prototype.getConfigValue = function (symbol) {
     return ConfigManager[symbol];
 };
 
-Window_Options.prototype.setConfigValue = function(symbol, volume) {
+Window_Options.prototype.setConfigValue = function (symbol, volume) {
     ConfigManager[symbol] = volume;
 };
+

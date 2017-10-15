@@ -1,4 +1,4 @@
-//-----------------------------------------------------------------------------
+//xenoSplitPos:Html5Audio-----------------------------------------------------------------------------
 /**
  * The static class that handles HTML5 Audio.
  *
@@ -23,7 +23,8 @@ Html5Audio._staticSePath = null;
  *
  * @static
  * @method setup
- * @param {String} url The url of the audio file
+ * @param {String}
+ *            url The url of the audio file
  */
 Html5Audio.setup = function (url) {
     if (!this._initialized) {
@@ -31,7 +32,7 @@ Html5Audio.setup = function (url) {
     }
     this.clear();
 
-    if(Decrypter.hasEncryptedAudio && this._audioElement.src) {
+    if (Decrypter.hasEncryptedAudio && this._audioElement.src) {
         window.URL.revokeObjectURL(this._audioElement.src);
     }
     this._url = url;
@@ -176,7 +177,8 @@ Html5Audio.clear = function () {
  * Set the URL of static se.
  *
  * @static
- * @param {String} url
+ * @param {String}
+ *            url
  */
 Html5Audio.setStaticSe = function (url) {
     if (!this._initialized) {
@@ -256,8 +258,10 @@ Html5Audio.isPlaying = function () {
  *
  * @static
  * @method play
- * @param {Boolean} loop Whether the audio data play in a loop
- * @param {Number} offset The start position to play in seconds
+ * @param {Boolean}
+ *            loop Whether the audio data play in a loop
+ * @param {Number}
+ *            offset The start position to play in seconds
  */
 Html5Audio.play = function (loop, offset) {
     if (this.isReady()) {
@@ -299,7 +303,8 @@ Html5Audio.stop = function () {
  *
  * @static
  * @method fadeIn
- * @param {Number} duration Fade-in time in seconds
+ * @param {Number}
+ *            duration Fade-in time in seconds
  */
 Html5Audio.fadeIn = function (duration) {
     if (this.isReady()) {
@@ -320,7 +325,8 @@ Html5Audio.fadeIn = function (duration) {
  *
  * @static
  * @method fadeOut
- * @param {Number} duration Fade-out time in seconds
+ * @param {Number}
+ *            duration Fade-out time in seconds
  */
 Html5Audio.fadeOut = function (duration) {
     if (this._audioElement) {
@@ -349,7 +355,8 @@ Html5Audio.seek = function () {
  *
  * @static
  * @method addLoadListener
- * @param {Function} listner The callback function
+ * @param {Function}
+ *            listner The callback function
  */
 Html5Audio.addLoadListener = function (listner) {
     this._loadListeners.push(listner);
@@ -358,7 +365,8 @@ Html5Audio.addLoadListener = function (listner) {
 /**
  * @static
  * @method _load
- * @param {String} url
+ * @param {String}
+ *            url
  * @private
  */
 Html5Audio._load = function (url) {
@@ -372,8 +380,10 @@ Html5Audio._load = function (url) {
 /**
  * @static
  * @method _startPlaying
- * @param {Boolean} loop
- * @param {Number} offset
+ * @param {Boolean}
+ *            loop
+ * @param {Number}
+ *            offset
  * @private
  */
 Html5Audio._startPlaying = function (loop, offset) {
@@ -423,15 +433,15 @@ Html5Audio._startGainTween = function (duration) {
 /**
  * @static
  * @method _applyTweenValue
- * @param {Number} volume
+ * @param {Number}
+ *            volume
  * @private
  */
 Html5Audio._applyTweenValue = function (volume) {
     Html5Audio._tweenGain += Html5Audio._tweenGainStep;
     if (Html5Audio._tweenGain < 0 && Html5Audio._tweenGainStep < 0) {
         Html5Audio._tweenGain = 0;
-    }
-    else if (Html5Audio._tweenGain > volume && Html5Audio._tweenGainStep > 0) {
+    } else if (Html5Audio._tweenGain > volume && Html5Audio._tweenGainStep > 0) {
         Html5Audio._tweenGain = volume;
     }
 
@@ -443,3 +453,4 @@ Html5Audio._applyTweenValue = function (volume) {
 
     Html5Audio._audioElement.volume = Html5Audio._tweenGain;
 };
+
