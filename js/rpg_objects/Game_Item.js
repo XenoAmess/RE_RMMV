@@ -1,4 +1,4 @@
-//xenoSplitPos:Game_Item-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Game_Item
 //
 // The game object class for handling skills, items, weapons, and armor. It is
@@ -8,7 +8,7 @@ function Game_Item() {
     this.initialize.apply(this, arguments);
 }
 
-Game_Item.prototype.initialize = function (item) {
+Game_Item.prototype.initialize = function(item) {
     this._dataClass = '';
     this._itemId = 0;
     if (item) {
@@ -16,39 +16,39 @@ Game_Item.prototype.initialize = function (item) {
     }
 };
 
-Game_Item.prototype.isSkill = function () {
+Game_Item.prototype.isSkill = function() {
     return this._dataClass === 'skill';
 };
 
-Game_Item.prototype.isItem = function () {
+Game_Item.prototype.isItem = function() {
     return this._dataClass === 'item';
 };
 
-Game_Item.prototype.isUsableItem = function () {
+Game_Item.prototype.isUsableItem = function() {
     return this.isSkill() || this.isItem();
 };
 
-Game_Item.prototype.isWeapon = function () {
+Game_Item.prototype.isWeapon = function() {
     return this._dataClass === 'weapon';
 };
 
-Game_Item.prototype.isArmor = function () {
+Game_Item.prototype.isArmor = function() {
     return this._dataClass === 'armor';
 };
 
-Game_Item.prototype.isEquipItem = function () {
+Game_Item.prototype.isEquipItem = function() {
     return this.isWeapon() || this.isArmor();
 };
 
-Game_Item.prototype.isNull = function () {
+Game_Item.prototype.isNull = function() {
     return this._dataClass === '';
 };
 
-Game_Item.prototype.itemId = function () {
+Game_Item.prototype.itemId = function() {
     return this._itemId;
 };
 
-Game_Item.prototype.object = function () {
+Game_Item.prototype.object = function() {
     if (this.isSkill()) {
         return $dataSkills[this._itemId];
     } else if (this.isItem()) {
@@ -62,7 +62,7 @@ Game_Item.prototype.object = function () {
     }
 };
 
-Game_Item.prototype.setObject = function (item) {
+Game_Item.prototype.setObject = function(item) {
     if (DataManager.isSkill(item)) {
         this._dataClass = 'skill';
     } else if (DataManager.isItem(item)) {
@@ -77,8 +77,7 @@ Game_Item.prototype.setObject = function (item) {
     this._itemId = item ? item.id : 0;
 };
 
-Game_Item.prototype.setEquip = function (isWeapon, itemId) {
+Game_Item.prototype.setEquip = function(isWeapon, itemId) {
     this._dataClass = isWeapon ? 'weapon' : 'armor';
     this._itemId = itemId;
 };
-

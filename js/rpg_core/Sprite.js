@@ -1,11 +1,10 @@
-//xenoSplitPos:Sprite-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 /**
  * The basic object that is rendered to the game screen.
  *
  * @class Sprite
  * @constructor
- * @param {Bitmap}
- *            bitmap The image for the sprite
+ * @param {Bitmap} bitmap The image for the sprite
  */
 function Sprite() {
     this.initialize.apply(this, arguments);
@@ -16,7 +15,7 @@ Sprite.prototype.constructor = Sprite;
 
 Sprite.voidFilter = new PIXI.filters.VoidFilter();
 
-Sprite.prototype.initialize = function (bitmap) {
+Sprite.prototype.initialize = function(bitmap) {
     var texture = new PIXI.Texture(new PIXI.BaseTexture());
 
     PIXI.Sprite.call(this, texture);
@@ -31,9 +30,7 @@ Sprite.prototype.initialize = function (bitmap) {
     this._tintTexture = null;
 
     /**
-     * use heavy renderer that will reduce border artifacts and apply advanced
-     * blendModes
-     *
+     * use heavy renderer that will reduce border artifacts and apply advanced blendModes
      * @type {boolean}
      * @private
      */
@@ -55,17 +52,17 @@ Sprite._counter = 0;
  * @type Bitmap
  */
 Object.defineProperty(Sprite.prototype, 'bitmap', {
-    get: function () {
+    get: function() {
         return this._bitmap;
     },
-    set: function (value) {
+    set: function(value) {
         if (this._bitmap !== value) {
             this._bitmap = value;
 
-            if (value) {
+            if(value){
                 this._refreshFrame = true;
                 value.addLoadListener(this._onBitmapLoad.bind(this));
-            } else {
+            }else{
                 this._refreshFrame = false;
                 this.texture.frame = Rectangle.emptyRectangle;
             }
@@ -81,10 +78,10 @@ Object.defineProperty(Sprite.prototype, 'bitmap', {
  * @type Number
  */
 Object.defineProperty(Sprite.prototype, 'width', {
-    get: function () {
+    get: function() {
         return this._frame.width;
     },
-    set: function (value) {
+    set: function(value) {
         this._frame.width = value;
         this._refresh();
     },
@@ -98,10 +95,10 @@ Object.defineProperty(Sprite.prototype, 'width', {
  * @type Number
  */
 Object.defineProperty(Sprite.prototype, 'height', {
-    get: function () {
+    get: function() {
         return this._frame.height;
     },
-    set: function (value) {
+    set: function(value) {
         this._frame.height = value;
         this._refresh();
     },
@@ -115,10 +112,10 @@ Object.defineProperty(Sprite.prototype, 'height', {
  * @type Number
  */
 Object.defineProperty(Sprite.prototype, 'opacity', {
-    get: function () {
+    get: function() {
         return this.alpha * 255;
     },
-    set: function (value) {
+    set: function(value) {
         this.alpha = value.clamp(0, 255) / 255;
     },
     configurable: true
@@ -129,8 +126,8 @@ Object.defineProperty(Sprite.prototype, 'opacity', {
  *
  * @method update
  */
-Sprite.prototype.update = function () {
-    this.children.forEach(function (child) {
+Sprite.prototype.update = function() {
+    this.children.forEach(function(child) {
         if (child.update) {
             child.update();
         }
@@ -141,12 +138,10 @@ Sprite.prototype.update = function () {
  * Sets the x and y at once.
  *
  * @method move
- * @param {Number}
- *            x The x coordinate of the sprite
- * @param {Number}
- *            y The y coordinate of the sprite
+ * @param {Number} x The x coordinate of the sprite
+ * @param {Number} y The y coordinate of the sprite
  */
-Sprite.prototype.move = function (x, y) {
+Sprite.prototype.move = function(x, y) {
     this.x = x;
     this.y = y;
 };
@@ -155,20 +150,16 @@ Sprite.prototype.move = function (x, y) {
  * Sets the rectagle of the bitmap that the sprite displays.
  *
  * @method setFrame
- * @param {Number}
- *            x The x coordinate of the frame
- * @param {Number}
- *            y The y coordinate of the frame
- * @param {Number}
- *            width The width of the frame
- * @param {Number}
- *            height The height of the frame
+ * @param {Number} x The x coordinate of the frame
+ * @param {Number} y The y coordinate of the frame
+ * @param {Number} width The width of the frame
+ * @param {Number} height The height of the frame
  */
-Sprite.prototype.setFrame = function (x, y, width, height) {
+Sprite.prototype.setFrame = function(x, y, width, height) {
     this._refreshFrame = false;
     var frame = this._frame;
     if (x !== frame.x || y !== frame.y ||
-        width !== frame.width || height !== frame.height) {
+            width !== frame.width || height !== frame.height) {
         frame.x = x;
         frame.y = y;
         frame.width = width;
@@ -183,7 +174,7 @@ Sprite.prototype.setFrame = function (x, y, width, height) {
  * @method getBlendColor
  * @return {Array} The blend color [r, g, b, a]
  */
-Sprite.prototype.getBlendColor = function () {
+Sprite.prototype.getBlendColor = function() {
     return this._blendColor.clone();
 };
 
@@ -191,10 +182,9 @@ Sprite.prototype.getBlendColor = function () {
  * Sets the blend color for the sprite.
  *
  * @method setBlendColor
- * @param {Array}
- *            color The blend color [r, g, b, a]
+ * @param {Array} color The blend color [r, g, b, a]
  */
-Sprite.prototype.setBlendColor = function (color) {
+Sprite.prototype.setBlendColor = function(color) {
     if (!(color instanceof Array)) {
         throw new Error('Argument must be an array');
     }
@@ -210,7 +200,7 @@ Sprite.prototype.setBlendColor = function (color) {
  * @method getColorTone
  * @return {Array} The color tone [r, g, b, gray]
  */
-Sprite.prototype.getColorTone = function () {
+Sprite.prototype.getColorTone = function() {
     return this._colorTone.clone();
 };
 
@@ -218,10 +208,9 @@ Sprite.prototype.getColorTone = function () {
  * Sets the color tone for the sprite.
  *
  * @method setColorTone
- * @param {Array}
- *            tone The color tone [r, g, b, gray]
+ * @param {Array} tone The color tone [r, g, b, gray]
  */
-Sprite.prototype.setColorTone = function (tone) {
+Sprite.prototype.setColorTone = function(tone) {
     if (!(tone instanceof Array)) {
         throw new Error('Argument must be an array');
     }
@@ -235,8 +224,8 @@ Sprite.prototype.setColorTone = function (tone) {
  * @method _onBitmapLoad
  * @private
  */
-Sprite.prototype._onBitmapLoad = function (bitmapLoaded) {
-    if (bitmapLoaded === this._bitmap) {
+Sprite.prototype._onBitmapLoad = function(bitmapLoaded) {
+    if(bitmapLoaded === this._bitmap){
         if (this._refreshFrame && this._bitmap) {
             this._refreshFrame = false;
             this._frame.width = this._bitmap.width;
@@ -251,7 +240,7 @@ Sprite.prototype._onBitmapLoad = function (bitmapLoaded) {
  * @method _refresh
  * @private
  */
-Sprite.prototype._refresh = function () {
+Sprite.prototype._refresh = function() {
     var frameX = Math.floor(this._frame.x);
     var frameY = Math.floor(this._frame.y);
     var frameW = Math.floor(this._frame.width);
@@ -295,20 +284,16 @@ Sprite.prototype._refresh = function () {
 
 /**
  * @method _isInBitmapRect
- * @param {Number}
- *            x
- * @param {Number}
- *            y
- * @param {Number}
- *            w
- * @param {Number}
- *            h
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} w
+ * @param {Number} h
  * @return {Boolean}
  * @private
  */
-Sprite.prototype._isInBitmapRect = function (x, y, w, h) {
+Sprite.prototype._isInBitmapRect = function(x, y, w, h) {
     return (this._bitmap && x + w > 0 && y + h > 0 &&
-        x < this._bitmap.width && y < this._bitmap.height);
+            x < this._bitmap.width && y < this._bitmap.height);
 };
 
 /**
@@ -316,20 +301,18 @@ Sprite.prototype._isInBitmapRect = function (x, y, w, h) {
  * @return {Boolean}
  * @private
  */
-Sprite.prototype._needsTint = function () {
+Sprite.prototype._needsTint = function() {
     var tone = this._colorTone;
     return tone[0] || tone[1] || tone[2] || tone[3] || this._blendColor[3] > 0;
 };
 
 /**
  * @method _createTinter
- * @param {Number}
- *            w
- * @param {Number}
- *            h
+ * @param {Number} w
+ * @param {Number} h
  * @private
  */
-Sprite.prototype._createTinter = function (w, h) {
+Sprite.prototype._createTinter = function(w, h) {
     if (!this._canvas) {
         this._canvas = document.createElement('canvas');
         this._context = this._canvas.getContext('2d');
@@ -349,17 +332,13 @@ Sprite.prototype._createTinter = function (w, h) {
 
 /**
  * @method _executeTint
- * @param {Number}
- *            x
- * @param {Number}
- *            y
- * @param {Number}
- *            w
- * @param {Number}
- *            h
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} w
+ * @param {Number} h
  * @private
  */
-Sprite.prototype._executeTint = function (x, y, w, h) {
+Sprite.prototype._executeTint = function(x, y, w, h) {
     var context = this._context;
     var tone = this._colorTone;
     var color = this._blendColor;
@@ -417,15 +396,14 @@ Sprite.prototype._renderWebGL_PIXI = PIXI.Sprite.prototype._renderWebGL;
 
 /**
  * @method _renderCanvas
- * @param {Object}
- *            renderer
+ * @param {Object} renderer
  * @private
  */
-Sprite.prototype._renderCanvas = function (renderer) {
+Sprite.prototype._renderCanvas = function(renderer) {
     if (this.bitmap) {
         this.bitmap.touch();
     }
-    if (this.bitmap && !this.bitmap.isReady()) {
+    if(this.bitmap && !this.bitmap.isReady()){
         return;
     }
 
@@ -436,11 +414,10 @@ Sprite.prototype._renderCanvas = function (renderer) {
 
 /**
  * checks if we need to speed up custom blendmodes
- *
  * @param renderer
  * @private
  */
-Sprite.prototype._speedUpCustomBlendModes = function (renderer) {
+Sprite.prototype._speedUpCustomBlendModes = function(renderer) {
     var picture = renderer.plugins.picture;
     var blend = this.blendMode;
     if (renderer.renderingToScreen && renderer._activeRenderTarget.root) {
@@ -462,15 +439,14 @@ Sprite.prototype._speedUpCustomBlendModes = function (renderer) {
 
 /**
  * @method _renderWebGL
- * @param {Object}
- *            renderer
+ * @param {Object} renderer
  * @private
  */
-Sprite.prototype._renderWebGL = function (renderer) {
+Sprite.prototype._renderWebGL = function(renderer) {
     if (this.bitmap) {
         this.bitmap.touch();
     }
-    if (this.bitmap && !this.bitmap.isReady()) {
+    if(this.bitmap && !this.bitmap.isReady()){
         return;
     }
     if (this.texture.frame.width > 0 && this.texture.frame.height > 0) {
@@ -478,20 +454,19 @@ Sprite.prototype._renderWebGL = function (renderer) {
             this._bitmap.checkDirty();
         }
 
-        // copy of pixi-v4 internal code
+        //copy of pixi-v4 internal code
         this.calculateVertices();
 
-        if (this.pluginName === 'sprite' && this._isPicture) {
-            // use heavy renderer, which reduces artifacts and applies corrent
-            // blendMode,
+        if (this._isPicture) {
+            // use heavy renderer, which reduces artifacts and applies corrent blendMode,
             // but does not use multitexture optimization
             this._speedUpCustomBlendModes(renderer);
             renderer.setObjectRenderer(renderer.plugins.picture);
             renderer.plugins.picture.render(this);
         } else {
             // use pixi super-speed renderer
-            renderer.setObjectRenderer(renderer.plugins[this.pluginName]);
-            renderer.plugins[this.pluginName].render(this);
+            renderer.setObjectRenderer(renderer.plugins.sprite);
+            renderer.plugins.sprite.render(this);
         }
     }
 };
@@ -572,8 +547,7 @@ Sprite.prototype._renderWebGL = function (renderer) {
  * Adds a child to the container.
  *
  * @method addChild
- * @param {Object}
- *            child The child to add
+ * @param {Object} child The child to add
  * @return {Object} The child that was added
  */
 
@@ -581,10 +555,8 @@ Sprite.prototype._renderWebGL = function (renderer) {
  * Adds a child to the container at a specified index.
  *
  * @method addChildAt
- * @param {Object}
- *            child The child to add
- * @param {Number}
- *            index The index to place the child in
+ * @param {Object} child The child to add
+ * @param {Number} index The index to place the child in
  * @return {Object} The child that was added
  */
 
@@ -592,8 +564,7 @@ Sprite.prototype._renderWebGL = function (renderer) {
  * Removes a child from the container.
  *
  * @method removeChild
- * @param {Object}
- *            child The child to remove
+ * @param {Object} child The child to remove
  * @return {Object} The child that was removed
  */
 
@@ -601,8 +572,6 @@ Sprite.prototype._renderWebGL = function (renderer) {
  * Removes a child from the specified index position.
  *
  * @method removeChildAt
- * @param {Number}
- *            index The index to get the child from
+ * @param {Number} index The index to get the child from
  * @return {Object} The child that was removed
  */
-

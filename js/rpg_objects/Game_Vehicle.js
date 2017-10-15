@@ -1,4 +1,4 @@
-//xenoSplitPos:Game_Vehicle-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Game_Vehicle
 //
 // The game object class for a vehicle.
@@ -10,7 +10,7 @@ function Game_Vehicle() {
 Game_Vehicle.prototype = Object.create(Game_Character.prototype);
 Game_Vehicle.prototype.constructor = Game_Vehicle;
 
-Game_Vehicle.prototype.initialize = function (type) {
+Game_Vehicle.prototype.initialize = function(type) {
     Game_Character.prototype.initialize.call(this);
     this._type = type;
     this.resetDirection();
@@ -18,7 +18,7 @@ Game_Vehicle.prototype.initialize = function (type) {
     this.loadSystemSettings();
 };
 
-Game_Vehicle.prototype.initMembers = function () {
+Game_Vehicle.prototype.initMembers = function() {
     Game_Character.prototype.initMembers.call(this);
     this._type = '';
     this._mapId = 0;
@@ -27,23 +27,23 @@ Game_Vehicle.prototype.initMembers = function () {
     this._bgm = null;
 };
 
-Game_Vehicle.prototype.isBoat = function () {
+Game_Vehicle.prototype.isBoat = function() {
     return this._type === 'boat';
 };
 
-Game_Vehicle.prototype.isShip = function () {
+Game_Vehicle.prototype.isShip = function() {
     return this._type === 'ship';
 };
 
-Game_Vehicle.prototype.isAirship = function () {
+Game_Vehicle.prototype.isAirship = function() {
     return this._type === 'airship';
 };
 
-Game_Vehicle.prototype.resetDirection = function () {
+Game_Vehicle.prototype.resetDirection = function() {
     this.setDirection(4);
 };
 
-Game_Vehicle.prototype.initMoveSpeed = function () {
+Game_Vehicle.prototype.initMoveSpeed = function() {
     if (this.isBoat()) {
         this.setMoveSpeed(4);
     } else if (this.isShip()) {
@@ -53,7 +53,7 @@ Game_Vehicle.prototype.initMoveSpeed = function () {
     }
 };
 
-Game_Vehicle.prototype.vehicle = function () {
+Game_Vehicle.prototype.vehicle = function() {
     if (this.isBoat()) {
         return $dataSystem.boat;
     } else if (this.isShip()) {
@@ -65,14 +65,14 @@ Game_Vehicle.prototype.vehicle = function () {
     }
 };
 
-Game_Vehicle.prototype.loadSystemSettings = function () {
+Game_Vehicle.prototype.loadSystemSettings = function() {
     var vehicle = this.vehicle();
     this._mapId = vehicle.startMapId;
     this.setPosition(vehicle.startX, vehicle.startY);
     this.setImage(vehicle.characterName, vehicle.characterIndex);
 };
 
-Game_Vehicle.prototype.refresh = function () {
+Game_Vehicle.prototype.refresh = function() {
     if (this._driving) {
         this._mapId = $gameMap.mapId();
         this.syncWithPlayer();
@@ -89,13 +89,13 @@ Game_Vehicle.prototype.refresh = function () {
     this.setTransparent(this._mapId !== $gameMap.mapId());
 };
 
-Game_Vehicle.prototype.setLocation = function (mapId, x, y) {
+Game_Vehicle.prototype.setLocation = function(mapId, x, y) {
     this._mapId = mapId;
     this.setPosition(x, y);
     this.refresh();
 };
 
-Game_Vehicle.prototype.pos = function (x, y) {
+Game_Vehicle.prototype.pos = function(x, y) {
     if (this._mapId === $gameMap.mapId()) {
         return Game_Character.prototype.pos.call(this, x, y);
     } else {
@@ -103,7 +103,7 @@ Game_Vehicle.prototype.pos = function (x, y) {
     }
 };
 
-Game_Vehicle.prototype.isMapPassable = function (x, y, d) {
+Game_Vehicle.prototype.isMapPassable = function(x, y, d) {
     var x2 = $gameMap.roundXWithDirection(x, d);
     var y2 = $gameMap.roundYWithDirection(y, d);
     if (this.isBoat()) {
@@ -117,7 +117,7 @@ Game_Vehicle.prototype.isMapPassable = function (x, y, d) {
     }
 };
 
-Game_Vehicle.prototype.getOn = function () {
+Game_Vehicle.prototype.getOn = function() {
     this._driving = true;
     this.setWalkAnime(true);
     this.setStepAnime(true);
@@ -125,7 +125,7 @@ Game_Vehicle.prototype.getOn = function () {
     this.playBgm();
 };
 
-Game_Vehicle.prototype.getOff = function () {
+Game_Vehicle.prototype.getOff = function() {
     this._driving = false;
     this.setWalkAnime(false);
     this.setStepAnime(false);
@@ -133,36 +133,36 @@ Game_Vehicle.prototype.getOff = function () {
     $gameSystem.replayWalkingBgm();
 };
 
-Game_Vehicle.prototype.setBgm = function (bgm) {
+Game_Vehicle.prototype.setBgm = function(bgm) {
     this._bgm = bgm;
 };
 
-Game_Vehicle.prototype.playBgm = function () {
+Game_Vehicle.prototype.playBgm = function() {
     AudioManager.playBgm(this._bgm || this.vehicle().bgm);
 };
 
-Game_Vehicle.prototype.syncWithPlayer = function () {
+Game_Vehicle.prototype.syncWithPlayer = function() {
     this.copyPosition($gamePlayer);
     this.refreshBushDepth();
 };
 
-Game_Vehicle.prototype.screenY = function () {
+Game_Vehicle.prototype.screenY = function() {
     return Game_Character.prototype.screenY.call(this) - this._altitude;
 };
 
-Game_Vehicle.prototype.shadowX = function () {
+Game_Vehicle.prototype.shadowX = function() {
     return this.screenX();
 };
 
-Game_Vehicle.prototype.shadowY = function () {
+Game_Vehicle.prototype.shadowY = function() {
     return this.screenY() + this._altitude;
 };
 
-Game_Vehicle.prototype.shadowOpacity = function () {
+Game_Vehicle.prototype.shadowOpacity = function() {
     return 255 * this._altitude / this.maxAltitude();
 };
 
-Game_Vehicle.prototype.canMove = function () {
+Game_Vehicle.prototype.canMove = function() {
     if (this.isAirship()) {
         return this.isHighest();
     } else {
@@ -170,20 +170,20 @@ Game_Vehicle.prototype.canMove = function () {
     }
 };
 
-Game_Vehicle.prototype.update = function () {
+Game_Vehicle.prototype.update = function() {
     Game_Character.prototype.update.call(this);
     if (this.isAirship()) {
         this.updateAirship();
     }
 };
 
-Game_Vehicle.prototype.updateAirship = function () {
+Game_Vehicle.prototype.updateAirship = function() {
     this.updateAirshipAltitude();
     this.setStepAnime(this.isHighest());
     this.setPriorityType(this.isLowest() ? 0 : 2);
 };
 
-Game_Vehicle.prototype.updateAirshipAltitude = function () {
+Game_Vehicle.prototype.updateAirshipAltitude = function() {
     if (this._driving && !this.isHighest()) {
         this._altitude++;
     }
@@ -192,23 +192,23 @@ Game_Vehicle.prototype.updateAirshipAltitude = function () {
     }
 };
 
-Game_Vehicle.prototype.maxAltitude = function () {
+Game_Vehicle.prototype.maxAltitude = function() {
     return 48;
 };
 
-Game_Vehicle.prototype.isLowest = function () {
+Game_Vehicle.prototype.isLowest = function() {
     return this._altitude <= 0;
 };
 
-Game_Vehicle.prototype.isHighest = function () {
+Game_Vehicle.prototype.isHighest = function() {
     return this._altitude >= this.maxAltitude();
 };
 
-Game_Vehicle.prototype.isTakeoffOk = function () {
+Game_Vehicle.prototype.isTakeoffOk = function() {
     return $gamePlayer.areFollowersGathered();
 };
 
-Game_Vehicle.prototype.isLandOk = function (x, y, d) {
+Game_Vehicle.prototype.isLandOk = function(x, y, d) {
     if (this.isAirship()) {
         if (!$gameMap.isAirshipLandOk(x, y)) {
             return false;
@@ -231,4 +231,3 @@ Game_Vehicle.prototype.isLandOk = function (x, y, d) {
     }
     return true;
 };
-

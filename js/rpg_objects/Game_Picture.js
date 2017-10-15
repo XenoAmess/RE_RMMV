@@ -1,4 +1,4 @@
-//xenoSplitPos:Game_Picture-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Game_Picture
 //
 // The game object class for a picture.
@@ -7,54 +7,54 @@ function Game_Picture() {
     this.initialize.apply(this, arguments);
 }
 
-Game_Picture.prototype.initialize = function () {
+Game_Picture.prototype.initialize = function() {
     this.initBasic();
     this.initTarget();
     this.initTone();
     this.initRotation();
 };
 
-Game_Picture.prototype.name = function () {
+Game_Picture.prototype.name = function() {
     return this._name;
 };
 
-Game_Picture.prototype.origin = function () {
+Game_Picture.prototype.origin = function() {
     return this._origin;
 };
 
-Game_Picture.prototype.x = function () {
+Game_Picture.prototype.x = function() {
     return this._x;
 };
 
-Game_Picture.prototype.y = function () {
+Game_Picture.prototype.y = function() {
     return this._y;
 };
 
-Game_Picture.prototype.scaleX = function () {
+Game_Picture.prototype.scaleX = function() {
     return this._scaleX;
 };
 
-Game_Picture.prototype.scaleY = function () {
+Game_Picture.prototype.scaleY = function() {
     return this._scaleY;
 };
 
-Game_Picture.prototype.opacity = function () {
+Game_Picture.prototype.opacity = function() {
     return this._opacity;
 };
 
-Game_Picture.prototype.blendMode = function () {
+Game_Picture.prototype.blendMode = function() {
     return this._blendMode;
 };
 
-Game_Picture.prototype.tone = function () {
+Game_Picture.prototype.tone = function() {
     return this._tone;
 };
 
-Game_Picture.prototype.angle = function () {
+Game_Picture.prototype.angle = function() {
     return this._angle;
 };
 
-Game_Picture.prototype.initBasic = function () {
+Game_Picture.prototype.initBasic = function() {
     this._name = '';
     this._origin = 0;
     this._x = 0;
@@ -65,7 +65,7 @@ Game_Picture.prototype.initBasic = function () {
     this._blendMode = 0;
 };
 
-Game_Picture.prototype.initTarget = function () {
+Game_Picture.prototype.initTarget = function() {
     this._targetX = this._x;
     this._targetY = this._y;
     this._targetScaleX = this._scaleX;
@@ -74,19 +74,19 @@ Game_Picture.prototype.initTarget = function () {
     this._duration = 0;
 };
 
-Game_Picture.prototype.initTone = function () {
+Game_Picture.prototype.initTone = function() {
     this._tone = null;
     this._toneTarget = null;
     this._toneDuration = 0;
 };
 
-Game_Picture.prototype.initRotation = function () {
+Game_Picture.prototype.initRotation = function() {
     this._angle = 0;
     this._rotationSpeed = 0;
 };
 
-Game_Picture.prototype.show = function (name, origin, x, y, scaleX,
-                                        scaleY, opacity, blendMode) {
+Game_Picture.prototype.show = function(name, origin, x, y, scaleX,
+                                       scaleY, opacity, blendMode) {
     this._name = name;
     this._origin = origin;
     this._x = x;
@@ -100,8 +100,8 @@ Game_Picture.prototype.show = function (name, origin, x, y, scaleX,
     this.initRotation();
 };
 
-Game_Picture.prototype.move = function (origin, x, y, scaleX, scaleY,
-                                        opacity, blendMode, duration) {
+Game_Picture.prototype.move = function(origin, x, y, scaleX, scaleY,
+                                       opacity, blendMode, duration) {
     this._origin = origin;
     this._targetX = x;
     this._targetY = y;
@@ -112,11 +112,11 @@ Game_Picture.prototype.move = function (origin, x, y, scaleX, scaleY,
     this._duration = duration;
 };
 
-Game_Picture.prototype.rotate = function (speed) {
+Game_Picture.prototype.rotate = function(speed) {
     this._rotationSpeed = speed;
 };
 
-Game_Picture.prototype.tint = function (tone, duration) {
+Game_Picture.prototype.tint = function(tone, duration) {
     if (!this._tone) {
         this._tone = [0, 0, 0, 0];
     }
@@ -127,7 +127,7 @@ Game_Picture.prototype.tint = function (tone, duration) {
     }
 };
 
-Game_Picture.prototype.erase = function () {
+Game_Picture.prototype.erase = function() {
     this._name = '';
     this._origin = 0;
     this.initTarget();
@@ -135,25 +135,25 @@ Game_Picture.prototype.erase = function () {
     this.initRotation();
 };
 
-Game_Picture.prototype.update = function () {
+Game_Picture.prototype.update = function() {
     this.updateMove();
     this.updateTone();
     this.updateRotation();
 };
 
-Game_Picture.prototype.updateMove = function () {
+Game_Picture.prototype.updateMove = function() {
     if (this._duration > 0) {
         var d = this._duration;
         this._x = (this._x * (d - 1) + this._targetX) / d;
         this._y = (this._y * (d - 1) + this._targetY) / d;
-        this._scaleX = (this._scaleX * (d - 1) + this._targetScaleX) / d;
-        this._scaleY = (this._scaleY * (d - 1) + this._targetScaleY) / d;
+        this._scaleX  = (this._scaleX  * (d - 1) + this._targetScaleX)  / d;
+        this._scaleY  = (this._scaleY  * (d - 1) + this._targetScaleY)  / d;
         this._opacity = (this._opacity * (d - 1) + this._targetOpacity) / d;
         this._duration--;
     }
 };
 
-Game_Picture.prototype.updateTone = function () {
+Game_Picture.prototype.updateTone = function() {
     if (this._toneDuration > 0) {
         var d = this._toneDuration;
         for (var i = 0; i < 4; i++) {
@@ -163,9 +163,8 @@ Game_Picture.prototype.updateTone = function () {
     }
 };
 
-Game_Picture.prototype.updateRotation = function () {
+Game_Picture.prototype.updateRotation = function() {
     if (this._rotationSpeed !== 0) {
         this._angle += this._rotationSpeed / 2;
     }
 };
-

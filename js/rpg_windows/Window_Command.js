@@ -1,4 +1,4 @@
-//xenoSplitPos:Window_Command-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Window_Command
 //
 // The superclass of windows for selecting a command.
@@ -10,7 +10,7 @@ function Window_Command() {
 Window_Command.prototype = Object.create(Window_Selectable.prototype);
 Window_Command.prototype.constructor = Window_Command;
 
-Window_Command.prototype.initialize = function (x, y) {
+Window_Command.prototype.initialize = function(x, y) {
     this.clearCommandList();
     this.makeCommandList();
     var width = this.windowWidth();
@@ -21,73 +21,68 @@ Window_Command.prototype.initialize = function (x, y) {
     this.activate();
 };
 
-Window_Command.prototype.windowWidth = function () {
+Window_Command.prototype.windowWidth = function() {
     return 240;
 };
 
-Window_Command.prototype.windowHeight = function () {
+Window_Command.prototype.windowHeight = function() {
     return this.fittingHeight(this.numVisibleRows());
 };
 
-Window_Command.prototype.numVisibleRows = function () {
+Window_Command.prototype.numVisibleRows = function() {
     return Math.ceil(this.maxItems() / this.maxCols());
 };
 
-Window_Command.prototype.maxItems = function () {
+Window_Command.prototype.maxItems = function() {
     return this._list.length;
 };
 
-Window_Command.prototype.clearCommandList = function () {
+Window_Command.prototype.clearCommandList = function() {
     this._list = [];
 };
 
-Window_Command.prototype.makeCommandList = function () {
+Window_Command.prototype.makeCommandList = function() {
 };
 
-Window_Command.prototype.addCommand = function (name, symbol, enabled, ext) {
+Window_Command.prototype.addCommand = function(name, symbol, enabled, ext) {
     if (enabled === undefined) {
         enabled = true;
     }
     if (ext === undefined) {
         ext = null;
     }
-    this._list.push({
-        name: name,
-        symbol: symbol,
-        enabled: enabled,
-        ext: ext
-    });
+    this._list.push({ name: name, symbol: symbol, enabled: enabled, ext: ext});
 };
 
-Window_Command.prototype.commandName = function (index) {
+Window_Command.prototype.commandName = function(index) {
     return this._list[index].name;
 };
 
-Window_Command.prototype.commandSymbol = function (index) {
+Window_Command.prototype.commandSymbol = function(index) {
     return this._list[index].symbol;
 };
 
-Window_Command.prototype.isCommandEnabled = function (index) {
+Window_Command.prototype.isCommandEnabled = function(index) {
     return this._list[index].enabled;
 };
 
-Window_Command.prototype.currentData = function () {
+Window_Command.prototype.currentData = function() {
     return this.index() >= 0 ? this._list[this.index()] : null;
 };
 
-Window_Command.prototype.isCurrentItemEnabled = function () {
+Window_Command.prototype.isCurrentItemEnabled = function() {
     return this.currentData() ? this.currentData().enabled : false;
 };
 
-Window_Command.prototype.currentSymbol = function () {
+Window_Command.prototype.currentSymbol = function() {
     return this.currentData() ? this.currentData().symbol : null;
 };
 
-Window_Command.prototype.currentExt = function () {
+Window_Command.prototype.currentExt = function() {
     return this.currentData() ? this.currentData().ext : null;
 };
 
-Window_Command.prototype.findSymbol = function (symbol) {
+Window_Command.prototype.findSymbol = function(symbol) {
     for (var i = 0; i < this._list.length; i++) {
         if (this._list[i].symbol === symbol) {
             return i;
@@ -96,7 +91,7 @@ Window_Command.prototype.findSymbol = function (symbol) {
     return -1;
 };
 
-Window_Command.prototype.selectSymbol = function (symbol) {
+Window_Command.prototype.selectSymbol = function(symbol) {
     var index = this.findSymbol(symbol);
     if (index >= 0) {
         this.select(index);
@@ -105,7 +100,7 @@ Window_Command.prototype.selectSymbol = function (symbol) {
     }
 };
 
-Window_Command.prototype.findExt = function (ext) {
+Window_Command.prototype.findExt = function(ext) {
     for (var i = 0; i < this._list.length; i++) {
         if (this._list[i].ext === ext) {
             return i;
@@ -114,7 +109,7 @@ Window_Command.prototype.findExt = function (ext) {
     return -1;
 };
 
-Window_Command.prototype.selectExt = function (ext) {
+Window_Command.prototype.selectExt = function(ext) {
     var index = this.findExt(ext);
     if (index >= 0) {
         this.select(index);
@@ -123,7 +118,7 @@ Window_Command.prototype.selectExt = function (ext) {
     }
 };
 
-Window_Command.prototype.drawItem = function (index) {
+Window_Command.prototype.drawItem = function(index) {
     var rect = this.itemRectForText(index);
     var align = this.itemTextAlign();
     this.resetTextColor();
@@ -131,15 +126,15 @@ Window_Command.prototype.drawItem = function (index) {
     this.drawText(this.commandName(index), rect.x, rect.y, rect.width, align);
 };
 
-Window_Command.prototype.itemTextAlign = function () {
+Window_Command.prototype.itemTextAlign = function() {
     return 'left';
 };
 
-Window_Command.prototype.isOkEnabled = function () {
+Window_Command.prototype.isOkEnabled = function() {
     return true;
 };
 
-Window_Command.prototype.callOkHandler = function () {
+Window_Command.prototype.callOkHandler = function() {
     var symbol = this.currentSymbol();
     if (this.isHandled(symbol)) {
         this.callHandler(symbol);
@@ -150,10 +145,9 @@ Window_Command.prototype.callOkHandler = function () {
     }
 };
 
-Window_Command.prototype.refresh = function () {
+Window_Command.prototype.refresh = function() {
     this.clearCommandList();
     this.makeCommandList();
     this.createContents();
     Window_Selectable.prototype.refresh.call(this);
 };
-

@@ -1,4 +1,4 @@
-//xenoSplitPos:Scene_Map-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Scene_Map
 //
 // The scene class of the map screen.
@@ -10,7 +10,7 @@ function Scene_Map() {
 Scene_Map.prototype = Object.create(Scene_Base.prototype);
 Scene_Map.prototype.constructor = Scene_Map;
 
-Scene_Map.prototype.initialize = function () {
+Scene_Map.prototype.initialize = function() {
     Scene_Base.prototype.initialize.call(this);
     this._waitCount = 0;
     this._encounterEffectDuration = 0;
@@ -18,14 +18,14 @@ Scene_Map.prototype.initialize = function () {
     this._touchCount = 0;
 };
 
-Scene_Map.prototype.create = function () {
+Scene_Map.prototype.create = function() {
     Scene_Base.prototype.create.call(this);
     this._transfer = $gamePlayer.isTransferring();
     var mapId = this._transfer ? $gamePlayer.newMapId() : $gameMap.mapId();
     DataManager.loadMapData(mapId);
 };
 
-Scene_Map.prototype.isReady = function () {
+Scene_Map.prototype.isReady = function() {
     if (!this._mapLoaded && DataManager.isMapLoaded()) {
         this.onMapLoaded();
         this._mapLoaded = true;
@@ -33,14 +33,14 @@ Scene_Map.prototype.isReady = function () {
     return this._mapLoaded && Scene_Base.prototype.isReady.call(this);
 };
 
-Scene_Map.prototype.onMapLoaded = function () {
+Scene_Map.prototype.onMapLoaded = function() {
     if (this._transfer) {
         $gamePlayer.performTransfer();
     }
     this.createDisplayObjects();
 };
 
-Scene_Map.prototype.start = function () {
+Scene_Map.prototype.start = function() {
     Scene_Base.prototype.start.call(this);
     SceneManager.clearStack();
     if (this._transfer) {
@@ -53,7 +53,7 @@ Scene_Map.prototype.start = function () {
     this.menuCalling = false;
 };
 
-Scene_Map.prototype.update = function () {
+Scene_Map.prototype.update = function() {
     this.updateDestination();
     this.updateMainMultiply();
     if (this.isSceneChangeOk()) {
@@ -65,14 +65,14 @@ Scene_Map.prototype.update = function () {
     Scene_Base.prototype.update.call(this);
 };
 
-Scene_Map.prototype.updateMainMultiply = function () {
+Scene_Map.prototype.updateMainMultiply = function() {
     this.updateMain();
     if (this.isFastForward()) {
         this.updateMain();
     }
 };
 
-Scene_Map.prototype.updateMain = function () {
+Scene_Map.prototype.updateMain = function() {
     var active = this.isActive();
     $gameMap.update(active);
     $gamePlayer.update(active);
@@ -80,12 +80,12 @@ Scene_Map.prototype.updateMain = function () {
     $gameScreen.update();
 };
 
-Scene_Map.prototype.isFastForward = function () {
+Scene_Map.prototype.isFastForward = function() {
     return ($gameMap.isEventRunning() && !SceneManager.isSceneChanging() &&
-        (Input.isLongPressed('ok') || TouchInput.isLongPressed()));
+            (Input.isLongPressed('ok') || TouchInput.isLongPressed()));
 };
 
-Scene_Map.prototype.stop = function () {
+Scene_Map.prototype.stop = function() {
     Scene_Base.prototype.stop.call(this);
     $gamePlayer.straighten();
     this._mapNameWindow.close();
@@ -98,13 +98,13 @@ Scene_Map.prototype.stop = function () {
     }
 };
 
-Scene_Map.prototype.isBusy = function () {
+Scene_Map.prototype.isBusy = function() {
     return ((this._messageWindow && this._messageWindow.isClosing()) ||
-        this._waitCount > 0 || this._encounterEffectDuration > 0 ||
-        Scene_Base.prototype.isBusy.call(this));
+            this._waitCount > 0 || this._encounterEffectDuration > 0 ||
+            Scene_Base.prototype.isBusy.call(this));
 };
 
-Scene_Map.prototype.terminate = function () {
+Scene_Map.prototype.terminate = function() {
     Scene_Base.prototype.terminate.call(this);
     if (!SceneManager.isNextScene(Scene_Battle)) {
         this._spriteset.update();
@@ -126,17 +126,17 @@ Scene_Map.prototype.terminate = function () {
     this.removeChild(this._spriteset);
 };
 
-Scene_Map.prototype.needsFadeIn = function () {
+Scene_Map.prototype.needsFadeIn = function() {
     return (SceneManager.isPreviousScene(Scene_Battle) ||
-        SceneManager.isPreviousScene(Scene_Load));
+            SceneManager.isPreviousScene(Scene_Load));
 };
 
-Scene_Map.prototype.needsSlowFadeOut = function () {
+Scene_Map.prototype.needsSlowFadeOut = function() {
     return (SceneManager.isNextScene(Scene_Title) ||
-        SceneManager.isNextScene(Scene_Gameover));
+            SceneManager.isNextScene(Scene_Gameover));
 };
 
-Scene_Map.prototype.updateWaitCount = function () {
+Scene_Map.prototype.updateWaitCount = function() {
     if (this._waitCount > 0) {
         this._waitCount--;
         return true;
@@ -144,7 +144,7 @@ Scene_Map.prototype.updateWaitCount = function () {
     return false;
 };
 
-Scene_Map.prototype.updateDestination = function () {
+Scene_Map.prototype.updateDestination = function() {
     if (this.isMapTouchOk()) {
         this.processMapTouch();
     } else {
@@ -153,11 +153,11 @@ Scene_Map.prototype.updateDestination = function () {
     }
 };
 
-Scene_Map.prototype.isMapTouchOk = function () {
+Scene_Map.prototype.isMapTouchOk = function() {
     return this.isActive() && $gamePlayer.canMove();
 };
 
-Scene_Map.prototype.processMapTouch = function () {
+Scene_Map.prototype.processMapTouch = function() {
     if (TouchInput.isTriggered() || this._touchCount > 0) {
         if (TouchInput.isPressed()) {
             if (this._touchCount === 0 || this._touchCount >= 15) {
@@ -172,11 +172,11 @@ Scene_Map.prototype.processMapTouch = function () {
     }
 };
 
-Scene_Map.prototype.isSceneChangeOk = function () {
+Scene_Map.prototype.isSceneChangeOk = function() {
     return this.isActive() && !$gameMessage.isBusy();
 };
 
-Scene_Map.prototype.updateScene = function () {
+Scene_Map.prototype.updateScene = function() {
     this.checkGameover();
     if (!SceneManager.isSceneChanging()) {
         this.updateTransferPlayer();
@@ -192,54 +192,54 @@ Scene_Map.prototype.updateScene = function () {
     }
 };
 
-Scene_Map.prototype.createDisplayObjects = function () {
+Scene_Map.prototype.createDisplayObjects = function() {
     this.createSpriteset();
     this.createMapNameWindow();
     this.createWindowLayer();
     this.createAllWindows();
 };
 
-Scene_Map.prototype.createSpriteset = function () {
+Scene_Map.prototype.createSpriteset = function() {
     this._spriteset = new Spriteset_Map();
     this.addChild(this._spriteset);
 };
 
-Scene_Map.prototype.createAllWindows = function () {
+Scene_Map.prototype.createAllWindows = function() {
     this.createMessageWindow();
     this.createScrollTextWindow();
 };
 
-Scene_Map.prototype.createMapNameWindow = function () {
+Scene_Map.prototype.createMapNameWindow = function() {
     this._mapNameWindow = new Window_MapName();
     this.addChild(this._mapNameWindow);
 };
 
-Scene_Map.prototype.createMessageWindow = function () {
+Scene_Map.prototype.createMessageWindow = function() {
     this._messageWindow = new Window_Message();
     this.addWindow(this._messageWindow);
-    this._messageWindow.subWindows().forEach(function (window) {
+    this._messageWindow.subWindows().forEach(function(window) {
         this.addWindow(window);
     }, this);
 };
 
-Scene_Map.prototype.createScrollTextWindow = function () {
+Scene_Map.prototype.createScrollTextWindow = function() {
     this._scrollTextWindow = new Window_ScrollText();
     this.addWindow(this._scrollTextWindow);
 };
 
-Scene_Map.prototype.updateTransferPlayer = function () {
+Scene_Map.prototype.updateTransferPlayer = function() {
     if ($gamePlayer.isTransferring()) {
         SceneManager.goto(Scene_Map);
     }
 };
 
-Scene_Map.prototype.updateEncounter = function () {
-    if ($gamePlayer.executeEncounter()) {
-        SceneManager.push(Scene_Battle);
-    }
+Scene_Map.prototype.updateEncounter = function() {
+   if ($gamePlayer.executeEncounter()) {
+       SceneManager.push(Scene_Battle);
+   }
 };
 
-Scene_Map.prototype.updateCallMenu = function () {
+Scene_Map.prototype.updateCallMenu = function() {
     if (this.isMenuEnabled()) {
         if (this.isMenuCalled()) {
             this.menuCalling = true;
@@ -252,15 +252,15 @@ Scene_Map.prototype.updateCallMenu = function () {
     }
 };
 
-Scene_Map.prototype.isMenuEnabled = function () {
+Scene_Map.prototype.isMenuEnabled = function() {
     return $gameSystem.isMenuEnabled() && !$gameMap.isEventRunning();
 };
 
-Scene_Map.prototype.isMenuCalled = function () {
+Scene_Map.prototype.isMenuCalled = function() {
     return Input.isTriggered('menu') || TouchInput.isCancelled();
 };
 
-Scene_Map.prototype.callMenu = function () {
+Scene_Map.prototype.callMenu = function() {
     SoundManager.playOk();
     SceneManager.push(Scene_Menu);
     Window_MenuCommand.initCommandPosition();
@@ -269,37 +269,35 @@ Scene_Map.prototype.callMenu = function () {
     this._waitCount = 2;
 };
 
-Scene_Map.prototype.updateCallDebug = function () {
+Scene_Map.prototype.updateCallDebug = function() {
     if (this.isDebugCalled()) {
         SceneManager.push(Scene_Debug);
     }
 };
 
-Scene_Map.prototype.isDebugCalled = function () {
+Scene_Map.prototype.isDebugCalled = function() {
     return Input.isTriggered('debug') && $gameTemp.isPlaytest();
 };
 
-Scene_Map.prototype.fadeInForTransfer = function () {
+Scene_Map.prototype.fadeInForTransfer = function() {
     var fadeType = $gamePlayer.fadeType();
     switch (fadeType) {
-        case 0:
-        case 1:
-            this.startFadeIn(this.fadeSpeed(), fadeType === 1);
-            break;
+    case 0: case 1:
+        this.startFadeIn(this.fadeSpeed(), fadeType === 1);
+        break;
     }
 };
 
-Scene_Map.prototype.fadeOutForTransfer = function () {
+Scene_Map.prototype.fadeOutForTransfer = function() {
     var fadeType = $gamePlayer.fadeType();
     switch (fadeType) {
-        case 0:
-        case 1:
-            this.startFadeOut(this.fadeSpeed(), fadeType === 1);
-            break;
+    case 0: case 1:
+        this.startFadeOut(this.fadeSpeed(), fadeType === 1);
+        break;
     }
 };
 
-Scene_Map.prototype.launchBattle = function () {
+Scene_Map.prototype.launchBattle = function() {
     BattleManager.saveBgmAndBgs();
     this.stopAudioOnBattleStart();
     SoundManager.playBattleStart();
@@ -307,7 +305,7 @@ Scene_Map.prototype.launchBattle = function () {
     this._mapNameWindow.hide();
 };
 
-Scene_Map.prototype.stopAudioOnBattleStart = function () {
+Scene_Map.prototype.stopAudioOnBattleStart = function() {
     if (!AudioManager.isCurrentBgm($gameSystem.battleBgm())) {
         AudioManager.stopBgm();
     }
@@ -316,12 +314,12 @@ Scene_Map.prototype.stopAudioOnBattleStart = function () {
     AudioManager.stopSe();
 };
 
-Scene_Map.prototype.startEncounterEffect = function () {
+Scene_Map.prototype.startEncounterEffect = function() {
     this._spriteset.hideCharacters();
     this._encounterEffectDuration = this.encounterEffectSpeed();
 };
 
-Scene_Map.prototype.updateEncounterEffect = function () {
+Scene_Map.prototype.updateEncounterEffect = function() {
     if (this._encounterEffectDuration > 0) {
         this._encounterEffectDuration--;
         var speed = this.encounterEffectSpeed();
@@ -346,18 +344,17 @@ Scene_Map.prototype.updateEncounterEffect = function () {
     }
 };
 
-Scene_Map.prototype.snapForBattleBackground = function () {
+Scene_Map.prototype.snapForBattleBackground = function() {
     this._windowLayer.visible = false;
     SceneManager.snapForBackground();
     this._windowLayer.visible = true;
 };
 
-Scene_Map.prototype.startFlashForEncounter = function (duration) {
+Scene_Map.prototype.startFlashForEncounter = function(duration) {
     var color = [255, 255, 255, 255];
     $gameScreen.startFlash(color, duration);
 };
 
-Scene_Map.prototype.encounterEffectSpeed = function () {
+Scene_Map.prototype.encounterEffectSpeed = function() {
     return 60;
 };
-

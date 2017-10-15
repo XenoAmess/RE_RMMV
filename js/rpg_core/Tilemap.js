@@ -1,4 +1,4 @@
-//xenoSplitPos:Tilemap-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 /**
  * The tilemap which displays 2D tile-based game map.
  *
@@ -12,7 +12,7 @@ function Tilemap() {
 Tilemap.prototype = Object.create(PIXI.Container.prototype);
 Tilemap.prototype.constructor = Tilemap;
 
-Tilemap.prototype.initialize = function () {
+Tilemap.prototype.initialize = function() {
     PIXI.Container.call(this);
 
     this._margin = 20;
@@ -86,10 +86,10 @@ Tilemap.prototype.initialize = function () {
  * @type Number
  */
 Object.defineProperty(Tilemap.prototype, 'width', {
-    get: function () {
+    get: function() {
         return this._width;
     },
-    set: function (value) {
+    set: function(value) {
         if (this._width !== value) {
             this._width = value;
             this._createLayers();
@@ -104,10 +104,10 @@ Object.defineProperty(Tilemap.prototype, 'width', {
  * @type Number
  */
 Object.defineProperty(Tilemap.prototype, 'height', {
-    get: function () {
+    get: function() {
         return this._height;
     },
-    set: function (value) {
+    set: function(value) {
         if (this._height !== value) {
             this._height = value;
             this._createLayers();
@@ -122,10 +122,10 @@ Object.defineProperty(Tilemap.prototype, 'height', {
  * @type Number
  */
 Object.defineProperty(Tilemap.prototype, 'tileWidth', {
-    get: function () {
+    get: function() {
         return this._tileWidth;
     },
-    set: function (value) {
+    set: function(value) {
         if (this._tileWidth !== value) {
             this._tileWidth = value;
             this._createLayers();
@@ -140,10 +140,10 @@ Object.defineProperty(Tilemap.prototype, 'tileWidth', {
  * @type Number
  */
 Object.defineProperty(Tilemap.prototype, 'tileHeight', {
-    get: function () {
+    get: function() {
         return this._tileHeight;
     },
-    set: function (value) {
+    set: function(value) {
         if (this._tileHeight !== value) {
             this._tileHeight = value;
             this._createLayers();
@@ -155,14 +155,11 @@ Object.defineProperty(Tilemap.prototype, 'tileHeight', {
  * Sets the tilemap data.
  *
  * @method setData
- * @param {Number}
- *            width The width of the map in number of tiles
- * @param {Number}
- *            height The height of the map in number of tiles
- * @param {Array}
- *            data The one dimensional array for the map data
+ * @param {Number} width The width of the map in number of tiles
+ * @param {Number} height The height of the map in number of tiles
+ * @param {Array} data The one dimensional array for the map data
  */
-Tilemap.prototype.setData = function (width, height, data) {
+Tilemap.prototype.setData = function(width, height, data) {
     this._mapWidth = width;
     this._mapHeight = height;
     this._mapData = data;
@@ -175,7 +172,7 @@ Tilemap.prototype.setData = function (width, height, data) {
  * @type Boolean
  * @return {Boolean} True if the tilemap is ready
  */
-Tilemap.prototype.isReady = function () {
+Tilemap.prototype.isReady = function() {
     for (var i = 0; i < this.bitmaps.length; i++) {
         if (this.bitmaps[i] && !this.bitmaps[i].isReady()) {
             return false;
@@ -189,15 +186,15 @@ Tilemap.prototype.isReady = function () {
  *
  * @method update
  */
-Tilemap.prototype.update = function () {
+Tilemap.prototype.update = function() {
     this.animationCount++;
     this.animationFrame = Math.floor(this.animationCount / 30);
-    this.children.forEach(function (child) {
+    this.children.forEach(function(child) {
         if (child.update) {
             child.update();
         }
     });
-    for (var i = 0; i < this.bitmaps.length; i++) {
+    for (var i=0; i<this.bitmaps.length;i++) {
         if (this.bitmaps[i]) {
             this.bitmaps[i].touch();
         }
@@ -209,7 +206,7 @@ Tilemap.prototype.update = function () {
  *
  * @method refresh
  */
-Tilemap.prototype.refresh = function () {
+Tilemap.prototype.refresh = function() {
     this._lastTiles.length = 0;
 };
 
@@ -218,7 +215,7 @@ Tilemap.prototype.refresh = function () {
  *
  * @method refresh
  */
-Tilemap.prototype.refreshTileset = function () {
+Tilemap.prototype.refreshTileset = function() {
 
 };
 
@@ -226,7 +223,7 @@ Tilemap.prototype.refreshTileset = function () {
  * @method updateTransform
  * @private
  */
-Tilemap.prototype.updateTransform = function () {
+Tilemap.prototype.updateTransform = function() {
     var ox = Math.floor(this.origin.x);
     var oy = Math.floor(this.origin.y);
     var startX = Math.floor((ox - this._margin) / this._tileWidth);
@@ -249,7 +246,7 @@ Tilemap.prototype.updateTransform = function () {
  * @method _createLayers
  * @private
  */
-Tilemap.prototype._createLayers = function () {
+Tilemap.prototype._createLayers = function() {
     var width = this._width;
     var height = this._height;
     var margin = this._margin;
@@ -263,12 +260,18 @@ Tilemap.prototype._createLayers = function () {
     this._layerHeight = layerHeight;
 
     /*
-	 * Z coordinate:
-	 * 
-	 * 0 : Lower tiles 1 : Lower characters 3 : Normal characters 4 : Upper
-	 * tiles 5 : Upper characters 6 : Airship shadow 7 : Balloon 8 : Animation 9 :
-	 * Destination
-	 */
+     * Z coordinate:
+     *
+     * 0 : Lower tiles
+     * 1 : Lower characters
+     * 3 : Normal characters
+     * 4 : Upper tiles
+     * 5 : Upper characters
+     * 6 : Airship shadow
+     * 7 : Balloon
+     * 8 : Animation
+     * 9 : Destination
+     */
 
     this._lowerLayer = new Sprite();
     this._lowerLayer.move(-margin, -margin, width, height);
@@ -289,13 +292,11 @@ Tilemap.prototype._createLayers = function () {
 
 /**
  * @method _updateLayerPositions
- * @param {Number}
- *            startX
- * @param {Number}
- *            startY
+ * @param {Number} startX
+ * @param {Number} startY
  * @private
  */
-Tilemap.prototype._updateLayerPositions = function (startX, startY) {
+Tilemap.prototype._updateLayerPositions = function(startX, startY) {
     var m = this._margin;
     var ox = Math.floor(this.origin.x);
     var oy = Math.floor(this.origin.y);
@@ -326,13 +327,11 @@ Tilemap.prototype._updateLayerPositions = function (startX, startY) {
 
 /**
  * @method _paintAllTiles
- * @param {Number}
- *            startX
- * @param {Number}
- *            startY
+ * @param {Number} startX
+ * @param {Number} startY
  * @private
  */
-Tilemap.prototype._paintAllTiles = function (startX, startY) {
+Tilemap.prototype._paintAllTiles = function(startX, startY) {
     var tileCols = Math.ceil(this._width / this._tileWidth) + 1;
     var tileRows = Math.ceil(this._height / this._tileHeight) + 1;
     for (var y = 0; y < tileRows; y++) {
@@ -344,17 +343,13 @@ Tilemap.prototype._paintAllTiles = function (startX, startY) {
 
 /**
  * @method _paintTiles
- * @param {Number}
- *            startX
- * @param {Number}
- *            startY
- * @param {Number}
- *            x
- * @param {Number}
- *            y
+ * @param {Number} startX
+ * @param {Number} startY
+ * @param {Number} x
+ * @param {Number} y
  * @private
  */
-Tilemap.prototype._paintTiles = function (startX, startY, x, y) {
+Tilemap.prototype._paintTiles = function(startX, startY, x, y) {
     var tableEdgeVirtualId = 10000;
     var mx = startX + x;
     var my = startY + y;
@@ -408,7 +403,7 @@ Tilemap.prototype._paintTiles = function (startX, startY, x, y) {
 
     var lastLowerTiles = this._readLastTiles(0, lx, ly);
     if (!lowerTiles.equals(lastLowerTiles) ||
-        (Tilemap.isTileA1(tileId0) && this._frameUpdated)) {
+            (Tilemap.isTileA1(tileId0) && this._frameUpdated)) {
         this._lowerBitmap.clearRect(dx, dy, this._tileWidth, this._tileHeight);
         for (var i = 0; i < lowerTiles.length; i++) {
             var lowerTileId = lowerTiles[i];
@@ -435,15 +430,12 @@ Tilemap.prototype._paintTiles = function (startX, startY, x, y) {
 
 /**
  * @method _readLastTiles
- * @param {Number}
- *            i
- * @param {Number}
- *            x
- * @param {Number}
- *            y
+ * @param {Number} i
+ * @param {Number} x
+ * @param {Number} y
  * @private
  */
-Tilemap.prototype._readLastTiles = function (i, x, y) {
+Tilemap.prototype._readLastTiles = function(i, x, y) {
     var array1 = this._lastTiles[i];
     if (array1) {
         var array2 = array1[y];
@@ -459,17 +451,13 @@ Tilemap.prototype._readLastTiles = function (i, x, y) {
 
 /**
  * @method _writeLastTiles
- * @param {Number}
- *            i
- * @param {Number}
- *            x
- * @param {Number}
- *            y
- * @param {Array}
- *            tiles
+ * @param {Number} i
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Array} tiles
  * @private
  */
-Tilemap.prototype._writeLastTiles = function (i, x, y, tiles) {
+Tilemap.prototype._writeLastTiles = function(i, x, y, tiles) {
     var array1 = this._lastTiles[i];
     if (!array1) {
         array1 = this._lastTiles[i] = [];
@@ -483,17 +471,13 @@ Tilemap.prototype._writeLastTiles = function (i, x, y, tiles) {
 
 /**
  * @method _drawTile
- * @param {Bitmap}
- *            bitmap
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
+ * @param {Bitmap} bitmap
+ * @param {Number} tileId
+ * @param {Number} dx
+ * @param {Number} dy
  * @private
  */
-Tilemap.prototype._drawTile = function (bitmap, tileId, dx, dy) {
+Tilemap.prototype._drawTile = function(bitmap, tileId, dx, dy) {
     if (Tilemap.isVisibleTile(tileId)) {
         if (Tilemap.isAutotile(tileId)) {
             this._drawAutotile(bitmap, tileId, dx, dy);
@@ -505,17 +489,13 @@ Tilemap.prototype._drawTile = function (bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawNormalTile
- * @param {Bitmap}
- *            bitmap
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
+ * @param {Bitmap} bitmap
+ * @param {Number} tileId
+ * @param {Number} dx
+ * @param {Number} dy
  * @private
  */
-Tilemap.prototype._drawNormalTile = function (bitmap, tileId, dx, dy) {
+Tilemap.prototype._drawNormalTile = function(bitmap, tileId, dx, dy) {
     var setNumber = 0;
 
     if (Tilemap.isTileA5(tileId)) {
@@ -537,17 +517,13 @@ Tilemap.prototype._drawNormalTile = function (bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawAutotile
- * @param {Bitmap}
- *            bitmap
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
+ * @param {Bitmap} bitmap
+ * @param {Number} tileId
+ * @param {Number} dx
+ * @param {Number} dy
  * @private
  */
-Tilemap.prototype._drawAutotile = function (bitmap, tileId, dx, dy) {
+Tilemap.prototype._drawAutotile = function(bitmap, tileId, dx, dy) {
     var autotileTable = Tilemap.FLOOR_AUTOTILE_TABLE;
     var kind = Tilemap.getAutotileKind(tileId);
     var shape = Tilemap.getAutotileShape(tileId);
@@ -578,7 +554,8 @@ Tilemap.prototype._drawAutotile = function (bitmap, tileId, dx, dy) {
             by = ty * 6 + Math.floor(tx / 2) % 2 * 3;
             if (kind % 2 === 0) {
                 bx += waterSurfaceIndex * 2;
-            } else {
+            }
+            else {
                 bx += 6;
                 autotileTable = Tilemap.WATERFALL_AUTOTILE_TABLE;
                 by += this.animationFrame % 3;
@@ -620,13 +597,13 @@ Tilemap.prototype._drawAutotile = function (bitmap, tileId, dx, dy) {
                 var qsx2 = qsx;
                 var qsy2 = 3;
                 if (qsy === 1) {
-                    qsx2 = [0, 3, 2, 1][qsx];
+                    qsx2 = [0,3,2,1][qsx];
                 }
                 var sx2 = (bx * 2 + qsx2) * w1;
                 var sy2 = (by * 2 + qsy2) * h1;
                 bitmap.bltImage(source, sx2, sy2, w1, h1, dx1, dy1, w1, h1);
-                dy1 += h1 / 2;
-                bitmap.bltImage(source, sx1, sy1, w1, h1 / 2, dx1, dy1, w1, h1 / 2);
+                dy1 += h1/2;
+                bitmap.bltImage(source, sx1, sy1, w1, h1/2, dx1, dy1, w1, h1/2);
             } else {
                 bitmap.bltImage(source, sx1, sy1, w1, h1, dx1, dy1, w1, h1);
             }
@@ -636,17 +613,13 @@ Tilemap.prototype._drawAutotile = function (bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawTableEdge
- * @param {Bitmap}
- *            bitmap
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
+ * @param {Bitmap} bitmap
+ * @param {Number} tileId
+ * @param {Number} dx
+ * @param {Number} dy
  * @private
  */
-Tilemap.prototype._drawTableEdge = function (bitmap, tileId, dx, dy) {
+Tilemap.prototype._drawTableEdge = function(bitmap, tileId, dx, dy) {
     if (Tilemap.isTileA2(tileId)) {
         var autotileTable = Tilemap.FLOOR_AUTOTILE_TABLE;
         var kind = Tilemap.getAutotileKind(tileId);
@@ -666,10 +639,10 @@ Tilemap.prototype._drawTableEdge = function (bitmap, tileId, dx, dy) {
                 var qsx = table[2 + i][0];
                 var qsy = table[2 + i][1];
                 var sx1 = (bx * 2 + qsx) * w1;
-                var sy1 = (by * 2 + qsy) * h1 + h1 / 2;
+                var sy1 = (by * 2 + qsy) * h1 + h1/2;
                 var dx1 = dx + (i % 2) * w1;
                 var dy1 = dy + Math.floor(i / 2) * h1;
-                bitmap.bltImage(source, sx1, sy1, w1, h1 / 2, dx1, dy1, w1, h1 / 2);
+                bitmap.bltImage(source, sx1, sy1, w1, h1/2, dx1, dy1, w1, h1/2);
             }
         }
     }
@@ -677,17 +650,13 @@ Tilemap.prototype._drawTableEdge = function (bitmap, tileId, dx, dy) {
 
 /**
  * @method _drawShadow
- * @param {Bitmap}
- *            bitmap
- * @param {Number}
- *            shadowBits
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
+ * @param {Bitmap} bitmap
+ * @param {Number} shadowBits
+ * @param {Number} dx
+ * @param {Number} dy
  * @private
  */
-Tilemap.prototype._drawShadow = function (bitmap, shadowBits, dx, dy) {
+Tilemap.prototype._drawShadow = function(bitmap, shadowBits, dx, dy) {
     if (shadowBits & 0x0f) {
         var w1 = this._tileWidth / 2;
         var h1 = this._tileHeight / 2;
@@ -704,16 +673,13 @@ Tilemap.prototype._drawShadow = function (bitmap, shadowBits, dx, dy) {
 
 /**
  * @method _readMapData
- * @param {Number}
- *            x
- * @param {Number}
- *            y
- * @param {Number}
- *            z
+ * @param {Number} x
+ * @param {Number} y
+ * @param {Number} z
  * @return {Number}
  * @private
  */
-Tilemap.prototype._readMapData = function (x, y, z) {
+Tilemap.prototype._readMapData = function(x, y, z) {
     if (this._mapData) {
         var width = this._mapWidth;
         var height = this._mapHeight;
@@ -735,36 +701,32 @@ Tilemap.prototype._readMapData = function (x, y, z) {
 
 /**
  * @method _isHigherTile
- * @param {Number}
- *            tileId
+ * @param {Number} tileId
  * @return {Boolean}
  * @private
  */
-Tilemap.prototype._isHigherTile = function (tileId) {
+Tilemap.prototype._isHigherTile = function(tileId) {
     return this.flags[tileId] & 0x10;
 };
 
 /**
  * @method _isTableTile
- * @param {Number}
- *            tileId
+ * @param {Number} tileId
  * @return {Boolean}
  * @private
  */
-Tilemap.prototype._isTableTile = function (tileId) {
+Tilemap.prototype._isTableTile = function(tileId) {
     return Tilemap.isTileA2(tileId) && (this.flags[tileId] & 0x80);
 };
 
 /**
  * @method _isOverpassPosition
- * @param {Number}
- *            mx
- * @param {Number}
- *            my
+ * @param {Number} mx
+ * @param {Number} my
  * @return {Boolean}
  * @private
  */
-Tilemap.prototype._isOverpassPosition = function (mx, my) {
+Tilemap.prototype._isOverpassPosition = function(mx, my) {
     return false;
 };
 
@@ -772,19 +734,17 @@ Tilemap.prototype._isOverpassPosition = function (mx, my) {
  * @method _sortChildren
  * @private
  */
-Tilemap.prototype._sortChildren = function () {
+Tilemap.prototype._sortChildren = function() {
     this.children.sort(this._compareChildOrder.bind(this));
 };
 
 /**
  * @method _compareChildOrder
- * @param {Object}
- *            a
- * @param {Object}
- *            b
+ * @param {Object} a
+ * @param {Object} b
  * @private
  */
-Tilemap.prototype._compareChildOrder = function (a, b) {
+Tilemap.prototype._compareChildOrder = function(a, b) {
     if (a.z !== b.z) {
         return a.z - b.z;
     } else if (a.y !== b.y) {
@@ -796,38 +756,38 @@ Tilemap.prototype._compareChildOrder = function (a, b) {
 
 // Tile type checkers
 
-Tilemap.TILE_ID_B = 0;
-Tilemap.TILE_ID_C = 256;
-Tilemap.TILE_ID_D = 512;
-Tilemap.TILE_ID_E = 768;
-Tilemap.TILE_ID_A5 = 1536;
-Tilemap.TILE_ID_A1 = 2048;
-Tilemap.TILE_ID_A2 = 2816;
-Tilemap.TILE_ID_A3 = 4352;
-Tilemap.TILE_ID_A4 = 5888;
-Tilemap.TILE_ID_MAX = 8192;
+Tilemap.TILE_ID_B      = 0;
+Tilemap.TILE_ID_C      = 256;
+Tilemap.TILE_ID_D      = 512;
+Tilemap.TILE_ID_E      = 768;
+Tilemap.TILE_ID_A5     = 1536;
+Tilemap.TILE_ID_A1     = 2048;
+Tilemap.TILE_ID_A2     = 2816;
+Tilemap.TILE_ID_A3     = 4352;
+Tilemap.TILE_ID_A4     = 5888;
+Tilemap.TILE_ID_MAX    = 8192;
 
-Tilemap.isVisibleTile = function (tileId) {
+Tilemap.isVisibleTile = function(tileId) {
     return tileId > 0 && tileId < this.TILE_ID_MAX;
 };
 
-Tilemap.isAutotile = function (tileId) {
+Tilemap.isAutotile = function(tileId) {
     return tileId >= this.TILE_ID_A1;
 };
 
-Tilemap.getAutotileKind = function (tileId) {
+Tilemap.getAutotileKind = function(tileId) {
     return Math.floor((tileId - this.TILE_ID_A1) / 48);
 };
 
-Tilemap.getAutotileShape = function (tileId) {
+Tilemap.getAutotileShape = function(tileId) {
     return (tileId - this.TILE_ID_A1) % 48;
 };
 
-Tilemap.makeAutotileId = function (kind, shape) {
+Tilemap.makeAutotileId = function(kind, shape) {
     return this.TILE_ID_A1 + kind * 48 + shape;
 };
 
-Tilemap.isSameKindTile = function (tileID1, tileID2) {
+Tilemap.isSameKindTile = function(tileID1, tileID2) {
     if (this.isAutotile(tileID1) && this.isAutotile(tileID2)) {
         return this.getAutotileKind(tileID1) === this.getAutotileKind(tileID2);
     } else {
@@ -835,27 +795,27 @@ Tilemap.isSameKindTile = function (tileID1, tileID2) {
     }
 };
 
-Tilemap.isTileA1 = function (tileId) {
+Tilemap.isTileA1 = function(tileId) {
     return tileId >= this.TILE_ID_A1 && tileId < this.TILE_ID_A2;
 };
 
-Tilemap.isTileA2 = function (tileId) {
+Tilemap.isTileA2 = function(tileId) {
     return tileId >= this.TILE_ID_A2 && tileId < this.TILE_ID_A3;
 };
 
-Tilemap.isTileA3 = function (tileId) {
+Tilemap.isTileA3 = function(tileId) {
     return tileId >= this.TILE_ID_A3 && tileId < this.TILE_ID_A4;
 };
 
-Tilemap.isTileA4 = function (tileId) {
+Tilemap.isTileA4 = function(tileId) {
     return tileId >= this.TILE_ID_A4 && tileId < this.TILE_ID_MAX;
 };
 
-Tilemap.isTileA5 = function (tileId) {
+Tilemap.isTileA5 = function(tileId) {
     return tileId >= this.TILE_ID_A5 && tileId < this.TILE_ID_A1;
 };
 
-Tilemap.isWaterTile = function (tileId) {
+Tilemap.isWaterTile = function(tileId) {
     if (this.isTileA1(tileId)) {
         return !(tileId >= this.TILE_ID_A1 + 96 && tileId < this.TILE_ID_A1 + 192);
     } else {
@@ -863,7 +823,7 @@ Tilemap.isWaterTile = function (tileId) {
     }
 };
 
-Tilemap.isWaterfallTile = function (tileId) {
+Tilemap.isWaterfallTile = function(tileId) {
     if (tileId >= this.TILE_ID_A1 + 192 && tileId < this.TILE_ID_A2) {
         return this.getAutotileKind(tileId) % 2 === 1;
     } else {
@@ -871,461 +831,87 @@ Tilemap.isWaterfallTile = function (tileId) {
     }
 };
 
-Tilemap.isGroundTile = function (tileId) {
+Tilemap.isGroundTile = function(tileId) {
     return this.isTileA1(tileId) || this.isTileA2(tileId) || this.isTileA5(tileId);
 };
 
-Tilemap.isShadowingTile = function (tileId) {
+Tilemap.isShadowingTile = function(tileId) {
     return this.isTileA3(tileId) || this.isTileA4(tileId);
 };
 
-Tilemap.isRoofTile = function (tileId) {
+Tilemap.isRoofTile = function(tileId) {
     return this.isTileA3(tileId) && this.getAutotileKind(tileId) % 16 < 8;
 };
 
-Tilemap.isWallTopTile = function (tileId) {
+Tilemap.isWallTopTile = function(tileId) {
     return this.isTileA4(tileId) && this.getAutotileKind(tileId) % 16 < 8;
 };
 
-Tilemap.isWallSideTile = function (tileId) {
+Tilemap.isWallSideTile = function(tileId) {
     return (this.isTileA3(tileId) || this.isTileA4(tileId)) &&
-        this.getAutotileKind(tileId) % 16 >= 8;
+            this.getAutotileKind(tileId) % 16 >= 8;
 };
 
-Tilemap.isWallTile = function (tileId) {
+Tilemap.isWallTile = function(tileId) {
     return this.isWallTopTile(tileId) || this.isWallSideTile(tileId);
 };
 
-Tilemap.isFloorTypeAutotile = function (tileId) {
+Tilemap.isFloorTypeAutotile = function(tileId) {
     return (this.isTileA1(tileId) && !this.isWaterfallTile(tileId)) ||
-        this.isTileA2(tileId) || this.isWallTopTile(tileId);
+            this.isTileA2(tileId) || this.isWallTopTile(tileId);
 };
 
-Tilemap.isWallTypeAutotile = function (tileId) {
+Tilemap.isWallTypeAutotile = function(tileId) {
     return this.isRoofTile(tileId) || this.isWallSideTile(tileId);
 };
 
-Tilemap.isWaterfallTypeAutotile = function (tileId) {
+Tilemap.isWaterfallTypeAutotile = function(tileId) {
     return this.isWaterfallTile(tileId);
 };
 
 // Autotile shape number to coordinates of tileset images
 
 Tilemap.FLOOR_AUTOTILE_TABLE = [
-    [
-        [2, 4],
-        [1, 4],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [2, 0],
-        [1, 4],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [2, 4],
-        [3, 0],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [2, 4],
-        [1, 4],
-        [2, 3],
-        [3, 1]
-    ],
-    [
-        [2, 0],
-        [1, 4],
-        [2, 3],
-        [3, 1]
-    ],
-    [
-        [2, 4],
-        [3, 0],
-        [2, 3],
-        [3, 1]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 3],
-        [3, 1]
-    ],
-    [
-        [2, 4],
-        [1, 4],
-        [2, 1],
-        [1, 3]
-    ],
-    [
-        [2, 0],
-        [1, 4],
-        [2, 1],
-        [1, 3]
-    ],
-    [
-        [2, 4],
-        [3, 0],
-        [2, 1],
-        [1, 3]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 1],
-        [1, 3]
-    ],
-    [
-        [2, 4],
-        [1, 4],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [2, 0],
-        [1, 4],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [2, 4],
-        [3, 0],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [0, 4],
-        [1, 4],
-        [0, 3],
-        [1, 3]
-    ],
-    [
-        [0, 4],
-        [3, 0],
-        [0, 3],
-        [1, 3]
-    ],
-    [
-        [0, 4],
-        [1, 4],
-        [0, 3],
-        [3, 1]
-    ],
-    [
-        [0, 4],
-        [3, 0],
-        [0, 3],
-        [3, 1]
-    ],
-    [
-        [2, 2],
-        [1, 2],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [2, 2],
-        [1, 2],
-        [2, 3],
-        [3, 1]
-    ],
-    [
-        [2, 2],
-        [1, 2],
-        [2, 1],
-        [1, 3]
-    ],
-    [
-        [2, 2],
-        [1, 2],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [2, 4],
-        [3, 4],
-        [2, 3],
-        [3, 3]
-    ],
-    [
-        [2, 4],
-        [3, 4],
-        [2, 1],
-        [3, 3]
-    ],
-    [
-        [2, 0],
-        [3, 4],
-        [2, 3],
-        [3, 3]
-    ],
-    [
-        [2, 0],
-        [3, 4],
-        [2, 1],
-        [3, 3]
-    ],
-    [
-        [2, 4],
-        [1, 4],
-        [2, 5],
-        [1, 5]
-    ],
-    [
-        [2, 0],
-        [1, 4],
-        [2, 5],
-        [1, 5]
-    ],
-    [
-        [2, 4],
-        [3, 0],
-        [2, 5],
-        [1, 5]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 5],
-        [1, 5]
-    ],
-    [
-        [0, 4],
-        [3, 4],
-        [0, 3],
-        [3, 3]
-    ],
-    [
-        [2, 2],
-        [1, 2],
-        [2, 5],
-        [1, 5]
-    ],
-    [
-        [0, 2],
-        [1, 2],
-        [0, 3],
-        [1, 3]
-    ],
-    [
-        [0, 2],
-        [1, 2],
-        [0, 3],
-        [3, 1]
-    ],
-    [
-        [2, 2],
-        [3, 2],
-        [2, 3],
-        [3, 3]
-    ],
-    [
-        [2, 2],
-        [3, 2],
-        [2, 1],
-        [3, 3]
-    ],
-    [
-        [2, 4],
-        [3, 4],
-        [2, 5],
-        [3, 5]
-    ],
-    [
-        [2, 0],
-        [3, 4],
-        [2, 5],
-        [3, 5]
-    ],
-    [
-        [0, 4],
-        [1, 4],
-        [0, 5],
-        [1, 5]
-    ],
-    [
-        [0, 4],
-        [3, 0],
-        [0, 5],
-        [1, 5]
-    ],
-    [
-        [0, 2],
-        [3, 2],
-        [0, 3],
-        [3, 3]
-    ],
-    [
-        [0, 2],
-        [1, 2],
-        [0, 5],
-        [1, 5]
-    ],
-    [
-        [0, 4],
-        [3, 4],
-        [0, 5],
-        [3, 5]
-    ],
-    [
-        [2, 2],
-        [3, 2],
-        [2, 5],
-        [3, 5]
-    ],
-    [
-        [0, 2],
-        [3, 2],
-        [0, 5],
-        [3, 5]
-    ],
-    [
-        [0, 0],
-        [1, 0],
-        [0, 1],
-        [1, 1]
-    ]
+    [[2,4],[1,4],[2,3],[1,3]],[[2,0],[1,4],[2,3],[1,3]],
+    [[2,4],[3,0],[2,3],[1,3]],[[2,0],[3,0],[2,3],[1,3]],
+    [[2,4],[1,4],[2,3],[3,1]],[[2,0],[1,4],[2,3],[3,1]],
+    [[2,4],[3,0],[2,3],[3,1]],[[2,0],[3,0],[2,3],[3,1]],
+    [[2,4],[1,4],[2,1],[1,3]],[[2,0],[1,4],[2,1],[1,3]],
+    [[2,4],[3,0],[2,1],[1,3]],[[2,0],[3,0],[2,1],[1,3]],
+    [[2,4],[1,4],[2,1],[3,1]],[[2,0],[1,4],[2,1],[3,1]],
+    [[2,4],[3,0],[2,1],[3,1]],[[2,0],[3,0],[2,1],[3,1]],
+    [[0,4],[1,4],[0,3],[1,3]],[[0,4],[3,0],[0,3],[1,3]],
+    [[0,4],[1,4],[0,3],[3,1]],[[0,4],[3,0],[0,3],[3,1]],
+    [[2,2],[1,2],[2,3],[1,3]],[[2,2],[1,2],[2,3],[3,1]],
+    [[2,2],[1,2],[2,1],[1,3]],[[2,2],[1,2],[2,1],[3,1]],
+    [[2,4],[3,4],[2,3],[3,3]],[[2,4],[3,4],[2,1],[3,3]],
+    [[2,0],[3,4],[2,3],[3,3]],[[2,0],[3,4],[2,1],[3,3]],
+    [[2,4],[1,4],[2,5],[1,5]],[[2,0],[1,4],[2,5],[1,5]],
+    [[2,4],[3,0],[2,5],[1,5]],[[2,0],[3,0],[2,5],[1,5]],
+    [[0,4],[3,4],[0,3],[3,3]],[[2,2],[1,2],[2,5],[1,5]],
+    [[0,2],[1,2],[0,3],[1,3]],[[0,2],[1,2],[0,3],[3,1]],
+    [[2,2],[3,2],[2,3],[3,3]],[[2,2],[3,2],[2,1],[3,3]],
+    [[2,4],[3,4],[2,5],[3,5]],[[2,0],[3,4],[2,5],[3,5]],
+    [[0,4],[1,4],[0,5],[1,5]],[[0,4],[3,0],[0,5],[1,5]],
+    [[0,2],[3,2],[0,3],[3,3]],[[0,2],[1,2],[0,5],[1,5]],
+    [[0,4],[3,4],[0,5],[3,5]],[[2,2],[3,2],[2,5],[3,5]],
+    [[0,2],[3,2],[0,5],[3,5]],[[0,0],[1,0],[0,1],[1,1]]
 ];
 
 Tilemap.WALL_AUTOTILE_TABLE = [
-    [
-        [2, 2],
-        [1, 2],
-        [2, 1],
-        [1, 1]
-    ],
-    [
-        [0, 2],
-        [1, 2],
-        [0, 1],
-        [1, 1]
-    ],
-    [
-        [2, 0],
-        [1, 0],
-        [2, 1],
-        [1, 1]
-    ],
-    [
-        [0, 0],
-        [1, 0],
-        [0, 1],
-        [1, 1]
-    ],
-    [
-        [2, 2],
-        [3, 2],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [0, 2],
-        [3, 2],
-        [0, 1],
-        [3, 1]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [0, 0],
-        [3, 0],
-        [0, 1],
-        [3, 1]
-    ],
-    [
-        [2, 2],
-        [1, 2],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [0, 2],
-        [1, 2],
-        [0, 3],
-        [1, 3]
-    ],
-    [
-        [2, 0],
-        [1, 0],
-        [2, 3],
-        [1, 3]
-    ],
-    [
-        [0, 0],
-        [1, 0],
-        [0, 3],
-        [1, 3]
-    ],
-    [
-        [2, 2],
-        [3, 2],
-        [2, 3],
-        [3, 3]
-    ],
-    [
-        [0, 2],
-        [3, 2],
-        [0, 3],
-        [3, 3]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 3],
-        [3, 3]
-    ],
-    [
-        [0, 0],
-        [3, 0],
-        [0, 3],
-        [3, 3]
-    ]
+    [[2,2],[1,2],[2,1],[1,1]],[[0,2],[1,2],[0,1],[1,1]],
+    [[2,0],[1,0],[2,1],[1,1]],[[0,0],[1,0],[0,1],[1,1]],
+    [[2,2],[3,2],[2,1],[3,1]],[[0,2],[3,2],[0,1],[3,1]],
+    [[2,0],[3,0],[2,1],[3,1]],[[0,0],[3,0],[0,1],[3,1]],
+    [[2,2],[1,2],[2,3],[1,3]],[[0,2],[1,2],[0,3],[1,3]],
+    [[2,0],[1,0],[2,3],[1,3]],[[0,0],[1,0],[0,3],[1,3]],
+    [[2,2],[3,2],[2,3],[3,3]],[[0,2],[3,2],[0,3],[3,3]],
+    [[2,0],[3,0],[2,3],[3,3]],[[0,0],[3,0],[0,3],[3,3]]
 ];
 
 Tilemap.WATERFALL_AUTOTILE_TABLE = [
-    [
-        [2, 0],
-        [1, 0],
-        [2, 1],
-        [1, 1]
-    ],
-    [
-        [0, 0],
-        [1, 0],
-        [0, 1],
-        [1, 1]
-    ],
-    [
-        [2, 0],
-        [3, 0],
-        [2, 1],
-        [3, 1]
-    ],
-    [
-        [0, 0],
-        [3, 0],
-        [0, 1],
-        [3, 1]
-    ]
+    [[2,0],[1,0],[2,1],[1,1]],[[0,0],[1,0],[0,1],[1,1]],
+    [[2,0],[3,0],[2,1],[3,1]],[[0,0],[3,0],[0,1],[3,1]]
 ];
 
 // The important members from Pixi.js
@@ -1348,8 +934,7 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Adds a child to the container.
  *
  * @method addChild
- * @param {Object}
- *            child The child to add
+ * @param {Object} child The child to add
  * @return {Object} The child that was added
  */
 
@@ -1357,10 +942,8 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Adds a child to the container at a specified index.
  *
  * @method addChildAt
- * @param {Object}
- *            child The child to add
- * @param {Number}
- *            index The index to place the child in
+ * @param {Object} child The child to add
+ * @param {Number} index The index to place the child in
  * @return {Object} The child that was added
  */
 
@@ -1368,8 +951,7 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Removes a child from the container.
  *
  * @method removeChild
- * @param {Object}
- *            child The child to remove
+ * @param {Object} child The child to remove
  * @return {Object} The child that was removed
  */
 
@@ -1377,461 +959,6 @@ Tilemap.WATERFALL_AUTOTILE_TABLE = [
  * Removes a child from the specified index position.
  *
  * @method removeChildAt
- * @param {Number}
- *            index The index to get the child from
+ * @param {Number} index The index to get the child from
  * @return {Object} The child that was removed
  */
-
-// -----------------------------------------------------------------------------
-/**
- * The tilemap which displays 2D tile-based game map using shaders
- *
- * @class Tilemap
- * @constructor
- */
-function ShaderTilemap() {
-    Tilemap.apply(this, arguments);
-    this.roundPixels = true;
-}
-
-ShaderTilemap.prototype = Object.create(Tilemap.prototype);
-ShaderTilemap.prototype.constructor = ShaderTilemap;
-
-// we need this constant for some platforms (Samsung S4, S5, Tab4, HTC One H8)
-PIXI.glCore.VertexArrayObject.FORCE_NATIVE = true;
-PIXI.settings.GC_MODE = PIXI.GC_MODES.AUTO;
-PIXI.tilemap.TileRenderer.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
-PIXI.tilemap.TileRenderer.DO_CLEAR = true;
-
-/**
- * Uploads animation state in renderer
- *
- * @method _hackRenderer
- * @private
- */
-ShaderTilemap.prototype._hackRenderer = function (renderer) {
-    var af = this.animationFrame % 4;
-    if (af == 3) af = 1;
-    renderer.plugins.tilemap.tileAnim[0] = af * this._tileWidth;
-    renderer.plugins.tilemap.tileAnim[1] = (this.animationFrame % 3) * this._tileHeight;
-    return renderer;
-};
-
-/**
- * PIXI render method
- *
- * @method renderCanvas
- * @param {Object}
- *            pixi renderer
- */
-ShaderTilemap.prototype.renderCanvas = function (renderer) {
-    this._hackRenderer(renderer);
-    PIXI.Container.prototype.renderCanvas.call(this, renderer);
-};
-
-
-/**
- * PIXI render method
- *
- * @method renderWebGL
- * @param {Object}
- *            pixi renderer
- */
-ShaderTilemap.prototype.renderWebGL = function (renderer) {
-    this._hackRenderer(renderer);
-    PIXI.Container.prototype.renderWebGL.call(this, renderer);
-};
-
-/**
- * Forces to repaint the entire tilemap AND update bitmaps list if needed
- *
- * @method refresh
- */
-ShaderTilemap.prototype.refresh = function () {
-    if (this._lastBitmapLength !== this.bitmaps.length) {
-        this._lastBitmapLength = this.bitmaps.length;
-        this.refreshTileset();
-    }
-    ;
-    this._needsRepaint = true;
-};
-
-/**
- * Call after you update tileset
- *
- * @method updateBitmaps
- */
-ShaderTilemap.prototype.refreshTileset = function () {
-    var bitmaps = this.bitmaps.map(function (x) {
-        return x._baseTexture ? new PIXI.Texture(x._baseTexture) : x;
-    });
-    this.lowerLayer.setBitmaps(bitmaps);
-    this.upperLayer.setBitmaps(bitmaps);
-};
-
-/**
- * @method updateTransform
- * @private
- */
-ShaderTilemap.prototype.updateTransform = function () {
-    if (this.roundPixels) {
-        var ox = Math.floor(this.origin.x);
-        var oy = Math.floor(this.origin.y);
-    } else {
-        ox = this.origin.x;
-        oy = this.origin.y;
-    }
-    var startX = Math.floor((ox - this._margin) / this._tileWidth);
-    var startY = Math.floor((oy - this._margin) / this._tileHeight);
-    this._updateLayerPositions(startX, startY);
-    if (this._needsRepaint ||
-        this._lastStartX !== startX || this._lastStartY !== startY) {
-        this._lastStartX = startX;
-        this._lastStartY = startY;
-        this._paintAllTiles(startX, startY);
-        this._needsRepaint = false;
-    }
-    this._sortChildren();
-    PIXI.Container.prototype.updateTransform.call(this);
-};
-
-/**
- * @method _createLayers
- * @private
- */
-ShaderTilemap.prototype._createLayers = function () {
-    var width = this._width;
-    var height = this._height;
-    var margin = this._margin;
-    var tileCols = Math.ceil(width / this._tileWidth) + 1;
-    var tileRows = Math.ceil(height / this._tileHeight) + 1;
-    var layerWidth = this._layerWidth = tileCols * this._tileWidth;
-    var layerHeight = this._layerHeight = tileRows * this._tileHeight;
-    this._needsRepaint = true;
-
-    if (!this.lowerZLayer) {
-        // @hackerham: create layers only in initialization. Doesn't depend on
-        // width/height
-        this.addChild(this.lowerZLayer = new PIXI.tilemap.ZLayer(this, 0));
-        this.addChild(this.upperZLayer = new PIXI.tilemap.ZLayer(this, 4));
-
-        var parameters = PluginManager.parameters('ShaderTilemap');
-        var useSquareShader = Number(parameters.hasOwnProperty('squareShader') ? parameters['squareShader'] : 0);
-
-        this.lowerZLayer.addChild(this.lowerLayer = new PIXI.tilemap.CompositeRectTileLayer(0, [], useSquareShader));
-        this.lowerLayer.shadowColor = new Float32Array([0.0, 0.0, 0.0, 0.5]);
-        this.upperZLayer.addChild(this.upperLayer = new PIXI.tilemap.CompositeRectTileLayer(4, [], useSquareShader));
-    }
-};
-
-/**
- * @method _updateLayerPositions
- * @param {Number}
- *            startX
- * @param {Number}
- *            startY
- * @private
- */
-ShaderTilemap.prototype._updateLayerPositions = function (startX, startY) {
-    if (this.roundPixels) {
-        var ox = Math.floor(this.origin.x);
-        var oy = Math.floor(this.origin.y);
-    } else {
-        ox = this.origin.x;
-        oy = this.origin.y;
-    }
-    this.lowerZLayer.position.x = startX * this._tileWidth - ox;
-    this.lowerZLayer.position.y = startY * this._tileHeight - oy;
-    this.upperZLayer.position.x = startX * this._tileWidth - ox;
-    this.upperZLayer.position.y = startY * this._tileHeight - oy;
-};
-
-/**
- * @method _paintAllTiles
- * @param {Number}
- *            startX
- * @param {Number}
- *            startY
- * @private
- */
-ShaderTilemap.prototype._paintAllTiles = function (startX, startY) {
-    this.lowerZLayer.clear();
-    this.upperZLayer.clear();
-    var tileCols = Math.ceil(this._width / this._tileWidth) + 1;
-    var tileRows = Math.ceil(this._height / this._tileHeight) + 1;
-    for (var y = 0; y < tileRows; y++) {
-        for (var x = 0; x < tileCols; x++) {
-            this._paintTiles(startX, startY, x, y);
-        }
-    }
-};
-
-/**
- * @method _paintTiles
- * @param {Number}
- *            startX
- * @param {Number}
- *            startY
- * @param {Number}
- *            x
- * @param {Number}
- *            y
- * @private
- */
-ShaderTilemap.prototype._paintTiles = function (startX, startY, x, y) {
-    var mx = startX + x;
-    var my = startY + y;
-    var dx = x * this._tileWidth,
-        dy = y * this._tileHeight;
-    var tileId0 = this._readMapData(mx, my, 0);
-    var tileId1 = this._readMapData(mx, my, 1);
-    var tileId2 = this._readMapData(mx, my, 2);
-    var tileId3 = this._readMapData(mx, my, 3);
-    var shadowBits = this._readMapData(mx, my, 4);
-    var upperTileId1 = this._readMapData(mx, my - 1, 1);
-    var lowerLayer = this.lowerLayer.children[0];
-    var upperLayer = this.upperLayer.children[0];
-
-    if (this._isHigherTile(tileId0)) {
-        this._drawTile(upperLayer, tileId0, dx, dy);
-    } else {
-        this._drawTile(lowerLayer, tileId0, dx, dy);
-    }
-    if (this._isHigherTile(tileId1)) {
-        this._drawTile(upperLayer, tileId1, dx, dy);
-    } else {
-        this._drawTile(lowerLayer, tileId1, dx, dy);
-    }
-
-    this._drawShadow(lowerLayer, shadowBits, dx, dy);
-    if (this._isTableTile(upperTileId1) && !this._isTableTile(tileId1)) {
-        if (!Tilemap.isShadowingTile(tileId0)) {
-            this._drawTableEdge(lowerLayer, upperTileId1, dx, dy);
-        }
-    }
-
-    if (this._isOverpassPosition(mx, my)) {
-        this._drawTile(upperLayer, tileId2, dx, dy);
-        this._drawTile(upperLayer, tileId3, dx, dy);
-    } else {
-        if (this._isHigherTile(tileId2)) {
-            this._drawTile(upperLayer, tileId2, dx, dy);
-        } else {
-            this._drawTile(lowerLayer, tileId2, dx, dy);
-        }
-        if (this._isHigherTile(tileId3)) {
-            this._drawTile(upperLayer, tileId3, dx, dy);
-        } else {
-            this._drawTile(lowerLayer, tileId3, dx, dy);
-        }
-    }
-};
-
-/**
- * @method _drawTile
- * @param {Array}
- *            layers
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
- * @private
- */
-ShaderTilemap.prototype._drawTile = function (layer, tileId, dx, dy) {
-    if (Tilemap.isVisibleTile(tileId)) {
-        if (Tilemap.isAutotile(tileId)) {
-            this._drawAutotile(layer, tileId, dx, dy);
-        } else {
-            this._drawNormalTile(layer, tileId, dx, dy);
-        }
-    }
-};
-
-/**
- * @method _drawNormalTile
- * @param {Array}
- *            layers
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
- * @private
- */
-ShaderTilemap.prototype._drawNormalTile = function (layer, tileId, dx, dy) {
-    var setNumber = 0;
-
-    if (Tilemap.isTileA5(tileId)) {
-        setNumber = 4;
-    } else {
-        setNumber = 5 + Math.floor(tileId / 256);
-    }
-
-    var w = this._tileWidth;
-    var h = this._tileHeight;
-    var sx = (Math.floor(tileId / 128) % 2 * 8 + tileId % 8) * w;
-    var sy = (Math.floor(tileId % 256 / 8) % 16) * h;
-
-    layer.addRect(setNumber, sx, sy, dx, dy, w, h);
-};
-
-/**
- * @method _drawAutotile
- * @param {Array}
- *            layers
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
- * @private
- */
-ShaderTilemap.prototype._drawAutotile = function (layer, tileId, dx, dy) {
-    var autotileTable = Tilemap.FLOOR_AUTOTILE_TABLE;
-    var kind = Tilemap.getAutotileKind(tileId);
-    var shape = Tilemap.getAutotileShape(tileId);
-    var tx = kind % 8;
-    var ty = Math.floor(kind / 8);
-    var bx = 0;
-    var by = 0;
-    var setNumber = 0;
-    var isTable = false;
-    var animX = 0,
-        animY = 0;
-
-    if (Tilemap.isTileA1(tileId)) {
-        setNumber = 0;
-        if (kind === 0) {
-            animX = 2;
-            by = 0;
-        } else if (kind === 1) {
-            animX = 2;
-            by = 3;
-        } else if (kind === 2) {
-            bx = 6;
-            by = 0;
-        } else if (kind === 3) {
-            bx = 6;
-            by = 3;
-        } else {
-            bx = Math.floor(tx / 4) * 8;
-            by = ty * 6 + Math.floor(tx / 2) % 2 * 3;
-            if (kind % 2 === 0) {
-                animX = 2;
-            } else {
-                bx += 6;
-                autotileTable = Tilemap.WATERFALL_AUTOTILE_TABLE;
-                animY = 1;
-            }
-        }
-    } else if (Tilemap.isTileA2(tileId)) {
-        setNumber = 1;
-        bx = tx * 2;
-        by = (ty - 2) * 3;
-        isTable = this._isTableTile(tileId);
-    } else if (Tilemap.isTileA3(tileId)) {
-        setNumber = 2;
-        bx = tx * 2;
-        by = (ty - 6) * 2;
-        autotileTable = Tilemap.WALL_AUTOTILE_TABLE;
-    } else if (Tilemap.isTileA4(tileId)) {
-        setNumber = 3;
-        bx = tx * 2;
-        by = Math.floor((ty - 10) * 2.5 + (ty % 2 === 1 ? 0.5 : 0));
-        if (ty % 2 === 1) {
-            autotileTable = Tilemap.WALL_AUTOTILE_TABLE;
-        }
-    }
-
-    var table = autotileTable[shape];
-    var w1 = this._tileWidth / 2;
-    var h1 = this._tileHeight / 2;
-    for (var i = 0; i < 4; i++) {
-        var qsx = table[i][0];
-        var qsy = table[i][1];
-        var sx1 = (bx * 2 + qsx) * w1;
-        var sy1 = (by * 2 + qsy) * h1;
-        var dx1 = dx + (i % 2) * w1;
-        var dy1 = dy + Math.floor(i / 2) * h1;
-        if (isTable && (qsy === 1 || qsy === 5)) {
-            var qsx2 = qsx;
-            var qsy2 = 3;
-            if (qsy === 1) {
-                // qsx2 = [0, 3, 2, 1][qsx];
-                qsx2 = (4 - qsx) % 4;
-            }
-            var sx2 = (bx * 2 + qsx2) * w1;
-            var sy2 = (by * 2 + qsy2) * h1;
-            layer.addRect(setNumber, sx2, sy2, dx1, dy1, w1, h1, animX, animY);
-            layer.addRect(setNumber, sx1, sy1, dx1, dy1 + h1 / 2, w1, h1 / 2, animX, animY);
-        } else {
-            layer.addRect(setNumber, sx1, sy1, dx1, dy1, w1, h1, animX, animY);
-        }
-    }
-};
-
-/**
- * @method _drawTableEdge
- * @param {Array}
- *            layers
- * @param {Number}
- *            tileId
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
- * @private
- */
-ShaderTilemap.prototype._drawTableEdge = function (layer, tileId, dx, dy) {
-    if (Tilemap.isTileA2(tileId)) {
-        var autotileTable = Tilemap.FLOOR_AUTOTILE_TABLE;
-        var kind = Tilemap.getAutotileKind(tileId);
-        var shape = Tilemap.getAutotileShape(tileId);
-        var tx = kind % 8;
-        var ty = Math.floor(kind / 8);
-        var setNumber = 1;
-        var bx = tx * 2;
-        var by = (ty - 2) * 3;
-        var table = autotileTable[shape];
-        var w1 = this._tileWidth / 2;
-        var h1 = this._tileHeight / 2;
-        for (var i = 0; i < 2; i++) {
-            var qsx = table[2 + i][0];
-            var qsy = table[2 + i][1];
-            var sx1 = (bx * 2 + qsx) * w1;
-            var sy1 = (by * 2 + qsy) * h1 + h1 / 2;
-            var dx1 = dx + (i % 2) * w1;
-            var dy1 = dy + Math.floor(i / 2) * h1;
-            layer.addRect(setNumber, sx1, sy1, dx1, dy1, w1, h1 / 2);
-        }
-    }
-};
-
-/**
- * @method _drawShadow
- * @param {Number}
- *            shadowBits
- * @param {Number}
- *            dx
- * @param {Number}
- *            dy
- * @private
- */
-ShaderTilemap.prototype._drawShadow = function (layer, shadowBits, dx, dy) {
-    if (shadowBits & 0x0f) {
-        var w1 = this._tileWidth / 2;
-        var h1 = this._tileHeight / 2;
-        for (var i = 0; i < 4; i++) {
-            if (shadowBits & (1 << i)) {
-                var dx1 = dx + (i % 2) * w1;
-                var dy1 = dy + Math.floor(i / 2) * h1;
-                layer.addRect(-1, 0, 0, dx1, dy1, w1, h1);
-            }
-        }
-    }
-};
-

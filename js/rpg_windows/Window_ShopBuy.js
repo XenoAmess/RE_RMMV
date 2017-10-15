@@ -1,4 +1,4 @@
-//xenoSplitPos:Window_ShopBuy-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Window_ShopBuy
 //
 // The window for selecting an item to buy on the shop screen.
@@ -10,7 +10,7 @@ function Window_ShopBuy() {
 Window_ShopBuy.prototype = Object.create(Window_Selectable.prototype);
 Window_ShopBuy.prototype.constructor = Window_ShopBuy;
 
-Window_ShopBuy.prototype.initialize = function (x, y, height, shopGoods) {
+Window_ShopBuy.prototype.initialize = function(x, y, height, shopGoods) {
     var width = this.windowWidth();
     Window_Selectable.prototype.initialize.call(this, x, y, width, height);
     this._shopGoods = shopGoods;
@@ -19,57 +19,57 @@ Window_ShopBuy.prototype.initialize = function (x, y, height, shopGoods) {
     this.select(0);
 };
 
-Window_ShopBuy.prototype.windowWidth = function () {
+Window_ShopBuy.prototype.windowWidth = function() {
     return 456;
 };
 
-Window_ShopBuy.prototype.maxItems = function () {
+Window_ShopBuy.prototype.maxItems = function() {
     return this._data ? this._data.length : 1;
 };
 
-Window_ShopBuy.prototype.item = function () {
+Window_ShopBuy.prototype.item = function() {
     return this._data[this.index()];
 };
 
-Window_ShopBuy.prototype.setMoney = function (money) {
+Window_ShopBuy.prototype.setMoney = function(money) {
     this._money = money;
     this.refresh();
 };
 
-Window_ShopBuy.prototype.isCurrentItemEnabled = function () {
+Window_ShopBuy.prototype.isCurrentItemEnabled = function() {
     return this.isEnabled(this._data[this.index()]);
 };
 
-Window_ShopBuy.prototype.price = function (item) {
+Window_ShopBuy.prototype.price = function(item) {
     return this._price[this._data.indexOf(item)] || 0;
 };
 
-Window_ShopBuy.prototype.isEnabled = function (item) {
+Window_ShopBuy.prototype.isEnabled = function(item) {
     return (item && this.price(item) <= this._money &&
-        !$gameParty.hasMaxItems(item));
+            !$gameParty.hasMaxItems(item));
 };
 
-Window_ShopBuy.prototype.refresh = function () {
+Window_ShopBuy.prototype.refresh = function() {
     this.makeItemList();
     this.createContents();
     this.drawAllItems();
 };
 
-Window_ShopBuy.prototype.makeItemList = function () {
+Window_ShopBuy.prototype.makeItemList = function() {
     this._data = [];
     this._price = [];
-    this._shopGoods.forEach(function (goods) {
+    this._shopGoods.forEach(function(goods) {
         var item = null;
         switch (goods[0]) {
-            case 0:
-                item = $dataItems[goods[1]];
-                break;
-            case 1:
-                item = $dataWeapons[goods[1]];
-                break;
-            case 2:
-                item = $dataArmors[goods[1]];
-                break;
+        case 0:
+            item = $dataItems[goods[1]];
+            break;
+        case 1:
+            item = $dataWeapons[goods[1]];
+            break;
+        case 2:
+            item = $dataArmors[goods[1]];
+            break;
         }
         if (item) {
             this._data.push(item);
@@ -78,7 +78,7 @@ Window_ShopBuy.prototype.makeItemList = function () {
     }, this);
 };
 
-Window_ShopBuy.prototype.drawItem = function (index) {
+Window_ShopBuy.prototype.drawItem = function(index) {
     var item = this._data[index];
     var rect = this.itemRect(index);
     var priceWidth = 96;
@@ -86,19 +86,18 @@ Window_ShopBuy.prototype.drawItem = function (index) {
     this.changePaintOpacity(this.isEnabled(item));
     this.drawItemName(item, rect.x, rect.y, rect.width - priceWidth);
     this.drawText(this.price(item), rect.x + rect.width - priceWidth,
-        rect.y, priceWidth, 'right');
+                  rect.y, priceWidth, 'right');
     this.changePaintOpacity(true);
 };
 
-Window_ShopBuy.prototype.setStatusWindow = function (statusWindow) {
+Window_ShopBuy.prototype.setStatusWindow = function(statusWindow) {
     this._statusWindow = statusWindow;
     this.callUpdateHelp();
 };
 
-Window_ShopBuy.prototype.updateHelp = function () {
+Window_ShopBuy.prototype.updateHelp = function() {
     this.setHelpWindowItem(this.item());
     if (this._statusWindow) {
         this._statusWindow.setItem(this.item());
     }
 };
-

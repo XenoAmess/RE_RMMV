@@ -1,4 +1,4 @@
-//xenoSplitPos:Sprite_Battler-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Sprite_Battler
 //
 // The superclass of Sprite_Actor and Sprite_Enemy.
@@ -10,13 +10,13 @@ function Sprite_Battler() {
 Sprite_Battler.prototype = Object.create(Sprite_Base.prototype);
 Sprite_Battler.prototype.constructor = Sprite_Battler;
 
-Sprite_Battler.prototype.initialize = function (battler) {
+Sprite_Battler.prototype.initialize = function(battler) {
     Sprite_Base.prototype.initialize.call(this);
     this.initMembers();
     this.setBattler(battler);
 };
 
-Sprite_Battler.prototype.initMembers = function () {
+Sprite_Battler.prototype.initMembers = function() {
     this.anchor.x = 0.5;
     this.anchor.y = 1;
     this._battler = null;
@@ -31,17 +31,17 @@ Sprite_Battler.prototype.initMembers = function () {
     this._selectionEffectCount = 0;
 };
 
-Sprite_Battler.prototype.setBattler = function (battler) {
+Sprite_Battler.prototype.setBattler = function(battler) {
     this._battler = battler;
 };
 
-Sprite_Battler.prototype.setHome = function (x, y) {
+Sprite_Battler.prototype.setHome = function(x, y) {
     this._homeX = x;
     this._homeY = y;
     this.updatePosition();
 };
 
-Sprite_Battler.prototype.update = function () {
+Sprite_Battler.prototype.update = function() {
     Sprite_Base.prototype.update.call(this);
     if (this._battler) {
         this.updateMain();
@@ -53,14 +53,14 @@ Sprite_Battler.prototype.update = function () {
     }
 };
 
-Sprite_Battler.prototype.updateVisibility = function () {
+Sprite_Battler.prototype.updateVisibility = function() {
     Sprite_Base.prototype.updateVisibility.call(this);
     if (!this._battler || !this._battler.isSpriteVisible()) {
         this.visible = false;
     }
 };
 
-Sprite_Battler.prototype.updateMain = function () {
+Sprite_Battler.prototype.updateMain = function() {
     if (this._battler.isSpriteVisible()) {
         this.updateBitmap();
         this.updateFrame();
@@ -69,13 +69,13 @@ Sprite_Battler.prototype.updateMain = function () {
     this.updatePosition();
 };
 
-Sprite_Battler.prototype.updateBitmap = function () {
+Sprite_Battler.prototype.updateBitmap = function() {
 };
 
-Sprite_Battler.prototype.updateFrame = function () {
+Sprite_Battler.prototype.updateFrame = function() {
 };
 
-Sprite_Battler.prototype.updateMove = function () {
+Sprite_Battler.prototype.updateMove = function() {
     if (this._movementDuration > 0) {
         var d = this._movementDuration;
         this._offsetX = (this._offsetX * (d - 1) + this._targetOffsetX) / d;
@@ -87,16 +87,16 @@ Sprite_Battler.prototype.updateMove = function () {
     }
 };
 
-Sprite_Battler.prototype.updatePosition = function () {
+Sprite_Battler.prototype.updatePosition = function() {
     this.x = this._homeX + this._offsetX;
     this.y = this._homeY + this._offsetY;
 };
 
-Sprite_Battler.prototype.updateAnimation = function () {
+Sprite_Battler.prototype.updateAnimation = function() {
     this.setupAnimation();
 };
 
-Sprite_Battler.prototype.updateDamagePopup = function () {
+Sprite_Battler.prototype.updateDamagePopup = function() {
     this.setupDamagePopup();
     if (this._damages.length > 0) {
         for (var i = 0; i < this._damages.length; i++) {
@@ -109,7 +109,7 @@ Sprite_Battler.prototype.updateDamagePopup = function () {
     }
 };
 
-Sprite_Battler.prototype.updateSelectionEffect = function () {
+Sprite_Battler.prototype.updateSelectionEffect = function() {
     var target = this._effectTarget;
     if (this._battler.isSelected()) {
         this._selectionEffectCount++;
@@ -124,7 +124,7 @@ Sprite_Battler.prototype.updateSelectionEffect = function () {
     }
 };
 
-Sprite_Battler.prototype.setupAnimation = function () {
+Sprite_Battler.prototype.setupAnimation = function() {
     while (this._battler.isAnimationRequested()) {
         var data = this._battler.shiftAnimation();
         var animation = $dataAnimations[data.animationId];
@@ -138,7 +138,7 @@ Sprite_Battler.prototype.setupAnimation = function () {
     }
 };
 
-Sprite_Battler.prototype.setupDamagePopup = function () {
+Sprite_Battler.prototype.setupDamagePopup = function() {
     if (this._battler.isDamagePopupRequested()) {
         if (this._battler.isSpriteVisible()) {
             var sprite = new Sprite_Damage();
@@ -153,15 +153,15 @@ Sprite_Battler.prototype.setupDamagePopup = function () {
     }
 };
 
-Sprite_Battler.prototype.damageOffsetX = function () {
+Sprite_Battler.prototype.damageOffsetX = function() {
     return 0;
 };
 
-Sprite_Battler.prototype.damageOffsetY = function () {
+Sprite_Battler.prototype.damageOffsetY = function() {
     return 0;
 };
 
-Sprite_Battler.prototype.startMove = function (x, y, duration) {
+Sprite_Battler.prototype.startMove = function(x, y, duration) {
     if (this._targetOffsetX !== x || this._targetOffsetY !== y) {
         this._targetOffsetX = x;
         this._targetOffsetY = y;
@@ -173,18 +173,17 @@ Sprite_Battler.prototype.startMove = function (x, y, duration) {
     }
 };
 
-Sprite_Battler.prototype.onMoveEnd = function () {
+Sprite_Battler.prototype.onMoveEnd = function() {
 };
 
-Sprite_Battler.prototype.isEffecting = function () {
+Sprite_Battler.prototype.isEffecting = function() {
     return false;
 };
 
-Sprite_Battler.prototype.isMoving = function () {
+Sprite_Battler.prototype.isMoving = function() {
     return this._movementDuration > 0;
 };
 
-Sprite_Battler.prototype.inHomePosition = function () {
+Sprite_Battler.prototype.inHomePosition = function() {
     return this._offsetX === 0 && this._offsetY === 0;
 };
-

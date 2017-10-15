@@ -1,4 +1,4 @@
-//xenoSplitPos:ConfigManager-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // ConfigManager
 //
 // The static class that manages the configuration data.
@@ -7,50 +7,50 @@ function ConfigManager() {
     throw new Error('This is a static class');
 }
 
-ConfigManager.alwaysDash = false;
-ConfigManager.commandRemember = false;
+ConfigManager.alwaysDash        = false;
+ConfigManager.commandRemember   = false;
 
 Object.defineProperty(ConfigManager, 'bgmVolume', {
-    get: function () {
+    get: function() {
         return AudioManager._bgmVolume;
     },
-    set: function (value) {
+    set: function(value) {
         AudioManager.bgmVolume = value;
     },
     configurable: true
 });
 
 Object.defineProperty(ConfigManager, 'bgsVolume', {
-    get: function () {
+    get: function() {
         return AudioManager.bgsVolume;
     },
-    set: function (value) {
+    set: function(value) {
         AudioManager.bgsVolume = value;
     },
     configurable: true
 });
 
 Object.defineProperty(ConfigManager, 'meVolume', {
-    get: function () {
+    get: function() {
         return AudioManager.meVolume;
     },
-    set: function (value) {
+    set: function(value) {
         AudioManager.meVolume = value;
     },
     configurable: true
 });
 
 Object.defineProperty(ConfigManager, 'seVolume', {
-    get: function () {
+    get: function() {
         return AudioManager.seVolume;
     },
-    set: function (value) {
+    set: function(value) {
         AudioManager.seVolume = value;
     },
     configurable: true
 });
 
-ConfigManager.load = function () {
+ConfigManager.load = function() {
     var json;
     var config = {};
     try {
@@ -64,11 +64,11 @@ ConfigManager.load = function () {
     this.applyData(config);
 };
 
-ConfigManager.save = function () {
+ConfigManager.save = function() {
     StorageManager.save(-1, JSON.stringify(this.makeData()));
 };
 
-ConfigManager.makeData = function () {
+ConfigManager.makeData = function() {
     var config = {};
     config.alwaysDash = this.alwaysDash;
     config.commandRemember = this.commandRemember;
@@ -79,7 +79,7 @@ ConfigManager.makeData = function () {
     return config;
 };
 
-ConfigManager.applyData = function (config) {
+ConfigManager.applyData = function(config) {
     this.alwaysDash = this.readFlag(config, 'alwaysDash');
     this.commandRemember = this.readFlag(config, 'commandRemember');
     this.bgmVolume = this.readVolume(config, 'bgmVolume');
@@ -88,11 +88,11 @@ ConfigManager.applyData = function (config) {
     this.seVolume = this.readVolume(config, 'seVolume');
 };
 
-ConfigManager.readFlag = function (config, name) {
+ConfigManager.readFlag = function(config, name) {
     return !!config[name];
 };
 
-ConfigManager.readVolume = function (config, name) {
+ConfigManager.readVolume = function(config, name) {
     var value = config[name];
     if (value !== undefined) {
         return Number(value).clamp(0, 100);
@@ -100,4 +100,3 @@ ConfigManager.readVolume = function (config, name) {
         return 100;
     }
 };
-
