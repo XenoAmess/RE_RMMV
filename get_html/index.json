@@ -1,0 +1,11 @@
+[
+  "libs.json",
+	"rpg_core.json",
+	"rpg_managers.json",
+	"rpg_objects.json",
+	"rpg_scenes.json",
+	"rpg_sprites.json",
+	"rpg_windows.json",
+	"js/plugins.js",
+	"js/main.js"
+]
