@@ -9,21 +9,22 @@ Decrypter._requestImgFile = [];
 Decrypter._headerlength = 16;
 Decrypter._xhrOk = 400;
 Decrypter._encryptionKey = "";
+
 Decrypter._ignoreList = [
     "img/system/Window.png"
 ];
+
+Decrypter._ignoreSet = new Set();
+
 Decrypter.SIGNATURE = "5250474d56000000";
 Decrypter.VER = "000301";
 Decrypter.REMAIN = "0000000000";
 
-Decrypter.checkImgIgnore = function(url) {
-    for (var cnt = 0; cnt < this._ignoreList.length; cnt++) {
-        if (url === this._ignoreList[cnt]) return true;
-    }
-    return false;
+Decrypter.checkImgIgnore = function (url) {
+    return url in this._ignoreList;
 };
 
-Decrypter.decryptImg = function(url, bitmap) {
+Decrypter.decryptImg = function (url, bitmap) {
     url = this.extToEncryptExt(url);
 
     var requestFile = new XMLHttpRequest();
@@ -31,7 +32,7 @@ Decrypter.decryptImg = function(url, bitmap) {
     requestFile.responseType = "arraybuffer";
     requestFile.send();
 
-    requestFile.onload = function() {
+    requestFile.onload = function () {
         if (this.status < Decrypter._xhrOk) {
             var arrayBuffer = Decrypter.decryptArrayBuffer(requestFile.response);
             bitmap._image.src = Decrypter.createBlobUrl(arrayBuffer);
@@ -40,7 +41,7 @@ Decrypter.decryptImg = function(url, bitmap) {
         }
     };
 
-    requestFile.onerror = function() {
+    requestFile.onerror = function () {
         if (bitmap._loader) {
             bitmap._loader();
         } else {
@@ -49,13 +50,13 @@ Decrypter.decryptImg = function(url, bitmap) {
     };
 };
 
-Decrypter.decryptHTML5Audio = function(url, bgm, pos) {
+Decrypter.decryptHTML5Audio = function (url, bgm, pos) {
     var requestFile = new XMLHttpRequest();
     requestFile.open("GET", url);
     requestFile.responseType = "arraybuffer";
     requestFile.send();
 
-    requestFile.onload = function() {
+    requestFile.onload = function () {
         if (this.status < Decrypter._xhrOk) {
             var arrayBuffer = Decrypter.decryptArrayBuffer(requestFile.response);
             var url = Decrypter.createBlobUrl(arrayBuffer);
@@ -64,11 +65,11 @@ Decrypter.decryptHTML5Audio = function(url, bgm, pos) {
     };
 };
 
-Decrypter.cutArrayHeader = function(arrayBuffer, length) {
+Decrypter.cutArrayHeader = function (arrayBuffer, length) {
     return arrayBuffer.slice(length);
 };
 
-Decrypter.decryptArrayBuffer = function(arrayBuffer) {
+Decrypter.decryptArrayBuffer = function (arrayBuffer) {
     if (!arrayBuffer) return null;
     var header = new Uint8Array(arrayBuffer, 0, this._headerlength);
 
@@ -98,12 +99,12 @@ Decrypter.decryptArrayBuffer = function(arrayBuffer) {
     return arrayBuffer;
 };
 
-Decrypter.createBlobUrl = function(arrayBuffer) {
+Decrypter.createBlobUrl = function (arrayBuffer) {
     var blob = new Blob([arrayBuffer]);
     return window.URL.createObjectURL(blob);
 };
 
-Decrypter.extToEncryptExt = function(url) {
+Decrypter.extToEncryptExt = function (url) {
     var ext = url.split('.').pop();
     var encryptedExt = ext;
 
@@ -115,7 +116,7 @@ Decrypter.extToEncryptExt = function(url) {
     return url.slice(0, url.lastIndexOf(ext) - 1) + encryptedExt;
 };
 
-Decrypter.readEncryptionkey = function() {
+Decrypter.readEncryptionkey = function () {
     this._encryptionKey = $dataSystem.encryptionKey.split(/(.{2})/).filter(Boolean);
 };
 
