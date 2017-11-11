@@ -18,7 +18,7 @@ function Bitmap() {
 
 // for iOS. img consumes memory. so reuse it.
 // 对于IOS，图片浪费内存。所以复用（图片）。
-//Bitmap._reuseImages = [];
+// Bitmap._reuseImages = [];
 
 
 /**
@@ -116,7 +116,7 @@ Bitmap.prototype._clearImgInstance = function () {
     this._errorListener = null;
     this._loadListener = null;
 
-    //Bitmap._reuseImages.push(this._image);
+    // Bitmap._reuseImages.push(this._image);
     this._image = null;
 };
 
@@ -1074,12 +1074,13 @@ Bitmap.prototype._requestImage = function (url) {
     //     this._image = new Image();
     // }
 
-    this._image = new Image();
+    // this._image = new Image();
 
     if (this._decodeAfterRequest && !this._loader) {
         this._loader = ResourceHandler.createLoader(url, this._requestImage.bind(this, url), this._onError.bind(this));
     }
 
+    this._image = new Image();
 
     this._url = url;
     this._loadingState = 'requesting';

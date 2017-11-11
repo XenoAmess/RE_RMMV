@@ -10,11 +10,9 @@ Decrypter._headerlength = 16;
 Decrypter._xhrOk = 400;
 Decrypter._encryptionKey = "";
 
-Decrypter._ignoreList = [
-    "img/system/Window.png"
-];
+Decrypter._ignoreList = $ignoreListObject;
 
-Decrypter._ignoreSet = new Set();
+//Decrypter._ignoreSet = new Set();
 
 Decrypter.SIGNATURE = "5250474d56000000";
 Decrypter.VER = "000301";

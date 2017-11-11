@@ -51,7 +51,10 @@ jspm_packages
 .idea
 dist/
 *.iml
-game/**/*
+
+!/game/
+/game/*
+!/game/js/
+
+
 todo.md
-corescript/**/*
-corescript.zip
