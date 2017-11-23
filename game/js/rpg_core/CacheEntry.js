@@ -28,7 +28,7 @@ function CacheEntry(cache, key, item) {
 /**
  * frees the resource
  */
-CacheEntry.prototype.free = function(byTTL) {
+CacheEntry.prototype.free = function (byTTL) {
     this.freedByTTL = byTTL || false;
     if (this.cached) {
         this.cached = false;
@@ -41,7 +41,7 @@ CacheEntry.prototype.free = function(byTTL) {
  *
  * @returns {CacheEntry}
  */
-CacheEntry.prototype.allocate = function() {
+CacheEntry.prototype.allocate = function () {
     if (!this.cached) {
         this.cache._inner[this.key] = this;
         this.cached = true;
@@ -59,13 +59,13 @@ CacheEntry.prototype.allocate = function() {
  *            time TTL in seconds, 0 if not set
  * @returns {CacheEntry}
  */
-CacheEntry.prototype.setTimeToLive = function(ticks, seconds) {
+CacheEntry.prototype.setTimeToLive = function (ticks, seconds) {
     this.ttlTicks = ticks || 0;
     this.ttlSeconds = seconds || 0;
     return this;
 };
 
-CacheEntry.prototype.isStillAlive = function() {
+CacheEntry.prototype.isStillAlive = function () {
     var cache = this.cache;
     return ((this.ttlTicks == 0) || (this.touchTicks + this.ttlTicks < cache.updateTicks)) &&
         ((this.ttlSeconds == 0) || (this.touchSeconds + this.ttlSeconds < cache.updateSeconds));
@@ -75,7 +75,7 @@ CacheEntry.prototype.isStillAlive = function() {
  * makes sure that resource wont freed by Time To Live if resource was already
  * freed by TTL, put it in cache again
  */
-CacheEntry.prototype.touch = function() {
+CacheEntry.prototype.touch = function () {
     var cache = this.cache;
     if (this.cached) {
         this.touchTicks = cache.updateTicks;

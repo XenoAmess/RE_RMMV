@@ -26,8 +26,14 @@ Utils.RPGMAKER_NAME = 'MV';
  * @type String
  * @final
  */
-Utils.RPGMAKER_VERSION = "1.5.1";
+Utils.RPGMAKER_VERSION = "RE_RMMV_0.5.0";
 
+
+$startupOptionsObject = {};
+var startupOptionslist = location.search.slice(1).split('&');
+for (var index in startupOptionslist) {
+    $startupOptionsObject[startupOptionslist[index]] = null;
+}
 /**
  * Checks whether the option is in the query string.
  *
@@ -37,8 +43,9 @@ Utils.RPGMAKER_VERSION = "1.5.1";
  *            name The option name
  * @return {Boolean} True if the option is in the query string
  */
-Utils.isOptionValid = function(name) {
-    return location.search.slice(1).split('&').contains(name);
+
+Utils.isOptionValid = function (name) {
+    return name in $startupOptionsObject;
 };
 
 /**
@@ -48,7 +55,7 @@ Utils.isOptionValid = function(name) {
  * @method isNwjs
  * @return {Boolean} True if the platform is NW.js
  */
-Utils.isNwjs = function() {
+Utils.isNwjs = function () {
     try {
         var tmp = require("nw.gui");
     } catch (err) {
@@ -64,7 +71,7 @@ Utils.isNwjs = function() {
  * @method isMobileDevice
  * @return {Boolean} True if the platform is a mobile device
  */
-Utils.isMobileDevice = function() {
+Utils.isMobileDevice = function () {
     var r = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
     return !!navigator.userAgent.match(r);
 };
@@ -76,7 +83,7 @@ Utils.isMobileDevice = function() {
  * @method isMobileSafari
  * @return {Boolean} True if the browser is Mobile Safari
  */
-Utils.isMobileSafari = function() {
+Utils.isMobileSafari = function () {
     var agent = navigator.userAgent;
     return !!(agent.match(/iPhone|iPad|iPod/) && agent.match(/AppleWebKit/) &&
         !agent.match('CriOS'));
@@ -89,7 +96,7 @@ Utils.isMobileSafari = function() {
  * @method isAndroidChrome
  * @return {Boolean} True if the browser is Android Chrome
  */
-Utils.isAndroidChrome = function() {
+Utils.isAndroidChrome = function () {
     var agent = navigator.userAgent;
     return !!(agent.match(/Android/) && agent.match(/Chrome/));
 };
@@ -101,7 +108,7 @@ Utils.isAndroidChrome = function() {
  * @method canReadGameFiles
  * @return {Boolean} True if the browser can read files in the game folder
  */
-Utils.canReadGameFiles = function() {
+Utils.canReadGameFiles = function () {
     var scripts = document.getElementsByTagName('script');
     var lastScript = scripts[scripts.length - 1];
     var xhr = new XMLHttpRequest();
@@ -128,7 +135,7 @@ Utils.canReadGameFiles = function() {
  *            b The blue value in the range (0, 255)
  * @return {String} CSS color string
  */
-Utils.rgbToCssColor = function(r, g, b) {
+Utils.rgbToCssColor = function (r, g, b) {
     r = Math.round(r);
     g = Math.round(g);
     b = Math.round(b);
@@ -136,7 +143,7 @@ Utils.rgbToCssColor = function(r, g, b) {
 };
 
 Utils._id = 1;
-Utils.generateRuntimeId = function() {
+Utils.generateRuntimeId = function () {
     return Utils._id++;
 };
 
@@ -148,7 +155,7 @@ Utils._supportPassiveEvent = null;
  * @method isSupportPassiveEvent
  * @return {Boolean} this browser support passive event or not
  */
-Utils.isSupportPassiveEvent = function() {
+Utils.isSupportPassiveEvent = function () {
     if (typeof Utils._supportPassiveEvent === "boolean") {
         return Utils._supportPassiveEvent;
     }
@@ -156,7 +163,7 @@ Utils.isSupportPassiveEvent = function() {
     // https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md#feature-detection
     var passive = false;
     var options = Object.defineProperty({}, "passive", {
-        get: function() {
+        get: function () {
             passive = true;
         }
     });

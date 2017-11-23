@@ -14,7 +14,7 @@ function Input() {
  * @static
  * @method initialize
  */
-Input.initialize = function() {
+Input.initialize = function () {
     this.clear();
     this._wrapNwjsAlert();
     this._setupEventHandlers();
@@ -98,7 +98,7 @@ Input.gamepadMapper = {
  * @static
  * @method clear
  */
-Input.clear = function() {
+Input.clear = function () {
     this._currentState = {};
     this._previousState = {};
     this._gamepadStates = [];
@@ -116,7 +116,7 @@ Input.clear = function() {
  * @static
  * @method update
  */
-Input.update = function() {
+Input.update = function () {
     this._pollGamepads();
     if (this._currentState[this._latestButton]) {
         this._pressedTime++;
@@ -143,7 +143,7 @@ Input.update = function() {
  *            keyName The mapped name of the key
  * @return {Boolean} True if the key is pressed
  */
-Input.isPressed = function(keyName) {
+Input.isPressed = function (keyName) {
     if (this._isEscapeCompatible(keyName) && this.isPressed('escape')) {
         return true;
     } else {
@@ -160,7 +160,7 @@ Input.isPressed = function(keyName) {
  *            keyName The mapped name of the key
  * @return {Boolean} True if the key is triggered
  */
-Input.isTriggered = function(keyName) {
+Input.isTriggered = function (keyName) {
     if (this._isEscapeCompatible(keyName) && this.isTriggered('escape')) {
         return true;
     } else {
@@ -177,7 +177,7 @@ Input.isTriggered = function(keyName) {
  *            keyName The mapped name of the key
  * @return {Boolean} True if the key is repeated
  */
-Input.isRepeated = function(keyName) {
+Input.isRepeated = function (keyName) {
     if (this._isEscapeCompatible(keyName) && this.isRepeated('escape')) {
         return true;
     } else {
@@ -197,7 +197,7 @@ Input.isRepeated = function(keyName) {
  *            keyName The mapped name of the key
  * @return {Boolean} True if the key is long-pressed
  */
-Input.isLongPressed = function(keyName) {
+Input.isLongPressed = function (keyName) {
     if (this._isEscapeCompatible(keyName) && this.isLongPressed('escape')) {
         return true;
     } else {
@@ -215,7 +215,7 @@ Input.isLongPressed = function(keyName) {
  * @type Number
  */
 Object.defineProperty(Input, 'dir4', {
-    get: function() {
+    get: function () {
         return this._dir4;
     },
     configurable: true
@@ -230,7 +230,7 @@ Object.defineProperty(Input, 'dir4', {
  * @type Number
  */
 Object.defineProperty(Input, 'dir8', {
-    get: function() {
+    get: function () {
         return this._dir8;
     },
     configurable: true
@@ -244,7 +244,7 @@ Object.defineProperty(Input, 'dir8', {
  * @type Number
  */
 Object.defineProperty(Input, 'date', {
-    get: function() {
+    get: function () {
         return this._date;
     },
     configurable: true
@@ -255,10 +255,10 @@ Object.defineProperty(Input, 'date', {
  * @method _wrapNwjsAlert
  * @private
  */
-Input._wrapNwjsAlert = function() {
+Input._wrapNwjsAlert = function () {
     if (Utils.isNwjs()) {
         var _alert = window.alert;
-        window.alert = function() {
+        window.alert = function () {
             var gui = require('nw.gui');
             var win = gui.Window.get();
             _alert.apply(this, arguments);
@@ -273,7 +273,7 @@ Input._wrapNwjsAlert = function() {
  * @method _setupEventHandlers
  * @private
  */
-Input._setupEventHandlers = function() {
+Input._setupEventHandlers = function () {
     document.addEventListener('keydown', this._onKeyDown.bind(this));
     document.addEventListener('keyup', this._onKeyUp.bind(this));
     window.addEventListener('blur', this._onLostFocus.bind(this));
@@ -286,7 +286,7 @@ Input._setupEventHandlers = function() {
  *            event
  * @private
  */
-Input._onKeyDown = function(event) {
+Input._onKeyDown = function (event) {
     if (this._shouldPreventDefault(event.keyCode)) {
         event.preventDefault();
     }
@@ -308,7 +308,7 @@ Input._onKeyDown = function(event) {
  *            keyCode
  * @private
  */
-Input._shouldPreventDefault = function(keyCode) {
+Input._shouldPreventDefault = function (keyCode) {
     switch (keyCode) {
         case 8: // backspace
         case 33: // pageup
@@ -329,7 +329,7 @@ Input._shouldPreventDefault = function(keyCode) {
  *            event
  * @private
  */
-Input._onKeyUp = function(event) {
+Input._onKeyUp = function (event) {
     var buttonName = this.keyMapper[event.keyCode];
     if (buttonName) {
         this._currentState[buttonName] = false;
@@ -344,7 +344,7 @@ Input._onKeyUp = function(event) {
  * @method _onLostFocus
  * @private
  */
-Input._onLostFocus = function() {
+Input._onLostFocus = function () {
     this.clear();
 };
 
@@ -353,7 +353,7 @@ Input._onLostFocus = function() {
  * @method _pollGamepads
  * @private
  */
-Input._pollGamepads = function() {
+Input._pollGamepads = function () {
     if (navigator.getGamepads) {
         var gamepads = navigator.getGamepads();
         if (gamepads) {
@@ -376,7 +376,7 @@ Input._pollGamepads = function() {
  *            index
  * @private
  */
-Input._updateGamepadState = function(gamepad) {
+Input._updateGamepadState = function (gamepad) {
     var lastState = this._gamepadStates[gamepad.index] || [];
     var newState = [];
     var buttons = gamepad.buttons;
@@ -415,7 +415,7 @@ Input._updateGamepadState = function(gamepad) {
  * @method _updateDirection
  * @private
  */
-Input._updateDirection = function() {
+Input._updateDirection = function () {
     var x = this._signX();
     var y = this._signY();
 
@@ -441,7 +441,7 @@ Input._updateDirection = function() {
  * @method _signX
  * @private
  */
-Input._signX = function() {
+Input._signX = function () {
     var x = 0;
 
     if (this.isPressed('left')) {
@@ -458,7 +458,7 @@ Input._signX = function() {
  * @method _signY
  * @private
  */
-Input._signY = function() {
+Input._signY = function () {
     var y = 0;
 
     if (this.isPressed('up')) {
@@ -480,7 +480,7 @@ Input._signY = function() {
  * @return {Number}
  * @private
  */
-Input._makeNumpadDirection = function(x, y) {
+Input._makeNumpadDirection = function (x, y) {
     if (x !== 0 || y !== 0) {
         return 5 - y * 3 + x;
     }
@@ -495,7 +495,7 @@ Input._makeNumpadDirection = function(x, y) {
  * @return {Boolean}
  * @private
  */
-Input._isEscapeCompatible = function(keyName) {
+Input._isEscapeCompatible = function (keyName) {
     return keyName === 'cancel' || keyName === 'menu';
 };
 

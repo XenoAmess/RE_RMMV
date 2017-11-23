@@ -19,7 +19,7 @@ function JsExtensions() {
  *            max The upper boundary
  * @return {Number} A number in the range (min, max)
  */
-Number.prototype.clamp = function(min, max) {
+Number.prototype.clamp = function (min, max) {
     if (this > max) return max;
     if (this < min) return min;
     return this;
@@ -33,7 +33,7 @@ Number.prototype.clamp = function(min, max) {
  *            n The divisor
  * @return {Number} A modulo value
  */
-Number.prototype.mod = function(n) {
+Number.prototype.mod = function (n) {
     if (this > 0) return this % n;
     if (this == 0) return 0;
     return this % n + n;
@@ -47,9 +47,9 @@ Number.prototype.mod = function(n) {
  *            ...args The objects to format
  * @return {String} A formatted string
  */
-String.prototype.format = function() {
+String.prototype.format = function () {
     var args = arguments;
-    return this.replace(/%([0-9]+)/g, function(s, n) {
+    return this.replace(/%([0-9]+)/g, function (s, n) {
         return args[Number(n) - 1];
     });
 };
@@ -63,7 +63,7 @@ String.prototype.format = function() {
  * @return {String} A string with leading zeros
  */
 var rpg_core_js_String_prototype_padZero_0 = new Array('');
-String.prototype.padZero = function(length) {
+String.prototype.padZero = function (length) {
     var s = this;
     var dist = length - s.length;
     if (dist <= 0) return s;
@@ -82,7 +82,7 @@ String.prototype.padZero = function(length) {
  *            length The length of the output string
  * @return {String} A string with leading zeros
  */
-Number.prototype.padZero = function(length) {
+Number.prototype.padZero = function (length) {
     return String(this).padZero(length);
 };
 
@@ -97,7 +97,7 @@ Object.defineProperties(Array.prototype, {
      */
     equals: {
         enumerable: false,
-        value: function(array) {
+        value: function (array) {
             if (!array || this.length !== array.length) {
                 return false;
             }
@@ -121,7 +121,7 @@ Object.defineProperties(Array.prototype, {
      */
     clone: {
         enumerable: false,
-        value: function() {
+        value: function () {
             return this.slice(0);
         }
     },
@@ -135,7 +135,7 @@ Object.defineProperties(Array.prototype, {
      */
     contains: {
         enumerable: false,
-        value: function(element) {
+        value: function (element) {
             return this.indexOf(element) >= 0;
         }
     }
@@ -149,7 +149,7 @@ Object.defineProperties(Array.prototype, {
  *            string The string to search for
  * @return {Boolean} True if the string contains a given string
  */
-String.prototype.contains = function(string) {
+String.prototype.contains = function (string) {
     return this.indexOf(string) >= 0;
 };
 
@@ -162,7 +162,7 @@ String.prototype.contains = function(string) {
  *            max The upper boundary (excluded)
  * @return {Number} A random integer
  */
-Math.randomInt = function(max) {
+Math.randomInt = function (max) {
     return Math.floor(max * Math.random());
 };
 

@@ -5,11 +5,11 @@ function ImageCache() {
 
 ImageCache.limit = 10 * 1000 * 1000;
 
-ImageCache.prototype.initialize = function() {
+ImageCache.prototype.initialize = function () {
     this._items = {};
 };
 
-ImageCache.prototype.add = function(key, value) {
+ImageCache.prototype.add = function (key, value) {
     this._items[key] = {
         bitmap: value,
         touch: Date.now(),
@@ -19,7 +19,7 @@ ImageCache.prototype.add = function(key, value) {
     this._truncateCache();
 };
 
-ImageCache.prototype.get = function(key) {
+ImageCache.prototype.get = function (key) {
     if (this._items[key]) {
         var item = this._items[key];
         item.touch = Date.now();
@@ -29,7 +29,7 @@ ImageCache.prototype.get = function(key) {
     return null;
 };
 
-ImageCache.prototype.reserve = function(key, value, reservationId) {
+ImageCache.prototype.reserve = function (key, value, reservationId) {
     if (!this._items[key]) {
         this._items[key] = {
             bitmap: value,
@@ -41,29 +41,29 @@ ImageCache.prototype.reserve = function(key, value, reservationId) {
     this._items[key].reservationId = reservationId;
 };
 
-ImageCache.prototype.releaseReservation = function(reservationId) {
+ImageCache.prototype.releaseReservation = function (reservationId) {
     var items = this._items;
 
     Object.keys(items)
-        .map(function(key) {
+        .map(function (key) {
             return items[key];
         })
-        .forEach(function(item) {
+        .forEach(function (item) {
             if (item.reservationId === reservationId) {
                 delete item.reservationId;
             }
         });
 };
 
-ImageCache.prototype._truncateCache = function() {
+ImageCache.prototype._truncateCache = function () {
     var items = this._items;
     var sizeLeft = ImageCache.limit;
 
-    Object.keys(items).map(function(key) {
+    Object.keys(items).map(function (key) {
         return items[key];
-    }).sort(function(a, b) {
+    }).sort(function (a, b) {
         return b.touch - a.touch;
-    }).forEach(function(item) {
+    }).forEach(function (item) {
         if (sizeLeft > 0 || this._mustBeHeld(item)) {
             var bitmap = item.bitmap;
             sizeLeft -= bitmap.width * bitmap.height;
@@ -73,7 +73,7 @@ ImageCache.prototype._truncateCache = function() {
     }.bind(this));
 };
 
-ImageCache.prototype._mustBeHeld = function(item) {
+ImageCache.prototype._mustBeHeld = function (item) {
     // request only is weak so It's purgeable
     if (item.bitmap.isRequestOnly()) return false;
     // reserved item must be held
@@ -84,17 +84,17 @@ ImageCache.prototype._mustBeHeld = function(item) {
     return false;
 };
 
-ImageCache.prototype.isReady = function() {
+ImageCache.prototype.isReady = function () {
     var items = this._items;
-    return !Object.keys(items).some(function(key) {
+    return !Object.keys(items).some(function (key) {
         return !items[key].bitmap.isRequestOnly() && !items[key].bitmap.isReady();
     });
 };
 
-ImageCache.prototype.getErrorBitmap = function() {
+ImageCache.prototype.getErrorBitmap = function () {
     var items = this._items;
     var bitmap = null;
-    if (Object.keys(items).some(function(key) {
+    if (Object.keys(items).some(function (key) {
             if (items[key].bitmap.isError()) {
                 bitmap = items[key].bitmap;
                 return true;

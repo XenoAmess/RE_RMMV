@@ -3,18 +3,18 @@ function RequestQueue() {
     this.initialize.apply(this, arguments);
 }
 
-RequestQueue.prototype.initialize = function() {
+RequestQueue.prototype.initialize = function () {
     this._queue = [];
 };
 
-RequestQueue.prototype.enqueue = function(key, value) {
+RequestQueue.prototype.enqueue = function (key, value) {
     this._queue.push({
         key: key,
         value: value,
     });
 };
 
-RequestQueue.prototype.update = function() {
+RequestQueue.prototype.update = function () {
     if (this._queue.length === 0) return;
 
     var top = this._queue[0];
@@ -28,7 +28,7 @@ RequestQueue.prototype.update = function() {
     }
 };
 
-RequestQueue.prototype.raisePriority = function(key) {
+RequestQueue.prototype.raisePriority = function (key) {
     for (var n = 0; n < this._queue.length; n++) {
         var item = this._queue[n];
         if (item.key === key) {
@@ -39,7 +39,7 @@ RequestQueue.prototype.raisePriority = function(key) {
     }
 };
 
-RequestQueue.prototype.clear = function() {
+RequestQueue.prototype.clear = function () {
     this._queue.splice(0);
 };
 
