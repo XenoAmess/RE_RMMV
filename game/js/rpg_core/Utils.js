@@ -34,6 +34,7 @@ var startupOptionslist = location.search.slice(1).split('&');
 for (var index in startupOptionslist) {
     $startupOptionsObject[startupOptionslist[index]] = null;
 }
+
 /**
  * Checks whether the option is in the query string.
  *
@@ -47,6 +48,11 @@ for (var index in startupOptionslist) {
 Utils.isOptionValid = function (name) {
     return name in $startupOptionsObject;
 };
+
+if (Utils.isOptionValid('test')) {
+    console.log('startupOptions');
+    console.log($startupOptionsObject);
+}
 
 /**
  * Checks whether the platform is NW.js.

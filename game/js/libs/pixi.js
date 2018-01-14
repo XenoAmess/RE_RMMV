@@ -5,7 +5,7 @@
  * pixi.js is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
-(function(f) {
+(function (f) {
     if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = f()
     } else if (typeof define === "function" && define.amd) {
@@ -23,7 +23,7 @@
         }
         g.PIXI = f()
     }
-})(function() {
+})(function () {
     var define, module, exports;
     return (function e(t, n, r) {
         function s(o, u) {
@@ -38,7 +38,7 @@
                 var l = n[o] = {
                     exports: {}
                 };
-                t[o][0].call(l.exports, function(e) {
+                t[o][0].call(l.exports, function (e) {
                     var n = t[o][1][e];
                     return s(n ? n : e)
                 }, l, l.exports, e, t, n, r)
@@ -50,7 +50,7 @@
         for (var o = 0; o < r.length; o++) s(r[o]);
         return s
     })({
-        1: [function(require, module, exports) {
+        1: [function (require, module, exports) {
             /**
              * Bit twiddling hacks for JavaScript.
              *
@@ -72,33 +72,33 @@
             exports.INT_MIN = -1 << (INT_BITS - 1);
 
             // Returns -1, 0, +1 depending on sign of x
-            exports.sign = function(v) {
+            exports.sign = function (v) {
                 return (v > 0) - (v < 0);
             }
 
             // Computes absolute value of integer
-            exports.abs = function(v) {
+            exports.abs = function (v) {
                 var mask = v >> (INT_BITS - 1);
                 return (v ^ mask) - mask;
             }
 
             // Computes minimum of integers x and y
-            exports.min = function(x, y) {
+            exports.min = function (x, y) {
                 return y ^ ((x ^ y) & -(x < y));
             }
 
             // Computes maximum of integers x and y
-            exports.max = function(x, y) {
+            exports.max = function (x, y) {
                 return x ^ ((x ^ y) & -(x < y));
             }
 
             // Checks if a number is a power of two
-            exports.isPow2 = function(v) {
+            exports.isPow2 = function (v) {
                 return !(v & (v - 1)) && (!!v);
             }
 
             // Computes log base 2 of v
-            exports.log2 = function(v) {
+            exports.log2 = function (v) {
                 var r, shift;
                 r = (v > 0xFFFF) << 4;
                 v >>>= r;
@@ -115,14 +115,14 @@
             }
 
             // Computes log base 10 of v
-            exports.log10 = function(v) {
+            exports.log10 = function (v) {
                 return (v >= 1000000000) ? 9 : (v >= 100000000) ? 8 : (v >= 10000000) ? 7 :
                     (v >= 1000000) ? 6 : (v >= 100000) ? 5 : (v >= 10000) ? 4 :
-                    (v >= 1000) ? 3 : (v >= 100) ? 2 : (v >= 10) ? 1 : 0;
+                        (v >= 1000) ? 3 : (v >= 100) ? 2 : (v >= 10) ? 1 : 0;
             }
 
             // Counts number of bits
-            exports.popCount = function(v) {
+            exports.popCount = function (v) {
                 v = v - ((v >>> 1) & 0x55555555);
                 v = (v & 0x33333333) + ((v >>> 2) & 0x33333333);
                 return ((v + (v >>> 4) & 0xF0F0F0F) * 0x1010101) >>> 24;
@@ -144,7 +144,7 @@
             exports.countTrailingZeros = countTrailingZeros;
 
             // Rounds to next power of 2
-            exports.nextPow2 = function(v) {
+            exports.nextPow2 = function (v) {
                 v += v === 0;
                 --v;
                 v |= v >>> 1;
@@ -156,7 +156,7 @@
             }
 
             // Rounds down to previous power of 2
-            exports.prevPow2 = function(v) {
+            exports.prevPow2 = function (v) {
                 v |= v >>> 1;
                 v |= v >>> 2;
                 v |= v >>> 4;
@@ -166,7 +166,7 @@
             }
 
             // Computes parity of word
-            exports.parity = function(v) {
+            exports.parity = function (v) {
                 v ^= v >>> 16;
                 v ^= v >>> 8;
                 v ^= v >>> 4;
@@ -176,7 +176,7 @@
 
             var REVERSE_TABLE = new Array(256);
 
-            (function(tab) {
+            (function (tab) {
                 for (var i = 0; i < 256; ++i) {
                     var v = i,
                         r = i,
@@ -191,7 +191,7 @@
             })(REVERSE_TABLE);
 
             // Reverse bits in a 32 bit word
-            exports.reverse = function(v) {
+            exports.reverse = function (v) {
                 return (REVERSE_TABLE[v & 0xff] << 24) |
                     (REVERSE_TABLE[(v >>> 8) & 0xff] << 16) |
                     (REVERSE_TABLE[(v >>> 16) & 0xff] << 8) |
@@ -199,7 +199,7 @@
             }
 
             // Interleave bits of 2 coordinates with 16 bits. Useful for fast quadtree codes
-            exports.interleave2 = function(x, y) {
+            exports.interleave2 = function (x, y) {
                 x &= 0xFFFF;
                 x = (x | (x << 8)) & 0x00FF00FF;
                 x = (x | (x << 4)) & 0x0F0F0F0F;
@@ -216,7 +216,7 @@
             }
 
             // Extracts the nth interleaved component
-            exports.deinterleave2 = function(v, n) {
+            exports.deinterleave2 = function (v, n) {
                 v = (v >>> n) & 0x55555555;
                 v = (v | (v >>> 1)) & 0x33333333;
                 v = (v | (v >>> 2)) & 0x0F0F0F0F;
@@ -228,7 +228,7 @@
 
             // Interleave bits of 3 coordinates, each with 10 bits. Useful for fast octree
             // codes
-            exports.interleave3 = function(x, y, z) {
+            exports.interleave3 = function (x, y, z) {
                 x &= 0x3FF;
                 x = (x | (x << 16)) & 4278190335;
                 x = (x | (x << 8)) & 251719695;
@@ -252,7 +252,7 @@
             }
 
             // Extracts nth interleaved component of a 3-tuple
-            exports.deinterleave3 = function(v, n) {
+            exports.deinterleave3 = function (v, n) {
                 v = (v >>> n) & 1227133513;
                 v = (v | (v >>> 2)) & 3272356035;
                 v = (v | (v >>> 4)) & 251719695;
@@ -263,14 +263,14 @@
 
             // Computes next combination in colexicographic order (this is mistakenly called
             // nextPermutation on the bit twiddling hacks page)
-            exports.nextCombination = function(v) {
+            exports.nextCombination = function (v) {
                 var t = v | (v - 1);
                 return (t + 1) | (((~t & -~t) - 1) >>> (countTrailingZeros(v) + 1));
             }
 
 
         }, {}],
-        2: [function(require, module, exports) {
+        2: [function (require, module, exports) {
             'use strict';
 
             module.exports = earcut;
@@ -878,7 +878,7 @@
             // return a percentage difference between the polygon area and its triangulation
             // area;
             // used to verify correctness of triangulation
-            earcut.deviation = function(data, holeIndices, dim, triangles) {
+            earcut.deviation = function (data, holeIndices, dim, triangles) {
                 var hasHoles = holeIndices && holeIndices.length;
                 var outerLen = hasHoles ? holeIndices[0] * dim : data.length;
 
@@ -916,7 +916,7 @@
 
             // turn a polygon in a multi-dimensional array form (e.g. as in GeoJSON) into a
             // form Earcut accepts
-            earcut.flatten = function(data) {
+            earcut.flatten = function (data) {
                 var dim = data[0][0].length,
                     result = {
                         vertices: [],
@@ -938,7 +938,7 @@
             };
 
         }, {}],
-        3: [function(require, module, exports) {
+        3: [function (require, module, exports) {
             'use strict';
 
             var has = Object.prototype.hasOwnProperty,
@@ -951,7 +951,8 @@
              * @constructor
              * @api private
              */
-            function Events() {}
+            function Events() {
+            }
 
             //
             // We try to not inherit from `Object.prototype`. In some engines creating an
@@ -1283,7 +1284,7 @@
             }
 
         }, {}],
-        4: [function(require, module, exports) {
+        4: [function (require, module, exports) {
             /**
              * isMobile.js v0.4.1
              *
@@ -1295,7 +1296,7 @@
              *
              * @license: http://creativecommons.org/publicdomain/zero/1.0/
              */
-            (function(global) {
+            (function (global) {
 
                 var apple_phone = /iPhone/i,
                     apple_ipod = /iPod/i,
@@ -1344,11 +1345,11 @@
 
                         'i'); // Case-insensitive matching
 
-                var match = function(regex, userAgent) {
+                var match = function (regex, userAgent) {
                     return regex.test(userAgent);
                 };
 
-                var IsMobileClass = function(userAgent) {
+                var IsMobileClass = function (userAgent) {
                     var ua = userAgent || navigator.userAgent;
 
                     // Facebook mobile app's integrated browser adds a bunch of strings that
@@ -1410,7 +1411,7 @@
                     }
                 };
 
-                var instantiate = function() {
+                var instantiate = function () {
                     var IM = new IsMobileClass();
                     IM.Class = IsMobileClass;
                     return IM;
@@ -1432,7 +1433,7 @@
             })(this);
 
         }, {}],
-        5: [function(require, module, exports) {
+        5: [function (require, module, exports) {
             /*
              * object-assign (c) Sindre Sorhus @license MIT
              */
@@ -1471,7 +1472,7 @@
                     for (var i = 0; i < 10; i++) {
                         test2['_' + String.fromCharCode(i)] = i;
                     }
-                    var order2 = Object.getOwnPropertyNames(test2).map(function(n) {
+                    var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
                         return test2[n];
                     });
                     if (order2.join('') !== '0123456789') {
@@ -1480,7 +1481,7 @@
 
                     // https://bugs.chromium.org/p/v8/issues/detail?id=3056
                     var test3 = {};
-                    'abcdefghijklmnopqrst'.split('').forEach(function(letter) {
+                    'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
                         test3[letter] = letter;
                     });
                     if (Object.keys(Object.assign({}, test3)).join('') !==
@@ -1495,7 +1496,7 @@
                 }
             }
 
-            module.exports = shouldUseNative() ? Object.assign : function(target, source) {
+            module.exports = shouldUseNative() ? Object.assign : function (target, source) {
                 var from;
                 var to = toObject(target);
                 var symbols;
@@ -1523,7 +1524,7 @@
             };
 
         }, {}],
-        6: [function(require, module, exports) {
+        6: [function (require, module, exports) {
             var EMPTY_ARRAY_BUFFER = new ArrayBuffer(0);
 
             /**
@@ -1541,7 +1542,7 @@
              * @param drawType
              *            {gl.STATIC_DRAW|gl.DYNAMIC_DRAW|gl.STREAM_DRAW}
              */
-            var Buffer = function(gl, type, data, drawType) {
+            var Buffer = function (gl, type, data, drawType) {
 
                 /**
                  * The current WebGL rendering context
@@ -1597,7 +1598,7 @@
              * @param dontBind
              *            {Boolean} whether to bind the buffer before uploading it
              */
-            Buffer.prototype.upload = function(data, offset, dontBind) {
+            Buffer.prototype.upload = function (data, offset, dontBind) {
                 // todo - needed?
                 if (!dontBind) this.bind();
 
@@ -1618,20 +1619,20 @@
              * Binds the buffer
              *
              */
-            Buffer.prototype.bind = function() {
+            Buffer.prototype.bind = function () {
                 var gl = this.gl;
                 gl.bindBuffer(this.type, this.buffer);
             };
 
-            Buffer.createVertexBuffer = function(gl, data, drawType) {
+            Buffer.createVertexBuffer = function (gl, data, drawType) {
                 return new Buffer(gl, gl.ARRAY_BUFFER, data, drawType);
             };
 
-            Buffer.createIndexBuffer = function(gl, data, drawType) {
+            Buffer.createIndexBuffer = function (gl, data, drawType) {
                 return new Buffer(gl, gl.ELEMENT_ARRAY_BUFFER, data, drawType);
             };
 
-            Buffer.create = function(gl, type, data, drawType) {
+            Buffer.create = function (gl, type, data, drawType) {
                 return new Buffer(gl, type, data, drawType);
             };
 
@@ -1639,14 +1640,14 @@
              * Destroys the buffer
              *
              */
-            Buffer.prototype.destroy = function() {
+            Buffer.prototype.destroy = function () {
                 this.gl.deleteBuffer(this.buffer);
             };
 
             module.exports = Buffer;
 
         }, {}],
-        7: [function(require, module, exports) {
+        7: [function (require, module, exports) {
 
             var Texture = require('./GLTexture');
 
@@ -1662,7 +1663,7 @@
              * @param height
              *            {Number} the height of the drawing area of the frame buffer
              */
-            var Framebuffer = function(gl, width, height) {
+            var Framebuffer = function (gl, width, height) {
                 /**
                  * The current WebGL rendering context
                  *
@@ -1711,7 +1712,7 @@
              * @param texture
              *            {PIXI.glCore.GLTexture}
              */
-            Framebuffer.prototype.enableTexture = function(texture) {
+            Framebuffer.prototype.enableTexture = function (texture) {
                 var gl = this.gl;
 
                 this.texture = texture || new Texture(gl);
@@ -1729,7 +1730,7 @@
             /**
              * Initialises the stencil buffer
              */
-            Framebuffer.prototype.enableStencil = function() {
+            Framebuffer.prototype.enableStencil = function () {
                 if (this.stencil) return;
 
                 var gl = this.gl;
@@ -1757,7 +1758,7 @@
              * @param a
              *            {Number} the alpha value of the clearing colour
              */
-            Framebuffer.prototype.clear = function(r, g, b, a) {
+            Framebuffer.prototype.clear = function (r, g, b, a) {
                 this.bind();
 
                 var gl = this.gl;
@@ -1769,7 +1770,7 @@
             /**
              * Binds the frame buffer to the WebGL context
              */
-            Framebuffer.prototype.bind = function() {
+            Framebuffer.prototype.bind = function () {
                 var gl = this.gl;
                 gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer);
             };
@@ -1777,7 +1778,7 @@
             /**
              * Unbinds the frame buffer to the WebGL context
              */
-            Framebuffer.prototype.unbind = function() {
+            Framebuffer.prototype.unbind = function () {
                 var gl = this.gl;
                 gl.bindFramebuffer(gl.FRAMEBUFFER, null);
             };
@@ -1789,7 +1790,7 @@
              * @param height
              *            {Number} the new height
              */
-            Framebuffer.prototype.resize = function(width, height) {
+            Framebuffer.prototype.resize = function (width, height) {
                 var gl = this.gl;
 
                 this.width = width;
@@ -1809,7 +1810,7 @@
             /**
              * Destroys this buffer
              */
-            Framebuffer.prototype.destroy = function() {
+            Framebuffer.prototype.destroy = function () {
                 var gl = this.gl;
 
                 // TODO
@@ -1838,7 +1839,7 @@
              * @param data
              *            {ArrayBuffer| SharedArrayBuffer|ArrayBufferView} an array of data
              */
-            Framebuffer.createRGBA = function(gl, width, height, data) {
+            Framebuffer.createRGBA = function (gl, width, height, data) {
                 var texture = Texture.fromData(gl, null, width, height);
                 texture.enableNearestScaling();
                 texture.enableWrapClamp();
@@ -1867,7 +1868,7 @@
              * @param data
              *            {ArrayBuffer| SharedArrayBuffer|ArrayBufferView} an array of data
              */
-            Framebuffer.createFloat32 = function(gl, width, height, data) {
+            Framebuffer.createFloat32 = function (gl, width, height, data) {
                 // create a new texture..
                 var texture = new Texture.fromData(gl, data, width, height);
                 texture.enableNearestScaling();
@@ -1887,7 +1888,7 @@
         }, {
             "./GLTexture": 9
         }],
-        8: [function(require, module, exports) {
+        8: [function (require, module, exports) {
 
             var compileProgram = require('./shader/compileProgram'),
                 extractAttributes = require('./shader/extractAttributes'),
@@ -1914,7 +1915,7 @@
              *            {object} A key value pair showing which location eact attribute
              *            should sit eg {position:0, uvs:1}
              */
-            var Shader = function(gl, vertexSrc, fragmentSrc, precision, attributeLocations) {
+            var Shader = function (gl, vertexSrc, fragmentSrc, precision, attributeLocations) {
                 /**
                  * The current WebGL rendering context
                  *
@@ -1958,14 +1959,14 @@
             /**
              * Uses this shader
              */
-            Shader.prototype.bind = function() {
+            Shader.prototype.bind = function () {
                 this.gl.useProgram(this.program);
             };
 
             /**
              * Destroys this shader TODO
              */
-            Shader.prototype.destroy = function() {
+            Shader.prototype.destroy = function () {
                 this.attributes = null;
                 this.uniformData = null;
                 this.uniforms = null;
@@ -1984,7 +1985,7 @@
             "./shader/generateUniformAccessObject": 18,
             "./shader/setPrecision": 22
         }],
-        9: [function(require, module, exports) {
+        9: [function (require, module, exports) {
 
             /**
              * Helper class to create a WebGL Texture
@@ -2002,7 +2003,7 @@
              * @param type
              *            {number} the gl type of the texture. defaults to gl.UNSIGNED_BYTE
              */
-            var Texture = function(gl, width, height, format, type) {
+            var Texture = function (gl, width, height, format, type) {
                 /**
                  * The current WebGL rendering context
                  *
@@ -2072,7 +2073,7 @@
              *            {HTMLImageElement|ImageData|HTMLVideoElement} the source image of
              *            the texture
              */
-            Texture.prototype.upload = function(source) {
+            Texture.prototype.upload = function (source) {
                 this.bind();
 
                 var gl = this.gl;
@@ -2108,7 +2109,7 @@
              * @param height
              *            {number} the new height of the texture
              */
-            Texture.prototype.uploadData = function(data, width, height) {
+            Texture.prototype.uploadData = function (data, width, height) {
                 this.bind();
 
                 var gl = this.gl;
@@ -2153,7 +2154,7 @@
              *
              * @param location
              */
-            Texture.prototype.bind = function(location) {
+            Texture.prototype.bind = function (location) {
                 var gl = this.gl;
 
                 if (location !== undefined) {
@@ -2166,7 +2167,7 @@
             /**
              * Unbinds the texture
              */
-            Texture.prototype.unbind = function() {
+            Texture.prototype.unbind = function () {
                 var gl = this.gl;
                 gl.bindTexture(gl.TEXTURE_2D, null);
             };
@@ -2176,7 +2177,7 @@
              *            {Boolean} if we want to use linear filtering or nearest neighbour
              *            interpolation
              */
-            Texture.prototype.minFilter = function(linear) {
+            Texture.prototype.minFilter = function (linear) {
                 var gl = this.gl;
 
                 this.bind();
@@ -2193,7 +2194,7 @@
              *            {Boolean} if we want to use linear filtering or nearest neighbour
              *            interpolation
              */
-            Texture.prototype.magFilter = function(linear) {
+            Texture.prototype.magFilter = function (linear) {
                 var gl = this.gl;
 
                 this.bind();
@@ -2204,7 +2205,7 @@
             /**
              * Enables mipmapping
              */
-            Texture.prototype.enableMipmap = function() {
+            Texture.prototype.enableMipmap = function () {
                 var gl = this.gl;
 
                 this.bind();
@@ -2217,7 +2218,7 @@
             /**
              * Enables linear filtering
              */
-            Texture.prototype.enableLinearScaling = function() {
+            Texture.prototype.enableLinearScaling = function () {
                 this.minFilter(true);
                 this.magFilter(true);
             };
@@ -2225,7 +2226,7 @@
             /**
              * Enables nearest neighbour interpolation
              */
-            Texture.prototype.enableNearestScaling = function() {
+            Texture.prototype.enableNearestScaling = function () {
                 this.minFilter(false);
                 this.magFilter(false);
             };
@@ -2233,7 +2234,7 @@
             /**
              * Enables clamping on the texture so WebGL will not repeat it
              */
-            Texture.prototype.enableWrapClamp = function() {
+            Texture.prototype.enableWrapClamp = function () {
                 var gl = this.gl;
 
                 this.bind();
@@ -2245,7 +2246,7 @@
             /**
              * Enable tiling on the texture
              */
-            Texture.prototype.enableWrapRepeat = function() {
+            Texture.prototype.enableWrapRepeat = function () {
                 var gl = this.gl;
 
                 this.bind();
@@ -2254,7 +2255,7 @@
                 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
             };
 
-            Texture.prototype.enableWrapMirrorRepeat = function() {
+            Texture.prototype.enableWrapMirrorRepeat = function () {
                 var gl = this.gl;
 
                 this.bind();
@@ -2267,7 +2268,7 @@
             /**
              * Destroys this texture
              */
-            Texture.prototype.destroy = function() {
+            Texture.prototype.destroy = function () {
                 var gl = this.gl;
                 // TODO
                 gl.deleteTexture(this.texture);
@@ -2282,7 +2283,7 @@
              * @param premultiplyAlpha
              *            {Boolean} If we want to use pre-multiplied alpha
              */
-            Texture.fromSource = function(gl, source, premultiplyAlpha) {
+            Texture.fromSource = function (gl, source, premultiplyAlpha) {
                 var texture = new Texture(gl);
                 texture.premultiplyAlpha = premultiplyAlpha || false;
                 texture.upload(source);
@@ -2301,7 +2302,7 @@
              * @param height
              *            {number} the new height of the texture
              */
-            Texture.fromData = function(gl, data, width, height) {
+            Texture.fromData = function (gl, data, width, height) {
                 // console.log(data, width, height);
                 var texture = new Texture(gl);
                 texture.uploadData(data, width, height);
@@ -2313,7 +2314,7 @@
             module.exports = Texture;
 
         }, {}],
-        10: [function(require, module, exports) {
+        10: [function (require, module, exports) {
 
             // state object//
             var setVertexAttribArrays = require('./setVertexAttribArrays');
@@ -2399,7 +2400,7 @@
             /**
              * Binds the buffer
              */
-            VertexArrayObject.prototype.bind = function() {
+            VertexArrayObject.prototype.bind = function () {
                 if (this.nativeVao) {
                     this.nativeVaoExtension.bindVertexArrayOES(this.nativeVao);
 
@@ -2418,7 +2419,7 @@
             /**
              * Unbinds the buffer
              */
-            VertexArrayObject.prototype.unbind = function() {
+            VertexArrayObject.prototype.unbind = function () {
                 if (this.nativeVao) {
                     this.nativeVaoExtension.bindVertexArrayOES(null);
                 }
@@ -2429,7 +2430,7 @@
             /**
              * Uses this vao
              */
-            VertexArrayObject.prototype.activate = function() {
+            VertexArrayObject.prototype.activate = function () {
 
                 var gl = this.gl;
                 var lastBuffer = null;
@@ -2474,7 +2475,7 @@
              * @param start
              *            {Number}
              */
-            VertexArrayObject.prototype.addAttribute = function(buffer, attribute, type, normalized, stride, start) {
+            VertexArrayObject.prototype.addAttribute = function (buffer, attribute, type, normalized, stride, start) {
                 this.attributes.push({
                     buffer: buffer,
                     attribute: attribute,
@@ -2496,7 +2497,7 @@
              * @param buffer
              *            {PIXI.gl.GLBuffer}
              */
-            VertexArrayObject.prototype.addIndex = function(buffer /* , options */ ) {
+            VertexArrayObject.prototype.addIndex = function (buffer /* , options */) {
                 this.indexBuffer = buffer;
 
                 this.dirty = true;
@@ -2507,7 +2508,7 @@
             /**
              * Unbinds this vao and disables it
              */
-            VertexArrayObject.prototype.clear = function() {
+            VertexArrayObject.prototype.clear = function () {
                 // var gl = this.gl;
 
                 // TODO - should this function unbind after clear?
@@ -2530,7 +2531,7 @@
              * @param start
              *            {Number}
              */
-            VertexArrayObject.prototype.draw = function(type, size, start) {
+            VertexArrayObject.prototype.draw = function (type, size, start) {
                 var gl = this.gl;
 
                 if (this.indexBuffer) {
@@ -2546,7 +2547,7 @@
             /**
              * Destroy this vao
              */
-            VertexArrayObject.prototype.destroy = function() {
+            VertexArrayObject.prototype.destroy = function () {
                 // lose references
                 this.gl = null;
                 this.indexBuffer = null;
@@ -2561,7 +2562,7 @@
                 this.nativeVao = null;
             };
 
-            VertexArrayObject.prototype.getSize = function() {
+            VertexArrayObject.prototype.getSize = function () {
                 var attrib = this.attributes[0];
                 return attrib.buffer.data.length / ((attrib.stride / 4) || attrib.attribute.size);
             };
@@ -2569,7 +2570,7 @@
         }, {
             "./setVertexAttribArrays": 13
         }],
-        11: [function(require, module, exports) {
+        11: [function (require, module, exports) {
 
             /**
              * Helper class to create a webGL Context
@@ -2586,7 +2587,7 @@
              *            for the options available
              * @return {WebGLRenderingContext} the WebGL context
              */
-            var createContext = function(canvas, options) {
+            var createContext = function (canvas, options) {
                 var gl = canvas.getContext('webgl', options) ||
                     canvas.getContext('experimental-webgl', options);
 
@@ -2601,7 +2602,7 @@
             module.exports = createContext;
 
         }, {}],
-        12: [function(require, module, exports) {
+        12: [function (require, module, exports) {
             var gl = {
                 createContext: require('./createContext'),
                 setVertexAttribArrays: require('./setVertexAttribArrays'),
@@ -2636,7 +2637,7 @@
             "./setVertexAttribArrays": 13,
             "./shader": 19
         }],
-        13: [function(require, module, exports) {
+        13: [function (require, module, exports) {
             // var GL_MAP = {};
 
             /**
@@ -2647,7 +2648,7 @@
              * @param state
              *            {*}
              */
-            var setVertexAttribArrays = function(gl, attribs, state) {
+            var setVertexAttribArrays = function (gl, attribs, state) {
                 var i;
                 if (state) {
                     var tempAttribState = state.tempAttribState,
@@ -2685,7 +2686,7 @@
             module.exports = setVertexAttribArrays;
 
         }, {}],
-        14: [function(require, module, exports) {
+        14: [function (require, module, exports) {
 
             /**
              * @class
@@ -2702,7 +2703,7 @@
              *            attribute locations
              * @return {WebGLProgram} the shader program
              */
-            var compileProgram = function(gl, vertexSrc, fragmentSrc, attributeLocations) {
+            var compileProgram = function (gl, vertexSrc, fragmentSrc, attributeLocations) {
                 var glVertShader = compileShader(gl, gl.VERTEX_SHADER, vertexSrc);
                 var glFragShader = compileShader(gl, gl.FRAGMENT_SHADER, fragmentSrc);
 
@@ -2754,7 +2755,7 @@
              *            {string|string[]} The vertex shader source as an array of strings.
              * @return {WebGLShader} the shader
              */
-            var compileShader = function(gl, type, src) {
+            var compileShader = function (gl, type, src) {
                 var shader = gl.createShader(type);
 
                 gl.shaderSource(shader, src);
@@ -2771,7 +2772,7 @@
             module.exports = compileProgram;
 
         }, {}],
-        15: [function(require, module, exports) {
+        15: [function (require, module, exports) {
             /**
              * @class
              * @memberof PIXI.glCore.shader
@@ -2780,7 +2781,7 @@
              * @param size
              *            {Number}
              */
-            var defaultValue = function(type, size) {
+            var defaultValue = function (type, size) {
                 switch (type) {
                     case 'float':
                         return 0;
@@ -2840,7 +2841,7 @@
                 }
             };
 
-            var booleanArray = function(size) {
+            var booleanArray = function (size) {
                 var array = new Array(size);
 
                 for (var i = 0; i < array.length; i++) {
@@ -2853,7 +2854,7 @@
             module.exports = defaultValue;
 
         }, {}],
-        16: [function(require, module, exports) {
+        16: [function (require, module, exports) {
 
             var mapType = require('./mapType');
             var mapSize = require('./mapSize');
@@ -2869,7 +2870,7 @@
              *            {WebGLProgram} The shader program to get the attributes from
              * @return attributes {Object}
              */
-            var extractAttributes = function(gl, program) {
+            var extractAttributes = function (gl, program) {
                 var attributes = {};
 
                 var totalAttributes = gl.getProgramParameter(program, gl.ACTIVE_ATTRIBUTES);
@@ -2890,7 +2891,7 @@
                 return attributes;
             };
 
-            var pointer = function(type, normalized, stride, start) {
+            var pointer = function (type, normalized, stride, start) {
                 // console.log(this.location)
                 gl.vertexAttribPointer(this.location, this.size, type || gl.FLOAT, normalized || false, stride || 0, start || 0);
             };
@@ -2901,7 +2902,7 @@
             "./mapSize": 20,
             "./mapType": 21
         }],
-        17: [function(require, module, exports) {
+        17: [function (require, module, exports) {
             var mapType = require('./mapType');
             var defaultValue = require('./defaultValue');
 
@@ -2916,7 +2917,7 @@
              *            {WebGLProgram} The shader program to get the uniforms from
              * @return uniforms {Object}
              */
-            var extractUniforms = function(gl, program) {
+            var extractUniforms = function (gl, program) {
                 var uniforms = {};
 
                 var totalUniforms = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
@@ -2943,7 +2944,7 @@
             "./defaultValue": 15,
             "./mapType": 21
         }],
-        18: [function(require, module, exports) {
+        18: [function (require, module, exports) {
             /**
              * Extracts the attributes
              *
@@ -2956,7 +2957,7 @@
              * @mat ?
              * @return attributes {Object}
              */
-            var generateUniformAccessObject = function(gl, uniformData) {
+            var generateUniformAccessObject = function (gl, uniformData) {
                 // this is the object we will be sending back.
                 // an object hierachy will be created for structs
                 var uniforms = {
@@ -2990,12 +2991,12 @@
                 return uniforms;
             };
 
-            var generateGetter = function(name) {
+            var generateGetter = function (name) {
                 var template = getterTemplate.replace('%%', name);
                 return new Function(template); // jshint ignore:line
             };
 
-            var generateSetter = function(name, uniform) {
+            var generateSetter = function (name, uniform) {
                 var template = setterTemplate.replace(/%%/g, name);
                 var setTemplate;
 
@@ -3012,7 +3013,7 @@
                 return new Function('value', template); // jshint ignore:line
             };
 
-            var getUniformGroup = function(nameTokens, uniform) {
+            var getUniformGroup = function (nameTokens, uniform) {
                 var cur = uniform;
 
                 for (var i = 0; i < nameTokens.length - 1; i++) {
@@ -3085,7 +3086,7 @@
             module.exports = generateUniformAccessObject;
 
         }, {}],
-        19: [function(require, module, exports) {
+        19: [function (require, module, exports) {
             module.exports = {
                 compileProgram: require('./compileProgram'),
                 defaultValue: require('./defaultValue'),
@@ -3106,7 +3107,7 @@
             "./mapType": 21,
             "./setPrecision": 22
         }],
-        20: [function(require, module, exports) {
+        20: [function (require, module, exports) {
             /**
              * @class
              * @memberof PIXI.glCore.shader
@@ -3114,7 +3115,7 @@
              *            {String}
              * @return {Number}
              */
-            var mapSize = function(type) {
+            var mapSize = function (type) {
                 return GLSL_TO_SIZE[type];
             };
 
@@ -3145,10 +3146,10 @@
             module.exports = mapSize;
 
         }, {}],
-        21: [function(require, module, exports) {
+        21: [function (require, module, exports) {
 
 
-            var mapSize = function(gl, type) {
+            var mapSize = function (gl, type) {
                 if (!GL_TABLE) {
                     var typeNames = Object.keys(GL_TO_GLSL_TYPES);
 
@@ -3191,7 +3192,7 @@
             module.exports = mapSize;
 
         }, {}],
-        22: [function(require, module, exports) {
+        22: [function (require, module, exports) {
             /**
              * Sets the float precision on the shader. If the precision is already present
              * this function will do nothing
@@ -3204,7 +3205,7 @@
              *
              * @return {string} modified shader source
              */
-            var setPrecision = function(src, precision) {
+            var setPrecision = function (src, precision) {
                 if (src.substring(0, 9) !== 'precision') {
                     return 'precision ' + precision + ' float;\n' + src;
                 }
@@ -3215,8 +3216,8 @@
             module.exports = setPrecision;
 
         }, {}],
-        23: [function(require, module, exports) {
-            (function(process) {
+        23: [function (require, module, exports) {
+            (function (process) {
                 // Copyright Joyent, Inc. and other Node contributors.
                 //
                 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3272,13 +3273,13 @@
                 // 'root' is just a slash, or nothing.
                 var splitPathRe =
                     /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-                var splitPath = function(filename) {
+                var splitPath = function (filename) {
                     return splitPathRe.exec(filename).slice(1);
                 };
 
                 // path.resolve([from ...], to)
                 // posix version
-                exports.resolve = function() {
+                exports.resolve = function () {
                     var resolvedPath = '',
                         resolvedAbsolute = false;
 
@@ -3300,7 +3301,7 @@
                     // handle relative paths to be safe (might happen when process.cwd() fails)
 
                     // Normalize the path
-                    resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+                    resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function (p) {
                         return !!p;
                     }), !resolvedAbsolute).join('/');
 
@@ -3309,12 +3310,12 @@
 
                 // path.normalize(path)
                 // posix version
-                exports.normalize = function(path) {
+                exports.normalize = function (path) {
                     var isAbsolute = exports.isAbsolute(path),
                         trailingSlash = substr(path, -1) === '/';
 
                     // Normalize the path
-                    path = normalizeArray(filter(path.split('/'), function(p) {
+                    path = normalizeArray(filter(path.split('/'), function (p) {
                         return !!p;
                     }), !isAbsolute).join('/');
 
@@ -3329,14 +3330,14 @@
                 };
 
                 // posix version
-                exports.isAbsolute = function(path) {
+                exports.isAbsolute = function (path) {
                     return path.charAt(0) === '/';
                 };
 
                 // posix version
-                exports.join = function() {
+                exports.join = function () {
                     var paths = Array.prototype.slice.call(arguments, 0);
-                    return exports.normalize(filter(paths, function(p, index) {
+                    return exports.normalize(filter(paths, function (p, index) {
                         if (typeof p !== 'string') {
                             throw new TypeError('Arguments to path.join must be strings');
                         }
@@ -3347,7 +3348,7 @@
 
                 // path.relative(from, to)
                 // posix version
-                exports.relative = function(from, to) {
+                exports.relative = function (from, to) {
                     from = exports.resolve(from).substr(1);
                     to = exports.resolve(to).substr(1);
 
@@ -3391,7 +3392,7 @@
                 exports.sep = '/';
                 exports.delimiter = ':';
 
-                exports.dirname = function(path) {
+                exports.dirname = function (path) {
                     var result = splitPath(path),
                         root = result[0],
                         dir = result[1];
@@ -3410,7 +3411,7 @@
                 };
 
 
-                exports.basename = function(path, ext) {
+                exports.basename = function (path, ext) {
                     var f = splitPath(path)[2];
                     // TODO: make this comparison case-insensitive on windows?
                     if (ext && f.substr(-1 * ext.length) === ext) {
@@ -3420,7 +3421,7 @@
                 };
 
 
-                exports.extname = function(path) {
+                exports.extname = function (path) {
                     return splitPath(path)[3];
                 };
 
@@ -3435,10 +3436,10 @@
 
                 // String.prototype.substr - negative index don't work in IE8
                 var substr = 'ab'.substr(-1) === 'b' ?
-                    function(str, start, len) {
+                    function (str, start, len) {
                         return str.substr(start, len)
                     } :
-                    function(str, start, len) {
+                    function (str, start, len) {
                         if (start < 0) start = str.length + start;
                         return str.substr(start, len);
                     };
@@ -3448,7 +3449,7 @@
         }, {
             "_process": 24
         }],
-        24: [function(require, module, exports) {
+        24: [function (require, module, exports) {
             // shim for using process in browser
             var process = module.exports = {};
 
@@ -3468,7 +3469,7 @@
                 throw new Error('clearTimeout has not been defined');
             }
 
-            (function() {
+            (function () {
                 try {
                     if (typeof setTimeout === 'function') {
                         cachedSetTimeout = setTimeout;
@@ -3593,7 +3594,7 @@
                 runClearTimeout(timeout);
             }
 
-            process.nextTick = function(fun) {
+            process.nextTick = function (fun) {
                 var args = new Array(arguments.length - 1);
                 if (arguments.length > 1) {
                     for (var i = 1; i < arguments.length; i++) {
@@ -3612,7 +3613,7 @@
                 this.array = array;
             }
 
-            Item.prototype.run = function() {
+            Item.prototype.run = function () {
                 this.fun.apply(null, this.array);
             };
             process.title = 'browser';
@@ -3622,7 +3623,8 @@
             process.version = ''; // empty string to avoid regexp issues
             process.versions = {};
 
-            function noop() {}
+            function noop() {
+            }
 
             process.on = noop;
             process.addListener = noop;
@@ -3634,30 +3636,30 @@
             process.prependListener = noop;
             process.prependOnceListener = noop;
 
-            process.listeners = function(name) {
+            process.listeners = function (name) {
                 return []
             }
 
-            process.binding = function(name) {
+            process.binding = function (name) {
                 throw new Error('process.binding is not supported');
             };
 
-            process.cwd = function() {
+            process.cwd = function () {
                 return '/'
             };
-            process.chdir = function(dir) {
+            process.chdir = function (dir) {
                 throw new Error('process.chdir is not supported');
             };
-            process.umask = function() {
+            process.umask = function () {
                 return 0;
             };
 
         }, {}],
-        25: [function(require, module, exports) {
-            (function(global) {
+        25: [function (require, module, exports) {
+            (function (global) {
                 /* ! https://mths.be/punycode v1.4.1 by @mathias */
                 ;
-                (function(root) {
+                (function (root) {
 
                     /** Detect free variables */
                     var freeExports = typeof exports == 'object' && exports &&
@@ -3829,7 +3831,7 @@
                      * @returns {String} The new Unicode string (UCS-2).
                      */
                     function ucs2encode(array) {
-                        return map(array, function(value) {
+                        return map(array, function (value) {
                             var output = '';
                             if (value > 0xFFFF) {
                                 value -= 0x10000;
@@ -3895,7 +3897,7 @@
                         var k = 0;
                         delta = firstTime ? floor(delta / damp) : delta >> 1;
                         delta += floor(delta / numPoints);
-                        for ( /* no initialization */ ; delta > baseMinusTMin * tMax >> 1; k += base) {
+                        for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
                             delta = floor(delta / baseMinusTMin);
                         }
                         return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
@@ -3963,7 +3965,7 @@
                             // which gets added to `i`. The overflow checking is easier
                             // if we increase `i` as we go, then subtract off its starting
                             // value at the end to obtain `delta`.
-                            for (oldi = i, w = 1, k = base; /* no condition */ ; k += base) {
+                            for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
 
                                 if (index >= inputLength) {
                                     error('invalid-input');
@@ -4102,7 +4104,7 @@
 
                                 if (currentValue == n) {
                                     // Represent delta as a generalized variable-length integer
-                                    for (q = delta, k = base; /* no condition */ ; k += base) {
+                                    for (q = delta, k = base; /* no condition */; k += base) {
                                         t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
                                         if (q < t) {
                                             break;
@@ -4143,7 +4145,7 @@
                      *          string.
                      */
                     function toUnicode(input) {
-                        return mapDomain(input, function(string) {
+                        return mapDomain(input, function (string) {
                             return regexPunycode.test(string) ?
                                 decode(string.slice(4).toLowerCase()) :
                                 string;
@@ -4164,7 +4166,7 @@
                      *          email address.
                      */
                     function toASCII(input) {
-                        return mapDomain(input, function(string) {
+                        return mapDomain(input, function (string) {
                             return regexNonASCII.test(string) ?
                                 'xn--' + encode(string) :
                                 string;
@@ -4209,7 +4211,7 @@
                         typeof define.amd == 'object' &&
                         define.amd
                     ) {
-                        define('punycode', function() {
+                        define('punycode', function () {
                             return punycode;
                         });
                     } else if (freeExports && freeModule) {
@@ -4232,7 +4234,7 @@
             }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
         }, {}],
-        26: [function(require, module, exports) {
+        26: [function (require, module, exports) {
             // Copyright Joyent, Inc. and other Node contributors.
             //
             // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4263,7 +4265,7 @@
                 return Object.prototype.hasOwnProperty.call(obj, prop);
             }
 
-            module.exports = function(qs, sep, eq, options) {
+            module.exports = function (qs, sep, eq, options) {
                 sep = sep || '&';
                 eq = eq || '=';
                 var obj = {};
@@ -4314,12 +4316,12 @@
                 return obj;
             };
 
-            var isArray = Array.isArray || function(xs) {
+            var isArray = Array.isArray || function (xs) {
                 return Object.prototype.toString.call(xs) === '[object Array]';
             };
 
         }, {}],
-        27: [function(require, module, exports) {
+        27: [function (require, module, exports) {
             // Copyright Joyent, Inc. and other Node contributors.
             //
             // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4343,7 +4345,7 @@
 
             'use strict';
 
-            var stringifyPrimitive = function(v) {
+            var stringifyPrimitive = function (v) {
                 switch (typeof v) {
                     case 'string':
                         return v;
@@ -4359,7 +4361,7 @@
                 }
             };
 
-            module.exports = function(obj, sep, eq, name) {
+            module.exports = function (obj, sep, eq, name) {
                 sep = sep || '&';
                 eq = eq || '=';
                 if (obj === null) {
@@ -4367,10 +4369,10 @@
                 }
 
                 if (typeof obj === 'object') {
-                    return map(objectKeys(obj), function(k) {
+                    return map(objectKeys(obj), function (k) {
                         var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
                         if (isArray(obj[k])) {
-                            return map(obj[k], function(v) {
+                            return map(obj[k], function (v) {
                                 return ks + encodeURIComponent(stringifyPrimitive(v));
                             }).join(sep);
                         } else {
@@ -4385,7 +4387,7 @@
                     encodeURIComponent(stringifyPrimitive(obj));
             };
 
-            var isArray = Array.isArray || function(xs) {
+            var isArray = Array.isArray || function (xs) {
                 return Object.prototype.toString.call(xs) === '[object Array]';
             };
 
@@ -4398,7 +4400,7 @@
                 return res;
             }
 
-            var objectKeys = Object.keys || function(obj) {
+            var objectKeys = Object.keys || function (obj) {
                 var res = [];
                 for (var key in obj) {
                     if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
@@ -4407,7 +4409,7 @@
             };
 
         }, {}],
-        28: [function(require, module, exports) {
+        28: [function (require, module, exports) {
             'use strict';
 
             exports.decode = exports.parse = require('./decode');
@@ -4417,7 +4419,7 @@
             "./decode": 26,
             "./encode": 27
         }],
-        29: [function(require, module, exports) {
+        29: [function (require, module, exports) {
             // Copyright Joyent, Inc. and other Node contributors.
             //
             // Permission is hereby granted, free of charge, to any person obtaining a
@@ -4527,7 +4529,7 @@
                 return u;
             }
 
-            Url.prototype.parse = function(url, parseQueryString, slashesDenoteHost) {
+            Url.prototype.parse = function (url, parseQueryString, slashesDenoteHost) {
                 if (!util.isString(url)) {
                     throw new TypeError("Parameter 'url' must be a string, not " + typeof url);
                 }
@@ -4537,7 +4539,7 @@
                 // See: https://code.google.com/p/chromium/issues/detail?id=25916
                 var queryIndex = url.indexOf('?'),
                     splitter =
-                    (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
+                        (queryIndex !== -1 && queryIndex < url.indexOf('#')) ? '?' : '#',
                     uSplit = url.split(splitter),
                     slashRegex = /\\/g;
                 uSplit[0] = uSplit[0].replace(slashRegex, '/');
@@ -4799,7 +4801,7 @@
                 return obj.format();
             }
 
-            Url.prototype.format = function() {
+            Url.prototype.format = function () {
                 var auth = this.auth || '';
                 if (auth) {
                     auth = encodeURIComponent(auth);
@@ -4847,7 +4849,7 @@
                 if (hash && hash.charAt(0) !== '#') hash = '#' + hash;
                 if (search && search.charAt(0) !== '?') search = '?' + search;
 
-                pathname = pathname.replace(/[?#]/g, function(match) {
+                pathname = pathname.replace(/[?#]/g, function (match) {
                     return encodeURIComponent(match);
                 });
                 search = search.replace('#', '%23');
@@ -4859,7 +4861,7 @@
                 return urlParse(source, false, true).resolve(relative);
             }
 
-            Url.prototype.resolve = function(relative) {
+            Url.prototype.resolve = function (relative) {
                 return this.resolveObject(urlParse(relative, false, true)).format();
             };
 
@@ -4868,7 +4870,7 @@
                 return urlParse(source, false, true).resolveObject(relative);
             }
 
-            Url.prototype.resolveObject = function(relative) {
+            Url.prototype.resolveObject = function (relative) {
                 if (util.isString(relative)) {
                     var rel = new Url();
                     rel.parse(relative, false, true);
@@ -4934,7 +4936,7 @@
                     result.protocol = relative.protocol;
                     if (!relative.host && !hostlessProtocol[relative.protocol]) {
                         var relPath = (relative.pathname || '').split('/');
-                        while (relPath.length && !(relative.host = relPath.shift()));
+                        while (relPath.length && !(relative.host = relPath.shift())) ;
                         if (!relative.host) relative.host = '';
                         if (!relative.hostname) relative.hostname = '';
                         if (relPath[0] !== '') relPath.unshift('');
@@ -5138,7 +5140,7 @@
                 return result;
             };
 
-            Url.prototype.parseHost = function() {
+            Url.prototype.parseHost = function () {
                 var host = this.host;
                 var port = portPattern.exec(host);
                 if (port) {
@@ -5156,26 +5158,26 @@
             "punycode": 25,
             "querystring": 28
         }],
-        30: [function(require, module, exports) {
+        30: [function (require, module, exports) {
             'use strict';
 
             module.exports = {
-                isString: function(arg) {
+                isString: function (arg) {
                     return typeof(arg) === 'string';
                 },
-                isObject: function(arg) {
+                isObject: function (arg) {
                     return typeof(arg) === 'object' && arg !== null;
                 },
-                isNull: function(arg) {
+                isNull: function (arg) {
                     return arg === null;
                 },
-                isNullOrUndefined: function(arg) {
+                isNullOrUndefined: function (arg) {
                     return arg == null;
                 }
             };
 
         }, {}],
-        31: [function(require, module, exports) {
+        31: [function (require, module, exports) {
             'use strict'
 
             /**
@@ -5208,14 +5210,14 @@
             }
 
         }, {}],
-        32: [function(require, module, exports) {
+        32: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj) {
+            var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
                 return typeof obj;
-            } : function(obj) {
+            } : function (obj) {
                 return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
             };
 
@@ -5272,7 +5274,7 @@
              * @class
              */
 
-            var Loader = function() {
+            var Loader = function () {
                 /**
                  * @param {string}
                  *            [baseUrl=''] - The base url for all resources loaded by this
@@ -5364,7 +5366,7 @@
                      *            d - The dequeue function
                      * @return {undefined}
                      */
-                    this._boundLoadResource = function(r, d) {
+                    this._boundLoadResource = function (r, d) {
                         return _this._loadResource(r, d);
                     };
 
@@ -5803,13 +5805,13 @@
                     resource._dequeue = dequeue;
 
                     // run before middleware
-                    async.eachSeries(this._beforeMiddleware, function(fn, next) {
-                        fn.call(_this2, resource, function() {
+                    async.eachSeries(this._beforeMiddleware, function (fn, next) {
+                        fn.call(_this2, resource, function () {
                             // if the before middleware marks the resource as complete,
                             // break and don't process any more before middleware
                             next(resource.isComplete ? {} : null);
                         });
-                    }, function() {
+                    }, function () {
                         if (resource.isComplete) {
                             _this2._onLoad(resource);
                         } else {
@@ -5852,9 +5854,9 @@
                     resource._dequeue();
 
                     // run all the after middleware for this resource
-                    async.eachSeries(this._afterMiddleware, function(fn, next) {
+                    async.eachSeries(this._afterMiddleware, function (fn, next) {
                         fn.call(_this3, resource, next);
-                    }, function() {
+                    }, function () {
                         resource.onAfterMiddleware.dispatch(resource);
 
                         _this3.progress += resource.progressChunk;
@@ -5887,12 +5889,12 @@
             "mini-signals": 38,
             "parse-uri": 39
         }],
-        33: [function(require, module, exports) {
+        33: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -5903,7 +5905,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -5942,7 +5944,8 @@
             var STATUS_TYPE_OK = 2;
 
             // noop
-            function _noop() {}
+            function _noop() {
+            }
 
             /* empty */
 
@@ -5952,7 +5955,7 @@
              * @class
              */
 
-            var Resource = function() {
+            var Resource = function () {
                 /**
                  * Sets the load type to be used for a specific extension.
                  *
@@ -6370,7 +6373,7 @@
 
                     if (this.isComplete) {
                         if (cb) {
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 return cb(_this);
                             }, 1);
                         }
@@ -6406,7 +6409,7 @@
                             break;
 
                         case Resource.LOAD_TYPE.XHR:
-                            /* falls through */
+                        /* falls through */
                         default:
                             if (useXdr && this.crossOrigin) {
                                 this._loadXdr();
@@ -6598,7 +6601,7 @@
                     // issue with the interface where some requests are lost if multiple
                     // XDomainRequests are being sent at the same time.
                     // Some info here: https://github.com/photonstorm/phaser/issues/1248
-                    setTimeout(function() {
+                    setTimeout(function () {
                         return xdr.send();
                     }, 1);
                 };
@@ -6921,7 +6924,7 @@
 
                         case Resource.XHR_RESPONSE_TYPE.DEFAULT:
                         case Resource.XHR_RESPONSE_TYPE.TEXT:
-                            /* falls through */
+                        /* falls through */
                         default:
                             return 'text/plain';
 
@@ -7147,7 +7150,7 @@
             "mini-signals": 38,
             "parse-uri": 39
         }],
-        34: [function(require, module, exports) {
+        34: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -7158,7 +7161,8 @@
              * Smaller version of the async library constructs.
              *
              */
-            function _noop() {}
+            function _noop() {
+            }
 
             /* empty */
 
@@ -7189,7 +7193,7 @@
                     }
 
                     if (deferNext) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             iterator(array[i++], next);
                         }, 1);
                     } else {
@@ -7318,7 +7322,7 @@
                     if (data == null && q.idle()) {
                         // eslint-disable-line no-eq-null,eqeqeq
                         // call drain immediately if there are no tasks
-                        setTimeout(function() {
+                        setTimeout(function () {
                             return q.drain();
                         }, 1);
 
@@ -7336,7 +7340,7 @@
                         q._tasks.push(item);
                     }
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         return q.process();
                     }, 1);
                 }
@@ -7368,7 +7372,7 @@
             }
 
         }, {}],
-        35: [function(require, module, exports) {
+        35: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -7439,7 +7443,7 @@
             }
 
         }, {}],
-        36: [function(require, module, exports) {
+        36: [function (require, module, exports) {
             'use strict';
 
             // import Loader from './Loader';
@@ -7469,14 +7473,14 @@
             "./async": 34,
             "./b64": 35
         }],
-        37: [function(require, module, exports) {
+        37: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj) {
+            var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
                 return typeof obj;
-            } : function(obj) {
+            } : function (obj) {
                 return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
             };
 
@@ -7521,7 +7525,7 @@
                                 resource.type = _Resource2.default.TYPE.IMAGE;
 
                                 // wait until the image loads and then callback
-                                resource.data.onload = function() {
+                                resource.data.onload = function () {
                                     resource.data.onload = null;
 
                                     next();
@@ -7534,7 +7538,7 @@
                         // if content type says this is an image, then we should transform
                         // the blob into an Image object
                         else if (resource.data.type.indexOf('image') === 0) {
-                            var _ret = function() {
+                            var _ret = function () {
                                 var src = Url.createObjectURL(resource.data);
 
                                 resource.blob = resource.data;
@@ -7546,7 +7550,7 @@
                                 // cleanup the no longer used blob after the image loads
                                 // TODO: Is this correct? Will the image be invalid
                                 // after revoking?
-                                resource.data.onload = function() {
+                                resource.data.onload = function () {
                                     Url.revokeObjectURL(src);
                                     resource.data.onload = null;
 
@@ -7571,14 +7575,14 @@
             "../../Resource": 33,
             "../../b64": 35
         }],
-        38: [function(require, module, exports) {
+        38: [function (require, module, exports) {
             'use strict';
 
             Object.defineProperty(exports, '__esModule', {
                 value: true
             });
 
-            var _createClass = (function() {
+            var _createClass = (function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -7589,7 +7593,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -7602,7 +7606,7 @@
                 }
             }
 
-            var MiniSignalBinding = (function() {
+            var MiniSignalBinding = (function () {
                 function MiniSignalBinding(fn, once, thisArg) {
                     if (once === undefined) once = false;
 
@@ -7641,7 +7645,7 @@
                 return node;
             }
 
-            var MiniSignal = (function() {
+            var MiniSignal = (function () {
                 function MiniSignal() {
                     _classCallCheck(this, MiniSignal);
 
@@ -7759,7 +7763,7 @@
             module.exports = exports['default'];
 
         }, {}],
-        39: [function(require, module, exports) {
+        39: [function (require, module, exports) {
             'use strict'
 
             module.exports = function parseURI(str, opts) {
@@ -7784,7 +7788,7 @@
                 while (i--) uri[o.key[i]] = m[i] || ''
 
                 uri[o.q.name] = {}
-                uri[o.key[12]].replace(o.q.parser, function($0, $1, $2) {
+                uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
                     if ($1) uri[o.q.name][$1] = $2
                 })
 
@@ -7792,7 +7796,7 @@
             }
 
         }, {}],
-        40: [function(require, module, exports) {
+        40: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -7867,7 +7871,7 @@
              * @memberof PIXI.accessibility
              */
 
-            var AccessibilityManager = function() {
+            var AccessibilityManager = function () {
                 /**
                  * @param {PIXI.CanvasRenderer|PIXI.WebGLRenderer}
                  *            renderer - A reference to the current renderer
@@ -7981,7 +7985,7 @@
                     hookDiv.style.backgroundColor = '#FF0000';
                     hookDiv.title = 'HOOK DIV';
 
-                    hookDiv.addEventListener('focus', function() {
+                    hookDiv.addEventListener('focus', function () {
                         _this.isMobileAccessabillity = true;
                         _this.activate();
                         document.body.removeChild(hookDiv);
@@ -8329,7 +8333,7 @@
             "./accessibleTarget": 41,
             "ismobilejs": 4
         }],
-        41: [function(require, module, exports) {
+        41: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -8385,7 +8389,7 @@
             };
 
         }, {}],
-        42: [function(require, module, exports) {
+        42: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -8418,12 +8422,12 @@
             "./AccessibilityManager": 40,
             "./accessibleTarget": 41
         }],
-        43: [function(require, module, exports) {
+        43: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -8434,7 +8438,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -8479,7 +8483,7 @@
              * @class
              * @memberof PIXI
              */
-            var Application = function() {
+            var Application = function () {
                 // eslint-disable-next-line valid-jsdoc
                 /**
                  * @param {object}
@@ -8707,7 +8711,7 @@
             "./settings": 101,
             "./ticker": 120
         }],
-        44: [function(require, module, exports) {
+        44: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -8777,7 +8781,7 @@
              * @memberof PIXI
              */
 
-            var Shader = function(_GLShader) {
+            var Shader = function (_GLShader) {
                 _inherits(Shader, _GLShader);
 
                 /**
@@ -8805,7 +8809,7 @@
             "./settings": 101,
             "pixi-gl-core": 12
         }],
-        45: [function(require, module, exports) {
+        45: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -8920,7 +8924,7 @@
             "./renderers/webgl/WebGLRenderer": 84,
             "./utils": 124
         }],
-        46: [function(require, module, exports) {
+        46: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -9275,7 +9279,7 @@
             };
 
         }, {}],
-        47: [function(require, module, exports) {
+        47: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -9295,7 +9299,7 @@
              * @class
              * @memberof PIXI
              */
-            var Bounds = function() {
+            var Bounds = function () {
                 /**
                  *
                  */
@@ -9642,12 +9646,12 @@
         }, {
             "../math": 70
         }],
-        48: [function(require, module, exports) {
+        48: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -9658,7 +9662,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -9715,7 +9719,7 @@
              * @extends PIXI.DisplayObject
              * @memberof PIXI
              */
-            var Container = function(_DisplayObject) {
+            var Container = function (_DisplayObject) {
                 _inherits(Container, _DisplayObject);
 
                 /**
@@ -9744,7 +9748,8 @@
                  */
 
 
-                Container.prototype.onChildrenChange = function onChildrenChange() {}
+                Container.prototype.onChildrenChange = function onChildrenChange() {
+                }
                 /* empty */
 
 
@@ -10098,7 +10103,8 @@
                  */
 
 
-                Container.prototype._calculateBounds = function _calculateBounds() {}
+                Container.prototype._calculateBounds = function _calculateBounds() {
+                }
                 // FILL IN//
 
 
@@ -10198,8 +10204,9 @@
 
 
                 Container.prototype._renderWebGL = function _renderWebGL(renderer) // eslint-disable-line
-                // no-unused-vars
-                {}
+                    // no-unused-vars
+                {
+                }
                 // this is where content itself gets rendered...
 
 
@@ -10213,8 +10220,9 @@
                 ;
 
                 Container.prototype._renderCanvas = function _renderCanvas(renderer) // eslint-disable-line
-                // no-unused-vars
-                {}
+                    // no-unused-vars
+                {
+                }
                 // this is where content itself gets rendered...
 
 
@@ -10347,12 +10355,12 @@
             "../utils": 124,
             "./DisplayObject": 49
         }],
-        49: [function(require, module, exports) {
+        49: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -10363,7 +10371,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -10439,7 +10447,7 @@
              * @extends EventEmitter
              * @memberof PIXI
              */
-            var DisplayObject = function(_EventEmitter) {
+            var DisplayObject = function (_EventEmitter) {
                 _inherits(DisplayObject, _EventEmitter);
 
                 /**
@@ -10774,8 +10782,9 @@
 
 
                 DisplayObject.prototype.renderWebGL = function renderWebGL(renderer) // eslint-disable-line
-                // no-unused-vars
-                {}
+                    // no-unused-vars
+                {
+                }
                 // OVERWRITE;
 
 
@@ -10788,8 +10797,9 @@
                 ;
 
                 DisplayObject.prototype.renderCanvas = function renderCanvas(renderer) // eslint-disable-line
-                // no-unused-vars
-                {}
+                    // no-unused-vars
+                {
+                }
                 // OVERWRITE;
 
 
@@ -11137,12 +11147,12 @@
             "./TransformStatic": 52,
             "eventemitter3": 3
         }],
-        50: [function(require, module, exports) {
+        50: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -11153,7 +11163,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -11208,7 +11218,7 @@
              * @extends PIXI.TransformBase
              * @memberof PIXI
              */
-            var Transform = function(_TransformBase) {
+            var Transform = function (_TransformBase) {
                 _inherits(Transform, _TransformBase);
 
                 /**
@@ -11367,7 +11377,7 @@
             "../math": 70,
             "./TransformBase": 51
         }],
-        51: [function(require, module, exports) {
+        51: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -11386,7 +11396,7 @@
              * @class
              * @memberof PIXI
              */
-            var TransformBase = function() {
+            var TransformBase = function () {
                 /**
                  *
                  */
@@ -11418,7 +11428,8 @@
                  */
 
 
-                TransformBase.prototype.updateLocalTransform = function updateLocalTransform() {}
+                TransformBase.prototype.updateLocalTransform = function updateLocalTransform() {
+                }
                 // empty
 
 
@@ -11466,12 +11477,12 @@
         }, {
             "../math": 70
         }],
-        52: [function(require, module, exports) {
+        52: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -11482,7 +11493,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -11536,7 +11547,7 @@
              * @extends PIXI.TransformBase
              * @memberof PIXI
              */
-            var TransformStatic = function(_TransformBase) {
+            var TransformStatic = function (_TransformBase) {
                 _inherits(TransformStatic, _TransformBase);
 
                 /**
@@ -11728,7 +11739,7 @@
             "../math": 70,
             "./TransformBase": 51
         }],
-        53: [function(require, module, exports) {
+        53: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -11820,7 +11831,7 @@
              * @memberof PIXI
              */
 
-            var Graphics = function(_Container) {
+            var Graphics = function (_Container) {
                 _inherits(Graphics, _Container);
 
                 /**
@@ -13041,7 +13052,7 @@
             "./GraphicsData": 54,
             "./utils/bezierCurveTo": 56
         }],
-        54: [function(require, module, exports) {
+        54: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -13058,7 +13069,7 @@
              * @class
              * @memberof PIXI
              */
-            var GraphicsData = function() {
+            var GraphicsData = function () {
                 /**
                  *
                  * @param {number}
@@ -13180,7 +13191,7 @@
             exports.default = GraphicsData;
 
         }, {}],
-        55: [function(require, module, exports) {
+        55: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -13222,7 +13233,7 @@
              * @private
              * @memberof PIXI
              */
-            var CanvasGraphicsRenderer = function() {
+            var CanvasGraphicsRenderer = function () {
                 /**
                  * @param {PIXI.CanvasRenderer}
                  *            renderer - The current PIXI renderer.
@@ -13468,7 +13479,7 @@
             "../../const": 46,
             "../../renderers/canvas/CanvasRenderer": 77
         }],
-        56: [function(require, module, exports) {
+        56: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -13529,7 +13540,7 @@
             }
 
         }, {}],
-        57: [function(require, module, exports) {
+        57: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -13611,7 +13622,7 @@
              * @memberof PIXI
              * @extends PIXI.ObjectRenderer
              */
-            var GraphicsRenderer = function(_ObjectRenderer) {
+            var GraphicsRenderer = function (_ObjectRenderer) {
                 _inherits(GraphicsRenderer, _ObjectRenderer);
 
                 /**
@@ -13850,7 +13861,7 @@
             "./utils/buildRectangle": 63,
             "./utils/buildRoundedRectangle": 64
         }],
-        58: [function(require, module, exports) {
+        58: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -13879,7 +13890,7 @@
              * @private
              * @memberof PIXI
              */
-            var WebGLGraphicsData = function() {
+            var WebGLGraphicsData = function () {
                 /**
                  * @param {WebGLRenderingContext}
                  *            gl - The current WebGL drawing context
@@ -14015,7 +14026,7 @@
         }, {
             "pixi-gl-core": 12
         }],
-        59: [function(require, module, exports) {
+        59: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -14065,7 +14076,7 @@
              * @memberof PIXI
              * @extends PIXI.Shader
              */
-            var PrimitiveShader = function(_Shader) {
+            var PrimitiveShader = function (_Shader) {
                 _inherits(PrimitiveShader, _Shader);
 
                 /**
@@ -14090,7 +14101,7 @@
         }, {
             "../../../Shader": 44
         }],
-        60: [function(require, module, exports) {
+        60: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -14197,12 +14208,12 @@
             "../../../utils": 124,
             "./buildLine": 61
         }],
-        61: [function(require, module, exports) {
+        61: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            exports.default = function(graphicsData, webGLData, webGLDataNativeLines) {
+            exports.default = function (graphicsData, webGLData, webGLDataNativeLines) {
                 if (graphicsData.nativeLines) {
                     buildNativeLine(graphicsData, webGLDataNativeLines);
                 } else {
@@ -14485,7 +14496,7 @@
             "../../../math": 70,
             "../../../utils": 124
         }],
-        62: [function(require, module, exports) {
+        62: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -14586,7 +14597,7 @@
             "./buildLine": 61,
             "earcut": 2
         }],
-        63: [function(require, module, exports) {
+        63: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -14676,7 +14687,7 @@
             "../../../utils": 124,
             "./buildLine": 61
         }],
-        64: [function(require, module, exports) {
+        64: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -14860,7 +14871,7 @@
             "./buildLine": 61,
             "earcut": 2
         }],
-        65: [function(require, module, exports) {
+        65: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -14868,7 +14879,7 @@
 
             var _const = require('./const');
 
-            Object.keys(_const).forEach(function(key) {
+            Object.keys(_const).forEach(function (key) {
                 if (key === "default" || key === "__esModule") return;
                 Object.defineProperty(exports, key, {
                     enumerable: true,
@@ -14880,7 +14891,7 @@
 
             var _math = require('./math');
 
-            Object.keys(_math).forEach(function(key) {
+            Object.keys(_math).forEach(function (key) {
                 if (key === "default" || key === "__esModule") return;
                 Object.defineProperty(exports, key, {
                     enumerable: true,
@@ -15299,7 +15310,7 @@
             "./utils": 124,
             "pixi-gl-core": 12
         }],
-        66: [function(require, module, exports) {
+        66: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -15513,12 +15524,12 @@
         }, {
             "./Matrix": 67
         }],
-        67: [function(require, module, exports) {
+        67: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -15529,7 +15540,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -15559,7 +15570,7 @@
              * @class
              * @memberof PIXI
              */
-            var Matrix = function() {
+            var Matrix = function () {
                 /**
                  * @param {number}
                  *            [a=1] - x scale
@@ -16113,12 +16124,12 @@
         }, {
             "./Point": 69
         }],
-        68: [function(require, module, exports) {
+        68: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -16129,7 +16140,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -16151,7 +16162,7 @@
              * @class
              * @memberof PIXI
              */
-            var ObservablePoint = function() {
+            var ObservablePoint = function () {
                 /**
                  * @param {Function}
                  *            cb - callback when changed
@@ -16261,7 +16272,7 @@
             exports.default = ObservablePoint;
 
         }, {}],
-        69: [function(require, module, exports) {
+        69: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -16280,7 +16291,7 @@
              * @class
              * @memberof PIXI
              */
-            var Point = function() {
+            var Point = function () {
                 /**
                  * @param {number}
                  *            [x=0] - position of the point on the x axis
@@ -16364,7 +16375,7 @@
             exports.default = Point;
 
         }, {}],
-        70: [function(require, module, exports) {
+        70: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -16467,7 +16478,7 @@
             "./shapes/Rectangle": 74,
             "./shapes/RoundedRectangle": 75
         }],
-        71: [function(require, module, exports) {
+        71: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -16496,7 +16507,7 @@
              * @class
              * @memberof PIXI
              */
-            var Circle = function() {
+            var Circle = function () {
                 /**
                  * @param {number}
                  *            [x=0] - The X coordinate of the center of this circle
@@ -16599,7 +16610,7 @@
             "../../const": 46,
             "./Rectangle": 74
         }],
-        72: [function(require, module, exports) {
+        72: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -16628,7 +16639,7 @@
              * @class
              * @memberof PIXI
              */
-            var Ellipse = function() {
+            var Ellipse = function () {
                 /**
                  * @param {number}
                  *            [x=0] - The X coordinate of the center of this circle
@@ -16740,7 +16751,7 @@
             "../../const": 46,
             "./Rectangle": 74
         }],
-        73: [function(require, module, exports) {
+        73: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -16767,7 +16778,7 @@
              * @class
              * @memberof PIXI
              */
-            var Polygon = function() {
+            var Polygon = function () {
                 /**
                  * @param {PIXI.Point[]|number[]}
                  *            points - This can be an array of Points that form the polygon,
@@ -16889,12 +16900,12 @@
             "../../const": 46,
             "../Point": 69
         }],
-        74: [function(require, module, exports) {
+        74: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -16905,7 +16916,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -16927,7 +16938,7 @@
              * @class
              * @memberof PIXI
              */
-            var Rectangle = function() {
+            var Rectangle = function () {
                 /**
                  * @param {number}
                  *            [x=0] - The X coordinate of the upper-left corner of the
@@ -17189,7 +17200,7 @@
         }, {
             "../../const": 46
         }],
-        75: [function(require, module, exports) {
+        75: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -17210,7 +17221,7 @@
              * @class
              * @memberof PIXI
              */
-            var RoundedRectangle = function() {
+            var RoundedRectangle = function () {
                 /**
                  * @param {number}
                  *            [x=0] - The X coordinate of the upper-left corner of the
@@ -17341,12 +17352,12 @@
         }, {
             "../../const": 46
         }],
-        76: [function(require, module, exports) {
+        76: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -17357,7 +17368,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -17433,7 +17444,7 @@
              * @memberof PIXI
              */
 
-            var SystemRenderer = function(_EventEmitter) {
+            var SystemRenderer = function (_EventEmitter) {
                 _inherits(SystemRenderer, _EventEmitter);
 
                 // eslint-disable-next-line valid-jsdoc
@@ -17791,7 +17802,7 @@
             "../utils": 124,
             "eventemitter3": 3
         }],
-        77: [function(require, module, exports) {
+        77: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -17863,7 +17874,7 @@
              * @memberof PIXI
              * @extends PIXI.SystemRenderer
              */
-            var CanvasRenderer = function(_SystemRenderer) {
+            var CanvasRenderer = function (_SystemRenderer) {
                 _inherits(CanvasRenderer, _SystemRenderer);
 
                 // eslint-disable-next-line valid-jsdoc
@@ -18230,7 +18241,7 @@
             "./utils/CanvasRenderTarget": 79,
             "./utils/mapCanvasBlendModesToPixi": 81
         }],
-        78: [function(require, module, exports) {
+        78: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -18249,7 +18260,7 @@
              * @class
              * @memberof PIXI
              */
-            var CanvasMaskManager = function() {
+            var CanvasMaskManager = function () {
                 /**
                  * @param {PIXI.CanvasRenderer}
                  *            renderer - The canvas renderer.
@@ -18413,12 +18424,12 @@
         }, {
             "../../../const": 46
         }],
-        79: [function(require, module, exports) {
+        79: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -18429,7 +18440,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -18458,7 +18469,7 @@
              * @class
              * @memberof PIXI
              */
-            var CanvasRenderTarget = function() {
+            var CanvasRenderTarget = function () {
                 /**
                  * @param {number}
                  *            width - the width for the newly created canvas
@@ -18571,7 +18582,7 @@
         }, {
             "../../../settings": 101
         }],
-        80: [function(require, module, exports) {
+        80: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -18635,7 +18646,7 @@
             }
 
         }, {}],
-        81: [function(require, module, exports) {
+        81: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -18717,7 +18728,7 @@
             "../../../const": 46,
             "./canUseNewCanvasBlendModes": 80
         }],
-        82: [function(require, module, exports) {
+        82: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -18747,7 +18758,7 @@
              * @class
              * @memberof PIXI
              */
-            var TextureGarbageCollector = function() {
+            var TextureGarbageCollector = function () {
                 /**
                  * @param {PIXI.WebGLRenderer}
                  *            renderer - The renderer this manager works for.
@@ -18854,7 +18865,7 @@
             "../../const": 46,
             "../../settings": 101
         }],
-        83: [function(require, module, exports) {
+        83: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -18887,7 +18898,7 @@
              * @class
              * @memberof PIXI
              */
-            var TextureManager = function() {
+            var TextureManager = function () {
                 /**
                  * @param {PIXI.WebGLRenderer}
                  *            renderer - A reference to the current renderer
@@ -18925,7 +18936,8 @@
                  */
 
 
-                TextureManager.prototype.bindTexture = function bindTexture() {}
+                TextureManager.prototype.bindTexture = function bindTexture() {
+                }
                 // empty
 
 
@@ -18935,7 +18947,8 @@
                  */
                 ;
 
-                TextureManager.prototype.getTexture = function getTexture() {}
+                TextureManager.prototype.getTexture = function getTexture() {
+                }
                 // empty
 
 
@@ -19133,7 +19146,7 @@
             "./utils/RenderTarget": 96,
             "pixi-gl-core": 12
         }],
-        84: [function(require, module, exports) {
+        84: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -19242,7 +19255,7 @@
              * @extends PIXI.SystemRenderer
              */
 
-            var WebGLRenderer = function(_SystemRenderer) {
+            var WebGLRenderer = function (_SystemRenderer) {
                 _inherits(WebGLRenderer, _SystemRenderer);
 
                 // eslint-disable-next-line valid-jsdoc
@@ -20053,7 +20066,7 @@
             "./utils/validateContext": 100,
             "pixi-gl-core": 12
         }],
-        85: [function(require, module, exports) {
+        85: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -20087,7 +20100,7 @@
              * @class
              */
 
-            var WebGLState = function() {
+            var WebGLState = function () {
                 /**
                  * @param {WebGLRenderingContext}
                  *            gl - The current WebGL rendering context
@@ -20351,12 +20364,12 @@
         }, {
             "./utils/mapWebGLBlendModesToPixi": 98
         }],
-        86: [function(require, module, exports) {
+        86: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -20367,7 +20380,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -20407,7 +20420,7 @@
              * @extends PIXI.Shader
              */
 
-            var Filter = function() {
+            var Filter = function () {
                 /**
                  * @param {string}
                  *            [vertexSrc] - The source of the vertex shader.
@@ -20518,7 +20531,7 @@
 
 
                 Filter.prototype.apply = function apply(filterManager, input, output, clear, currentState) // eslint-disable-line
-                // no-unused-vars
+                    // no-unused-vars
                 {
                     // --- //
                     // this.uniforms.filterMatrix =
@@ -20591,7 +20604,7 @@
             "../../../utils": 124,
             "./extractUniformsFromSrc": 87
         }],
-        87: [function(require, module, exports) {
+        87: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -20660,7 +20673,7 @@
         }, {
             "pixi-gl-core": 12
         }],
-        88: [function(require, module, exports) {
+        88: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -20729,7 +20742,7 @@
         }, {
             "../../../math": 70
         }],
-        89: [function(require, module, exports) {
+        89: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -20783,7 +20796,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI
              */
-            var SpriteMaskFilter = function(_Filter) {
+            var SpriteMaskFilter = function (_Filter) {
                 _inherits(SpriteMaskFilter, _Filter);
 
                 /**
@@ -20836,7 +20849,7 @@
             "../Filter": 86,
             "path": 23
         }],
-        90: [function(require, module, exports) {
+        90: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -20942,7 +20955,7 @@
              */
 
 
-            var FilterManager = function(_WebGLManager) {
+            var FilterManager = function (_WebGLManager) {
                 _inherits(FilterManager, _WebGLManager);
 
                 /**
@@ -21508,7 +21521,7 @@
             "./WebGLManager": 93,
             "bit-twiddle": 1
         }],
-        91: [function(require, module, exports) {
+        91: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -21560,7 +21573,7 @@
              * @extends PIXI.WebGLManager
              * @memberof PIXI
              */
-            var MaskManager = function(_WebGLManager) {
+            var MaskManager = function (_WebGLManager) {
                 _inherits(MaskManager, _WebGLManager);
 
                 /**
@@ -21758,7 +21771,7 @@
             "../filters/spriteMask/SpriteMaskFilter": 89,
             "./WebGLManager": 93
         }],
-        92: [function(require, module, exports) {
+        92: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -21806,7 +21819,7 @@
              * @extends PIXI.WebGLManager
              * @memberof PIXI
              */
-            var StencilManager = function(_WebGLManager) {
+            var StencilManager = function (_WebGLManager) {
                 _inherits(StencilManager, _WebGLManager);
 
                 /**
@@ -21949,7 +21962,7 @@
         }, {
             "./WebGLManager": 93
         }],
-        93: [function(require, module, exports) {
+        93: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -21964,7 +21977,7 @@
              * @class
              * @memberof PIXI
              */
-            var WebGLManager = function() {
+            var WebGLManager = function () {
                 /**
                  * @param {PIXI.WebGLRenderer}
                  *            renderer - The renderer this manager works for.
@@ -21988,7 +22001,8 @@
                  */
 
 
-                WebGLManager.prototype.onContextChange = function onContextChange() {}
+                WebGLManager.prototype.onContextChange = function onContextChange() {
+                }
                 // do some codes init!
 
 
@@ -22010,7 +22024,7 @@
             exports.default = WebGLManager;
 
         }, {}],
-        94: [function(require, module, exports) {
+        94: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22061,7 +22075,7 @@
              * @extends PIXI.WebGLManager
              * @memberof PIXI
              */
-            var ObjectRenderer = function(_WebGLManager) {
+            var ObjectRenderer = function (_WebGLManager) {
                 _inherits(ObjectRenderer, _WebGLManager);
 
                 function ObjectRenderer() {
@@ -22074,7 +22088,8 @@
                  * Starts the renderer and sets the shader
                  *
                  */
-                ObjectRenderer.prototype.start = function start() {}
+                ObjectRenderer.prototype.start = function start() {
+                }
                 // set the shader..
 
 
@@ -22094,7 +22109,8 @@
                  */
 
 
-                ObjectRenderer.prototype.flush = function flush() {}
+                ObjectRenderer.prototype.flush = function flush() {
+                }
                 // flush!
 
 
@@ -22107,7 +22123,7 @@
                 ;
 
                 ObjectRenderer.prototype.render = function render(object) // eslint-disable-line
-                // no-unused-vars
+                    // no-unused-vars
                 {
                     // render the object
                 };
@@ -22120,7 +22136,7 @@
         }, {
             "../managers/WebGLManager": 93
         }],
-        95: [function(require, module, exports) {
+        95: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22151,7 +22167,7 @@
              * @class
              * @memberof PIXI
              */
-            var Quad = function() {
+            var Quad = function () {
                 /**
                  * @param {WebGLRenderingContext}
                  *            gl - The gl context for this quad to use.
@@ -22318,7 +22334,7 @@
             "../../../utils/createIndicesForQuads": 122,
             "pixi-gl-core": 12
         }],
-        96: [function(require, module, exports) {
+        96: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22349,7 +22365,7 @@
              * @class
              * @memberof PIXI
              */
-            var RenderTarget = function() {
+            var RenderTarget = function () {
                 /**
                  * @param {WebGLRenderingContext}
                  *            gl - The current WebGL drawing context
@@ -22676,7 +22692,7 @@
             "../../../settings": 101,
             "pixi-gl-core": 12
         }],
-        97: [function(require, module, exports) {
+        97: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22756,7 +22772,7 @@
         }, {
             "pixi-gl-core": 12
         }],
-        98: [function(require, module, exports) {
+        98: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22810,7 +22826,7 @@
         }, {
             "../../../const": 46
         }],
-        99: [function(require, module, exports) {
+        99: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22847,7 +22863,7 @@
         }, {
             "../../../const": 46
         }],
-        100: [function(require, module, exports) {
+        100: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -22866,7 +22882,7 @@
             }
 
         }, {}],
-        101: [function(require, module, exports) {
+        101: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -23109,12 +23125,12 @@
             "./utils/canUploadSameBuffer": 121,
             "./utils/maxRecommendedTextures": 126
         }],
-        102: [function(require, module, exports) {
+        102: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -23125,7 +23141,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -23195,7 +23211,7 @@
              * @memberof PIXI
              */
 
-            var Sprite = function(_Container) {
+            var Sprite = function (_Container) {
                 _inherits(Sprite, _Container);
 
                 /**
@@ -23818,7 +23834,7 @@
             "../textures/Texture": 115,
             "../utils": 124
         }],
-        103: [function(require, module, exports) {
+        103: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -23869,7 +23885,7 @@
              * @memberof PIXI
              */
 
-            var CanvasSpriteRenderer = function() {
+            var CanvasSpriteRenderer = function () {
                 /**
                  * @param {PIXI.WebGLRenderer}
                  *            renderer -The renderer sprite this batch works for.
@@ -23989,7 +24005,7 @@
             "../../renderers/canvas/CanvasRenderer": 77,
             "./CanvasTinter": 104
         }],
-        104: [function(require, module, exports) {
+        104: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -24267,7 +24283,7 @@
             "../../renderers/canvas/utils/canUseNewCanvasBlendModes": 80,
             "../../utils": 124
         }],
-        105: [function(require, module, exports) {
+        105: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -24282,7 +24298,7 @@
              * @class
              * @memberof PIXI
              */
-            var Buffer = function() {
+            var Buffer = function () {
                 /**
                  * @param {number}
                  *            size - The size of the buffer in bytes.
@@ -24326,7 +24342,7 @@
             exports.default = Buffer;
 
         }, {}],
-        106: [function(require, module, exports) {
+        106: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -24415,7 +24431,7 @@
              * @extends PIXI.ObjectRenderer
              */
 
-            var SpriteRenderer = function(_ObjectRenderer) {
+            var SpriteRenderer = function (_ObjectRenderer) {
                 _inherits(SpriteRenderer, _ObjectRenderer);
 
                 /**
@@ -24923,7 +24939,7 @@
             "bit-twiddle": 1,
             "pixi-gl-core": 12
         }],
-        107: [function(require, module, exports) {
+        107: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -24994,12 +25010,12 @@
             "../../Shader": 44,
             "path": 23
         }],
-        108: [function(require, module, exports) {
+        108: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -25010,7 +25026,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -25110,7 +25126,7 @@
              * @memberof PIXI
              */
 
-            var Text = function(_Sprite) {
+            var Text = function (_Sprite) {
                 _inherits(Text, _Sprite);
 
                 /**
@@ -25756,7 +25772,7 @@
             "./TextMetrics": 109,
             "./TextStyle": 110
         }],
-        109: [function(require, module, exports) {
+        109: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -25774,7 +25790,7 @@
              * @class
              * @memberOf PIXI
              */
-            var TextMetrics = function() {
+            var TextMetrics = function () {
                 /**
                  * @param {string}
                  *            text - the text that was measured
@@ -26095,12 +26111,12 @@
             TextMetrics._fonts = {};
 
         }, {}],
-        110: [function(require, module, exports) {
+        110: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -26111,7 +26127,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -26177,7 +26193,7 @@
              * @memberof PIXI
              */
 
-            var TextStyle = function() {
+            var TextStyle = function () {
                 /**
                  * @param {object}
                  *            [style] - The style parameters
@@ -26488,7 +26504,7 @@
                         return this._dropShadowDistance;
                     },
                     set: function set(dropShadowDistance) // eslint-disable-line
-                    // require-jsdoc
+                        // require-jsdoc
                     {
                         if (this._dropShadowDistance !== dropShadowDistance) {
                             this._dropShadowDistance = dropShadowDistance;
@@ -26553,7 +26569,7 @@
                         return this._fillGradientStops;
                     },
                     set: function set(fillGradientStops) // eslint-disable-line
-                    // require-jsdoc
+                        // require-jsdoc
                     {
                         if (!areArraysEqual(this._fillGradientStops, fillGradientStops)) {
                             this._fillGradientStops = fillGradientStops;
@@ -26974,7 +26990,7 @@
             "../const": 46,
             "../utils": 124
         }],
-        111: [function(require, module, exports) {
+        111: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -27059,7 +27075,7 @@
              * @extends PIXI.BaseTexture
              * @memberof PIXI
              */
-            var BaseRenderTexture = function(_BaseTexture) {
+            var BaseRenderTexture = function (_BaseTexture) {
                 _inherits(BaseRenderTexture, _BaseTexture);
 
                 /**
@@ -27172,7 +27188,7 @@
             "../settings": 101,
             "./BaseTexture": 112
         }],
-        112: [function(require, module, exports) {
+        112: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -27237,7 +27253,7 @@
              * @extends EventEmitter
              * @memberof PIXI
              */
-            var BaseTexture = function(_EventEmitter) {
+            var BaseTexture = function (_EventEmitter) {
                 _inherits(BaseTexture, _EventEmitter);
 
                 /**
@@ -27582,7 +27598,7 @@
 
                         var scope = this;
 
-                        source.onload = function() {
+                        source.onload = function () {
                             scope._updateImageType();
                             source.onload = null;
                             source.onerror = null;
@@ -27603,7 +27619,7 @@
                             scope.emit('loaded', scope);
                         };
 
-                        source.onerror = function() {
+                        source.onerror = function () {
                             source.onload = null;
                             source.onerror = null;
 
@@ -27751,7 +27767,7 @@
                     // as XML
                     // svgXhr.overrideMimeType('image/svg+xml');
 
-                    svgXhr.onload = function() {
+                    svgXhr.onload = function () {
                         if (svgXhr.readyState !== svgXhr.DONE || svgXhr.status !== 200) {
                             throw new Error('Failed to load SVG using XHR.');
                         }
@@ -27759,7 +27775,7 @@
                         _this2._loadSvgSourceUsingString(svgXhr.response);
                     };
 
-                    svgXhr.onerror = function() {
+                    svgXhr.onerror = function () {
                         return _this2.emit('error', _this2);
                     };
 
@@ -28100,7 +28116,7 @@
             "bit-twiddle": 1,
             "eventemitter3": 3
         }],
-        113: [function(require, module, exports) {
+        113: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -28182,7 +28198,7 @@
              * @extends PIXI.Texture
              * @memberof PIXI
              */
-            var RenderTexture = function(_Texture) {
+            var RenderTexture = function (_Texture) {
                 _inherits(RenderTexture, _Texture);
 
                 /**
@@ -28292,12 +28308,12 @@
             "./BaseRenderTexture": 111,
             "./Texture": 115
         }],
-        114: [function(require, module, exports) {
+        114: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -28308,7 +28324,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -28332,7 +28348,7 @@
              * @class
              * @memberof PIXI
              */
-            var Spritesheet = function() {
+            var Spritesheet = function () {
                 _createClass(Spritesheet, null, [{
                     key: 'BATCH_SIZE',
 
@@ -28553,7 +28569,7 @@
 
                     this._processFrames(this._batchIndex * Spritesheet.BATCH_SIZE);
                     this._batchIndex++;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         if (_this._batchIndex * Spritesheet.BATCH_SIZE < _this._frameKeys.length) {
                             _this._nextBatch();
                         } else {
@@ -28596,12 +28612,12 @@
             "../": 65,
             "../utils": 124
         }],
-        115: [function(require, module, exports) {
+        115: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -28612,7 +28628,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -28701,7 +28717,7 @@
              * @extends EventEmitter
              * @memberof PIXI
              */
-            var Texture = function(_EventEmitter) {
+            var Texture = function (_EventEmitter) {
                 _inherits(Texture, _EventEmitter);
 
                 /**
@@ -29355,10 +29371,14 @@
             }
 
             function removeAllHandlers(tex) {
-                tex.destroy = function _emptyDestroy() { /* empty */ };
-                tex.on = function _emptyOn() { /* empty */ };
-                tex.once = function _emptyOnce() { /* empty */ };
-                tex.emit = function _emptyEmit() { /* empty */ };
+                tex.destroy = function _emptyDestroy() { /* empty */
+                };
+                tex.on = function _emptyOn() { /* empty */
+                };
+                tex.once = function _emptyOnce() { /* empty */
+                };
+                tex.emit = function _emptyEmit() { /* empty */
+                };
             }
 
             /**
@@ -29392,7 +29412,7 @@
             "./VideoBaseTexture": 117,
             "eventemitter3": 3
         }],
-        116: [function(require, module, exports) {
+        116: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -29420,7 +29440,7 @@
              * @private
              * @memberof PIXI
              */
-            var TextureUvs = function() {
+            var TextureUvs = function () {
                 /**
                  *
                  */
@@ -29514,12 +29534,12 @@
         }, {
             "../math/GroupD8": 66
         }],
-        117: [function(require, module, exports) {
+        117: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -29530,7 +29550,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -29606,7 +29626,7 @@
              * @extends PIXI.BaseTexture
              * @memberof PIXI
              */
-            var VideoBaseTexture = function(_BaseTexture) {
+            var VideoBaseTexture = function (_BaseTexture) {
                 _inherits(VideoBaseTexture, _BaseTexture);
 
                 /**
@@ -29898,12 +29918,12 @@
             "../utils": 124,
             "./BaseTexture": 112
         }],
-        118: [function(require, module, exports) {
+        118: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -29914,7 +29934,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -29952,7 +29972,7 @@
              * @class
              * @memberof PIXI.ticker
              */
-            var Ticker = function() {
+            var Ticker = function () {
                 /**
                  *
                  */
@@ -30063,7 +30083,7 @@
                      * @param {number}
                      *            time - Time since last tick.
                      */
-                    this._tick = function(time) {
+                    this._tick = function (time) {
                         _this._requestId = null;
 
                         if (_this.started) {
@@ -30421,7 +30441,7 @@
             "../settings": 101,
             "./TickerListener": 119
         }],
-        119: [function(require, module, exports) {
+        119: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -30439,7 +30459,7 @@
              * @class
              * @memberof PIXI.ticker
              */
-            var TickerListener = function() {
+            var TickerListener = function () {
                 /**
                  * Constructor
                  *
@@ -30621,7 +30641,7 @@
             exports.default = TickerListener;
 
         }, {}],
-        120: [function(require, module, exports) {
+        120: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -30670,7 +30690,7 @@
             var shared = new _Ticker2.default();
 
             shared.autoStart = true;
-            shared.destroy = function() {
+            shared.destroy = function () {
                 // protect destroying shared ticker
                 // this is used by other internal systems
                 // like AnimatedSprite and InteractionManager
@@ -30696,7 +30716,7 @@
         }, {
             "./Ticker": 118
         }],
-        121: [function(require, module, exports) {
+        121: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -30713,7 +30733,7 @@
             }
 
         }, {}],
-        122: [function(require, module, exports) {
+        122: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -30750,7 +30770,7 @@
             }
 
         }, {}],
-        123: [function(require, module, exports) {
+        123: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -30816,7 +30836,7 @@
         }, {
             "url": 29
         }],
-        124: [function(require, module, exports) {
+        124: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -31340,7 +31360,7 @@
             "ismobilejs": 4,
             "remove-array-items": 31
         }],
-        125: [function(require, module, exports) {
+        125: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -31387,7 +31407,7 @@
         }, {
             "../const": 46
         }],
-        126: [function(require, module, exports) {
+        126: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -31416,7 +31436,7 @@
         }, {
             "ismobilejs": 4
         }],
-        127: [function(require, module, exports) {
+        127: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -31489,7 +31509,7 @@
             }
 
         }, {}],
-        128: [function(require, module, exports) {
+        128: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -31560,7 +31580,7 @@
             };
 
         }, {}],
-        129: [function(require, module, exports) {
+        129: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -31639,7 +31659,7 @@
             }
 
         }, {}],
-        130: [function(require, module, exports) {
+        130: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -32528,7 +32548,7 @@
                  * @deprecated since version 3.0.6
                  * @return {number} The uid
                  */
-                core.utils.uuid = function() {
+                core.utils.uuid = function () {
                     warn('utils.uuid() is deprecated, please use utils.uid() from now on.');
 
                     return core.utils.uid();
@@ -32541,7 +32561,7 @@
                  * @deprecated
                  * @return {boolean} Can use blend modes.
                  */
-                core.utils.canUseNewCanvasBlendModes = function() {
+                core.utils.canUseNewCanvasBlendModes = function () {
                     warn('utils.canUseNewCanvasBlendModes() is deprecated, please use CanvasTinter.canUseMultiply from now on');
 
                     return core.CanvasTinter.canUseMultiply;
@@ -32774,7 +32794,7 @@
             }
 
         }, {}],
-        131: [function(require, module, exports) {
+        131: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -32817,7 +32837,7 @@
              * @memberof PIXI.extract
              */
 
-            var CanvasExtract = function() {
+            var CanvasExtract = function () {
                 /**
                  * @param {PIXI.CanvasRenderer}
                  *            renderer - A reference to the current renderer
@@ -32985,7 +33005,7 @@
         }, {
             "../../core": 65
         }],
-        132: [function(require, module, exports) {
+        132: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -33018,7 +33038,7 @@
             "./canvas/CanvasExtract": 131,
             "./webgl/WebGLExtract": 133
         }],
-        133: [function(require, module, exports) {
+        133: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -33062,7 +33082,7 @@
              * @memberof PIXI.extract
              */
 
-            var WebGLExtract = function() {
+            var WebGLExtract = function () {
                 /**
                  * @param {PIXI.WebGLRenderer}
                  *            renderer - A reference to the current renderer
@@ -33272,12 +33292,12 @@
         }, {
             "../../core": 65
         }],
-        134: [function(require, module, exports) {
+        134: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -33288,7 +33308,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -33366,7 +33386,7 @@
              * @extends PIXI.Sprite
              * @memberof PIXI.extras
              */
-            var AnimatedSprite = function(_core$Sprite) {
+            var AnimatedSprite = function (_core$Sprite) {
                 _inherits(AnimatedSprite, _core$Sprite);
 
                 /**
@@ -33756,12 +33776,12 @@
         }, {
             "../core": 65
         }],
-        135: [function(require, module, exports) {
+        135: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -33772,7 +33792,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -33858,7 +33878,7 @@
              * @extends PIXI.Container
              * @memberof PIXI.extras
              */
-            var BitmapText = function(_core$Container) {
+            var BitmapText = function (_core$Container) {
                 _inherits(BitmapText, _core$Container);
 
                 /**
@@ -33965,7 +33985,7 @@
                      * @member {PIXI.ObservablePoint}
                      * @private
                      */
-                    _this._anchor = new _ObservablePoint2.default(function() {
+                    _this._anchor = new _ObservablePoint2.default(function () {
                         _this.dirty = true;
                     }, _this, 0, 0);
 
@@ -34416,12 +34436,12 @@
             "../core/math/ObservablePoint": 68,
             "../core/settings": 101
         }],
-        136: [function(require, module, exports) {
+        136: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -34432,7 +34452,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -34464,7 +34484,7 @@
              * @memberof PIXI.extras
              */
 
-            var TextureTransform = function() {
+            var TextureTransform = function () {
                 /**
                  *
                  * @param {PIXI.Texture}
@@ -34611,12 +34631,12 @@
         }, {
             "../core/math/Matrix": 67
         }],
-        137: [function(require, module, exports) {
+        137: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -34627,7 +34647,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -34705,7 +34725,7 @@
              * @memberof PIXI.extras
              */
 
-            var TilingSprite = function(_core$Sprite) {
+            var TilingSprite = function (_core$Sprite) {
                 _inherits(TilingSprite, _core$Sprite);
 
                 /**
@@ -35159,7 +35179,7 @@
             "../core/sprites/canvas/CanvasTinter": 104,
             "./TextureTransform": 136
         }],
-        138: [function(require, module, exports) {
+        138: [function (require, module, exports) {
             'use strict';
 
             var _core = require('../core');
@@ -35604,7 +35624,7 @@
             "../core/textures/Texture": 115,
             "../core/utils": 124
         }],
-        139: [function(require, module, exports) {
+        139: [function (require, module, exports) {
             'use strict';
 
             var _core = require('../core');
@@ -35655,7 +35675,7 @@
         }, {
             "../core": 65
         }],
-        140: [function(require, module, exports) {
+        140: [function (require, module, exports) {
             'use strict';
 
             var _core = require('../core');
@@ -35708,7 +35728,7 @@
         }, {
             "../core": 65
         }],
-        141: [function(require, module, exports) {
+        141: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -35783,7 +35803,7 @@
             "./getGlobalPosition": 140,
             "./webgl/TilingSpriteRenderer": 142
         }],
-        142: [function(require, module, exports) {
+        142: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -35849,7 +35869,7 @@
              * @extends PIXI.ObjectRenderer
              */
 
-            var TilingSpriteRenderer = function(_core$ObjectRenderer) {
+            var TilingSpriteRenderer = function (_core$ObjectRenderer) {
                 _inherits(TilingSpriteRenderer, _core$ObjectRenderer);
 
                 /**
@@ -35987,12 +36007,12 @@
             "../../core/const": 46,
             "path": 23
         }],
-        143: [function(require, module, exports) {
+        143: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -36003,7 +36023,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -36079,7 +36099,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var BlurFilter = function(_core$Filter) {
+            var BlurFilter = function (_core$Filter) {
                 _inherits(BlurFilter, _core$Filter);
 
                 /**
@@ -36230,12 +36250,12 @@
             "./BlurXFilter": 144,
             "./BlurYFilter": 145
         }],
-        144: [function(require, module, exports) {
+        144: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -36246,7 +36266,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -36325,7 +36345,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var BlurXFilter = function(_core$Filter) {
+            var BlurXFilter = function (_core$Filter) {
                 _inherits(BlurXFilter, _core$Filter);
 
                 /**
@@ -36467,12 +36487,12 @@
             "./generateBlurVertSource": 147,
             "./getMaxBlurKernelSize": 148
         }],
-        145: [function(require, module, exports) {
+        145: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -36483,7 +36503,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -36562,7 +36582,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var BlurYFilter = function(_core$Filter) {
+            var BlurYFilter = function (_core$Filter) {
                 _inherits(BlurYFilter, _core$Filter);
 
                 /**
@@ -36702,7 +36722,7 @@
             "./generateBlurVertSource": 147,
             "./getMaxBlurKernelSize": 148
         }],
-        146: [function(require, module, exports) {
+        146: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -36750,7 +36770,7 @@
             }
 
         }, {}],
-        147: [function(require, module, exports) {
+        147: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -36795,7 +36815,7 @@
             }
 
         }, {}],
-        148: [function(require, module, exports) {
+        148: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -36813,12 +36833,12 @@
             }
 
         }, {}],
-        149: [function(require, module, exports) {
+        149: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -36829,7 +36849,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -36898,7 +36918,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var ColorMatrixFilter = function(_core$Filter) {
+            var ColorMatrixFilter = function (_core$Filter) {
                 _inherits(ColorMatrixFilter, _core$Filter);
 
                 /**
@@ -37173,7 +37193,7 @@
 
 
                 ColorMatrixFilter.prototype.desaturate = function desaturate() // eslint-disable-line
-                // no-unused-vars
+                    // no-unused-vars
                 {
                     this.saturate(-1);
                 };
@@ -37478,12 +37498,12 @@
             "../../core": 65,
             "path": 23
         }],
-        150: [function(require, module, exports) {
+        150: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -37494,7 +37514,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -37561,7 +37581,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var DisplacementFilter = function(_core$Filter) {
+            var DisplacementFilter = function (_core$Filter) {
                 _inherits(DisplacementFilter, _core$Filter);
 
                 /**
@@ -37653,7 +37673,7 @@
             "../../core": 65,
             "path": 23
         }],
-        151: [function(require, module, exports) {
+        151: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -37720,7 +37740,7 @@
              * @memberof PIXI.filters
              *
              */
-            var FXAAFilter = function(_core$Filter) {
+            var FXAAFilter = function (_core$Filter) {
                 _inherits(FXAAFilter, _core$Filter);
 
                 /**
@@ -37746,7 +37766,7 @@
             "../../core": 65,
             "path": 23
         }],
-        152: [function(require, module, exports) {
+        152: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -37839,12 +37859,12 @@
             "./noise/NoiseFilter": 153,
             "./void/VoidFilter": 154
         }],
-        153: [function(require, module, exports) {
+        153: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -37855,7 +37875,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -37924,7 +37944,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var NoiseFilter = function(_core$Filter) {
+            var NoiseFilter = function (_core$Filter) {
                 _inherits(NoiseFilter, _core$Filter);
 
                 /**
@@ -37997,7 +38017,7 @@
             "../../core": 65,
             "path": 23
         }],
-        154: [function(require, module, exports) {
+        154: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -38058,7 +38078,7 @@
              * @extends PIXI.Filter
              * @memberof PIXI.filters
              */
-            var VoidFilter = function(_core$Filter) {
+            var VoidFilter = function (_core$Filter) {
                 _inherits(VoidFilter, _core$Filter);
 
                 /**
@@ -38086,12 +38106,12 @@
             "../../core": 65,
             "path": 23
         }],
-        155: [function(require, module, exports) {
+        155: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -38102,7 +38122,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -38140,7 +38160,7 @@
              * @class
              * @memberof PIXI.interaction
              */
-            var InteractionData = function() {
+            var InteractionData = function () {
                 /**
                  *
                  */
@@ -38375,7 +38395,7 @@
         }, {
             "../core": 65
         }],
-        156: [function(require, module, exports) {
+        156: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -38392,7 +38412,7 @@
              * @class
              * @memberof PIXI.interaction
              */
-            var InteractionEvent = function() {
+            var InteractionEvent = function () {
                 /**
                  *
                  */
@@ -38465,14 +38485,14 @@
             exports.default = InteractionEvent;
 
         }, {}],
-        157: [function(require, module, exports) {
+        157: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj) {
+            var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
                 return typeof obj;
-            } : function(obj) {
+            } : function (obj) {
                 return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
             };
 
@@ -38576,7 +38596,7 @@
              * @memberof PIXI.interaction
              */
 
-            var InteractionManager = function(_EventEmitter) {
+            var InteractionManager = function (_EventEmitter) {
                 _inherits(InteractionManager, _EventEmitter);
 
                 /**
@@ -40509,12 +40529,12 @@
             "./interactiveTarget": 160,
             "eventemitter3": 3
         }],
-        158: [function(require, module, exports) {
+        158: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -40525,7 +40545,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -40546,7 +40566,7 @@
              * @private
              * @memberof PIXI.interaction
              */
-            var InteractionTrackingData = function() {
+            var InteractionTrackingData = function () {
                 /**
                  * @param {number}
                  *            pointerId - Unique pointer id of the event
@@ -40600,16 +40620,16 @@
                 }, {
                     key: "flags",
                     get: function get() {
-                            return this._flags;
-                        }
+                        return this._flags;
+                    }
 
-                        /**
-                         * Set the flags for the tracking data
-                         *
-                         * @param {number}
-                         *            flags - Flags to set
-                         */
-                        ,
+                    /**
+                     * Set the flags for the tracking data
+                     *
+                     * @param {number}
+                     *            flags - Flags to set
+                     */
+                    ,
                     set: function set(flags) {
                         this._flags = flags;
                     }
@@ -40637,16 +40657,16 @@
                 }, {
                     key: "over",
                     get: function get() {
-                            return (this._flags & this.constructor.FLAGS.OVER) !== 0;
-                        }
+                        return (this._flags & this.constructor.FLAGS.OVER) !== 0;
+                    }
 
-                        /**
-                         * Set the over flag
-                         *
-                         * @param {boolean}
-                         *            yn - Is the event over?
-                         */
-                        ,
+                    /**
+                     * Set the over flag
+                     *
+                     * @param {boolean}
+                     *            yn - Is the event over?
+                     */
+                    ,
                     set: function set(yn) {
                         this._doSet(this.constructor.FLAGS.OVER, yn);
                     }
@@ -40661,16 +40681,16 @@
                 }, {
                     key: "rightDown",
                     get: function get() {
-                            return (this._flags & this.constructor.FLAGS.RIGHT_DOWN) !== 0;
-                        }
+                        return (this._flags & this.constructor.FLAGS.RIGHT_DOWN) !== 0;
+                    }
 
-                        /**
-                         * Set the right down flag
-                         *
-                         * @param {boolean}
-                         *            yn - Is the right mouse button down?
-                         */
-                        ,
+                    /**
+                     * Set the right down flag
+                     *
+                     * @param {boolean}
+                     *            yn - Is the right mouse button down?
+                     */
+                    ,
                     set: function set(yn) {
                         this._doSet(this.constructor.FLAGS.RIGHT_DOWN, yn);
                     }
@@ -40685,16 +40705,16 @@
                 }, {
                     key: "leftDown",
                     get: function get() {
-                            return (this._flags & this.constructor.FLAGS.LEFT_DOWN) !== 0;
-                        }
+                        return (this._flags & this.constructor.FLAGS.LEFT_DOWN) !== 0;
+                    }
 
-                        /**
-                         * Set the left down flag
-                         *
-                         * @param {boolean}
-                         *            yn - Is the left mouse button down?
-                         */
-                        ,
+                    /**
+                     * Set the left down flag
+                     *
+                     * @param {boolean}
+                     *            yn - Is the left mouse button down?
+                     */
+                    ,
                     set: function set(yn) {
                         this._doSet(this.constructor.FLAGS.LEFT_DOWN, yn);
                     }
@@ -40714,7 +40734,7 @@
             });
 
         }, {}],
-        159: [function(require, module, exports) {
+        159: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -40777,7 +40797,7 @@
             "./InteractionTrackingData": 158,
             "./interactiveTarget": 160
         }],
-        160: [function(require, module, exports) {
+        160: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -40887,13 +40907,13 @@
             };
 
         }, {}],
-        161: [function(require, module, exports) {
+        161: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
             exports.parse = parse;
 
-            exports.default = function() {
+            exports.default = function () {
                 return function bitmapFontParser(resource, next) {
                     // skip if no data or not xml data
                     if (!resource.data || resource.type !== _resourceLoader.Resource.TYPE.XML) {
@@ -40949,7 +40969,7 @@
                         };
 
                         // load the texture for the font
-                        this.add(resource.name + '_image', textureUrl, loadOptions, function(res) {
+                        this.add(resource.name + '_image', textureUrl, loadOptions, function (res) {
                             parse(resource, res.texture);
                             next();
                         });
@@ -41002,7 +41022,7 @@
             "path": 23,
             "resource-loader": 36
         }],
-        162: [function(require, module, exports) {
+        162: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -41093,7 +41113,7 @@
              */
             var shared = new _loader2.default();
 
-            shared.destroy = function() {
+            shared.destroy = function () {
                 // protect destroying shared loader
             };
 
@@ -41142,7 +41162,7 @@
             "./textureParser": 165,
             "resource-loader": 36
         }],
-        163: [function(require, module, exports) {
+        163: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -41246,7 +41266,7 @@
              * @extends module:resource-loader.ResourceLoader
              * @memberof PIXI.loaders
              */
-            var Loader = function(_ResourceLoader) {
+            var Loader = function (_ResourceLoader) {
                 _inherits(Loader, _ResourceLoader);
 
                 /**
@@ -41269,19 +41289,19 @@
                     }
 
                     // Compat layer, translate the new v2 signals into old v1 events.
-                    _this.onStart.add(function(l) {
+                    _this.onStart.add(function (l) {
                         return _this.emit('start', l);
                     });
-                    _this.onProgress.add(function(l, r) {
+                    _this.onProgress.add(function (l, r) {
                         return _this.emit('progress', l, r);
                     });
-                    _this.onError.add(function(e, l, r) {
+                    _this.onError.add(function (e, l, r) {
                         return _this.emit('error', e, l, r);
                     });
-                    _this.onLoad.add(function(l, r) {
+                    _this.onLoad.add(function (l, r) {
                         return _this.emit('load', l, r);
                     });
-                    _this.onComplete.add(function(l, r) {
+                    _this.onComplete.add(function (l, r) {
                         return _this.emit('complete', l, r);
                     });
                     return _this;
@@ -41345,12 +41365,12 @@
             "resource-loader": 36,
             "resource-loader/lib/middlewares/parsing/blob": 37
         }],
-        164: [function(require, module, exports) {
+        164: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            exports.default = function() {
+            exports.default = function () {
                 return function spritesheetParser(resource, next) {
                     var imageResourceName = resource.name + '_image';
 
@@ -41375,7 +41395,7 @@
                     this.add(imageResourceName, resourcePath, loadOptions, function onImageLoad(res) {
                         var spritesheet = new _core.Spritesheet(res.texture.baseTexture, resource.data, resource.url);
 
-                        spritesheet.parse(function() {
+                        spritesheet.parse(function () {
                             resource.spritesheet = spritesheet;
                             resource.textures = spritesheet.textures;
                             next();
@@ -41414,12 +41434,12 @@
             "resource-loader": 36,
             "url": 29
         }],
-        165: [function(require, module, exports) {
+        165: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            exports.default = function() {
+            exports.default = function () {
                 return function textureParser(resource, next) {
                     // create a new texture if the data is an Image object
                     if (resource.data && resource.type === _resourceLoader.Resource.TYPE.IMAGE) {
@@ -41445,12 +41465,12 @@
             "../core/textures/Texture": 115,
             "resource-loader": 36
         }],
-        166: [function(require, module, exports) {
+        166: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -41461,7 +41481,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -41536,7 +41556,7 @@
              * @memberof PIXI.mesh
              */
 
-            var Mesh = function(_core$Container) {
+            var Mesh = function (_core$Container) {
                 _inherits(Mesh, _core$Container);
 
                 /**
@@ -41760,7 +41780,8 @@
                  */
 
 
-                Mesh.prototype._refresh = function _refresh() {}
+                Mesh.prototype._refresh = function _refresh() {
+                }
                 /* empty */
 
 
@@ -41892,12 +41913,12 @@
             "../core": 65,
             "../extras/TextureTransform": 136
         }],
-        167: [function(require, module, exports) {
+        167: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -41908,7 +41929,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -41989,7 +42010,7 @@
              *
              */
 
-            var NineSlicePlane = function(_Plane) {
+            var NineSlicePlane = function (_Plane) {
                 _inherits(NineSlicePlane, _Plane);
 
                 /**
@@ -42347,7 +42368,7 @@
         }, {
             "./Plane": 168
         }],
-        168: [function(require, module, exports) {
+        168: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -42402,7 +42423,7 @@
              * @memberof PIXI.mesh
              *
              */
-            var Plane = function(_Mesh) {
+            var Plane = function (_Mesh) {
                 _inherits(Plane, _Mesh);
 
                 /**
@@ -42515,7 +42536,7 @@
         }, {
             "./Mesh": 166
         }],
-        169: [function(require, module, exports) {
+        169: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -42570,7 +42591,7 @@
              * @memberof PIXI.mesh
              *
              */
-            var Rope = function(_Mesh) {
+            var Rope = function (_Mesh) {
                 _inherits(Rope, _Mesh);
 
                 /**
@@ -42784,7 +42805,7 @@
         }, {
             "./Mesh": 166
         }],
-        170: [function(require, module, exports) {
+        170: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -42831,7 +42852,7 @@
              * @private
              * @memberof PIXI
              */
-            var MeshSpriteRenderer = function() {
+            var MeshSpriteRenderer = function () {
                 /**
                  * @param {PIXI.CanvasRenderer}
                  *            renderer - The renderer this downport works for
@@ -43101,7 +43122,7 @@
             "../../core": 65,
             "../Mesh": 166
         }],
-        171: [function(require, module, exports) {
+        171: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -43174,7 +43195,7 @@
             "./canvas/CanvasMeshRenderer": 170,
             "./webgl/MeshRenderer": 172
         }],
-        172: [function(require, module, exports) {
+        172: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -43252,7 +43273,7 @@
              * @extends PIXI.ObjectRenderer
              */
 
-            var MeshRenderer = function(_core$ObjectRenderer) {
+            var MeshRenderer = function (_core$ObjectRenderer) {
                 _inherits(MeshRenderer, _core$ObjectRenderer);
 
                 /**
@@ -43372,12 +43393,12 @@
             "path": 23,
             "pixi-gl-core": 12
         }],
-        173: [function(require, module, exports) {
+        173: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
 
-            var _createClass = function() {
+            var _createClass = function () {
                 function defineProperties(target, props) {
                     for (var i = 0; i < props.length; i++) {
                         var descriptor = props[i];
@@ -43388,7 +43409,7 @@
                     }
                 }
 
-                return function(Constructor, protoProps, staticProps) {
+                return function (Constructor, protoProps, staticProps) {
                     if (protoProps) defineProperties(Constructor.prototype, protoProps);
                     if (staticProps) defineProperties(Constructor, staticProps);
                     return Constructor;
@@ -43466,7 +43487,7 @@
              * @extends PIXI.Container
              * @memberof PIXI.particles
              */
-            var ParticleContainer = function(_core$Container) {
+            var ParticleContainer = function (_core$Container) {
                 _inherits(ParticleContainer, _core$Container);
 
                 /**
@@ -43670,7 +43691,7 @@
                     if (!this.baseTexture) {
                         this.baseTexture = this.children[0]._texture.baseTexture;
                         if (!this.baseTexture.hasLoaded) {
-                            this.baseTexture.once('update', function() {
+                            this.baseTexture.once('update', function () {
                                 return _this2.onChildrenChange(0);
                             });
                         }
@@ -43835,7 +43856,7 @@
             "../core": 65,
             "../core/utils": 124
         }],
-        174: [function(require, module, exports) {
+        174: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -43868,7 +43889,7 @@
             "./ParticleContainer": 173,
             "./webgl/ParticleRenderer": 176
         }],
-        175: [function(require, module, exports) {
+        175: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -43913,7 +43934,7 @@
              * @private
              * @memberof PIXI
              */
-            var ParticleBuffer = function() {
+            var ParticleBuffer = function () {
                 /**
                  * @param {WebGLRenderingContext}
                  *            gl - The rendering context.
@@ -44135,7 +44156,7 @@
             "../../core/utils/createIndicesForQuads": 122,
             "pixi-gl-core": 12
         }],
-        176: [function(require, module, exports) {
+        176: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -44221,7 +44242,7 @@
              * @private
              * @memberof PIXI
              */
-            var ParticleRenderer = function(_core$ObjectRenderer) {
+            var ParticleRenderer = function (_core$ObjectRenderer) {
                 _inherits(ParticleRenderer, _core$ObjectRenderer);
 
                 /**
@@ -44703,7 +44724,7 @@
             "./ParticleBuffer": 175,
             "./ParticleShader": 177
         }],
-        177: [function(require, module, exports) {
+        177: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -44751,7 +44772,7 @@
              * @extends PIXI.Shader
              * @memberof PIXI
              */
-            var ParticleShader = function(_Shader) {
+            var ParticleShader = function (_Shader) {
                 _inherits(ParticleShader, _Shader);
 
                 /**
@@ -44776,7 +44797,7 @@
         }, {
             "../../core/Shader": 44
         }],
-        178: [function(require, module, exports) {
+        178: [function (require, module, exports) {
             "use strict";
 
             // References:
@@ -44795,7 +44816,7 @@
             }
 
         }, {}],
-        179: [function(require, module, exports) {
+        179: [function (require, module, exports) {
             'use strict';
 
             var _objectAssign = require('object-assign');
@@ -44817,7 +44838,7 @@
         }, {
             "object-assign": 5
         }],
-        180: [function(require, module, exports) {
+        180: [function (require, module, exports) {
             'use strict';
 
             require('./Object.assign');
@@ -44847,8 +44868,8 @@
             "./Object.assign": 179,
             "./requestAnimationFrame": 181
         }],
-        181: [function(require, module, exports) {
-            (function(global) {
+        181: [function (require, module, exports) {
+            (function (global) {
                 'use strict';
 
                 // References:
@@ -44879,7 +44900,7 @@
                         global.performance = {};
                     }
 
-                    global.performance.now = function() {
+                    global.performance.now = function () {
                         return Date.now() - startTime;
                     };
                 }
@@ -44896,7 +44917,7 @@
                 }
 
                 if (!global.requestAnimationFrame) {
-                    global.requestAnimationFrame = function(callback) {
+                    global.requestAnimationFrame = function (callback) {
                         if (typeof callback !== 'function') {
                             throw new TypeError(callback + 'is not a function');
                         }
@@ -44910,7 +44931,7 @@
 
                         lastTime = currentTime;
 
-                        return setTimeout(function() {
+                        return setTimeout(function () {
                             lastTime = Date.now();
                             callback(performance.now());
                         }, delay);
@@ -44918,7 +44939,7 @@
                 }
 
                 if (!global.cancelAnimationFrame) {
-                    global.cancelAnimationFrame = function(id) {
+                    global.cancelAnimationFrame = function (id) {
                         return clearTimeout(id);
                     };
                 }
@@ -44926,7 +44947,7 @@
             }).call(this, typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
         }, {}],
-        182: [function(require, module, exports) {
+        182: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -44997,7 +45018,7 @@
              * @memberof PIXI.prepare
              */
 
-            var BasePrepare = function() {
+            var BasePrepare = function () {
                 /**
                  * @param {PIXI.SystemRenderer}
                  *            renderer - A reference to the current renderer
@@ -45078,7 +45099,7 @@
                      * @type {Function}
                      * @private
                      */
-                    this.delayedTick = function() {
+                    this.delayedTick = function () {
                         // unlikely, but in case we were destroyed between tick() and
                         // delayedTick()
                         if (!_this.queue) {
@@ -45473,7 +45494,7 @@
             "../core": 65,
             "./limiters/CountLimiter": 185
         }],
-        183: [function(require, module, exports) {
+        183: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -45551,7 +45572,7 @@
              * @memberof PIXI.prepare
              */
 
-            var CanvasPrepare = function(_BasePrepare) {
+            var CanvasPrepare = function (_BasePrepare) {
                 _inherits(CanvasPrepare, _BasePrepare);
 
                 /**
@@ -45646,7 +45667,7 @@
             "../../core": 65,
             "../BasePrepare": 182
         }],
-        184: [function(require, module, exports) {
+        184: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -45709,7 +45730,7 @@
             "./limiters/TimeLimiter": 186,
             "./webgl/WebGLPrepare": 187
         }],
-        185: [function(require, module, exports) {
+        185: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -45727,7 +45748,7 @@
              * @class
              * @memberof PIXI
              */
-            var CountLimiter = function() {
+            var CountLimiter = function () {
                 /**
                  * @param {number}
                  *            maxItemsPerFrame - The maximum number of items that can be
@@ -45778,7 +45799,7 @@
             exports.default = CountLimiter;
 
         }, {}],
-        186: [function(require, module, exports) {
+        186: [function (require, module, exports) {
             "use strict";
 
             exports.__esModule = true;
@@ -45796,7 +45817,7 @@
              * @class
              * @memberof PIXI
              */
-            var TimeLimiter = function() {
+            var TimeLimiter = function () {
                 /**
                  * @param {number}
                  *            maxMilliseconds - The maximum milliseconds that can be spent
@@ -45847,7 +45868,7 @@
             exports.default = TimeLimiter;
 
         }, {}],
-        187: [function(require, module, exports) {
+        187: [function (require, module, exports) {
             'use strict';
 
             exports.__esModule = true;
@@ -45919,7 +45940,7 @@
              * @extends PIXI.prepare.BasePrepare
              * @memberof PIXI.prepare
              */
-            var WebGLPrepare = function(_BasePrepare) {
+            var WebGLPrepare = function (_BasePrepare) {
                 _inherits(WebGLPrepare, _BasePrepare);
 
                 /**
@@ -46024,8 +46045,8 @@
             "../../core": 65,
             "../BasePrepare": 182
         }],
-        188: [function(require, module, exports) {
-            (function(global) {
+        188: [function (require, module, exports) {
+            (function (global) {
                 'use strict';
 
                 exports.__esModule = true;
@@ -46033,7 +46054,7 @@
 
                 var _polyfill = require('./polyfill');
 
-                Object.keys(_polyfill).forEach(function(key) {
+                Object.keys(_polyfill).forEach(function (key) {
                     if (key === "default" || key === "__esModule") return;
                     Object.defineProperty(exports, key, {
                         enumerable: true,
@@ -46045,7 +46066,7 @@
 
                 var _core = require('./core');
 
-                Object.keys(_core).forEach(function(key) {
+                Object.keys(_core).forEach(function (key) {
                     if (key === "default" || key === "__esModule") return;
                     Object.defineProperty(exports, key, {
                         enumerable: true,
@@ -46128,11 +46149,11 @@
                  */
 
 
-                // handle mixins now, after all code has been added, including deprecation
+                    // handle mixins now, after all code has been added, including deprecation
 
 
-                // export libs
-                // import polyfills. Done as an export to make sure polyfills are imported first
+                    // export libs
+                    // import polyfills. Done as an export to make sure polyfills are imported first
                 var loader = loaders.shared || null;
 
                 exports.accessibility = accessibility;

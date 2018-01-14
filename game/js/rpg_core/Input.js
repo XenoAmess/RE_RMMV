@@ -123,6 +123,17 @@ Input.update = function () {
     } else {
         this._latestButton = null;
     }
+
+    if (Utils.isOptionValid('test')) {
+        console.log("latestButton", this._latestButton);
+        var tmp = "";
+        for (var name in this._currentState) {
+            tmp += "name : " + name + " _currentState[name] : " + this._currentState[name] + " _previousState[name] : " + this._previousState[name] + "\n";
+
+        }
+        console.log(tmp);
+    }
+
     for (var name in this._currentState) {
         if (this._currentState[name] && !this._previousState[name]) {
             this._latestButton = name;

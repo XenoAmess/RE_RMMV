@@ -23,9 +23,9 @@ Tilemap.prototype.initialize = function () {
     this._mapWidth = 0;
     this._mapHeight = 0;
     this._mapData = null;
-    this._layerWidth = 0._lastTiles = [];;
+    this._layerWidth = 0;
     this._layerHeight = 0;
-    this
+    this._lastTiles = [];
 
     /**
      * The bitmaps used as a tileset.
